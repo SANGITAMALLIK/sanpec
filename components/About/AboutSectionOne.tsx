@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 
 const tabsData = [
   {
@@ -102,36 +102,9 @@ const tabsData = [
 
 const ModernTabs = () => {
   const [activeTab, setActiveTab] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-          } else {
-            setIsVisible(false);
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -100px 0px' }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
-  }, []);
 
   return (
-    <div ref={sectionRef} className="relative w-full bg-gradient-to-br from-slate-50 to-slate-100 py-20 px-4 overflow-hidden">
+    <div className="relative w-full bg-gradient-to-br from-slate-50 to-slate-100 py-20 px-4 overflow-hidden">
       {/* Decorative Tower SVG - Left Side */}
       <div className="absolute left-0 top-0 h-full w-64 opacity-5 pointer-events-none">
         <svg viewBox="0 0 200 800" className="h-full w-full" fill="none">
@@ -191,12 +164,7 @@ const ModernTabs = () => {
 
       <div className="relative max-w-7xl mx-auto">
         {/* Section Title */}
-        <div 
-          className={`text-center mb-16 transition-all duration-1000 ease-out ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
-          }`}
-          style={{ transitionDelay: '100ms' }}
-        >
+        <div className="text-center mb-16">
           <div className="inline-block">
             <h2 className="text-5xl lg:text-6xl font-black uppercase tracking-tight mb-4">
               <span className="bg-gradient-to-r from-[#CD091B] via-[#CD091B] to-[#CD091B] bg-clip-text text-transparent">
@@ -216,22 +184,19 @@ const ModernTabs = () => {
             <button
               key={tab.id}
               onClick={() => setActiveTab(index)}
-              className={`group relative overflow-hidden rounded-2xl p-6 transition-all duration-700 ease-out transform hover:scale-105 ${
+              className={`group relative overflow-hidden rounded-2xl p-6 ${
                 activeTab === index
                   ? "bg-gradient-to-br from-[#0f1631] to-[#0f1631] shadow-2xl shadow-[#171530]/50"
                   : "bg-white hover:bg-gradient-to-br hover:from-gray-50 hover:to-gray-100 shadow-lg hover:shadow-xl"
-              } ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
               }`}
-              style={{ transitionDelay: `${200 + index * 100}ms` }}
             >
-              <div className={`absolute inset-0 bg-gradient-to-br from-[#0f1631]/10 to-[#0f1631]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${activeTab === index ? 'opacity-100' : ''}`} />
+              <div className={`absolute inset-0 bg-gradient-to-br from-[#0f1631]/10 to-[#0f1631]/10 opacity-0 group-hover:opacity-100 ${activeTab === index ? 'opacity-100' : ''}`} />
               
               <div className="relative z-10 flex flex-col items-center gap-3">
-                <div className={`text-4xl transform transition-transform duration-300 ${activeTab === index ? 'scale-110' : 'group-hover:scale-110'}`}>
+                <div className="text-4xl">
                   {tab.icon}
                 </div>
-                <h3 className={`text-xs font-bold text-center uppercase tracking-wider transition-colors duration-300 ${
+                <h3 className={`text-xs font-bold text-center uppercase tracking-wider ${
                   activeTab === index ? "text-white" : "text-gray-700 group-hover:text-[#CD091B]"
                 }`}>
                   {tab.title}
@@ -246,27 +211,18 @@ const ModernTabs = () => {
         </div>
 
         {/* Tab Content */}
-        <div 
-          className={`relative overflow-hidden rounded-3xl shadow-2xl transition-all duration-1000 ease-out ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
-          }`}
-          style={{ transitionDelay: '900ms' }}
-        >
+        <div className="relative overflow-hidden rounded-3xl shadow-2xl">
           {tabsData.map((tab, index) => (
             <div
               key={tab.id}
-              className={`transition-all duration-700 ${
-                activeTab === index
-                  ? "opacity-100 translate-x-0"
-                  : "opacity-0 absolute translate-x-full pointer-events-none"
-              }`}
+              className={activeTab === index ? "" : "hidden"}
             >
               <div className="grid lg:grid-cols-2 gap-0">
                 <div className="relative h-[400px] lg:h-[600px] overflow-hidden group">
                   <img
                     src={tab.image}
                     alt={tab.heading}
-                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                    className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#171530] via-[#171530]/60 to-transparent" />
                   
@@ -284,8 +240,8 @@ const ModernTabs = () => {
 
                   <ul className="space-y-4 mb-8">
                     {tab.points.map((point, idx) => (
-                      <li key={idx} className="flex items-start gap-3 group/item hover:translate-x-2 transition-transform duration-300">
-                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-br from-[#CD091B] to-[#a0070f] flex items-center justify-center text-white text-xs font-bold mt-0.5 group-hover/item:scale-110 transition-transform">
+                      <li key={idx} className="flex items-start gap-3 group/item">
+                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-br from-[#CD091B] to-[#a0070f] flex items-center justify-center text-white text-xs font-bold mt-0.5">
                           ✓
                         </span>
                         <span className="text-gray-700 text-sm leading-relaxed">
@@ -297,10 +253,10 @@ const ModernTabs = () => {
 
                   <a
                     href={tab.link}
-                    className="inline-flex items-center gap-2 bg-gradient-to-r from-[#CD091B] to-[#a0070f] hover:from-[#171530] hover:to-[#0a0a1a] text-white px-8 py-4 rounded-full font-bold uppercase text-sm tracking-wider shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 group/btn w-fit"
+                    className="inline-flex items-center gap-2 bg-gradient-to-r from-[#CD091B] to-[#a0070f] hover:from-[#171530] hover:to-[#0a0a1a] text-white px-8 py-4 rounded-full font-bold uppercase text-sm tracking-wider shadow-lg hover:shadow-2xl group/btn w-fit"
                   >
                     <span>Read More</span>
-                    <span className="transform group-hover/btn:translate-x-1 transition-transform duration-300">→</span>
+                    <span>→</span>
                   </a>
                 </div>
               </div>
