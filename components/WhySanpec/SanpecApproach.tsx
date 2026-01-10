@@ -1,0 +1,160 @@
+'use client';
+import React, { useState } from 'react';
+import { ChevronUp, ChevronDown } from 'lucide-react';
+
+const TabGallery = () => {
+  const [activeTab, setActiveTab] = useState(0);
+
+  const tabs = [
+    {
+      id: 83,
+      leftImage: "https://sanpec-excellence.com/wp-content/uploads/2025/06/1.png",
+      rightImage: "https://sanpec-excellence.com/wp-content/uploads/2025/09/Copy-of-1of-SANPEC-Blueprint-v3-green-images-1.png"
+    },
+    {
+      id: 87,
+      leftImage: "https://sanpec-excellence.com/wp-content/uploads/2025/06/3.png",
+      rightImage: "https://sanpec-excellence.com/wp-content/uploads/2025/06/4.png"
+    },
+    {
+      id: 88,
+      leftImage: "https://sanpec-excellence.com/wp-content/uploads/2025/06/6.png",
+      rightImage: null
+    },
+    {
+      id: 89,
+      leftImage: "https://sanpec-excellence.com/wp-content/uploads/2025/06/7.png",
+      rightImage: null
+    },
+    {
+      id: 91,
+      leftImage: "https://sanpec-excellence.com/wp-content/uploads/2025/09/THE-GRID-OF-THE-FUTURE.png",
+      rightImage: null
+    }
+  ];
+
+  const nextTab = () => setActiveTab((prev) => (prev + 1) % tabs.length);
+  const prevTab = () => setActiveTab((prev) => (prev - 1 + tabs.length) % tabs.length);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-100 via-gray-50 to-slate-100 p-8">
+      <div className="flex gap-8 max-w-7xl mx-auto">
+        {/* Left Vertical Tabs */}
+        <div className="w-28 flex flex-col items-center py-8 space-y-6">
+          <button
+            onClick={prevTab}
+            className="bg-gradient-to-br from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white p-3 rounded-full transition-all duration-300 hover:scale-110 shadow-xl"
+          >
+            <ChevronUp className="w-6 h-6" />
+          </button>
+
+          <div className="flex flex-col gap-4">
+            {tabs.map((tab, index) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(index)}
+                className={`relative overflow-hidden rounded-lg transition-all duration-500 ${
+                  activeTab === index
+                    ? 'ring-4 ring-red-500 shadow-2xl scale-110'
+                    : 'ring-2 ring-gray-300 hover:ring-blue-600 hover:scale-105 opacity-60 hover:opacity-100'
+                }`}
+                style={{ width: '80px', height: '80px' }}
+              >
+                <img
+                  src={tab.leftImage}
+                  alt=""
+                  className="w-full h-full object-cover"
+                />
+                {activeTab === index && (
+                  <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-red-500 via-white to-blue-700"></div>
+                )}
+              </button>
+            ))}
+          </div>
+
+          <button
+            onClick={nextTab}
+            className="bg-gradient-to-br from-blue-700 to-blue-800 hover:from-blue-800 hover:to-blue-900 text-white p-3 rounded-full transition-all duration-300 hover:scale-110 shadow-xl"
+          >
+            <ChevronDown className="w-6 h-6" />
+          </button>
+
+          <div className="mt-4 bg-gradient-to-r from-red-500 to-blue-700 text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg">
+            {activeTab + 1}/{tabs.length}
+          </div>
+        </div>
+
+        {/* Book Container - 2 Pages Side by Side */}
+        <div className="flex-1">
+          <div className="relative" style={{ perspective: '2000px' }}>
+            {/* Book Shadow */}
+            <div className="absolute inset-0 bg-black/20 blur-2xl transform translate-y-4"></div>
+            
+            {/* Open Book */}
+            <div className="relative bg-amber-100 rounded-2xl shadow-2xl overflow-hidden">
+              <div className="flex" style={{ minHeight: '80vh' }}>
+                {/* Left Page */}
+                <div className="w-1/2 bg-white border-r-8 border-red-800 overflow-auto">
+                  <img
+                    src={tabs[activeTab].leftImage}
+                    alt=""
+                    className="w-full h-auto"
+                  />
+                </div>
+
+                {/* Center Binding */}
+                <div className="absolute left-1/2 top-0 bottom-0 w-6 bg-gradient-to-b from-red-900 via-red-950 to-red-900 transform -translate-x-1/2 shadow-2xl z-10">
+                  <div className="h-full flex flex-col items-center justify-center gap-4">
+                    <div className="w-0.5 h-20 bg-gradient-to-b from-yellow-400 via-white to-blue-600"></div>
+                    <div className="w-0.5 h-20 bg-gradient-to-b from-blue-600 via-white to-yellow-400"></div>
+                  </div>
+                </div>
+
+                {/* Right Page */}
+                <div className="w-1/2 bg-white border-l-8 border-blue-800 overflow-auto">
+                  {tabs[activeTab].rightImage ? (
+                    <img
+                      src={tabs[activeTab].rightImage}
+                      alt=""
+                      className="w-full h-auto"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-red-50 to-blue-50">
+                      <div className="text-gray-300 text-2xl font-light">Empty Page</div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Page Numbers */}
+              <div className="absolute bottom-8 left-0 right-0 flex justify-between px-12">
+                <div className="text-red-600 font-bold text-lg">{activeTab * 2 + 1}</div>
+                <div className="text-blue-700 font-bold text-lg">{activeTab * 2 + 2}</div>
+              </div>
+
+              {/* Book Pages Stack Effect (Left Side) */}
+              <div className="absolute left-0 top-8 bottom-8 w-3">
+                <div className="h-full flex flex-col justify-center gap-1">
+                  {[...Array(20)].map((_, i) => (
+                    <div key={i} className="h-1 bg-gradient-to-r from-gray-200 to-gray-100 rounded-l" style={{ width: `${10 - i * 0.4}px` }}></div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Book Pages Stack Effect (Right Side) */}
+              <div className="absolute right-0 top-8 bottom-8 w-3">
+                <div className="h-full flex flex-col justify-center gap-1">
+                  {[...Array(20)].map((_, i) => (
+                    <div key={i} className="h-1 bg-gradient-to-l from-gray-200 to-gray-100 rounded-r" style={{ width: `${10 - i * 0.4}px` }}></div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default TabGallery;
