@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+
 import React, { useState, useEffect } from 'react';
 import { Search, Home, ChevronRight, Filter, ArrowRight, TrendingUp, Zap, Mail, Tag, ChevronLeft } from 'lucide-react';
 
