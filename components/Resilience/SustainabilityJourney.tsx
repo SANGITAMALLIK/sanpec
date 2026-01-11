@@ -7,11 +7,11 @@ export default function PremiumTabsSection() {
   const [hoveredCard, setHoveredCard] = useState(null);
 
   const tabs = [
-    { id: 'quality-of-life', label: 'Quality of Life', icon: Users, color: 'from-blue-500 to-indigo-600' },
-    { id: 'leadership', label: 'Leadership', icon: Award, color: 'from-purple-500 to-pink-600' },
-    { id: 'resource-allocation', label: 'Resource Allocation', icon: Recycle, color: 'from-blue-600 to-cyan-500' },
-    { id: 'climate-and-resilience', label: 'Climate and Resilience', icon: CloudRain, color: 'from-indigo-600 to-purple-600' },
-    { id: 'natural-world', label: 'Natural World', icon: Leaf, color: 'from-emerald-500 to-teal-600' }
+    { id: 'quality-of-life', label: 'Quality of Life', icon: Users, color: 'from-[#101631] to-[#101631]/90' },
+    { id: 'leadership', label: 'Leadership', icon: Award, color: 'from-[#CD091B] to-[#CD091B]/90' },
+    { id: 'resource-allocation', label: 'Resource Allocation', icon: Recycle, color: 'from-[#101631] to-[#CD091B]' },
+    { id: 'climate-and-resilience', label: 'Climate and Resilience', icon: CloudRain, color: 'from-[#CD091B] to-[#101631]' },
+    { id: 'natural-world', label: 'Natural World', icon: Leaf, color: 'from-[#101631]/80 to-[#CD091B]/80' }
   ];
 
   const tabContent = {
@@ -105,72 +105,63 @@ export default function PremiumTabsSection() {
   return (
     <div className="py-16 px-4 relative overflow-hidden bg-white">
       
-      {/* Top Gradient Background - Visible */}
       <div 
         className="absolute top-0 left-0 right-0 h-[400px] z-0"
         style={{
-          background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(147, 51, 234, 0.08) 50%, rgba(236, 72, 153, 0.08) 100%)'
+          background: 'linear-gradient(135deg, rgba(16, 22, 49, 0.05) 0%, rgba(205, 9, 27, 0.05) 50%, rgba(16, 22, 49, 0.05) 100%)'
         }}
       ></div>
 
-      {/* Power Structure Elements - Engineering Feel */}
-      
-      {/* Top Left - Transmission Tower */}
       <div className="absolute top-20 left-10 opacity-[0.06] pointer-events-none z-0">
         <svg width="100" height="200" viewBox="0 0 100 200">
-          <line x1="50" y1="10" x2="50" y2="190" stroke="#3b82f6" strokeWidth="3"/>
-          <line x1="30" y1="50" x2="70" y2="50" stroke="#3b82f6" strokeWidth="2"/>
-          <line x1="20" y1="100" x2="80" y2="100" stroke="#3b82f6" strokeWidth="2"/>
-          <line x1="10" y1="150" x2="90" y2="150" stroke="#3b82f6" strokeWidth="2"/>
-          <line x1="30" y1="10" x2="50" y2="40" stroke="#3b82f6" strokeWidth="2"/>
-          <line x1="70" y1="10" x2="50" y2="40" stroke="#3b82f6" strokeWidth="2"/>
+          <line x1="50" y1="10" x2="50" y2="190" stroke="#101631" strokeWidth="3"/>
+          <line x1="30" y1="50" x2="70" y2="50" stroke="#101631" strokeWidth="2"/>
+          <line x1="20" y1="100" x2="80" y2="100" stroke="#101631" strokeWidth="2"/>
+          <line x1="10" y1="150" x2="90" y2="150" stroke="#101631" strokeWidth="2"/>
+          <line x1="30" y1="10" x2="50" y2="40" stroke="#101631" strokeWidth="2"/>
+          <line x1="70" y1="10" x2="50" y2="40" stroke="#101631" strokeWidth="2"/>
         </svg>
       </div>
 
-      {/* Top Right - Electrical Grid */}
       <div className="absolute top-32 right-16 opacity-[0.06] pointer-events-none z-0">
         <svg width="120" height="120" viewBox="0 0 120 120">
-          <circle cx="60" cy="60" r="50" fill="none" stroke="#8b5cf6" strokeWidth="2"/>
-          <circle cx="60" cy="60" r="35" fill="none" stroke="#8b5cf6" strokeWidth="2"/>
-          <line x1="60" y1="10" x2="60" y2="110" stroke="#8b5cf6" strokeWidth="2"/>
-          <line x1="10" y1="60" x2="110" y2="60" stroke="#8b5cf6" strokeWidth="2"/>
-          <line x1="20" y1="20" x2="100" y2="100" stroke="#8b5cf6" strokeWidth="2"/>
-          <line x1="100" y1="20" x2="20" y2="100" stroke="#8b5cf6" strokeWidth="2"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#CD091B" strokeWidth="2"/>
+          <circle cx="60" cy="60" r="35" fill="none" stroke="#CD091B" strokeWidth="2"/>
+          <line x1="60" y1="10" x2="60" y2="110" stroke="#CD091B" strokeWidth="2"/>
+          <line x1="10" y1="60" x2="110" y2="60" stroke="#CD091B" strokeWidth="2"/>
+          <line x1="20" y1="20" x2="100" y2="100" stroke="#CD091B" strokeWidth="2"/>
+          <line x1="100" y1="20" x2="20" y2="100" stroke="#CD091B" strokeWidth="2"/>
         </svg>
       </div>
 
-      {/* Bottom Left - Triangular Structure */}
       <div className="absolute bottom-20 left-20 opacity-[0.06] pointer-events-none z-0">
         <svg width="140" height="140" viewBox="0 0 140 140">
-          <polygon points="70,10 10,130 130,130" fill="none" stroke="#06b6d4" strokeWidth="3"/>
-          <polygon points="70,35 35,105 105,105" fill="none" stroke="#06b6d4" strokeWidth="2"/>
-          <line x1="70" y1="10" x2="70" y2="130" stroke="#06b6d4" strokeWidth="2"/>
+          <polygon points="70,10 10,130 130,130" fill="none" stroke="#101631" strokeWidth="3"/>
+          <polygon points="70,35 35,105 105,105" fill="none" stroke="#101631" strokeWidth="2"/>
+          <line x1="70" y1="10" x2="70" y2="130" stroke="#101631" strokeWidth="2"/>
         </svg>
       </div>
 
-      {/* Bottom Right - Power Lines */}
       <div className="absolute bottom-32 right-12 opacity-[0.06] pointer-events-none z-0">
         <svg width="100" height="180" viewBox="0 0 100 180">
-          <line x1="50" y1="0" x2="50" y2="180" stroke="#ec4899" strokeWidth="3"/>
-          <line x1="35" y1="40" x2="65" y2="40" stroke="#ec4899" strokeWidth="2"/>
-          <line x1="25" y1="90" x2="75" y2="90" stroke="#ec4899" strokeWidth="2"/>
-          <line x1="15" y1="140" x2="85" y2="140" stroke="#ec4899" strokeWidth="2"/>
-          <path d="M 75 90 Q 90 85 105 80" stroke="#ec4899" strokeWidth="1.5" fill="none"/>
-          <path d="M 75 95 Q 90 90 105 85" stroke="#ec4899" strokeWidth="1.5" fill="none"/>
+          <line x1="50" y1="0" x2="50" y2="180" stroke="#CD091B" strokeWidth="3"/>
+          <line x1="35" y1="40" x2="65" y2="40" stroke="#CD091B" strokeWidth="2"/>
+          <line x1="25" y1="90" x2="75" y2="90" stroke="#CD091B" strokeWidth="2"/>
+          <line x1="15" y1="140" x2="85" y2="140" stroke="#CD091B" strokeWidth="2"/>
+          <path d="M 75 90 Q 90 85 105 80" stroke="#CD091B" strokeWidth="1.5" fill="none"/>
+          <path d="M 75 95 Q 90 90 105 85" stroke="#CD091B" strokeWidth="1.5" fill="none"/>
         </svg>
       </div>
 
-      {/* Middle Right - Hexagonal Grid */}
       <div className="absolute top-1/2 right-8 opacity-[0.05] pointer-events-none z-0">
         <svg width="100" height="100" viewBox="0 0 100 100">
-          <polygon points="50,5 90,27.5 90,72.5 50,95 10,72.5 10,27.5" fill="none" stroke="#6366f1" strokeWidth="2"/>
-          <polygon points="50,20 75,35 75,65 50,80 25,65 25,35" fill="none" stroke="#6366f1" strokeWidth="2"/>
+          <polygon points="50,5 90,27.5 90,72.5 50,95 10,72.5 10,27.5" fill="none" stroke="#101631" strokeWidth="2"/>
+          <polygon points="50,20 75,35 75,65 50,80 25,65 25,35" fill="none" stroke="#101631" strokeWidth="2"/>
         </svg>
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
         
-        {/* Premium Tabs Navigation */}
         <div className="mb-12">
           <div className="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-3 border border-gray-200/50">
             <div className="flex flex-wrap gap-3 justify-center">
@@ -220,11 +211,9 @@ export default function PremiumTabsSection() {
           </div>
         </div>
 
-        {/* Tab Content Area - Reduced Padding */}
         <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
           <div className="p-6 lg:p-8">
             
-            {/* Title Section */}
             <div className="mb-8">
               <div className={`inline-flex items-center gap-4 bg-gradient-to-r ${currentTab.color} px-8 py-4 rounded-2xl shadow-2xl`}>
                 {React.createElement(currentTab.icon, { className: 'w-7 h-7 text-white' })}
@@ -236,7 +225,6 @@ export default function PremiumTabsSection() {
 
             <div className="grid lg:grid-cols-12 gap-8 items-start">
               
-              {/* Image Section */}
               {currentContent.image && (
                 <div className="lg:col-span-5">
                   <div className="relative group">
@@ -252,7 +240,6 @@ export default function PremiumTabsSection() {
                 </div>
               )}
 
-              {/* Compact Grid Cards */}
               <div className={currentContent.image ? 'lg:col-span-7' : 'lg:col-span-12'}>
                 <div className={`grid ${currentContent.image ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'} gap-3`}>
                   {currentContent.items.map((item, index) => {
@@ -295,7 +282,6 @@ export default function PremiumTabsSection() {
           </div>
         </div>
 
-        {/* Progress Indicators */}
         <div className="flex justify-center mt-10 gap-3">
           {tabs.map((tab) => (
             <button

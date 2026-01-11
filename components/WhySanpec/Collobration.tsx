@@ -89,14 +89,14 @@ const CollaborationsSection = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-slate-50 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-slate-50 to-gray-100 relative overflow-hidden">
       
       {/* Advanced Grid Pattern */}
       <div className="absolute inset-0 opacity-[0.04]">
         <div className="absolute inset-0" style={{
           backgroundImage: `
-            repeating-linear-gradient(#CC2222 1px, transparent 1px),
-            repeating-linear-gradient(#CC2222 1px, transparent 1px)
+            repeating-linear-gradient(#CD091B 1px, transparent 1px),
+            repeating-linear-gradient(#CD091B 1px, transparent 1px)
           `,
           backgroundSize: '40px 40px'
         }}></div>
@@ -106,9 +106,9 @@ const CollaborationsSection = () => {
       <svg className="absolute inset-0 w-full h-full opacity-[0.03] pointer-events-none">
         <defs>
           <linearGradient id="line-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#3b82f6" />
-            <stop offset="50%" stopColor="#60a5fa" />
-            <stop offset="100%" stopColor="#3b82f6" />
+            <stop offset="0%" stopColor="#101631" />
+            <stop offset="50%" stopColor="#CD091B" />
+            <stop offset="100%" stopColor="#101631" />
           </linearGradient>
         </defs>
         <path d="M 0,100 Q 250,50 500,100 T 1000,100" stroke="url(#line-gradient)" strokeWidth="2" fill="none" opacity="0.5">
@@ -119,24 +119,23 @@ const CollaborationsSection = () => {
         </path>
       </svg>
 
-      {/* Floating Technical Elements */}
-      <div className="absolute top-20 right-20 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-20 left-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+      {/* Floating Elements */}
+      <div className="absolute top-20 right-20 w-96 h-96 bg-[#101631]/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-20 left-20 w-96 h-96 bg-[#CD091B]/10 rounded-full blur-3xl"></div>
 
-      {/* Power Tower Decorations - More Visible */}
+      {/* Power Tower Decorations */}
       <div className="absolute top-32 left-16 opacity-[0.08] hidden lg:block">
         <svg className="w-28 h-36" viewBox="0 0 100 160">
-          <line x1="50" y1="10" x2="30" y2="40" stroke="#2563eb" strokeWidth="4"/>
-          <line x1="50" y1="10" x2="70" y2="40" stroke="#2563eb" strokeWidth="4"/>
-          <line x1="30" y1="40" x2="20" y2="80" stroke="#2563eb" strokeWidth="4"/>
-          <line x1="70" y1="40" x2="80" y2="80" stroke="#2563eb" strokeWidth="4"/>
-          <line x1="20" y1="80" x2="10" y2="140" stroke="#2563eb" strokeWidth="5"/>
-          <line x1="80" y1="80" x2="90" y2="140" stroke="#2563eb" strokeWidth="5"/>
-          <line x1="10" y1="140" x2="90" y2="140" stroke="#2563eb" strokeWidth="5"/>
-          <circle cx="50" cy="10" r="5" fill="#dc2626"/>
-          <circle cx="30" cy="40" r="3" fill="#dc2626"/>
-          <circle cx="70" cy="40" r="3" fill="#dc2626"/>
-          {/* Power Lines */}
+          <line x1="50" y1="10" x2="30" y2="40" stroke="#101631" strokeWidth="4"/>
+          <line x1="50" y1="10" x2="70" y2="40" stroke="#101631" strokeWidth="4"/>
+          <line x1="30" y1="40" x2="20" y2="80" stroke="#101631" strokeWidth="4"/>
+          <line x1="70" y1="40" x2="80" y2="80" stroke="#101631" strokeWidth="4"/>
+          <line x1="20" y1="80" x2="10" y2="140" stroke="#101631" strokeWidth="5"/>
+          <line x1="80" y1="80" x2="90" y2="140" stroke="#101631" strokeWidth="5"/>
+          <line x1="10" y1="140" x2="90" y2="140" stroke="#101631" strokeWidth="5"/>
+          <circle cx="50" cy="10" r="5" fill="#CD091B"/>
+          <circle cx="30" cy="40" r="3" fill="#CD091B"/>
+          <circle cx="70" cy="40" r="3" fill="#CD091B"/>
           <line x1="15" y1="50" x2="85" y2="50" stroke="#fbbf24" strokeWidth="2" strokeDasharray="3,3"/>
           <line x1="15" y1="60" x2="85" y2="60" stroke="#fbbf24" strokeWidth="2" strokeDasharray="3,3"/>
           <line x1="15" y1="70" x2="85" y2="70" stroke="#fbbf24" strokeWidth="2" strokeDasharray="3,3"/>
@@ -145,41 +144,19 @@ const CollaborationsSection = () => {
 
       <div className="absolute bottom-32 right-16 opacity-[0.08] hidden lg:block">
         <svg className="w-28 h-36" viewBox="0 0 100 160">
-          <line x1="50" y1="10" x2="30" y2="40" stroke="#2563eb" strokeWidth="4"/>
-          <line x1="50" y1="10" x2="70" y2="40" stroke="#2563eb" strokeWidth="4"/>
-          <line x1="30" y1="40" x2="20" y2="80" stroke="#2563eb" strokeWidth="4"/>
-          <line x1="70" y1="40" x2="80" y2="80" stroke="#2563eb" strokeWidth="4"/>
-          <line x1="20" y1="80" x2="10" y2="140" stroke="#2563eb" strokeWidth="5"/>
-          <line x1="80" y1="80" x2="90" y2="140" stroke="#2563eb" strokeWidth="5"/>
-          <line x1="10" y1="140" x2="90" y2="140" stroke="#2563eb" strokeWidth="5"/>
-          <circle cx="50" cy="10" r="5" fill="#dc2626"/>
-          <circle cx="30" cy="40" r="3" fill="#dc2626"/>
-          <circle cx="70" cy="40" r="3" fill="#dc2626"/>
-          {/* Power Lines */}
+          <line x1="50" y1="10" x2="30" y2="40" stroke="#101631" strokeWidth="4"/>
+          <line x1="50" y1="10" x2="70" y2="40" stroke="#101631" strokeWidth="4"/>
+          <line x1="30" y1="40" x2="20" y2="80" stroke="#101631" strokeWidth="4"/>
+          <line x1="70" y1="40" x2="80" y2="80" stroke="#101631" strokeWidth="4"/>
+          <line x1="20" y1="80" x2="10" y2="140" stroke="#101631" strokeWidth="5"/>
+          <line x1="80" y1="80" x2="90" y2="140" stroke="#101631" strokeWidth="5"/>
+          <line x1="10" y1="140" x2="90" y2="140" stroke="#101631" strokeWidth="5"/>
+          <circle cx="50" cy="10" r="5" fill="#CD091B"/>
+          <circle cx="30" cy="40" r="3" fill="#CD091B"/>
+          <circle cx="70" cy="40" r="3" fill="#CD091B"/>
           <line x1="15" y1="50" x2="85" y2="50" stroke="#fbbf24" strokeWidth="2" strokeDasharray="3,3"/>
           <line x1="15" y1="60" x2="85" y2="60" stroke="#fbbf24" strokeWidth="2" strokeDasharray="3,3"/>
           <line x1="15" y1="70" x2="85" y2="70" stroke="#fbbf24" strokeWidth="2" strokeDasharray="3,3"/>
-        </svg>
-      </div>
-
-      {/* Additional Poles */}
-      <div className="absolute top-1/2 left-32 opacity-[0.06] hidden xl:block">
-        <svg className="w-20 h-28" viewBox="0 0 100 160">
-          <rect x="45" y="20" width="10" height="120" fill="#2563eb"/>
-          <circle cx="50" cy="20" r="6" fill="#ef4444"/>
-          <line x1="30" y1="40" x2="70" y2="40" stroke="#2563eb" strokeWidth="3"/>
-          <line x1="30" y1="70" x2="70" y2="70" stroke="#2563eb" strokeWidth="3"/>
-          <line x1="30" y1="100" x2="70" y2="100" stroke="#2563eb" strokeWidth="3"/>
-        </svg>
-      </div>
-
-      <div className="absolute top-1/3 right-28 opacity-[0.06] hidden xl:block">
-        <svg className="w-20 h-28" viewBox="0 0 100 160">
-          <rect x="45" y="20" width="10" height="120" fill="#2563eb"/>
-          <circle cx="50" cy="20" r="6" fill="#ef4444"/>
-          <line x1="30" y1="40" x2="70" y2="40" stroke="#2563eb" strokeWidth="3"/>
-          <line x1="30" y1="70" x2="70" y2="70" stroke="#2563eb" strokeWidth="3"/>
-          <line x1="30" y1="100" x2="70" y2="100" stroke="#2563eb" strokeWidth="3"/>
         </svg>
       </div>
 
@@ -189,11 +166,10 @@ const CollaborationsSection = () => {
         <div className="grid lg:grid-cols-12 gap-6 md:gap-8 max-w-[1800px] mx-auto">
           
           {/* Left Side - Introduction */}
-          <div className="lg:col-span-4 space-y-6 transform rotate-2 sm:rotate-1 md:rotate-0">
+          <div className="lg:col-span-4 space-y-6">
             
             {/* Main Card */}
-            <div className="bg-gradient-to-br from-[#b11226] via-[#1f3c88] to-[#0a1a3a]
- bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 rounded-3xl p-8 md:p-10 shadow-2xl border-2 border-blue-400 relative overflow-hidden">
+            <div className="bg-gradient-to-br from-[#CD091B] via-[#101631] to-[#0a1a3a] rounded-3xl p-8 md:p-10 shadow-2xl border-2 border-[#CD091B]/50 relative overflow-hidden">
               
               {/* Decorative Elements */}
               <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
@@ -236,13 +212,13 @@ const CollaborationsSection = () => {
 
             {/* Stats Cards */}
             <div className="grid grid-cols-2 gap-4">
-              <div className="bg-white rounded-2xl p-5 border-2 border-blue-300 shadow-xl hover:shadow-2xl transition-shadow hover:border-blue-400">
-                <Target className="w-8 h-8 text-blue-600 mb-2" />
+              <div className="bg-white rounded-2xl p-5 border-2 border-[#101631]/30 shadow-xl hover:shadow-2xl transition-all hover:border-[#101631]">
+                <Target className="w-8 h-8 text-[#CD091B] mb-2" />
                 <div className="text-2xl font-black text-gray-900 mb-1">50+</div>
                 <div className="text-xs text-gray-600 font-semibold">Active Partners</div>
               </div>
-              <div className="bg-white rounded-2xl p-5 border-2 border-blue-300 shadow-xl hover:shadow-2xl transition-shadow hover:border-blue-400">
-                <TrendingUp className="w-8 h-8 text-blue-600 mb-2" />
+              <div className="bg-white rounded-2xl p-5 border-2 border-[#101631]/30 shadow-xl hover:shadow-2xl transition-all hover:border-[#101631]">
+                <TrendingUp className="w-8 h-8 text-[#CD091B] mb-2" />
                 <div className="text-2xl font-black text-gray-900 mb-1">100+</div>
                 <div className="text-xs text-gray-600 font-semibold">Joint Projects</div>
               </div>
@@ -271,27 +247,27 @@ const CollaborationsSection = () => {
                   key={accordion.id}
                   className={`rounded-2xl overflow-hidden border-2 transition-all duration-500 shadow-xl ${
                     isOpen 
-                      ? 'bg-gradient-to-br from-blue-900 via-blue-900 to-blue-700 border-blue-400 shadow-2xl' 
-                      : 'bg-white border-blue-200 hover:border-blue-400 hover:shadow-2xl'
+                      ? 'bg-gradient-to-br from-[#101631] via-[#101631]/95 to-[#101631]/90 border-[#CD091B] shadow-2xl' 
+                      : 'bg-white border-[#101631]/20 hover:border-[#CD091B]/50 hover:shadow-2xl'
                   }`}
                 >
                   {/* Accordion Header */}
                   <button
                     onClick={() => setOpenAccordion(isOpen ? null : idx)}
-                    className="w-full p-6 md:p-8 text-left flex items-center justify-between group hover:bg-blue-50 transition-colors"
+                    className="w-full p-6 md:p-8 text-left flex items-center justify-between group hover:bg-gray-50 transition-colors"
                   >
                     <div className="flex items-center gap-4 flex-1 min-w-0">
                       <div className={`p-3 rounded-xl flex-shrink-0 transition-all duration-500 shadow-lg ${
                         isOpen 
-                          ? 'bg-white/20 backdrop-blur-sm' 
-                          : 'bg-blue-100 group-hover:bg-blue-200'
+                          ? 'bg-[#CD091B]/20 backdrop-blur-sm' 
+                          : 'bg-[#101631]/10 group-hover:bg-[#101631]/20'
                       }`}>
                         <IconComponent className={`w-6 h-6 md:w-7 md:h-7 ${
-                          isOpen ? 'text-white' : 'text-blue-700'
+                          isOpen ? 'text-white' : 'text-[#101631]'
                         }`} />
                       </div>
                       <h3 className={`font-bold text-base md:text-lg lg:text-xl transition-colors ${
-                        isOpen ? 'text-white' : 'text-gray-800 group-hover:text-blue-700'
+                        isOpen ? 'text-white' : 'text-gray-800 group-hover:text-[#CD091B]'
                       }`}>
                         {accordion.title}
                       </h3>
@@ -299,7 +275,7 @@ const CollaborationsSection = () => {
                     <ChevronDown className={`w-6 h-6 md:w-7 md:h-7 flex-shrink-0 ml-4 transition-all duration-500 ${
                       isOpen 
                         ? 'rotate-180 text-white' 
-                        : 'text-gray-500 group-hover:text-blue-600'
+                        : 'text-gray-500 group-hover:text-[#CD091B]'
                     }`} />
                   </button>
 
@@ -307,7 +283,7 @@ const CollaborationsSection = () => {
                   <div className={`transition-all duration-500 overflow-hidden ${
                     isOpen ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'
                   }`}>
-                    <div className="p-6 md:p-8 lg:p-10 bg-gradient-to-br from-lightblue-600 to-blue-700 border-t-2 border-white/20">
+                    <div className="p-6 md:p-8 lg:p-10 bg-gradient-to-br from-[#101631] to-[#101631]/90 border-t-2 border-white/20">
                       
                       <h4 className="text-xl md:text-2xl font-black text-white mb-4">
                         {accordion.content.heading}
@@ -322,10 +298,10 @@ const CollaborationsSection = () => {
                         {accordion.content.points.map((point, pIdx) => (
                           <div 
                             key={pIdx}
-                            className="bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/20 hover:border-white/40 transition-all hover:shadow-xl"
+                            className="bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/20 hover:border-[#CD091B]/50 transition-all hover:shadow-xl"
                           >
                             <div className="flex gap-4 items-start">
-                              <div className="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center flex-shrink-0 shadow-lg backdrop-blur-sm">
+                              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#CD091B] to-[#CD091B]/80 flex items-center justify-center flex-shrink-0 shadow-lg">
                                 <Activity className="w-5 h-5 text-white" />
                               </div>
                               <div className="flex-1 min-w-0">
@@ -342,7 +318,7 @@ const CollaborationsSection = () => {
                       </div>
 
                       {/* Conclusion */}
-                      <div className="bg-white/15 backdrop-blur-sm rounded-xl p-6 border-l-4 border-white shadow-lg">
+                      <div className="bg-white/15 backdrop-blur-sm rounded-xl p-6 border-l-4 border-[#CD091B] shadow-lg">
                         <p className="text-white text-sm md:text-base leading-relaxed font-medium">
                           {accordion.content.conclusion}
                         </p>
@@ -360,18 +336,18 @@ const CollaborationsSection = () => {
         {/* Bottom Stats Bar */}
         <div className="mt-12 max-w-[1800px] mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-            <div className="bg-white backdrop-blur-sm rounded-2xl p-6 border-2 border-blue-300 shadow-xl text-center hover:shadow-2xl transition-shadow">
-              <Zap className="w-10 h-10 text-blue-600 mx-auto mb-3" />
+            <div className="bg-white backdrop-blur-sm rounded-2xl p-6 border-2 border-[#101631]/30 shadow-xl text-center hover:shadow-2xl hover:border-[#CD091B] transition-all">
+              <Zap className="w-10 h-10 text-[#CD091B] mx-auto mb-3" />
               <div className="text-3xl font-black text-gray-900 mb-2">Innovation</div>
               <div className="text-gray-700 text-sm font-semibold">Driving Technology Forward</div>
             </div>
-            <div className="bg-white backdrop-blur-sm rounded-2xl p-6 border-2 border-blue-300 shadow-xl text-center hover:shadow-2xl transition-shadow">
-              <Network className="w-10 h-10 text-blue-600 mx-auto mb-3" />
+            <div className="bg-white backdrop-blur-sm rounded-2xl p-6 border-2 border-[#101631]/30 shadow-xl text-center hover:shadow-2xl hover:border-[#CD091B] transition-all">
+              <Network className="w-10 h-10 text-[#CD091B] mx-auto mb-3" />
               <div className="text-3xl font-black text-gray-900 mb-2">Partnership</div>
               <div className="text-gray-700 text-sm font-semibold">Global Network Expansion</div>
             </div>
-            <div className="bg-white backdrop-blur-sm rounded-2xl p-6 border-2 border-blue-300 shadow-xl text-center hover:shadow-2xl transition-shadow">
-              <Shield className="w-10 h-10 text-blue-600 mx-auto mb-3" />
+            <div className="bg-white backdrop-blur-sm rounded-2xl p-6 border-2 border-[#101631]/30 shadow-xl text-center hover:shadow-2xl hover:border-[#CD091B] transition-all">
+              <Shield className="w-10 h-10 text-[#CD091B] mx-auto mb-3" />
               <div className="text-3xl font-black text-gray-900 mb-2">Excellence</div>
               <div className="text-gray-700 text-sm font-semibold">Industry Leadership</div>
             </div>

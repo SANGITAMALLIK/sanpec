@@ -138,11 +138,11 @@ const TabGallery = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-[#101631] to-slate-900 relative overflow-hidden">
       {/* Animated Grid Background */}
       <div className="absolute inset-0 opacity-[0.08]">
         <div className="absolute inset-0" style={{
-          backgroundImage: 'linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)',
+          backgroundImage: 'linear-gradient(rgba(205, 9, 27, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(205, 9, 27, 0.4) 1px, transparent 1px)',
           backgroundSize: '60px 60px',
           animation: 'gridMove 20s linear infinite'
         }}></div>
@@ -170,54 +170,18 @@ const TabGallery = () => {
         }
       `}</style>
 
-      {/* Power Towers SVG Background */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.04]">
-        <svg className="absolute left-16 top-24 w-16 h-32" viewBox="0 0 100 200" style={{animation: 'float 6s ease-in-out infinite'}}>
-          <line x1="50" y1="10" x2="30" y2="50" stroke="#60a5fa" strokeWidth="3"/>
-          <line x1="50" y1="10" x2="70" y2="50" stroke="#60a5fa" strokeWidth="3"/>
-          <line x1="30" y1="50" x2="20" y2="100" stroke="#60a5fa" strokeWidth="3"/>
-          <line x1="70" y1="50" x2="80" y2="100" stroke="#60a5fa" strokeWidth="3"/>
-          <line x1="20" y1="100" x2="10" y2="180" stroke="#60a5fa" strokeWidth="4"/>
-          <line x1="80" y1="100" x2="90" y2="180" stroke="#60a5fa" strokeWidth="4"/>
-          <line x1="10" y1="180" x2="90" y2="180" stroke="#60a5fa" strokeWidth="4"/>
-          <circle cx="50" cy="10" r="4" fill="#f59e0b"/>
-        </svg>
-        
-        <svg className="absolute right-20 top-40 w-16 h-32" viewBox="0 0 100 200" style={{animation: 'float 7s ease-in-out infinite', animationDelay: '1s'}}>
-          <line x1="50" y1="10" x2="30" y2="50" stroke="#60a5fa" strokeWidth="3"/>
-          <line x1="50" y1="10" x2="70" y2="50" stroke="#60a5fa" strokeWidth="3"/>
-          <line x1="30" y1="50" x2="20" y2="100" stroke="#60a5fa" strokeWidth="3"/>
-          <line x1="70" y1="50" x2="80" y2="100" stroke="#60a5fa" strokeWidth="3"/>
-          <line x1="20" y1="100" x2="10" y2="180" stroke="#60a5fa" strokeWidth="4"/>
-          <line x1="80" y1="100" x2="90" y2="180" stroke="#60a5fa" strokeWidth="4"/>
-          <line x1="10" y1="180" x2="90" y2="180" stroke="#60a5fa" strokeWidth="4"/>
-          <circle cx="50" cy="10" r="4" fill="#f59e0b"/>
-        </svg>
-
-        <svg className="absolute left-1/4 bottom-24 w-14 h-28 hidden md:block" viewBox="0 0 100 200" style={{animation: 'float 8s ease-in-out infinite', animationDelay: '2s'}}>
-          <polygon points="50,20 45,60 40,100 35,150 30,190 70,190 65,150 60,100 55,60" fill="none" stroke="#f59e0b" strokeWidth="3"/>
-          <circle cx="50" cy="20" r="3" fill="#60a5fa"/>
-        </svg>
-
-        <svg className="absolute right-1/3 bottom-32 w-14 h-28 hidden md:block" viewBox="0 0 100 200" style={{animation: 'float 9s ease-in-out infinite', animationDelay: '3s'}}>
-          <polygon points="50,20 45,60 40,100 35,150 30,190 70,190 65,150 60,100 55,60" fill="none" stroke="#f59e0b" strokeWidth="3"/>
-          <circle cx="50" cy="20" r="3" fill="#60a5fa"/>
-        </svg>
-      </div>
-
       {/* Floating Orbs */}
-      <div className="absolute top-20 left-1/4 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl" style={{animation: 'pulse-glow 4s ease-in-out infinite'}}></div>
-      <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl" style={{animation: 'pulse-glow 4s ease-in-out infinite', animationDelay: '2s'}}></div>
-      <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-purple-500/15 rounded-full blur-3xl hidden md:block" style={{animation: 'pulse-glow 5s ease-in-out infinite', animationDelay: '1s'}}></div>
+      <div className="absolute top-20 left-1/4 w-72 h-72 bg-[#101631]/20 rounded-full blur-3xl" style={{animation: 'pulse-glow 4s ease-in-out infinite'}}></div>
+      <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-[#CD091B]/20 rounded-full blur-3xl" style={{animation: 'pulse-glow 4s ease-in-out infinite', animationDelay: '2s'}}></div>
 
       {/* Hero Section */}
       <div className="relative z-10 text-center py-12 md:py-16 px-4">
-        <div className="inline-flex items-center gap-2 md:gap-3 bg-gradient-to-r from-blue-500/20 to-orange-500/20 backdrop-blur-xl border border-blue-400/40 px-4 md:px-8 py-2 md:py-3 rounded-full mb-4 md:mb-6 shadow-2xl">
+        <div className="inline-flex items-center gap-2 md:gap-3 bg-gradient-to-r from-[#101631]/20 to-[#CD091B]/20 backdrop-blur-xl border border-[#CD091B]/40 px-4 md:px-8 py-2 md:py-3 rounded-full mb-4 md:mb-6 shadow-2xl">
           <Zap className="w-4 h-4 md:w-5 md:h-5 text-yellow-400 animate-pulse" />
           <span className="text-white font-bold text-xs md:text-sm tracking-wide">TRANSFORMING ENERGY INFRASTRUCTURE</span>
           <Sparkles className="w-4 h-4 md:w-5 md:h-5 text-yellow-400" />
         </div>
-        <h1 className="text-5xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-cyan-200 to-orange-300 mb-3 md:mb-4 tracking-tighter drop-shadow-2xl">
+        <h1 className="text-5xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#101631] via-gray-200 to-[#CD091B] mb-3 md:mb-4 tracking-tighter drop-shadow-2xl">
           Drivers Of Change
         </h1>
         <p className="text-blue-100 text-base md:text-xl max-w-4xl mx-auto font-light leading-relaxed px-4">
@@ -234,7 +198,7 @@ const TabGallery = () => {
             <Shield className="w-4 h-4 md:w-5 md:h-5" />
             <span className="text-xs md:text-sm font-medium">ISO Certified</span>
           </div>
-          <div className="flex items-center gap-2 text-orange-300">
+          <div className="flex items-center gap-2 text-[#CD091B]">
             <Cpu className="w-4 h-4 md:w-5 md:h-5" />
             <span className="text-xs md:text-sm font-medium">Smart Technology</span>
           </div>
@@ -242,7 +206,7 @@ const TabGallery = () => {
       </div>
 
       {/* Tabs Navigation */}
-      <div className="relative z-20 backdrop-blur-2xl bg-gradient-to-r from-slate-900/60 via-blue-900/60 to-slate-900/60 border-y border-white/20 sticky top-0 shadow-2xl">
+      <div className="relative z-20 backdrop-blur-2xl bg-gradient-to-r from-slate-900/60 via-[#101631]/60 to-slate-900/60 border-y border-white/20 sticky top-0 shadow-2xl">
         <div className="max-w-full px-3 md:px-6">
           <div className="flex justify-start md:justify-center gap-2 py-4 md:py-5 overflow-x-auto scrollbar-hide">
             {tabs.map((tab, index) => {
@@ -256,7 +220,7 @@ const TabGallery = () => {
                   }}
                   className={`group relative flex items-center gap-2 md:gap-3 px-4 md:px-6 py-3 md:py-3.5 rounded-xl font-bold whitespace-nowrap transition-all duration-500 ${
                     activeTab === index
-                      ? 'bg-gradient-to-r from-red-600 via-red-500 to-red-700 text-white shadow-2xl scale-105'
+                      ? 'bg-gradient-to-r from-[#CD091B] via-[#CD091B]/90 to-[#CD091B] text-white shadow-2xl scale-105'
                       : 'text-white/70 hover:text-white hover:bg-white/10 hover:scale-105'
                   }`}
                 >
@@ -274,9 +238,9 @@ const TabGallery = () => {
 
       {/* Content Area */}
       <div className="relative z-10 px-4 md:px-6 py-8 md:py-10 max-w-7xl mx-auto">
-        <div className="bg-gradient-to-br from-slate-900/95 to-blue-950/95 backdrop-blur-2xl rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden border border-white/10">
+        <div className="bg-gradient-to-br from-slate-900/95 to-[#101631]/95 backdrop-blur-2xl rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden border border-white/10">
           {/* Header */}
-          <div className="bg-gradient-to-r from-red-600 via-red-500 to-red-700 p-6 md:p-10 relative overflow-hidden">
+          <div className="bg-gradient-to-r from-[#CD091B] via-[#CD091B]/90 to-[#CD091B] p-6 md:p-10 relative overflow-hidden">
             <div className="absolute inset-0 bg-black/30"></div>
             <div className="absolute -right-20 -top-20 w-56 h-56 bg-white/10 rounded-full blur-3xl"></div>
             <div className="absolute -left-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
@@ -297,16 +261,16 @@ const TabGallery = () => {
               {/* Left Column */}
               <div className="space-y-5 md:space-y-6">
                 <div className="relative group">
-                  <div className="absolute -left-2 md:-left-3 top-0 bottom-0 w-1 md:w-1.5 bg-gradient-to-b from-red-600 via-red-500 to-red-700 rounded-full"></div>
-                  <p className="text-gray-200 text-sm md:text-base leading-relaxed pl-6 md:pl-8 text-justify bg-gradient-to-br from-slate-800/60 to-blue-900/30 p-5 md:p-7 rounded-xl md:rounded-2xl border border-white/10 shadow-xl hover:shadow-2xl transition-shadow">
+                  <div className="absolute -left-2 md:-left-3 top-0 bottom-0 w-1 md:w-1.5 bg-gradient-to-b from-[#CD091B] via-[#CD091B]/90 to-[#CD091B] rounded-full"></div>
+                  <p className="text-gray-200 text-sm md:text-base leading-relaxed pl-6 md:pl-8 text-justify bg-gradient-to-br from-slate-800/60 to-[#101631]/30 p-5 md:p-7 rounded-xl md:rounded-2xl border border-white/10 shadow-xl hover:shadow-2xl transition-shadow">
                     {tabs[activeTab].content.description}
                   </p>
                 </div>
                 {tabs[activeTab].content.bullets && (
-                  <div className="bg-gradient-to-br from-slate-800/60 to-blue-900/40 p-5 md:p-7 rounded-xl md:rounded-2xl border border-white/10 space-y-3 md:space-y-4 shadow-xl">
+                  <div className="bg-gradient-to-br from-slate-800/60 to-[#101631]/40 p-5 md:p-7 rounded-xl md:rounded-2xl border border-white/10 space-y-3 md:space-y-4 shadow-xl">
                     {tabs[activeTab].content.bullets.map((bullet, idx) => (
                       <div key={idx} className="flex gap-3 md:gap-4 items-start group">
-                        <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-gradient-to-r from-red-600 via-red-500 to-red-700 mt-1.5 md:mt-2 group-hover:scale-150 transition-transform shadow-lg flex-shrink-0"></div>
+                        <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-gradient-to-r from-[#CD091B] via-[#CD091B]/90 to-[#CD091B] mt-1.5 md:mt-2 group-hover:scale-150 transition-transform shadow-lg flex-shrink-0"></div>
                         <span className="text-gray-200 text-sm md:text-base leading-relaxed">{bullet}</span>
                       </div>
                     ))}
@@ -315,14 +279,14 @@ const TabGallery = () => {
 
                 {tabs[activeTab].content.subtitle && (
                   <div className="space-y-4 md:space-y-5">
-                    <h3 className="text-2xl md:text-3xl font-black bg-gradient-to-r from-red-600 via-red-500 to-red-700 bg-clip-text text-transparent drop-shadow-lg">
+                    <h3 className="text-2xl md:text-3xl font-black bg-gradient-to-r from-[#CD091B] via-[#CD091B]/90 to-[#CD091B] bg-clip-text text-transparent drop-shadow-lg">
                       {tabs[activeTab].content.subtitle}
                     </h3>
                     {tabs[activeTab].content.skills && (
                       <div className="grid grid-cols-1 gap-2.5 md:gap-3">
                         {tabs[activeTab].content.skills.map((skill, idx) => (
                           <div key={idx} className="flex gap-3 md:gap-4 items-center bg-gradient-to-r from-slate-800/60 to-transparent p-3 md:p-4 rounded-lg md:rounded-xl border border-white/10 hover:border-white/30 transition-all group shadow-lg hover:shadow-xl">
-                            <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-gradient-to-r from-red-600 via-red-500 to-red-700 flex items-center justify-center text-white text-sm md:text-base font-bold group-hover:scale-110 transition-transform shadow-lg flex-shrink-0">
+                            <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-gradient-to-r from-[#CD091B] via-[#CD091B]/90 to-[#CD091B] flex items-center justify-center text-white text-sm md:text-base font-bold group-hover:scale-110 transition-transform shadow-lg flex-shrink-0">
                               {idx + 1}
                             </div>
                             <span className="text-gray-200 text-sm md:text-base font-medium">{skill}</span>
@@ -343,7 +307,7 @@ const TabGallery = () => {
                       return (
                         <div
                           key={idx}
-                          className={`bg-gradient-to-br from-slate-800/60 to-blue-900/40 rounded-xl md:rounded-2xl overflow-hidden border-2 transition-all duration-500 shadow-xl ${
+                          className={`bg-gradient-to-br from-slate-800/60 to-[#101631]/40 rounded-xl md:rounded-2xl overflow-hidden border-2 transition-all duration-500 shadow-xl ${
                             isOpen ? 'border-white/40 shadow-2xl' : 'border-white/10 hover:border-white/25'
                           }`}
                         >
@@ -352,7 +316,7 @@ const TabGallery = () => {
                             className="w-full p-4 md:p-5 font-bold text-white text-left flex items-center justify-between hover:bg-white/5 transition-colors group"
                           >
                             <span className="flex items-center gap-2.5 md:gap-3">
-                              <span className="w-7 h-7 md:w-9 md:h-9 rounded-lg bg-gradient-to-r from-red-600 via-red-500 to-red-700 flex items-center justify-center text-xs md:text-sm font-black shadow-lg flex-shrink-0">
+                              <span className="w-7 h-7 md:w-9 md:h-9 rounded-lg bg-gradient-to-r from-[#CD091B] via-[#CD091B]/90 to-[#CD091B] flex items-center justify-center text-xs md:text-sm font-black shadow-lg flex-shrink-0">
                                 {idx + 1}
                               </span>
                               <span className="text-sm md:text-base">{accordion.title}</span>
@@ -377,7 +341,7 @@ const TabGallery = () => {
               <div className="mt-8 md:mt-12 text-center">
                 <a
                   href={tabs[activeTab].content.readMoreLink}
-                  className="group inline-flex items-center gap-3 md:gap-4 bg-gradient-to-r from-red-600 via-red-500 to-red-700 text-white px-8 md:px-12 py-4 md:py-5 rounded-full font-bold text-base md:text-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-110 relative overflow-hidden"
+                  className="group inline-flex items-center gap-3 md:gap-4 bg-gradient-to-r from-[#CD091B] via-[#CD091B]/90 to-[#CD091B] text-white px-8 md:px-12 py-4 md:py-5 rounded-full font-bold text-base md:text-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-110 relative overflow-hidden"
                 >
                   <span className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></span>
                   <span className="relative z-10">Explore More</span>
@@ -388,9 +352,6 @@ const TabGallery = () => {
           </div>
         </div>
       </div>
-
-      {/* Footer Stats */}
-    
     </div>
   );
 };

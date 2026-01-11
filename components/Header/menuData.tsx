@@ -148,6 +148,7 @@ export const menuData = {
     { id: 4, title: "Projects", path: "https://news.sanpec-excellence.com/td-projects/", newTab: true },
     { id: 5, title: "Why SANPEC", path: "/why-sanpec", newTab: false },
     { id: 6, title: "Resilience", path: "/resilience-and-sustainabilty", newTab: false },
-    { id: 7, title: "Blog", path: "/blog", newTab: false }
+    { id: 7, title: "Quality Assurance", path: "/quality-assurance", newTab: false },
+    { id: 8, title: "Blog", path: "/blog", newTab: false }
   ]
 };

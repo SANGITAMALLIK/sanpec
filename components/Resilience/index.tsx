@@ -10,6 +10,8 @@ const SustainabilityHero = () => {
     if (!canvas) return;
     
     const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    
     canvas.width = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
     
@@ -17,12 +19,13 @@ const SustainabilityHero = () => {
     const particleCount = 60;
     
     class Particle {
-       x: number;
-  y: number;
-  size: number;
-  speedX: number;
-  speedY: number;
-  color: string;
+      x;
+      y;
+      size;
+      speedX;
+      speedY;
+      color;
+      
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
@@ -43,6 +46,7 @@ const SustainabilityHero = () => {
       }
       
       draw() {
+        if (!ctx) return;
         ctx.fillStyle = this.color;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -56,6 +60,7 @@ const SustainabilityHero = () => {
     
     let animationId;
     const animate = () => {
+      if (!ctx) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
       particles.forEach(particle => {
@@ -68,16 +73,18 @@ const SustainabilityHero = () => {
     
     animate();
     
-    return () => cancelAnimationFrame(animationId);
+    return () => {
+      if (animationId) cancelAnimationFrame(animationId);
+    };
   }, []);
   
   return (
     <section className="relative min-h-screen overflow-hidden">
-      {/* Premium Grid Background - Red Theme */}
+      {/* Premium Grid Background - SANPEC Colors */}
       <div 
         className="absolute inset-0 z-0"
         style={{
-          background: 'linear-gradient(135deg, #7f1d1d 0%, #991b1b 25%, #dc2626 50%, #b91c1c 75%, #7f1d1d 100%)',
+          background: 'linear-gradient(135deg, #0a0e1a 0%, #101631 25%, #1a2347 50%, #101631 75%, #0a0e1a 100%)',
           backgroundSize: '100% 100%'
         }}
       >
@@ -85,7 +92,7 @@ const SustainabilityHero = () => {
         <div 
           className="absolute inset-0 opacity-20"
           style={{
-            backgroundImage: 'linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px)',
+            backgroundImage: 'linear-gradient(to right, rgba(205,9,27,0.2) 1px, transparent 1px), linear-gradient(to bottom, rgba(205,9,27,0.2) 1px, transparent 1px)',
             backgroundSize: '80px 80px'
           }}
         ></div>
@@ -94,7 +101,7 @@ const SustainabilityHero = () => {
         <div 
           className="absolute inset-0 opacity-10"
           style={{
-            backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255,255,255,0.1) 40px, rgba(255,255,255,0.1) 80px)',
+            backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(205,9,27,0.1) 40px, rgba(205,9,27,0.1) 80px)',
           }}
         ></div>
       </div>
@@ -106,21 +113,21 @@ const SustainabilityHero = () => {
       />
       
       {/* Gradient Overlays */}
-      <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-red-950/40 to-transparent z-10"></div>
-      <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-red-950/40 to-transparent z-10"></div>
+      <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-[#101631]/40 to-transparent z-10"></div>
+      <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-[#101631]/40 to-transparent z-10"></div>
       
       <div className="container relative z-20 mx-auto px-4 sm:px-6 py-16 md:py-24">
         {/* Premium Breadcrumb */}
         <div className="mb-8 md:mb-12">
           <nav className="flex items-center space-x-3 text-sm md:text-base">
-            <a href="#" className="text-red-200 hover:text-white transition-all duration-300 transform hover:translate-x-1 inline-flex items-center group">
+            <a href="#" className="text-gray-300 hover:text-white transition-all duration-300 transform hover:translate-x-1 inline-flex items-center group">
               <svg className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
               </svg>
               Home
             </a>
             <span className="text-gray-400">/</span>
-            <a href="#" className="text-red-300 hover:text-white transition-colors">Our Impact</a>
+            <a href="#" className="text-gray-300 hover:text-white transition-colors">Our Impact</a>
             <span className="text-gray-400">/</span>
             <span className="text-white font-semibold">Sustainability</span>
           </nav>
@@ -130,9 +137,9 @@ const SustainabilityHero = () => {
           {/* Content Section */}
           <div className="relative z-10">
             {/* Animated Badge */}
-            <div className="inline-flex items-center px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 mb-6 md:mb-8 group hover:bg-white/15 transition-all duration-300">
-              <div className="w-2 h-2 rounded-full bg-red-400 mr-3 animate-pulse"></div>
-              <span className="text-red-200 text-xs md:text-sm font-bold tracking-widest uppercase">SUSTAINABILITY</span>
+            <div className="inline-flex items-center px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-xl border border-[#CD091B]/30 mb-6 md:mb-8 group hover:bg-white/15 transition-all duration-300">
+              <div className="w-2 h-2 rounded-full bg-[#CD091B] mr-3 animate-pulse"></div>
+              <span className="text-gray-200 text-xs md:text-sm font-bold tracking-widest uppercase">SUSTAINABILITY</span>
               <div className="ml-4 w-0.5 h-4 bg-white/30"></div>
               <span className="ml-4 text-xs text-white/70 font-medium">2024</span>
             </div>
@@ -142,14 +149,14 @@ const SustainabilityHero = () => {
               <span className="block text-white mb-2">
                 Resilience and
               </span>
-              <span className="block bg-gradient-to-r from-red-300 via-red-200 to-red-300 bg-clip-text text-transparent">
+              <span className="block bg-gradient-to-r from-[#CD091B] via-[#ff4d5e] to-[#CD091B] bg-clip-text text-transparent">
                 Sustainability
               </span>
             </h1>
             
             {/* Description */}
-            <div className="relative pl-6 border-l-4 border-red-400/50 my-8 md:my-10">
-              <div className="absolute -left-2.5 top-0 w-2 h-10 bg-gradient-to-b from-red-400 to-red-600 rounded-full"></div>
+            <div className="relative pl-6 border-l-4 border-[#CD091B]/50 my-8 md:my-10">
+              <div className="absolute -left-2.5 top-0 w-2 h-10 bg-gradient-to-b from-[#CD091B] to-[#101631] rounded-full"></div>
               <p className="text-lg md:text-xl text-gray-200 leading-relaxed font-light">
                 Sustainability is an approach to business that meets the needs of the present without compromising the ability of the future generations to meet their own needs.
               </p>
@@ -160,7 +167,7 @@ const SustainabilityHero = () => {
               <button 
                 className="group relative px-8 py-4 rounded-full text-white font-bold overflow-hidden transform hover:scale-105 transition-all duration-300 hover:shadow-2xl"
                 style={{ 
-                  background: 'linear-gradient(to right, #CD091B, #0D132D)',
+                  background: 'linear-gradient(to right, #CD091B, #101631)',
                   boxShadow: '0 10px 30px rgba(205, 9, 27, 0.3)'
                 }}
               >
@@ -172,11 +179,11 @@ const SustainabilityHero = () => {
                 </span>
                 <span 
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  style={{ background: 'linear-gradient(to right, #0D132D, #CD091B)' }}
+                  style={{ background: 'linear-gradient(to right, #101631, #CD091B)' }}
                 ></span>
               </button>
               
-              <button className="group px-8 py-4 rounded-full border-2 border-white/30 backdrop-blur-sm text-white font-bold hover:bg-white/10 hover:border-white/50 transition-all duration-300">
+              <button className="group px-8 py-4 rounded-full border-2 border-[#CD091B]/40 backdrop-blur-sm text-white font-bold hover:bg-[#CD091B]/10 hover:border-[#CD091B] transition-all duration-300">
                 <span className="flex items-center">
                   View Impact Report
                   <svg className="w-5 h-5 ml-2 transform group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -203,7 +210,7 @@ const SustainabilityHero = () => {
                   </div>
                   <div 
                     className="w-0 h-1 group-hover:w-full transition-all duration-500 mx-auto mt-3 rounded-full"
-                    style={{ background: 'linear-gradient(to right, #CD091B, #0D132D)' }}
+                    style={{ background: 'linear-gradient(to right, #CD091B, #101631)' }}
                   ></div>
                 </div>
               ))}
@@ -215,11 +222,11 @@ const SustainabilityHero = () => {
             {/* Main Card */}
             <div className="relative w-full h-[450px] md:h-[550px] rounded-3xl overflow-hidden group">
               {/* Glass Card Background */}
-              <div className="absolute inset-0 bg-white/5 backdrop-blur-xl border border-white/10">
+              <div className="absolute inset-0 bg-white/5 backdrop-blur-xl border border-[#CD091B]/20">
                 <div className="absolute inset-0 flex flex-col items-center justify-center p-8">
                   <div 
                     className="w-32 h-32 mx-auto mb-8 rounded-full flex items-center justify-center shadow-2xl"
-                    style={{ background: 'linear-gradient(to right, #CD091B, #0D132D)' }}
+                    style={{ background: 'linear-gradient(to right, #CD091B, #101631)' }}
                   >
                     <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -232,13 +239,13 @@ const SustainabilityHero = () => {
                 {/* Hover Overlay */}
                 <div 
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-                  style={{ background: 'linear-gradient(to top, rgba(205, 9, 27, 0.2), transparent, rgba(13, 19, 45, 0.2))' }}
+                  style={{ background: 'linear-gradient(to top, rgba(205, 9, 27, 0.2), transparent, rgba(16, 22, 49, 0.2))' }}
                 ></div>
               </div>
             </div>
             
             {/* Floating Info Cards */}
-            <div className="absolute -bottom-6 -left-6 w-44 p-4 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl transform -rotate-3 hover:-rotate-6 hover:scale-105 transition-all duration-300">
+            <div className="absolute -bottom-6 -left-6 w-44 p-4 rounded-2xl bg-white/10 backdrop-blur-xl border border-[#CD091B]/30 shadow-2xl transform -rotate-3 hover:-rotate-6 hover:scale-105 transition-all duration-300">
               <div className="flex items-center">
                 <div className="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center mr-3">
                   <svg className="w-6 h-6 text-green-400" fill="currentColor" viewBox="0 0 20 20">
@@ -252,7 +259,7 @@ const SustainabilityHero = () => {
               </div>
             </div>
             
-            <div className="absolute -top-6 -right-6 w-44 p-4 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl transform rotate-3 hover:rotate-6 hover:scale-105 transition-all duration-300">
+            <div className="absolute -top-6 -right-6 w-44 p-4 rounded-2xl bg-white/10 backdrop-blur-xl border border-[#CD091B]/30 shadow-2xl transform rotate-3 hover:rotate-6 hover:scale-105 transition-all duration-300">
               <div className="flex items-center">
                 <div 
                   className="w-12 h-12 rounded-full flex items-center justify-center mr-3"
@@ -275,8 +282,8 @@ const SustainabilityHero = () => {
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
           <div className="flex flex-col items-center">
             <span className="text-sm text-white/70 mb-2">Scroll to explore</span>
-            <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-              <div className="w-1 h-3 bg-white rounded-full mt-2 animate-bounce"></div>
+            <div className="w-6 h-10 border-2 border-[#CD091B]/40 rounded-full flex justify-center">
+              <div className="w-1 h-3 bg-[#CD091B] rounded-full mt-2 animate-bounce"></div>
             </div>
           </div>
         </div>

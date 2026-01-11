@@ -97,13 +97,27 @@ export default function HeroSlider() {
     setActive(index);
   };
 
+  // Auto scroll tabs when active slide changes
+  useEffect(() => {
+    if (tabsRef.current && allImagesLoaded) {
+      const activeTab = tabsRef.current.children[active];
+      if (activeTab) {
+        activeTab.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'center'
+        });
+      }
+    }
+  }, [active, allImagesLoaded]);
+
   return (
-    <section className="relative w-full h-screen overflow-hidden bg-[#cd091b]">
+    <section className="relative w-full h-screen overflow-hidden bg-gray-900 lg:bg-[#cd091b]">
       {/* Loading Overlay */}
       {!allImagesLoaded && (
-        <div className="absolute top-0 left-0 w-full h-full bg-[#cd091b] flex flex-col items-center justify-center z-[100] text-white">
-          <div className="w-[50px] h-[50px] border-4 border-white/30 border-t-white rounded-full animate-spin mb-4"></div>
-          <p className="text-xl font-semibold tracking-[2px] uppercase">Loading...</p>
+        <div className="absolute top-0 left-0 w-full h-full bg-gray-900 lg:bg-[#cd091b] flex flex-col items-center justify-center z-[100] text-white">
+          <div className="w-12 h-12 lg:w-[50px] lg:h-[50px] border-4 border-white/30 border-t-white rounded-full animate-spin mb-4"></div>
+          <p className="text-lg lg:text-xl font-semibold tracking-[2px] uppercase">Loading...</p>
         </div>
       )}
 
@@ -116,7 +130,7 @@ export default function HeroSlider() {
         >
           <div className="flex flex-col lg:flex-row h-full w-full">
             {/* Left Side - Image with blend */}
-            <div className="flex-1 relative overflow-hidden bg-[#cd091b] h-[35vh] lg:h-full">
+            <div className="flex-1 relative overflow-hidden bg-transparent lg:bg-[#cd091b] h-[50vh] lg:h-full">
               {/* Skeleton loader for image */}
               {!imagesLoaded[slide.image] && (
                 <div className="absolute top-0 left-0 w-full h-full z-[1] animate-shimmer"
@@ -134,38 +148,48 @@ export default function HeroSlider() {
                 style={{ opacity: imagesLoaded[slide.image] ? 1 : 0 }}
               />
               
-              {/* Gradient Overlay */}
-              <div className="absolute top-0 right-0 w-full lg:w-1/2 h-1/2 lg:h-full pointer-events-none z-[2] lg:bottom-auto bottom-0 lg:top-0"
+              {/* Gradient Overlay - Only on Desktop */}
+              <div className="hidden lg:block absolute top-0 right-0 w-1/2 h-full pointer-events-none z-[2]"
                    style={{
-                     background: window.innerWidth >= 1024 
-                       ? `linear-gradient(to right, transparent 0%, rgba(205, 9, 27, 0.3) 40%, rgba(205, 9, 27, 0.6) 70%, ${slide.bgColor} 100%)`
-                       : `linear-gradient(to bottom, transparent 0%, rgba(205, 9, 27, 0.3) 40%, rgba(205, 9, 27, 0.6) 70%, ${slide.bgColor} 100%)`
+                     background: `linear-gradient(to right, transparent 0%, rgba(205, 9, 27, 0.3) 40%, rgba(205, 9, 27, 0.6) 70%, ${slide.bgColor} 100%)`
+                   }}></div>
+              
+              {/* Mobile Gradient Overlay - Bottom */}
+              <div className="block lg:hidden absolute bottom-0 left-0 w-full h-1/3 pointer-events-none z-[2]"
+                   style={{
+                     background: `linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.7) 100%)`
                    }}></div>
             </div>
 
             {/* Right Side - Text with Color Background */}
-            <div className="flex-1 flex items-center justify-center p-6 lg:p-16 transition-colors duration-700 relative overflow-hidden h-[65vh] lg:h-full"
+            <div className="flex-1 flex items-center justify-center p-4 sm:p-6 lg:p-16 transition-colors duration-700 relative overflow-hidden h-[50vh] lg:h-full"
                  style={{ backgroundColor: slide.bgColor }}>
-              {/* Grid Pattern Overlay */}
-              <div className="absolute inset-0 pointer-events-none z-[1]"
+              {/* Grid Pattern Overlay - Only on Desktop */}
+              <div className="hidden lg:block absolute inset-0 pointer-events-none z-[1]"
                    style={{
                      backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px)',
-                     backgroundSize: window.innerWidth >= 1024 ? '50px 50px' : window.innerWidth >= 640 ? '40px 40px' : '30px 30px'
+                     backgroundSize: '50px 50px'
                    }}></div>
               
               <div className={`max-w-full lg:max-w-[600px] text-white relative z-[2] ${
                 index === active && allImagesLoaded ? 'animate-slideInRight' : 'opacity-0'
               }`}>
-                <h4 className="text-base uppercase tracking-[2px] font-semibold mb-6 opacity-90">
+                <h4 className="text-xs sm:text-sm lg:text-base uppercase tracking-[1.5px] lg:tracking-[2px] font-semibold mb-3 lg:mb-6 opacity-90">
                   {slide.preTitle}
                 </h4>
-                <h1 className="text-2xl sm:text-3xl lg:text-5xl xl:text-[3.5rem] font-bold mb-6 leading-[1.6] tracking-wide">
+                <h1 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold mb-3 lg:mb-6 leading-[1.3] sm:leading-[1.4] lg:leading-[1.3] tracking-wide overflow-hidden"
+                    style={{
+                      display: '-webkit-box',
+                      WebkitLineClamp: 2,
+                      WebkitBoxOrient: 'vertical',
+                      textOverflow: 'ellipsis'
+                    }}>
                   {slide.title}
                 </h1>
-                <p className="text-lg mb-8 leading-[1.6] opacity-95">
+                <p className="text-sm sm:text-base lg:text-lg mb-4 lg:mb-8 leading-relaxed lg:leading-[1.6] opacity-95">
                   {slide.desc}
                 </p>
-                <button className="px-10 py-4 bg-white/20 text-white border-2 border-white rounded cursor-pointer transition-all duration-300 font-semibold hover:bg-white hover:text-[#cd091b] hover:-translate-y-1"
+                <button className="px-6 py-3 lg:px-10 lg:py-4 bg-white/20 text-white border-2 border-white rounded cursor-pointer transition-all duration-300 text-sm lg:text-base font-semibold hover:bg-white hover:text-[#cd091b] hover:-translate-y-1"
                         style={{ backdropFilter: 'blur(10px)' }}>
                   Explore now
                 </button>
@@ -179,16 +203,16 @@ export default function HeroSlider() {
       <button 
         onClick={prevSlide} 
         disabled={!allImagesLoaded}
-        className="absolute top-1/2 -translate-y-1/2 z-[20] w-[60px] h-[60px] bg-white/90 border-none rounded-full text-[#333] cursor-pointer flex items-center justify-center transition-all duration-300 shadow-[0_4px_15px_rgba(0,0,0,0.2)] disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white hover:scale-110 left-4 lg:left-8">
-        <ChevronLeft size={32} />
+        className="absolute top-1/2 -translate-y-1/2 z-[20] w-12 h-12 sm:w-14 sm:h-14 lg:w-[60px] lg:h-[60px] bg-white/90 border-none rounded-full text-[#333] cursor-pointer flex items-center justify-center transition-all duration-300 shadow-[0_4px_15px_rgba(0,0,0,0.2)] disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white hover:scale-110 left-2 sm:left-4 lg:left-8">
+        <ChevronLeft size={24} className="lg:w-8 lg:h-8" />
       </button>
 
       {/* Right Arrow */}
       <button 
         onClick={nextSlide} 
         disabled={!allImagesLoaded}
-        className="absolute top-1/2 -translate-y-1/2 z-[20] w-[60px] h-[60px] bg-white/90 border-none rounded-full text-[#333] cursor-pointer flex items-center justify-center transition-all duration-300 shadow-[0_4px_15px_rgba(0,0,0,0.2)] disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white hover:scale-110 right-4 lg:right-8">
-        <ChevronRight size={32} />
+        className="absolute top-1/2 -translate-y-1/2 z-[20] w-12 h-12 sm:w-14 sm:h-14 lg:w-[60px] lg:h-[60px] bg-white/90 border-none rounded-full text-[#333] cursor-pointer flex items-center justify-center transition-all duration-300 shadow-[0_4px_15px_rgba(0,0,0,0.2)] disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white hover:scale-110 right-2 sm:right-4 lg:right-8">
+        <ChevronRight size={24} className="lg:w-8 lg:h-8" />
       </button>
 
       {/* Navigation Tabs */}
@@ -203,16 +227,16 @@ export default function HeroSlider() {
             <div
               key={slide.id}
               onClick={() => allImagesLoaded && handleTabClick(index)}
-              className={`flex items-center gap-4 px-8 py-6 cursor-pointer transition-all duration-300 border-b-[3px] whitespace-nowrap min-w-fit ${
+              className={`flex items-center gap-2 sm:gap-3 lg:gap-4 px-3 py-3 sm:px-5 sm:py-4 lg:px-8 lg:py-6 cursor-pointer transition-all duration-300 border-b-[3px] whitespace-nowrap min-w-fit ${
                 index === active 
                   ? 'bg-white/10 border-b-[#cd091b] text-white' 
                   : 'bg-transparent border-b-transparent text-white/70 hover:bg-white/5 hover:text-white'
               }`}
               style={{ cursor: allImagesLoaded ? 'pointer' : 'not-allowed' }}>
-              <span className="font-bold text-xl text-[#cd091b]">
+              <span className="font-bold text-base sm:text-lg lg:text-xl text-[#cd091b]">
                 {`0${slide.id}`}
               </span>
-              <span className="text-sm uppercase tracking-[1px]">
+              <span className="text-[10px] sm:text-xs lg:text-sm uppercase tracking-[0.5px] sm:tracking-[1px]">
                 {slide.preTitle}
               </span>
             </div>
@@ -220,36 +244,8 @@ export default function HeroSlider() {
         </div>
       </div>
 
-      {/* Mobile Responsive Styles */}
+      {/* Animations */}
       <style jsx>{`
-        @media (max-width: 1024px) {
-          .left-side { height: 40vh; }
-          .right-side { height: 60vh; padding: 2rem 1.5rem; }
-          .text-content { max-width: 100%; }
-          .main-title { font-size: 1.8rem; }
-          .description { font-size: 0.95rem; }
-          .arrow-btn { width: 50px; height: 50px; }
-          .left-arrow { left: 1rem; }
-          .right-arrow { right: 1rem; }
-          .tab-item { padding: 1rem 1.5rem; }
-          .tab-number { font-size: 1rem; }
-          .tab-title { font-size: 0.8rem; }
-        }
-
-        @media (max-width: 640px) {
-          .left-side { height: 35vh; }
-          .right-side { height: 65vh; padding: 1.5rem 1rem; }
-          .main-title { font-size: 1.5rem; margin-bottom: 1rem; }
-          .description { font-size: 0.9rem; margin-bottom: 1.5rem; }
-          .explore-btn { padding: 0.8rem 2rem; font-size: 0.9rem; }
-          .arrow-btn { width: 45px; height: 45px; }
-          .left-arrow { left: 0.5rem; }
-          .right-arrow { right: 0.5rem; }
-          .tab-item { padding: 0.8rem 1rem; gap: 0.5rem; }
-          .tab-number { font-size: 0.9rem; }
-          .tab-title { font-size: 0.7rem; }
-        }
-
         @keyframes spin {
           to { transform: rotate(360deg); }
         }

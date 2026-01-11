@@ -150,10 +150,27 @@ const sections = [
 export default function InteractivePieWheel() {
   const [currentActiveIndex, setCurrentActiveIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   
   // Colors - Only 2 colors as requested
   const primaryColor = "#101631";
   const secondaryColor = "#CD091B";
+
+  // Detect mobile screen
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    
+    // Initial check
+    checkMobile();
+    
+    // Add event listener
+    window.addEventListener('resize', checkMobile);
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const totalSlices = sections.length;
   const anglePerSlice = 360 / totalSlices;
@@ -190,130 +207,141 @@ export default function InteractivePieWheel() {
 
   const rotation = 90 - (currentActiveIndex * anglePerSlice + anglePerSlice / 2);
 
+  // Safe check for current section
+  const currentSection = sections[currentActiveIndex] || sections[0];
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
       {/* Background SVG Elements - Power Structure Related */}
-      <div className="absolute inset-0 z-0 opacity-10">
-        {/* Transmission Tower 1 */}
-        <svg className="absolute top-10 left-20 w-40 h-40" viewBox="0 0 100 100">
-          <path d="M50 10 L55 40 L45 40 Z" fill={primaryColor} />
-          <rect x="48" y="40" width="4" height="50" fill={primaryColor} />
-          <path d="M30 90 L70 90 L65 80 L35 80 Z" fill={primaryColor} />
-          <line x1="40" y1="60" x2="60" y2="60" stroke={primaryColor} strokeWidth="1" />
-          <line x1="45" y1="70" x2="55" y2="70" stroke={primaryColor} strokeWidth="1" />
-        </svg>
-        
-        {/* Transmission Tower 2 */}
-        <svg className="absolute bottom-32 right-32 w-32 h-32" viewBox="0 0 100 100">
-          <path d="M50 15 L60 45 L40 45 Z" fill={secondaryColor} />
-          <rect x="48" y="45" width="4" height="45" fill={secondaryColor} />
-          <path d="M35 90 L65 90 L60 80 L40 80 Z" fill={secondaryColor} />
-          <line x1="42" y1="60" x2="58" y2="60" stroke={secondaryColor} strokeWidth="1" />
-          <line x1="45" y1="70" x2="55" y2="70" stroke={secondaryColor} strokeWidth="1" />
-        </svg>
-        
-        {/* Electrical Circuit */}
-        <svg className="absolute top-1/3 left-1/4 w-48 h-48" viewBox="0 0 100 100">
-          <rect x="20" y="20" width="60" height="60" rx="10" fill="none" stroke={primaryColor} strokeWidth="2" strokeDasharray="5,5" />
-          <circle cx="35" cy="35" r="8" fill="none" stroke={primaryColor} strokeWidth="2" />
-          <circle cx="65" cy="65" r="8" fill="none" stroke={primaryColor} strokeWidth="2" />
-          <path d="M35 35 L45 45 L55 35 L65 45" stroke={secondaryColor} strokeWidth="2" fill="none" />
-          <circle cx="50" cy="50" r="3" fill={secondaryColor} />
-        </svg>
-        
-        {/* Power Lines */}
-        <svg className="absolute bottom-20 left-1/3 w-64 h-24" viewBox="0 0 200 40">
-          <line x1="10" y1="20" x2="190" y2="20" stroke={primaryColor} strokeWidth="2" strokeDasharray="10,5" />
-          <circle cx="40" cy="20" r="4" fill={secondaryColor} />
-          <circle cx="80" cy="20" r="4" fill={secondaryColor} />
-          <circle cx="120" cy="20" r="4" fill={secondaryColor} />
-          <circle cx="160" cy="20" r="4" fill={secondaryColor} />
-        </svg>
-        
-        {/* Bolt Icons */}
-        <svg className="absolute top-44 right-44 w-20 h-20" viewBox="0 0 100 100">
-          <path d="M60 10 L40 50 L55 50 L35 90 L65 50 L50 50 Z" fill={secondaryColor} opacity="0.6" />
-        </svg>
-        
-        <svg className="absolute bottom-44 left-44 w-16 h-16" viewBox="0 0 100 100">
-          <path d="M55 15 L40 40 L50 40 L35 75 L60 40 L50 40 Z" fill={primaryColor} opacity="0.6" />
-        </svg>
-        
-        {/* Gear Icon */}
-        <svg className="absolute top-1/4 right-1/4 w-28 h-28" viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="30" fill="none" stroke={primaryColor} strokeWidth="3" />
-          <circle cx="50" cy="50" r="10" fill="none" stroke={primaryColor} strokeWidth="3" />
-          {[...Array(8)].map((_, i) => {
-            const angle = (i * 45) * Math.PI / 180;
-            const x1 = 50 + 30 * Math.cos(angle);
-            const y1 = 50 + 30 * Math.sin(angle);
-            const x2 = 50 + 20 * Math.cos(angle);
-            const y2 = 50 + 20 * Math.sin(angle);
-            return (
-              <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke={primaryColor} strokeWidth="3" />
-            );
-          })}
-        </svg>
-      </div>
-
-      {/* Main Container with 70px padding on left and right */}
-      <div className="px-[70px] py-12 max-w-[1800px] mx-auto relative z-10">
-        
-        {/* Attractive Section Title */}
-        <div className="text-center mb-16 relative">
-          {/* Decorative Elements */}
-          <div className="absolute top-0 left-0 w-full flex justify-center">
-            <div className="flex items-center gap-3">
-              <div className="w-20 h-1 bg-gradient-to-r from-transparent via-gray-300 to-transparent rounded-full"></div>
-              <div className="w-3 h-3 rounded-full animate-pulse" style={{ backgroundColor: secondaryColor }}></div>
-              <div className="w-20 h-1 bg-gradient-to-l from-transparent via-gray-300 to-transparent rounded-full"></div>
-            </div>
-          </div>
+      {!isMobile && (
+        <div className="absolute inset-0 z-0 opacity-10">
+          {/* Transmission Tower 1 */}
+          <svg className="absolute top-10 left-20 w-40 h-40" viewBox="0 0 100 100">
+            <path d="M50 10 L55 40 L45 40 Z" fill={primaryColor} />
+            <rect x="48" y="40" width="4" height="50" fill={primaryColor} />
+            <path d="M30 90 L70 90 L65 80 L35 80 Z" fill={primaryColor} />
+            <line x1="40" y1="60" x2="60" y2="60" stroke={primaryColor} strokeWidth="1" />
+            <line x1="45" y1="70" x2="55" y2="70" stroke={primaryColor} strokeWidth="1" />
+          </svg>
           
-          {/* Main Title */}
-          <div className="relative inline-block mt-10 mb-6">
-            {/* Background Glow */}
-            <div className="absolute -inset-4 bg-gradient-to-r from-secondaryColor/10 to-primaryColor/10 blur-xl rounded-2xl"></div>
+          {/* Transmission Tower 2 */}
+          <svg className="absolute bottom-32 right-32 w-32 h-32" viewBox="0 0 100 100">
+            <path d="M50 15 L60 45 L40 45 Z" fill={secondaryColor} />
+            <rect x="48" y="45" width="4" height="45" fill={secondaryColor} />
+            <path d="M35 90 L65 90 L60 80 L40 80 Z" fill={secondaryColor} />
+            <line x1="42" y1="60" x2="58" y2="60" stroke={secondaryColor} strokeWidth="1" />
+            <line x1="45" y1="70" x2="55" y2="70" stroke={secondaryColor} strokeWidth="1" />
+          </svg>
+          
+          {/* Electrical Circuit */}
+          <svg className="absolute top-1/3 left-1/4 w-48 h-48" viewBox="0 0 100 100">
+            <rect x="20" y="20" width="60" height="60" rx="10" fill="none" stroke={primaryColor} strokeWidth="2" strokeDasharray="5,5" />
+            <circle cx="35" cy="35" r="8" fill="none" stroke={primaryColor} strokeWidth="2" />
+            <circle cx="65" cy="65" r="8" fill="none" stroke={primaryColor} strokeWidth="2" />
+            <path d="M35 35 L45 45 L55 35 L65 45" stroke={secondaryColor} strokeWidth="2" fill="none" />
+            <circle cx="50" cy="50" r="3" fill={secondaryColor} />
+          </svg>
+          
+          {/* Power Lines */}
+          <svg className="absolute bottom-20 left-1/3 w-64 h-24" viewBox="0 0 200 40">
+            <line x1="10" y1="20" x2="190" y2="20" stroke={primaryColor} strokeWidth="2" strokeDasharray="10,5" />
+            <circle cx="40" cy="20" r="4" fill={secondaryColor} />
+            <circle cx="80" cy="20" r="4" fill={secondaryColor} />
+            <circle cx="120" cy="20" r="4" fill={secondaryColor} />
+            <circle cx="160" cy="20" r="4" fill={secondaryColor} />
+          </svg>
+          
+          {/* Bolt Icons */}
+          <svg className="absolute top-44 right-44 w-20 h-20" viewBox="0 0 100 100">
+            <path d="M60 10 L40 50 L55 50 L35 90 L65 50 L50 50 Z" fill={secondaryColor} opacity="0.6" />
+          </svg>
+          
+          <svg className="absolute bottom-44 left-44 w-16 h-16" viewBox="0 0 100 100">
+            <path d="M55 15 L40 40 L50 40 L35 75 L60 40 L50 40 Z" fill={primaryColor} opacity="0.6" />
+          </svg>
+          
+          {/* Gear Icon */}
+          <svg className="absolute top-1/4 right-1/4 w-28 h-28" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="30" fill="none" stroke={primaryColor} strokeWidth="3" />
+            <circle cx="50" cy="50" r="10" fill="none" stroke={primaryColor} strokeWidth="3" />
+            {[...Array(8)].map((_, i) => {
+              const angle = (i * 45) * Math.PI / 180;
+              const x1 = 50 + 30 * Math.cos(angle);
+              const y1 = 50 + 30 * Math.sin(angle);
+              const x2 = 50 + 20 * Math.cos(angle);
+              const y2 = 50 + 20 * Math.sin(angle);
+              return (
+                <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke={primaryColor} strokeWidth="3" />
+              );
+            })}
+          </svg>
+        </div>
+      )}
+
+      {/* Main Container - Responsive padding for mobile */}
+      <div className="px-4 lg:px-[70px] py-8 lg:py-12 max-w-[1800px] mx-auto relative z-10">
+        
+        {/* Attractive Section Title - Responsive for mobile */}
+        <div className="text-center mb-8 lg:mb-16 relative">
+          {/* Decorative Elements - Hide on mobile */}
+          {!isMobile && (
+            <div className="absolute top-0 left-0 w-full flex justify-center">
+              <div className="flex items-center gap-3">
+                <div className="w-20 h-1 bg-gradient-to-r from-transparent via-gray-300 to-transparent rounded-full"></div>
+                <div className="w-3 h-3 rounded-full animate-pulse" style={{ backgroundColor: secondaryColor }}></div>
+                <div className="w-20 h-1 bg-gradient-to-l from-transparent via-gray-300 to-transparent rounded-full"></div>
+              </div>
+            </div>
+          )}
+          
+          {/* Main Title - Responsive text sizes */}
+          <div className="relative inline-block mt-6 lg:mt-10 mb-4 lg:mb-6">
+            {/* Background Glow - Hide on mobile */}
+            {!isMobile && (
+              <div className="absolute -inset-4 bg-gradient-to-r from-secondaryColor/10 to-primaryColor/10 blur-xl rounded-2xl"></div>
+            )}
             
-            <h1 className="relative text-5xl md:text-6xl lg:text-7xl font-black mb-4 tracking-tight">
+            <h1 className="relative text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mb-2 lg:mb-4 tracking-tight">
               <span style={{ color: primaryColor }}>SANPEC'S</span>{' '}
               <span style={{ color: secondaryColor }}>SIX PILLARS</span>
             </h1>
             
-            <h2 className="relative text-3xl md:text-4xl font-bold mb-6" style={{ color: primaryColor }}>
+            <h2 className="relative text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4 lg:mb-6" style={{ color: primaryColor }}>
               OF EXCELLENCE
             </h2>
             
-            {/* Title Decorative Line */}
-            <div className="relative h-1.5 w-48 mx-auto rounded-full overflow-hidden">
+            {/* Title Decorative Line - Smaller on mobile */}
+            <div className="relative h-1 w-32 lg:w-48 mx-auto rounded-full overflow-hidden">
               <div className="absolute inset-0" style={{ 
                 background: `linear-gradient(90deg, ${primaryColor}30, ${secondaryColor}, ${primaryColor}30)` 
               }}></div>
             </div>
           </div>
           
-          {/* Description */}
-          <div className="max-w-4xl mx-auto mt-10">
-            <div className="relative bg-white border border-gray-200 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                <div className="w-6 h-6 rotate-45 bg-white border-t border-l border-gray-200"></div>
-              </div>
+          {/* Description - Simplified on mobile */}
+          <div className="max-w-4xl mx-auto mt-6 lg:mt-10">
+            <div className="relative bg-white border border-gray-200 rounded-xl lg:rounded-2xl p-4 lg:p-8 shadow-md lg:shadow-lg hover:shadow-lg lg:hover:shadow-xl transition-shadow duration-300">
+              {!isMobile && (
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                  <div className="w-6 h-6 rotate-45 bg-white border-t border-l border-gray-200"></div>
+                </div>
+              )}
               
-              <div className="flex items-start gap-4">
+              <div className="flex items-start gap-3 lg:gap-4">
                 <div className="flex-shrink-0">
-                  <div className="w-14 h-14 rounded-full flex items-center justify-center shadow-lg" 
+                  <div className="w-10 h-10 lg:w-14 lg:h-14 rounded-full flex items-center justify-center shadow-md lg:shadow-lg" 
                        style={{ backgroundColor: secondaryColor }}>
-                    <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 lg:w-7 lg:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                   </div>
                 </div>
                 
                 <div className="text-left">
-                  <h3 className="text-xl font-bold mb-2" style={{ color: secondaryColor }}>
+                  <h3 className="text-lg lg:text-xl font-bold mb-1 lg:mb-2" style={{ color: secondaryColor }}>
                     Powering the Future
                   </h3>
-                  <p className="text-gray-700 text-lg leading-relaxed">
+                  <p className="text-gray-700 text-sm lg:text-lg leading-relaxed">
                     Unwavering commitment to excellence, resilience, and sustainability. SANPEC has set new benchmarks and led the power transmission industry forward in these critical areas.
                   </p>
                 </div>
@@ -322,48 +350,50 @@ export default function InteractivePieWheel() {
           </div>
         </div>
 
-        {/* Main Content Area */}
-        <div className="flex flex-col lg:flex-row gap-12 items-start">
+        {/* Main Content Area - Mobile: Stack vertically, Desktop: Side by side */}
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start">
           
-          {/* Left - Pie Wheel with Outer Layer */}
-          <div className="lg:w-1/2 flex justify-center">
-            <div className="relative w-[600px] h-[600px]">
-              {/* Outer Static Layer with Text - DOES NOT ROTATE */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-[580px] h-[580px] rounded-full border-2 flex items-center justify-center"
-                     style={{ borderColor: `${primaryColor}30` }}>
-                  {/* Top Text */}
-                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-6">
-                    <div className="px-6 py-3 rounded-full bg-white shadow-lg border border-gray-200">
-                      <span className="font-bold text-lg tracking-wide whitespace-nowrap" style={{ color: primaryColor }}>
-                        Bringing Engineering Excellence
-                      </span>
+          {/* Left - Pie Wheel with Outer Layer - Hide outer layer on mobile */}
+          <div className="w-full lg:w-1/2 flex justify-center hidden lg:flex">
+            <div className={`relative ${isMobile ? 'w-[300px] h-[300px]' : 'w-[600px] h-[600px]'}`}>
+              {/* Outer Static Layer with Text - Hide on mobile */}
+              {!isMobile && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-[580px] h-[580px] rounded-full border-2 flex items-center justify-center"
+                       style={{ borderColor: `${primaryColor}30` }}>
+                    {/* Top Text */}
+                    <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-6">
+                      <div className="px-6 py-3 rounded-full bg-white shadow-lg border border-gray-200">
+                        <span className="font-bold text-lg tracking-wide whitespace-nowrap" style={{ color: primaryColor }}>
+                          Bringing Engineering Excellence
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                  
-                  {/* Bottom Text */}
-                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-6">
-                    <div className="px-6 py-3 rounded-full bg-white shadow-lg border border-gray-200">
-                      <span className="font-bold text-lg tracking-wide whitespace-nowrap" style={{ color: primaryColor }}>
-                        Improving Power Grid Reliability
-                      </span>
+                    
+                    {/* Bottom Text */}
+                    <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-6">
+                      <div className="px-6 py-3 rounded-full bg-white shadow-lg border border-gray-200">
+                        <span className="font-bold text-lg tracking-wide whitespace-nowrap" style={{ color: primaryColor }}>
+                          Improving Power Grid Reliability
+                        </span>
+                      </div>
                     </div>
+                    
+                    {/* Middle Ring */}
+                    <div className="w-[520px] h-[520px] rounded-full border" style={{ 
+                      borderColor: `${primaryColor}20`,
+                    }}></div>
                   </div>
-                  
-                  {/* Middle Ring */}
-                  <div className="w-[520px] h-[520px] rounded-full border" style={{ 
-                    borderColor: `${primaryColor}20`,
-                  }}></div>
                 </div>
-              </div>
+              )}
               
-              {/* Original Pie Wheel - Rotating Part - EXACTLY AS BEFORE */}
+              {/* Pie Wheel - Responsive size */}
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <div className="relative w-[500px] h-[500px]">
-                  {/* Outer Ring */}
-                  <div className="absolute inset-0 rounded-full border-8" style={{ 
+                <div className={`relative ${isMobile ? 'w-[300px] h-[300px]' : 'w-[500px] h-[500px]'}`}>
+                  {/* Outer Ring - Smaller on mobile */}
+                  <div className={`absolute inset-0 rounded-full ${isMobile ? 'border-4' : 'border-8'}`} style={{ 
                     borderColor: `${primaryColor}20`,
-                    boxShadow: `0 0 40px ${secondaryColor}10`
+                    boxShadow: `0 0 20px ${secondaryColor}10`
                   }}></div>
                   
                   {/* Pie Wheel */}
@@ -371,7 +401,7 @@ export default function InteractivePieWheel() {
                     className="w-full h-full rounded-full overflow-hidden transition-transform duration-700 ease-out"
                     style={{ 
                       transform: `rotate(${rotation}deg)`,
-                      boxShadow: '0 20px 60px rgba(0,0,0,0.15)'
+                      boxShadow: isMobile ? '0 10px 30px rgba(0,0,0,0.1)' : '0 20px 60px rgba(0,0,0,0.15)'
                     }}
                   >
                     <svg viewBox="0 0 500 500" className="w-full h-full">
@@ -388,78 +418,76 @@ export default function InteractivePieWheel() {
                       ))}
                     </svg>
                     
-                    {/* Labels - Fixed Position (not rotating) */}
-                   <div className="absolute inset-0 pointer-events-none">
-  {sections.map((sec, i) => {
-    const angle = i * anglePerSlice + anglePerSlice / 2;
-    const r = 180;
+                    {/* Labels - Responsive positioning */}
+                    <div className="absolute inset-0 pointer-events-none">
+                      {sections.map((sec, i) => {
+                        const angle = i * anglePerSlice + anglePerSlice / 2;
+                        const r = isMobile ? 100 : 180;
 
-    const x = 250 + r * Math.cos((angle - 90) * Math.PI / 180);
-    const y = 250 + r * Math.sin((angle - 90) * Math.PI / 180);
+                        const x = 250 + r * Math.cos((angle - 90) * Math.PI / 180);
+                        const y = 250 + r * Math.sin((angle - 90) * Math.PI / 180);
 
-    return (
-      <div
-        key={i}
-        className="absolute text-center"
-        style={{
-          left: `${x}px`,
-          top: `${y}px`,
-          transform: `
-            translate(-50%, -50%)
-            rotate(${-rotation}deg)
-          `,
-          transformOrigin: 'center',
-        }}
-      >
-        <div
-          className={`
-            px-4 py-2 rounded-lg transition-all duration-300
-            ${i === currentActiveIndex
-              ? 'bg-secondaryColor text-white'
-              : 'text-gray-800'
-            }
-          `}
-        >
-          <span className="font-bold text-sm tracking-wide leading-snug line-clamp-2" style={{ maxWidth: '130px' }}>
-            {sec.tabTitle}
-          </span>
-        </div>
-      </div>
-    );
-  })}
-</div>
-
+                        return (
+                          <div
+                            key={i}
+                            className="absolute text-center"
+                            style={{
+                              left: `${x}px`,
+                              top: `${y}px`,
+                              transform: `
+                                translate(-50%, -50%)
+                                rotate(${-rotation}deg)
+                              `,
+                              transformOrigin: 'center',
+                            }}
+                          >
+                            <div
+                              className={`
+                                px-3 py-2 rounded-lg transition-all duration-300
+                                ${i === currentActiveIndex
+                                  ? 'bg-secondaryColor text-white'
+                                  : 'text-gray-800'
+                                }
+                              `}
+                            >
+                              <span className={`font-bold ${isMobile ? 'text-xs' : 'text-sm'} tracking-wide leading-snug line-clamp-2`} style={{ maxWidth: isMobile ? '100px' : '130px' }}>
+                                {sec.tabTitle}
+                              </span>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
                   
-                  {/* Center Controls - EXACTLY AS BEFORE */}
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40">
-                    <div className="w-full h-full rounded-full bg-white border-4 shadow-2xl flex flex-col items-center justify-center"
+                  {/* Center Controls - Responsive size */}
+                  <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${isMobile ? 'w-24 h-24' : 'w-40 h-40'}`}>
+                    <div className={`w-full h-full rounded-full bg-white border-4 shadow-xl flex flex-col items-center justify-center ${isMobile ? 'p-2' : 'p-4'}`}
                          style={{ borderColor: primaryColor }}>
-                      <div className="text-center mb-3">
-                        <div className="text-sm font-bold uppercase tracking-widest" style={{ color: primaryColor }}>
+                      <div className="text-center mb-2">
+                        <div className={`${isMobile ? 'text-xs' : 'text-sm'} font-bold uppercase tracking-widest`} style={{ color: primaryColor }}>
                           SANPEC EXCELLENCE
                         </div>
-                        
                       </div>
                       
-                      <div className="flex gap-3">
+                      <div className="flex gap-2">
                         <button
                           onClick={previousSlice}
-                          className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg"
+                          className={`${isMobile ? 'w-8 h-8' : 'w-10 h-10'} rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg`}
                           style={{ backgroundColor: primaryColor }}
                           aria-label="Previous"
                         >
-                          <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className={`${isMobile ? 'w-4 h-4' : 'w-5 h-5'} text-white`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
                           </svg>
                         </button>
                         <button
                           onClick={nextSlice}
-                          className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg"
+                          className={`${isMobile ? 'w-8 h-8' : 'w-10 h-10'} rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg`}
                           style={{ backgroundColor: secondaryColor }}
                           aria-label="Next"
                         >
-                          <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className={`${isMobile ? 'w-4 h-4' : 'w-5 h-5'} text-white`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
                           </svg>
                         </button>
@@ -471,50 +499,44 @@ export default function InteractivePieWheel() {
             </div>
           </div>
 
-          {/* Right - Content Panel - EXACTLY AS BEFORE */}
-          <div className="lg:w-1/2">
-            <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden h-[600px]">
+          {/* Right - Content Panel - Full width on mobile */}
+          <div className="w-full lg:w-1/2">
+            <div className="bg-white rounded-xl lg:rounded-2xl shadow-lg lg:shadow-xl border border-gray-200 overflow-hidden h-auto lg:h-[600px]">
               <div className="flex flex-col md:flex-row h-full">
-                {/* Image Section - Full Height */}
-                <div className="md:w-2/5 h-64 md:h-auto relative overflow-hidden">
+                {/* Image Section - Responsive height and object-cover on mobile */}
+                <div className="md:w-2/5 h-48 md:h-auto relative overflow-hidden">
                   <img
-                    src={sections[currentActiveIndex].image}
-                    alt={sections[currentActiveIndex].contentTitle}
+                    src={currentSection.image}
+                    alt={currentSection.contentTitle}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                     onError={(e) => {
                       e.target.src = "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9";
                     }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-                  <div className="absolute top-4 left-4">
-                  
-                  </div>
                 </div>
                 
-                {/* Content Section - Scrollable */}
-                <div className="md:w-3/5 p-8 overflow-y-auto">
+                {/* Content Section - Responsive padding */}
+                <div className="md:w-3/5 p-4 lg:p-8 overflow-y-auto">
                   {/* Title */}
-                  <div className="mb-6 pb-4 border-b" style={{ borderColor: `${primaryColor}20` }}>
-                    <div className="flex items-center gap-3 mb-2">
-                    
-                      <h2 className="text-2xl md:text-3xl font-bold" style={{ color: primaryColor }}>
-                        {sections[currentActiveIndex].contentTitle}
-                      </h2>
-                    </div>
-                    <div className="w-24 h-1.5 rounded-full" style={{ backgroundColor: secondaryColor }}></div>
+                  <div className="mb-4 lg:mb-6 pb-3 lg:pb-4 border-b" style={{ borderColor: `${primaryColor}20` }}>
+                    <h2 className={`${isMobile ? 'text-xl' : 'text-2xl md:text-3xl'} font-bold`} style={{ color: primaryColor }}>
+                      {currentSection.contentTitle}
+                    </h2>
+                    <div className={`${isMobile ? 'w-16 h-1' : 'w-24 h-1.5'} rounded-full mt-2`} style={{ backgroundColor: secondaryColor }}></div>
                   </div>
                   
-                  {/* Content - All text properly displayed */}
-                  <div className="space-y-5 mb-8 pr-2">
-                    {sections[currentActiveIndex].content.map((item, idx) => (
+                  {/* Content - Responsive text */}
+                  <div className="space-y-4 mb-6 pr-2">
+                    {currentSection.content.map((item, idx) => (
                       <div key={idx} className="group hover:bg-gray-50 p-3 rounded-lg transition-all duration-300">
                         {item.subtitle && (
-                          <h3 className="font-bold text-lg mb-2 flex items-center gap-2" style={{ color: primaryColor }}>
+                          <h3 className={`font-bold ${isMobile ? 'text-base' : 'text-lg'} mb-2 flex items-center gap-2`} style={{ color: primaryColor }}>
                             <div className="w-2 h-2 rounded-full bg-secondaryColor opacity-0 group-hover:opacity-100 transition-opacity"></div>
                             {item.subtitle}
                           </h3>
                         )}
-                        <p className="text-gray-700 leading-relaxed text-sm md:text-base">
+                        <p className={`text-gray-700 leading-relaxed ${isMobile ? 'text-sm' : 'text-sm md:text-base'}`}>
                           {item.text}
                         </p>
                       </div>
@@ -523,17 +545,17 @@ export default function InteractivePieWheel() {
                   
                   {/* CTA Button */}
                   <a 
-                    href={sections[currentActiveIndex].link}
+                    href={currentSection.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 px-6 py-3 rounded-xl font-bold transition-all duration-300 hover:gap-4 hover:shadow-lg group"
+                    className="inline-flex items-center gap-3 px-4 lg:px-6 py-2 lg:py-3 rounded-lg lg:rounded-xl font-bold transition-all duration-300 hover:gap-4 hover:shadow-lg group text-sm lg:text-base"
                     style={{ 
                       backgroundColor: secondaryColor,
                       color: 'white'
                     }}
                   >
                     <span>Read More</span>
-                    <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 lg:w-5 lg:h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>
                   </a>
@@ -543,16 +565,16 @@ export default function InteractivePieWheel() {
           </div>
         </div>
         
-        {/* Bottom Navigation Tabs - EXACTLY AS BEFORE */}
-        <div className="mt-16">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+        {/* Bottom Navigation Tabs - Responsive grid */}
+        <div className="mt-8 lg:mt-16">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 lg:gap-4">
             {sections.map((section, index) => (
               <button
                 key={index}
                 onClick={() => selectSlice(index)}
                 className={`
-                  relative p-5 rounded-xl transition-all duration-300 overflow-hidden group
-                  ${index === currentActiveIndex ? 'scale-105 shadow-xl' : 'shadow-lg hover:scale-105'}
+                  relative p-3 lg:p-5 rounded-lg lg:rounded-xl transition-all duration-300 overflow-hidden group
+                  ${index === currentActiveIndex ? 'scale-105 shadow-lg lg:shadow-xl' : 'shadow-md lg:shadow-lg hover:scale-105'}
                 `}
                 style={{
                   backgroundColor: index === currentActiveIndex ? secondaryColor : 'white',
@@ -565,16 +587,16 @@ export default function InteractivePieWheel() {
                 
                 {/* Content */}
                 <div className="relative z-10">
-                  <div className="flex items-center justify-center mb-3">
+                  <div className="flex items-center justify-center mb-2 lg:mb-3">
                     <div className={`
-                      w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300
+                      ${isMobile ? 'w-8 h-8' : 'w-10 h-10'} rounded-full flex items-center justify-center transition-all duration-300
                       ${index === currentActiveIndex 
                         ? 'bg-white/20' 
                         : 'bg-gray-100 group-hover:bg-secondaryColor/10'
                       }
                     `}>
                       <svg className={`
-                        w-5 h-5 transition-colors duration-300
+                        ${isMobile ? 'w-4 h-4' : 'w-5 h-5'} transition-colors duration-300
                         ${index === currentActiveIndex ? 'text-white' : 'text-gray-500 group-hover:text-secondaryColor'}
                       `} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
@@ -582,7 +604,7 @@ export default function InteractivePieWheel() {
                     </div>
                   </div>
                   
-                  <div className="font-bold text-sm md:text-base leading-tight">
+                  <div className={`font-bold ${isMobile ? 'text-xs' : 'text-sm md:text-base'} leading-tight`}>
                     {section.tabTitle}
                   </div>
                 </div>
@@ -591,33 +613,6 @@ export default function InteractivePieWheel() {
           </div>
         </div>
       </div>
-
-      {/* Custom Scrollbar Styling */}
-      <style jsx>{`
-        /* Smooth scrollbar */
-        ::-webkit-scrollbar {
-          width: 6px;
-        }
-        
-        ::-webkit-scrollbar-track {
-          background: #f1f1f1;
-          border-radius: 3px;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-          background: #CD091B;
-          border-radius: 3px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-          background: #101631;
-        }
-        
-        /* Ensure content doesn't overflow */
-        .content-scroll {
-          max-height: 400px;
-        }
-      `}</style>
     </div>
   );
 }
