@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { GraduationCap, Trophy, Heart, ArrowRight, Sparkles } from 'lucide-react';
+import { GraduationCap, Trophy, Heart, Zap, TrendingUp, Activity } from 'lucide-react';
 
 export default function SocialImpactSection() {
   const [hoveredCard, setHoveredCard] = useState(null);
@@ -12,8 +12,8 @@ export default function SocialImpactSection() {
       title: 'Strong K-12 Support',
       subtitle: 'Local Commitment',
       description: 'We have devoted our time, money, and resources to support the K-12 communities. The workforce members contribute to the well-being and improvement of the local communities.',
-      color: 'from-[#101631] to-[#101631]/90',
-      solidColor: 'bg-[#101631]'
+      color: '#101631',
+      stats: '500+ Students'
     },
     {
       id: 2,
@@ -21,8 +21,8 @@ export default function SocialImpactSection() {
       title: 'Youth Sports',
       subtitle: 'Community Engagement',
       description: 'SANPEC is highly involved with local and statewide communities to support quality education, and youth sports programs through volunteer contributions.',
-      color: 'from-[#CD091B] to-[#CD091B]/90',
-      solidColor: 'bg-[#CD091B]'
+      color: '#CD091B',
+      stats: '15+ Programs'
     },
     {
       id: 3,
@@ -30,208 +30,230 @@ export default function SocialImpactSection() {
       title: 'Fostering Well-Being',
       subtitle: 'Workplace Culture',
       description: 'Creating a culture of well-being is essential for a thriving workplace. When employees feel supported, valued, and cared for, they are more engaged, productive, and innovative.',
-      color: 'from-[#CD091B]/80 to-[#101631]/80',
-      solidColor: 'bg-[#CD091B]'
+      color: '#101631',
+      stats: '100% Coverage'
     }
   ];
 
   return (
-    <div className="bg-white py-20 px-4 relative overflow-hidden">
+    <div className="bg-gray-50 py-12 md:py-20 px-4 relative overflow-hidden">
       
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#101631] via-[#CD091B] to-[#101631]"></div>
-
-      <div className="absolute top-40 right-20 w-64 h-64 bg-[#101631]/5 rounded-full blur-3xl opacity-30"></div>
-      <div className="absolute bottom-40 left-20 w-64 h-64 bg-[#CD091B]/5 rounded-full blur-3xl opacity-30"></div>
-
-      <div className="absolute left-0 top-1/3 opacity-[0.04] hover:opacity-[0.08] transition-opacity duration-700 pointer-events-auto group">
-        <svg width="120" height="400" viewBox="0 0 120 400" xmlns="http://www.w3.org/2000/svg" className="transform group-hover:scale-105 transition-transform duration-700">
-          <line x1="60" y1="10" x2="60" y2="380" stroke="#101631" strokeWidth="4"/>
-          <line x1="35" y1="80" x2="85" y2="80" stroke="#101631" strokeWidth="3"/>
-          <line x1="25" y1="160" x2="95" y2="160" stroke="#101631" strokeWidth="3"/>
-          <line x1="15" y1="240" x2="105" y2="240" stroke="#101631" strokeWidth="3"/>
-          <line x1="10" y1="320" x2="110" y2="320" stroke="#101631" strokeWidth="3"/>
-          <line x1="35" y1="10" x2="60" y2="50" stroke="#101631" strokeWidth="3"/>
-          <line x1="85" y1="10" x2="60" y2="50" stroke="#101631" strokeWidth="3"/>
-          <path d="M 110 240 L 180 220" stroke="#101631" strokeWidth="2" fill="none"/>
-          <path d="M 110 260 L 180 240" stroke="#101631" strokeWidth="2" fill="none"/>
-        </svg>
+      {/* Diagonal Split Background */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-1/2 bg-white"></div>
+        <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gray-100"></div>
+        <div 
+          className="absolute top-0 right-0 w-1/3 h-full bg-[#101631] opacity-[0.02]"
+          style={{ clipPath: 'polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%)' }}
+        ></div>
+        <div 
+          className="absolute top-0 left-0 w-1/3 h-full bg-[#CD091B] opacity-[0.02]"
+          style={{ clipPath: 'polygon(0% 0%, 70% 0%, 100% 100%, 0% 100%)' }}
+        ></div>
       </div>
 
-      <div className="absolute right-0 top-1/4 opacity-[0.04] hover:opacity-[0.08] transition-opacity duration-700 pointer-events-auto group">
-        <svg width="120" height="450" viewBox="0 0 120 450" xmlns="http://www.w3.org/2000/svg" className="transform group-hover:scale-105 transition-transform duration-700">
-          <line x1="60" y1="15" x2="60" y2="430" stroke="#CD091B" strokeWidth="4"/>
-          <line x1="30" y1="90" x2="90" y2="90" stroke="#CD091B" strokeWidth="3"/>
-          <line x1="20" y1="180" x2="100" y2="180" stroke="#CD091B" strokeWidth="3"/>
-          <line x1="10" y1="270" x2="110" y2="270" stroke="#CD091B" strokeWidth="3"/>
-          <line x1="5" y1="360" x2="115" y2="360" stroke="#CD091B" strokeWidth="3"/>
-          <line x1="30" y1="15" x2="60" y2="60" stroke="#CD091B" strokeWidth="3"/>
-          <line x1="90" y1="15" x2="60" y2="60" stroke="#CD091B" strokeWidth="3"/>
-          <path d="M 10 270 L -60 250" stroke="#CD091B" strokeWidth="2" fill="none"/>
-          <path d="M 10 290 L -60 270" stroke="#CD091B" strokeWidth="2" fill="none"/>
-        </svg>
-      </div>
-
+      {/* Technical Grid Pattern */}
       <div 
-        className="absolute top-0 left-0 right-0 h-[350px]"
+        className="absolute inset-0 opacity-[0.03]"
         style={{
-          backgroundImage: 'linear-gradient(to right, #e5e7eb 1px, transparent 1px), linear-gradient(to bottom, #e5e7eb 1px, transparent 1px)',
-          backgroundSize: '50px 50px',
-          opacity: 0.5
+          backgroundImage: `
+            linear-gradient(to right, #101631 1px, transparent 1px),
+            linear-gradient(to bottom, #101631 1px, transparent 1px)
+          `,
+          backgroundSize: '60px 60px'
         }}
       ></div>
 
+      {/* Floating Technical Elements */}
+      <div className="absolute top-20 left-10 opacity-[0.08]">
+        <svg width="80" height="80" viewBox="0 0 80 80">
+          <circle cx="40" cy="40" r="35" fill="none" stroke="#101631" strokeWidth="2" strokeDasharray="5,5"/>
+          <circle cx="40" cy="40" r="20" fill="none" stroke="#CD091B" strokeWidth="2"/>
+          <line x1="40" y1="5" x2="40" y2="75" stroke="#101631" strokeWidth="1"/>
+          <line x1="5" y1="40" x2="75" y2="40" stroke="#CD091B" strokeWidth="1"/>
+        </svg>
+      </div>
+
+      <div className="absolute bottom-20 right-10 opacity-[0.08]">
+        <svg width="100" height="100" viewBox="0 0 100 100">
+          <rect x="10" y="10" width="80" height="80" fill="none" stroke="#CD091B" strokeWidth="2" transform="rotate(45 50 50)"/>
+          <rect x="25" y="25" width="50" height="50" fill="none" stroke="#101631" strokeWidth="2" transform="rotate(45 50 50)"/>
+        </svg>
+      </div>
+
+      {/* Power Tower Left */}
+      <div className="absolute left-0 top-1/4 opacity-[0.05]">
+        <svg width="120" height="300" viewBox="0 0 120 300">
+          <line x1="60" y1="10" x2="60" y2="280" stroke="#101631" strokeWidth="4"/>
+          <line x1="30" y1="60" x2="90" y2="60" stroke="#101631" strokeWidth="3"/>
+          <line x1="20" y1="120" x2="100" y2="120" stroke="#101631" strokeWidth="3"/>
+          <line x1="15" y1="180" x2="105" y2="180" stroke="#101631" strokeWidth="3"/>
+          <circle cx="60" cy="10" r="6" fill="#CD091B"/>
+          <path d="M 100 120 L 150 110" stroke="#101631" strokeWidth="2" strokeDasharray="4,4"/>
+        </svg>
+      </div>
+
       <div className="max-w-7xl mx-auto relative z-10">
         
-        <div className="relative text-center mb-20 py-1">
-          <div className="relative z-10">
-            <div className="inline-flex items-center gap-3 mb-6">
-              <div className="w-16 h-1 bg-gradient-to-r from-[#101631] to-[#CD091B] rounded-full"></div>
-              <Sparkles className="w-6 h-6 text-[#CD091B]" />
-              <div className="w-16 h-1 bg-gradient-to-r from-[#CD091B] to-[#101631] rounded-full"></div>
+        {/* Header with Technical Style */}
+        <div className="mb-12 md:mb-20">
+          <div className="flex items-center gap-4 mb-8">
+            <div className="w-12 h-12 bg-[#CD091B] flex items-center justify-center">
+              <Activity className="w-6 h-6 text-white" />
             </div>
-            
-            <h1 className="text-6xl lg:text-7xl font-black mb-4 tracking-tight" style={{fontFamily: 'system-ui, -apple-system, sans-serif', letterSpacing: '-0.02em'}}>
-              <span className="bg-gradient-to-r from-[#101631] via-[#CD091B] to-[#101631] bg-clip-text text-transparent">
-                SOCIAL IMPACT
-              </span>
-            </h1>
-            <p className="text-xl text-gray-600 font-medium max-w-3xl mx-auto leading-relaxed">
-              Committed to building stronger communities through education, sports, and well-being
-            </p>
+            <div className="flex-1 h-0.5 bg-[#101631]"></div>
+            <Zap className="w-8 h-8 text-[#CD091B]" />
+            <div className="flex-1 h-0.5 bg-[#CD091B]"></div>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-8 items-end">
+            <div>
+              <div className="text-sm font-semibold text-[#CD091B] tracking-widest mb-3">COMMUNITY EXCELLENCE</div>
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-[#101631] leading-tight">
+                SOCIAL<br/>IMPACT
+              </h1>
+            </div>
+            <div className="border-l-4 border-[#CD091B] pl-6">
+              <p className="text-base md:text-lg text-gray-700 leading-relaxed">
+                Building stronger communities through education, sports, and workplace excellence
+              </p>
+            </div>
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-12 gap-8">
+        {/* Unique Asymmetric Layout */}
+        <div className="space-y-6 md:space-y-8">
           
-          <div className="lg:col-span-7 space-y-8">
-            {impactAreas.slice(0, 2).map((area, index) => {
-              const Icon = area.icon;
-              const isHovered = hoveredCard === area.id;
-              
-              return (
-                <div
-                  key={area.id}
-                  onMouseEnter={() => setHoveredCard(area.id)}
-                  onMouseLeave={() => setHoveredCard(null)}
-                  className="group relative bg-gradient-to-br from-gray-50 to-white border-2 border-gray-100 rounded-3xl overflow-hidden transition-all duration-700 hover:shadow-2xl hover:-translate-y-2"
-                  style={{
-                    animationDelay: `${index * 200}ms`,
-                    animation: 'slideInLeft 0.8s ease-out forwards'
-                  }}
-                >
-                  <div className={`absolute inset-0 bg-gradient-to-br ${area.color} opacity-0 group-hover:opacity-5 transition-opacity duration-700`}></div>
-                  
-                  <div className={`absolute top-0 left-0 right-0 h-2 bg-gradient-to-r ${area.color}`}></div>
-
-                  <div className="relative p-10">
-                    <div className={`inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br ${area.color} mb-6 shadow-xl transition-all duration-700 ${
-                      isHovered ? 'scale-110 rotate-6' : 'scale-100 rotate-0'
-                    }`}>
-                      <Icon className="w-10 h-10 text-white" />
+          {/* First Row - Large Card + Small Card */}
+          <div className="grid lg:grid-cols-3 gap-6 md:gap-8">
+            
+            {/* Large Featured Card */}
+            <div
+              className="lg:col-span-2 relative group cursor-pointer"
+              onMouseEnter={() => setHoveredCard(1)}
+              onMouseLeave={() => setHoveredCard(null)}
+            >
+              <div className="relative bg-white border-2 border-gray-200 overflow-hidden transition-all duration-500 hover:shadow-2xl">
+                <div className="absolute top-0 left-0 w-2 h-full bg-[#101631]"></div>
+                <div className="absolute top-0 right-0 w-full h-2 bg-[#101631]"></div>
+                
+                <div className="p-8 md:p-12">
+                  <div className="flex items-start justify-between mb-6">
+                    <div className="flex items-center gap-4">
+                      <div className="w-20 h-20 bg-[#101631] flex items-center justify-center">
+                        <GraduationCap className="w-10 h-10 text-white" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-semibold text-[#CD091B] tracking-wider mb-1">LOCAL COMMITMENT</div>
+                        <div className="text-2xl font-bold text-[#101631]">500+ Students</div>
+                      </div>
                     </div>
-
-                    <div className={`inline-block px-4 py-1.5 rounded-full bg-gradient-to-r ${area.color} mb-5`}>
-                      <span className="text-white text-xs font-bold tracking-wider uppercase">{area.subtitle}</span>
-                    </div>
-
-                    <h3 className="text-4xl lg:text-5xl font-black text-gray-900 mb-5 leading-tight" style={{fontFamily: 'system-ui, -apple-system, sans-serif', letterSpacing: '-0.02em'}}>
-                      {area.title}
-                    </h3>
-
-                    <p className="text-gray-600 text-lg leading-relaxed mb-6">
-                      {area.description}
-                    </p>
-
-                    <div className={`inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r ${area.color} rounded-xl text-white font-bold shadow-lg transition-all duration-300 ${
-                      isHovered ? 'translate-x-2 shadow-2xl' : 'translate-x-0'
-                    }`}>
-                      <span>Learn More</span>
-                      <ArrowRight className="w-5 h-5" />
+                    <div className={`w-12 h-12 border-2 border-[#101631] flex items-center justify-center transition-transform duration-500 ${hoveredCard === 1 ? 'rotate-45' : 'rotate-0'}`}>
+                      <TrendingUp className="w-6 h-6 text-[#101631]" />
                     </div>
                   </div>
 
-                  <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${area.color} transform origin-left transition-transform duration-700 ${
-                    isHovered ? 'scale-x-100 h-2' : 'scale-x-0'
-                  }`}></div>
-                </div>
-              );
-            })}
-          </div>
+                  <h3 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+                    Strong K-12 Support
+                  </h3>
 
-          <div className="lg:col-span-5 space-y-8">
-            
-            <div 
-              className="relative group rounded-3xl overflow-hidden border-2 border-gray-100 shadow-xl"
-              style={{
-                animation: 'slideInRight 0.8s ease-out forwards',
-                animationDelay: '200ms'
-              }}
-            >
-              <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#101631] via-[#CD091B] to-[#101631] z-10"></div>
-              
-              <img 
-                src="https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture7.png" 
-                alt="Social Impact"
-                className="w-full h-auto object-contain transform group-hover:scale-105 transition-transform duration-1000"
-              />
+                  <p className="text-gray-600 text-lg leading-relaxed">
+                    We have devoted our time, money, and resources to support the K-12 communities. The workforce members contribute to the well-being and improvement of the local communities.
+                  </p>
+                </div>
+
+                <div className={`absolute bottom-0 left-0 right-0 h-2 bg-[#101631] transform origin-left transition-transform duration-500 ${
+                  hoveredCard === 1 ? 'scale-x-100' : 'scale-x-0'
+                }`}></div>
+              </div>
             </div>
 
-            {impactAreas.slice(2, 3).map((area) => {
+            {/* Small Card with Image */}
+            <div className="relative group">
+              <div className="relative bg-white border-2 border-gray-200 overflow-hidden hover:shadow-2xl transition-all duration-500">
+                <div className="absolute top-0 left-0 w-full h-2 bg-[#CD091B]"></div>
+                <div className="absolute top-0 right-0 w-2 h-full bg-[#CD091B]"></div>
+                
+                <img 
+                  src="https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture7.png" 
+                  alt="Social Impact"
+                  className="w-full h-64 object-cover"
+                />
+                
+                <div className="p-6 bg-[#101631]">
+                  <div className="text-white text-sm font-semibold mb-2">COMMUNITY IMPACT</div>
+                  <div className="text-white text-2xl font-bold">Together We Build</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Second Row - Two Medium Cards */}
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+            
+            {impactAreas.slice(1).map((area) => {
               const Icon = area.icon;
               const isHovered = hoveredCard === area.id;
               
               return (
                 <div
                   key={area.id}
+                  className="relative group cursor-pointer"
                   onMouseEnter={() => setHoveredCard(area.id)}
                   onMouseLeave={() => setHoveredCard(null)}
-                  className="group relative bg-gradient-to-br from-gray-50 to-white border-2 border-gray-100 rounded-3xl overflow-hidden transition-all duration-700 hover:shadow-2xl hover:-translate-y-2"
-                  style={{
-                    animation: 'slideInRight 0.8s ease-out forwards',
-                    animationDelay: '400ms'
-                  }}
                 >
-                  <div className={`absolute inset-0 bg-gradient-to-br ${area.color} opacity-0 group-hover:opacity-5 transition-opacity duration-700`}></div>
-                  <div className={`absolute top-0 left-0 right-0 h-2 bg-gradient-to-r ${area.color}`}></div>
-                  
-                  <div className="relative p-8">
-                    <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br ${area.color} mb-5 shadow-xl transition-all duration-700 ${
-                      isHovered ? 'scale-110 rotate-6' : 'scale-100 rotate-0'
-                    }`}>
-                      <Icon className="w-8 h-8 text-white" />
+                  <div className="relative bg-white border-2 border-gray-200 overflow-hidden transition-all duration-500 hover:shadow-2xl">
+                    <div className="absolute top-0 left-0 w-full h-2" style={{ backgroundColor: area.color }}></div>
+                    <div className="absolute bottom-0 left-0 w-2 h-full" style={{ backgroundColor: area.color }}></div>
+                    
+                    <div className="p-8">
+                      <div className="flex items-start justify-between mb-6">
+                        <div className="w-16 h-16 flex items-center justify-center" style={{ backgroundColor: area.color }}>
+                          <Icon className="w-8 h-8 text-white" />
+                        </div>
+                        <div className="text-right">
+                          <div className="text-xs font-semibold text-[#CD091B] tracking-wider mb-1">{area.subtitle}</div>
+                          <div className="text-xl font-bold" style={{ color: area.color }}>{area.stats}</div>
+                        </div>
+                      </div>
+
+                      <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 leading-tight">
+                        {area.title}
+                      </h3>
+
+                      <p className="text-gray-600 leading-relaxed">
+                        {area.description}
+                      </p>
+
+                      <div className="mt-6 flex items-center gap-2">
+                        <div className="flex-1 h-1" style={{ backgroundColor: area.color }}></div>
+                        <div className={`w-8 h-8 border-2 flex items-center justify-center transition-transform duration-500 ${isHovered ? 'rotate-90' : 'rotate-0'}`} style={{ borderColor: area.color }}>
+                          <Zap className="w-4 h-4" style={{ color: area.color }} />
+                        </div>
+                      </div>
                     </div>
 
-                    <div className={`inline-block px-3 py-1 rounded-full bg-gradient-to-r ${area.color} mb-4`}>
-                      <span className="text-white text-xs font-bold tracking-wider uppercase">{area.subtitle}</span>
-                    </div>
-
-                    <h3 className="text-3xl font-black text-gray-900 mb-4 leading-tight" style={{fontFamily: 'system-ui, -apple-system, sans-serif', letterSpacing: '-0.02em'}}>
-                      {area.title}
-                    </h3>
-
-                    <p className="text-gray-600 leading-relaxed mb-5 text-sm">
-                      {area.description}
-                    </p>
-
-                    <div className={`inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r ${area.color} rounded-xl text-white font-bold shadow-lg transition-all duration-300 ${
-                      isHovered ? 'translate-x-2 shadow-2xl' : 'translate-x-0'
-                    }`}>
-                      <span className="text-sm">Learn More</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </div>
+                    <div 
+                      className={`absolute bottom-0 left-0 right-0 h-2 transform origin-left transition-transform duration-500 ${
+                        isHovered ? 'scale-x-100' : 'scale-x-0'
+                      }`}
+                      style={{ backgroundColor: area.color }}
+                    ></div>
                   </div>
-
-                  <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${area.color} transform origin-left transition-transform duration-700 ${
-                    isHovered ? 'scale-x-100 h-2' : 'scale-x-0'
-                  }`}></div>
                 </div>
               );
             })}
+
           </div>
 
         </div>
 
       </div>
+
+      {/* Bottom Technical Border */}
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#101631]"></div>
+      <div className="absolute bottom-1 left-0 right-0 h-0.5 bg-[#CD091B]"></div>
     </div>
   );
-} 
+}

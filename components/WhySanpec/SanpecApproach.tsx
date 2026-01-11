@@ -37,13 +37,13 @@ const TabGallery = () => {
   const prevTab = () => setActiveTab((prev) => (prev - 1 + tabs.length) % tabs.length);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-100 via-gray-50 to-slate-100 p-8">
+    <div className="min-h-screen bg-white p-8">
       <div className="flex gap-8 max-w-7xl mx-auto">
         {/* Left Vertical Tabs */}
         <div className="w-28 flex flex-col items-center py-8 space-y-6">
           <button
             onClick={prevTab}
-            className="bg-gradient-to-br from-[#CD091B] to-[#CD091B]/90 hover:from-[#CD091B]/90 hover:to-[#CD091B] text-white p-3 rounded-full transition-all duration-300 hover:scale-110 shadow-xl"
+            className="bg-[#CD091B] hover:opacity-90 text-white p-3 transition-all duration-300 hover:scale-110 shadow-xl"
           >
             <ChevronUp className="w-6 h-6" />
           </button>
@@ -53,10 +53,10 @@ const TabGallery = () => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(index)}
-                className={`relative overflow-hidden rounded-lg transition-all duration-500 ${
+                className={`relative overflow-hidden transition-all duration-500 border-4 ${
                   activeTab === index
-                    ? 'ring-4 ring-[#CD091B] shadow-2xl scale-110'
-                    : 'ring-2 ring-gray-300 hover:ring-[#101631] hover:scale-105 opacity-60 hover:opacity-100'
+                    ? 'border-[#CD091B] shadow-2xl scale-110'
+                    : 'border-gray-300 hover:border-[#101631] hover:scale-105 opacity-60 hover:opacity-100'
                 }`}
                 style={{ width: '80px', height: '80px' }}
               >
@@ -66,7 +66,7 @@ const TabGallery = () => {
                   className="w-full h-full object-cover"
                 />
                 {activeTab === index && (
-                  <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[#CD091B] via-white to-[#101631]"></div>
+                  <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-[#CD091B]"></div>
                 )}
               </button>
             ))}
@@ -74,24 +74,24 @@ const TabGallery = () => {
 
           <button
             onClick={nextTab}
-            className="bg-gradient-to-br from-[#101631] to-[#101631]/90 hover:from-[#101631]/90 hover:to-[#101631] text-white p-3 rounded-full transition-all duration-300 hover:scale-110 shadow-xl"
+            className="bg-[#101631] hover:opacity-90 text-white p-3 transition-all duration-300 hover:scale-110 shadow-xl"
           >
             <ChevronDown className="w-6 h-6" />
           </button>
 
-          <div className="mt-4 bg-gradient-to-r from-[#CD091B] to-[#101631] text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg">
+          <div className="mt-4 bg-[#CD091B] text-white text-sm font-bold px-4 py-2 shadow-lg">
             {activeTab + 1}/{tabs.length}
           </div>
         </div>
 
-        {/* Book Container - 2 Pages Side by Side */}
+        {/* Book Container */}
         <div className="flex-1">
-          <div className="relative" style={{ perspective: '2000px' }}>
+          <div className="relative">
             {/* Book Shadow */}
-            <div className="absolute inset-0 bg-black/20 blur-2xl transform translate-y-4"></div>
+            <div className="absolute inset-0 bg-black opacity-20 blur-2xl transform translate-y-4"></div>
             
             {/* Open Book */}
-            <div className="relative bg-amber-100 rounded-2xl shadow-2xl overflow-hidden">
+            <div className="relative bg-amber-100 shadow-2xl overflow-hidden">
               <div className="flex" style={{ minHeight: '80vh' }}>
                 {/* Left Page */}
                 <div className="w-1/2 bg-white border-r-8 border-[#CD091B] overflow-auto">
@@ -103,10 +103,10 @@ const TabGallery = () => {
                 </div>
 
                 {/* Center Binding */}
-                <div className="absolute left-1/2 top-0 bottom-0 w-6 bg-gradient-to-b from-[#CD091B] via-[#101631] to-[#CD091B] transform -translate-x-1/2 shadow-2xl z-10">
+                <div className="absolute left-1/2 top-0 bottom-0 w-6 bg-[#101631] transform -translate-x-1/2 shadow-2xl z-10">
                   <div className="h-full flex flex-col items-center justify-center gap-4">
-                    <div className="w-0.5 h-20 bg-gradient-to-b from-yellow-400 via-white to-[#101631]"></div>
-                    <div className="w-0.5 h-20 bg-gradient-to-b from-[#101631] via-white to-yellow-400"></div>
+                    <div className="w-0.5 h-20 bg-white"></div>
+                    <div className="w-0.5 h-20 bg-white"></div>
                   </div>
                 </div>
 
@@ -119,7 +119,7 @@ const TabGallery = () => {
                       className="w-full h-auto"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#CD091B]/5 to-[#101631]/5">
+                    <div className="w-full h-full flex items-center justify-center bg-gray-50">
                       <div className="text-gray-300 text-2xl font-light">Empty Page</div>
                     </div>
                   )}
@@ -136,7 +136,7 @@ const TabGallery = () => {
               <div className="absolute left-0 top-8 bottom-8 w-3">
                 <div className="h-full flex flex-col justify-center gap-1">
                   {[...Array(20)].map((_, i) => (
-                    <div key={i} className="h-1 bg-gradient-to-r from-gray-200 to-gray-100 rounded-l" style={{ width: `${10 - i * 0.4}px` }}></div>
+                    <div key={i} className="h-1 bg-gray-200" style={{ width: `${10 - i * 0.4}px` }}></div>
                   ))}
                 </div>
               </div>
@@ -145,7 +145,7 @@ const TabGallery = () => {
               <div className="absolute right-0 top-8 bottom-8 w-3">
                 <div className="h-full flex flex-col justify-center gap-1">
                   {[...Array(20)].map((_, i) => (
-                    <div key={i} className="h-1 bg-gradient-to-l from-gray-200 to-gray-100 rounded-r" style={{ width: `${10 - i * 0.4}px` }}></div>
+                    <div key={i} className="h-1 bg-gray-200" style={{ width: `${10 - i * 0.4}px` }}></div>
                   ))}
                 </div>
               </div>
