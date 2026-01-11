@@ -2,8 +2,12 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronDown, ChevronRight, Home, Sparkles, Menu, X } from 'lucide-react';
 import dynamic from "next/dynamic";
+import { useRouter, usePathname } from 'next/navigation'; // YE IMPORT JARURI HAI
 
 export default function SidebarMenu() {
+  const router = useRouter(); // Router initialize
+  const pathname = usePathname(); // Current URL path
+  
   const [expandedParent, setExpandedParent] = useState('transmission');
   const [activeItem, setActiveItem] = useState('design-engineering');
   const [currentPage, setCurrentPage] = useState('design-engineering');
@@ -141,6 +145,20 @@ export default function SidebarMenu() {
     }
   ];
 
+  // URL se state sync karo jab page load ho
+  useEffect(() => {
+    if (pathname) {
+      menuData.forEach(parent => {
+        const matchedChild = parent.children.find(child => child.url === pathname);
+        if (matchedChild) {
+          setActiveItem(matchedChild.id);
+          setExpandedParent(parent.id);
+          setCurrentPage(matchedChild.id);
+        }
+      });
+    }
+  }, [pathname]);
+
   const toggleExpand = (itemId) => {
     if (expandedParent === itemId) {
       setExpandedParent(null);
@@ -149,6 +167,7 @@ export default function SidebarMenu() {
     }
   };
 
+  // YE FUNCTION IMPORTANT - router.push use karo
   const handleItemClick = (itemId, parentId, url) => {
     setActiveItem(itemId);
     setExpandedParent(parentId);
@@ -158,7 +177,8 @@ export default function SidebarMenu() {
       setIsMobileMenuOpen(false);
     }
     
-    window.history.pushState({}, '', url);
+    // Next.js router se navigate karo
+    router.push(url);
   };
 
   const currentParent = menuData.find(p => p.children.some(c => c.id === activeItem));
@@ -184,7 +204,7 @@ export default function SidebarMenu() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Mobile Menu Button - Inside sidebar on left */}
+      {/* Mobile Menu Button */}
       <button
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         className="lg:hidden fixed top-24 left-4 z-30 p-3 bg-[#101631] rounded-lg shadow-md border border-gray-300 hover:bg-[#CD091B] transition-colors"
@@ -193,11 +213,10 @@ export default function SidebarMenu() {
         {isMobileMenuOpen ? <X size={24} className="text-white" /> : <Menu size={24} className="text-white" />}
       </button>
 
-      {/* Hero/Title Section - Full Width */}
+      {/* Hero/Title Section */}
       <div className="relative bg-[#101631] overflow-hidden" style={{ height: '370px' }}>
-        {/* Power Poles and Towers Elements */}
         <div className="absolute inset-0 opacity-10">
-          {/* Transmission Tower 1 - Left */}
+          {/* Tower 1 - Left */}
           <div className="absolute left-16 top-20">
             <div className="relative w-8 h-48">
               <div className="absolute left-1/2 transform -translate-x-1/2 w-2 h-full bg-[#CD091B]"></div>
@@ -209,7 +228,7 @@ export default function SidebarMenu() {
             </div>
           </div>
 
-          {/* Transmission Tower 2 - Right */}
+          {/* Tower 2 - Right */}
           <div className="absolute right-20 top-24">
             <div className="relative w-8 h-52">
               <div className="absolute left-1/2 transform -translate-x-1/2 w-2 h-full bg-[#CD091B]"></div>
@@ -221,7 +240,7 @@ export default function SidebarMenu() {
             </div>
           </div>
 
-          {/* Electric Pole 1 - Center Left */}
+          {/* Pole 1 - Center Left */}
           <div className="absolute left-1/3 top-32">
             <div className="relative w-6 h-40">
               <div className="absolute left-1/2 transform -translate-x-1/2 w-2 h-full bg-[#CD091B]"></div>
@@ -231,7 +250,7 @@ export default function SidebarMenu() {
             </div>
           </div>
 
-          {/* Electric Pole 2 - Center Right */}
+          {/* Pole 2 - Center Right */}
           <div className="absolute right-1/3 top-28">
             <div className="relative w-6 h-36">
               <div className="absolute left-1/2 transform -translate-x-1/2 w-2 h-full bg-[#CD091B]"></div>
@@ -290,7 +309,6 @@ export default function SidebarMenu() {
             : 'hidden lg:block'
           }
         `}>
-          {/* Mobile Close Button */}
           {isMobileMenuOpen && (
             <button
               onClick={() => setIsMobileMenuOpen(false)}
@@ -375,7 +393,6 @@ export default function SidebarMenu() {
 
         {/* Main Content */}
         <main className="flex-1 p-4 sm:p-6 lg:p-8 bg-white min-h-screen">
-          {/* Main Content Card */}
           <div className="relative bg-white rounded-xl sm:rounded-2xl shadow-sm border border-gray-200 overflow-hidden mb-6 sm:mb-8 hover:shadow-md transition-shadow duration-300">
             <div className="h-0.5 bg-[#CD091B]" />
             

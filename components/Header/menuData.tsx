@@ -29,7 +29,7 @@ export const menuData = {
                 title: 'Design and engineering',
                 desc: 'Transmission, Engineering Excellence, Structure Optimization, Robust Transmission Line',
                 image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=300&h=192&fit=crop',
-                link: '/transmission/design-engineering'
+                link: '/electric-tower/transmission/design-engineering'
               },  
               {
                 title: 'Tower Testing',
