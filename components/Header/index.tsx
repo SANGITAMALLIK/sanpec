@@ -10,6 +10,7 @@ export default function SanpecHeader() {
   const [activeTab, setActiveTab] = useState('transmission');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showTopMenu, setShowTopMenu] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -76,6 +77,40 @@ export default function SanpecHeader() {
 
         <div className="text-white" style={{ position: 'relative', zIndex: 2 }}>
           <div className="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-[50px]">
+            {/* Mobile Top Bar - Always Visible on Mobile */}
+            <div className="lg:hidden flex items-center justify-between py-2 border-b border-white/10">
+              {/* Mobile Tagline */}
+              <div className="text-[10px] font-medium opacity-90 uppercase truncate pr-2">
+                Bringing Engineering Excellence
+              </div>
+              
+              {/* Mobile Top Menu Toggle */}
+              <button 
+                onClick={() => setShowTopMenu(!showTopMenu)}
+                className="flex items-center gap-1 text-[10px] font-medium px-2 py-1 bg-white/10 rounded hover:bg-white/20 transition-all"
+              >
+                <span>Menu</span>
+                <ChevronDown size={12} className={`transition-transform ${showTopMenu ? 'rotate-180' : ''}`} />
+              </button>
+            </div>
+
+            {/* Mobile Top Menu Items */}
+            {showTopMenu && (
+              <div className="lg:hidden bg-white/10 backdrop-blur-sm border-b border-white/10">
+                <div className="grid grid-cols-2 gap-2 p-3">
+                  {menuData.topMenuItems.map((item, idx) => (
+                    <Link 
+                      key={idx} 
+                      href={item.path} 
+                      className="text-[10px] font-medium hover:bg-white/20 transition-all px-3 py-2 rounded text-center"
+                    >
+                      {item.title}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <div className="flex">
               {/* Logo - Left Side */}
               <div className="flex items-stretch py-2 pr-4 md:pr-6">
@@ -84,7 +119,7 @@ export default function SanpecHeader() {
                     src="/images/logo/sanpec-logo.webp" 
                     alt="Sanpec Logo" 
                     className={`w-auto transition-all duration-300 ${
-                      isScrolled ? 'h-12 md:h-16' : 'h-16 md:h-20'
+                      isScrolled ? 'h-12 md:h-16' : 'h-14 md:h-20'
                     }`}
                   />
                 </Link>
@@ -92,18 +127,18 @@ export default function SanpecHeader() {
 
               {/* Right Side Content */}
               <div className="flex-1 flex flex-col">
-                {/* Top Bar with Tagline and Menu Items */}
-                <div className={`flex items-center justify-between transition-all duration-300 px-2 md:px-6 ${
+                {/* Desktop Top Bar - Hidden on Mobile */}
+                <div className={`hidden lg:flex items-center justify-between transition-all duration-300 px-2 md:px-6 ${
                   isScrolled ? 'py-1.5 md:py-2' : 'py-2 md:py-3'
                 }`}>
                   {/* Left - Tagline */}
-                  <div className="hidden lg:block text-[12px] font-medium opacity-90 uppercase">
+                  <div className="text-[12px] font-medium opacity-90 uppercase">
                     Bringing Engineering Excellence. Improving Power Grid Reliability
                   </div>
 
                   {/* Right - Top Menu Items */}
                   <div className="flex items-center gap-2 md:gap-4 ml-auto">
-                    <div className="hidden md:flex items-center gap-3 lg:gap-4 uppercase">
+                    <div className="flex items-center gap-3 lg:gap-4 uppercase">
                       {menuData.topMenuItems.map((item, idx) => (
                         <Link key={idx} href={item.path} className="text-[11px] lg:text-[12px] hover:opacity-80 transition-all font-medium whitespace-nowrap">
                           {item.title}
@@ -150,9 +185,13 @@ export default function SanpecHeader() {
                       ))}
                     </nav>
 
-                    {/* Mobile: Logo Left, Toggle Right, Search Right */}
+                    {/* Mobile Navigation */}
                     <div className="lg:hidden flex items-center justify-between w-full">
-                      <div className="flex-1"></div>
+                      {/* Mobile Menu Title */}
+                      <div className="text-sm font-medium uppercase opacity-0">
+                        Main Menu
+                      </div>
+                      
                       <div className="flex items-center gap-2">
                         <button className="text-white hover:bg-white/10 hover:scale-110 transition-all p-3">
                           <Search size={18} />
@@ -195,68 +234,110 @@ export default function SanpecHeader() {
             }} />
             
             <nav className="flex flex-col" style={{ position: 'relative', zIndex: 1 }}>
+              {/* Mobile Menu Header */}
+              <div className="p-4 border-b border-white/10">
+                <div className="text-sm font-medium text-white/80 mb-2">Main Navigation</div>
+              </div>
+
               {menuData.navigationItems.map((item, idx) => (
                 item.hasDropdown ? (
-                  <div key={idx}>
+                  <div key={idx} className="border-b border-white/10 last:border-0">
                     <button 
                       onClick={() => setOpenDropdown(openDropdown === 'electric' ? null : 'electric')}
-                      className="flex items-center justify-between w-full px-6 py-4 text-white hover:bg-white/10 transition-all border-b border-white/10"
+                      className="flex items-center justify-between w-full px-6 py-4 text-white hover:bg-white/10 transition-all"
                     >
-                      <span>{item.title}</span>
+                      <span className="font-medium">{item.title}</span>
                       <ChevronDown size={20} className={`transition-transform duration-300 ${openDropdown === 'electric' ? 'rotate-180' : ''}`} />
                     </button>
 
                     {openDropdown === 'electric' && (
-                      <div className="bg-white/5 border-b border-white/10">
-                        {item.megaMenu.tabs.map((tab) => (
-                          <div key={tab.id} className="border-b border-white/5 last:border-0">
+                      <div className="bg-white/5">
+                        {/* Tab Buttons for Mobile */}
+                        <div className="flex overflow-x-auto border-b border-white/10">
+                          {item.megaMenu.tabs.map((tab) => (
                             <button
+                              key={tab.id}
                               onClick={() => setActiveTab(activeTab === tab.id ? null : tab.id)}
-                              className="w-full flex items-center justify-between px-8 py-3 text-white hover:bg-white/5 transition-all text-sm"
+                              className={`flex-shrink-0 px-4 py-3 text-sm font-medium whitespace-nowrap ${
+                                activeTab === tab.id 
+                                  ? 'bg-[#CD091B] text-white' 
+                                  : 'text-white/80 hover:bg-white/10'
+                              }`}
                             >
-                              <span>{tab.title}</span>
-                              <ChevronRight size={16} className={`transition-transform ${activeTab === tab.id ? 'rotate-90' : ''}`} />
+                              {tab.title}
                             </button>
-                            
-                            {activeTab === tab.id && (
-                              <div className="bg-white/5">
+                          ))}
+                        </div>
+
+                        {/* Tab Content */}
+                        {item.megaMenu.tabs.map((tab) => (
+                          activeTab === tab.id && (
+                            <div key={tab.id} className="p-4">
+                              <div className="mb-4">
+                                <img 
+                                  src={tab.image}
+                                  alt={tab.title}
+                                  className="w-full h-40 object-cover rounded-lg mb-3"
+                                />
+                              </div>
+                              
+                              <div className="space-y-3">
                                 {tab.items.map((subItem, subIdx) => (
                                   <Link
                                     key={subIdx}
                                     href={subItem.link}
-                                    className="block px-12 py-3 text-white/90 hover:bg-white/5 transition-all text-sm"
+                                    className="block p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-all"
                                     onClick={() => setMobileMenuOpen(false)}
                                   >
-                                    {subItem.title}
+                                    <div className="font-medium text-white mb-1">{subItem.title}</div>
+                                    <div className="text-sm text-white/70 line-clamp-2">{subItem.desc}</div>
                                   </Link>
                                 ))}
                               </div>
-                            )}
-                          </div>
+                            </div>
+                          )
                         ))}
                       </div>
                     )}
                   </div>
                 ) : (
                   item.newTab ? (
-                    <a key={idx} href={item.path} className="px-6 py-4 text-white hover:bg-white/10 transition-all border-b border-white/10" onClick={() => setMobileMenuOpen(false)}>
+                    <a 
+                      key={idx} 
+                      href={item.path} 
+                      className="px-6 py-4 text-white hover:bg-white/10 transition-all border-b border-white/10 font-medium"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
                       {item.title}
                     </a>
                   ) : (
-                    <Link key={idx} href={item.path} className="px-6 py-4 text-white hover:bg-white/10 transition-all border-b border-white/10" onClick={() => setMobileMenuOpen(false)}>
+                    <Link 
+                      key={idx} 
+                      href={item.path} 
+                      className="px-6 py-4 text-white hover:bg-white/10 transition-all border-b border-white/10 font-medium"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
                       {item.title}
                     </Link>
                   )
                 )
               ))}
 
-              {/* Mobile Top Menu Items */}
-              <div className="border-t border-white/20 mt-2">
-                {menuData.topMenuItems.map((item, idx) => (
-                  <Link key={idx} href={item.path} className={`px-6 py-4 text-white hover:bg-white/10 transition-all ${idx < menuData.topMenuItems.length - 1 ? 'border-b border-white/10' : ''}`} onClick={() => setMobileMenuOpen(false)}>
-                    {item.title}
-                  </Link>
-                ))}
+              {/* Mobile Top Menu Items Section */}
+              <div className="mt-4 p-4 border-t border-white/20">
+                <div className="text-sm font-medium text-white/80 mb-3">Quick Links</div>
+                <div className="grid grid-cols-2 gap-2">
+                  {menuData.topMenuItems.map((item, idx) => (
+                    <Link 
+                      key={idx} 
+                      href={item.path} 
+                      className="text-center px-3 py-2 text-sm bg-white/10 rounded hover:bg-white/20 transition-all"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {item.title}
+                    </Link>
+                  ))}
+                </div>
               </div>
             </nav>
           </div>

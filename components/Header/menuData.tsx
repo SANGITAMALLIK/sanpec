@@ -35,7 +35,7 @@ export const menuData = {
                 title: 'Tower Testing',
                 desc: 'T Line Structures Testing, Source Inspections At Manufacturing facilities',
                 image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=300&h=185&fit=crop',
-                link: '/electric-tower/transmission-and-distribution/#e-n-tab-title-2072638982'
+                link: '/electric-tower/transmission/electrical-testing/#2'
               },
               {
                 title: 'Electrical Testing',

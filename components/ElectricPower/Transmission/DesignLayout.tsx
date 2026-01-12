@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   ChevronRight, 
   CheckCircle, 
@@ -21,6 +21,27 @@ export default function DesignEngineeringTabs() {
   const [activeMainTab, setActiveMainTab] = useState(0);
   const [activeSubTab, setActiveSubTab] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Hash-based navigation handler
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash) {
+        const tabIndex = parseInt(hash);
+        if (!isNaN(tabIndex) && tabIndex >= 0 && tabIndex <= 3) {
+          setActiveMainTab(tabIndex);
+          setActiveSubTab(0);
+        }
+      }
+    };
+
+    // Check hash on mount
+    handleHashChange();
+
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   const mainTabs = [
     { id: 0, title: 'Design & Engineering', description: 'Innovative structural solutions' },
@@ -169,6 +190,15 @@ export default function DesignEngineeringTabs() {
       ]
     }
   ];
+
+  const handleMainTabClick = (tabId) => {
+    setActiveMainTab(tabId);
+    setActiveSubTab(0);
+    setMobileMenuOpen(false);
+    
+    // Update URL hash
+    window.history.pushState(null, '', `#${tabId}`);
+  };
 
   const renderContent = () => {
     if (activeMainTab === 0) {
@@ -450,11 +480,7 @@ export default function DesignEngineeringTabs() {
             return (
               <button
                 key={tab.id}
-                onClick={() => {
-                  setActiveMainTab(tab.id);
-                  setActiveSubTab(0);
-                  setMobileMenuOpen(false);
-                }}
+                onClick={() => handleMainTabClick(tab.id)}
                 className={`p-4 rounded-xl transition-all duration-300 w-full text-left border ${
                   isActive 
                     ? 'bg-[#101631] text-white border-[#101631]' 

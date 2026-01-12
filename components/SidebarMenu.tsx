@@ -24,14 +24,6 @@ export default function SidebarMenu() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const TowerTestingLayout = dynamic(
-    () => import("@/components/ElectricPower/Transmission/TowerTestingLayout"),
-    { ssr: false }
-  );
-  const ElectricalTestingLayout = dynamic(
-    () => import("@/components/ElectricPower/Transmission/ElectricalTestingLayout"),
-    { ssr: false }
-  );
   const DesignLayout = dynamic(
     () => import("@/components/ElectricPower/Transmission/DesignLayout"),
     { ssr: false }
@@ -189,12 +181,7 @@ export default function SidebarMenu() {
       'design-engineering': {
         layout: <DesignLayout />
       },
-      'tower-testing': {
-        layout: <TowerTestingLayout />
-      },
-      'electrical-testing': {
-        layout: <ElectricalTestingLayout />
-      },
+      
     };
 
     return contentData[currentPage] || contentData['design-engineering'];

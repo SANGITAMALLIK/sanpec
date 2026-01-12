@@ -1,10 +1,23 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { CheckCircle, Shield, Award, Users, Target, TrendingUp, FileCheck, Zap, Eye, Settings, TestTube2, Hammer } from 'lucide-react';
+import { 
+  CheckCircle, Shield, Award, Users, Target, TrendingUp, 
+  FileCheck, Zap, Eye, Settings, TestTube2, Hammer,
+  ChevronRight, Menu, X, Download, FileText, ClipboardList,
+  BarChart, AlertTriangle, MessageSquare, UsersIcon, Brain,
+  GitMerge, Search, Filter, PieChart, Clock, TrendingDown,
+  Star, ThumbsUp, HelpCircle, Calendar, Wrench, CheckSquare,
+  FileBarChart, Cpu, GitBranch, Layers, Zap as Lightning,
+  Cloud, Server, Database, Cctv, HardHat, Wrench as Tool,
+  Building, Factory, Globe, Truck, Package, Shield as Protection,
+  Battery, Power as PowerIcon, Grid as GridIcon, RadioTower as TowerIcon, 
+  Link as CableIcon, CircuitBoard as CircuitIcon
+} from 'lucide-react';
 
 export default function QualityAssurancePage() {
   const [isVisible, setIsVisible] = useState(false);
+  const [activeFramework, setActiveFramework] = useState('classical');
   const primaryColor = "#101631";
   const secondaryColor = "#CD091B";
 
@@ -12,6 +25,159 @@ export default function QualityAssurancePage() {
     setIsVisible(true);
   }, []);
 
+  // Quality Framework Tabs from image
+  const frameworkTabs = [
+    {
+      id: 'classical',
+      title: 'CLASSICAL ASSURANCE',
+      icon: FileText,
+      description: 'Basic quality management system components',
+      color: primaryColor,
+      points: [
+        { 
+          title: 'Procedures', 
+          description: 'Standard operating procedures for consistent execution across all transmission projects',
+          icon: ClipboardList,
+          benefits: ['Standardization', 'Repeatability', 'Compliance']
+        },
+        { 
+          title: 'Work Instructions', 
+          description: 'Detailed step-by-step guidance for tower fabrication, welding, and assembly processes',
+          icon: FileCheck,
+          benefits: ['Clarity', 'Error Prevention', 'Training']
+        },
+        { 
+          title: 'Records', 
+          description: 'Comprehensive documentation of material tests, weld inspections, and quality checks',
+          icon: FileBarChart,
+          benefits: ['Traceability', 'Audit Trail', 'Data Analysis']
+        },
+        { 
+          title: 'Policies', 
+          description: 'Organizational policies for quality standards, safety protocols, and compliance requirements',
+          icon: Shield,
+          benefits: ['Governance', 'Accountability', 'Strategic Direction']
+        }
+      ]
+    },
+    {
+      id: 'quality',
+      title: 'QUALITY ASSURANCE',
+      icon: Shield,
+      description: 'Systematic quality verification processes',
+      color: secondaryColor,
+      points: [
+        { 
+          title: 'Internal Audits', 
+          description: 'Regular self-assessment of fabrication facilities and field operations',
+          icon: Search,
+          benefits: ['Self-Improvement', 'Gap Analysis', 'Process Validation']
+        },
+        { 
+          title: 'External Audits', 
+          description: 'Third-party certification audits for ISO, AISC, and industry standards',
+          icon: CheckSquare,
+          benefits: ['Certification', 'Credibility', 'Market Access']
+        },
+        { 
+          title: 'Compliance', 
+          description: 'Adherence to ASCE, IEEE, and other transmission industry regulations',
+          icon: Award,
+          benefits: ['Regulatory Safety', 'Legal Protection', 'Industry Standards']
+        },
+        { 
+          title: 'Process Checks', 
+          description: 'Continuous monitoring of fabrication processes and material quality',
+          icon: CheckCircle,
+          benefits: ['Real-time Control', 'Early Detection', 'Quality Assurance']
+        }
+      ]
+    },
+    {
+      id: 'improvement',
+      title: 'PROCESS IMPROVEMENT',
+      icon: TrendingUp,
+      description: 'Continuous enhancement methodologies',
+      color: primaryColor,
+      points: [
+        { 
+          title: 'Quality Plan', 
+          description: 'Strategic quality roadmap for transmission projects and maintenance',
+          icon: Target,
+          benefits: ['Strategic Alignment', 'Resource Planning', 'Goal Setting']
+        },
+        { 
+          title: 'Test Plan', 
+          description: 'Comprehensive testing strategy for materials, welds, and structures',
+          icon: TestTube2,
+          benefits: ['Systematic Testing', 'Risk Coverage', 'Validation']
+        },
+        { 
+          title: 'Resource Allocation', 
+          description: 'Optimal deployment of inspectors, engineers, and testing equipment',
+          icon: Users,
+          benefits: ['Efficiency', 'Cost Control', 'Skill Matching']
+        },
+        { 
+          title: 'Schedule', 
+          description: 'Timeline management for quality activities and project milestones',
+          icon: Calendar,
+          benefits: ['Timely Delivery', 'Milestone Tracking', 'Progress Monitoring']
+        }
+      ]
+    },
+    {
+      id: 'metrics',
+      title: 'PERFORMANCE METRICS',
+      icon: BarChart,
+      description: 'Quality measurement and analysis',
+      color: secondaryColor,
+      points: [
+        { 
+          title: 'KPI Monitoring', 
+          description: 'Key Performance Indicators for quality, safety, and delivery metrics',
+          icon: TrendingUp,
+          benefits: ['Performance Tracking', 'Goal Measurement', 'Decision Making']
+        },
+        { 
+          title: 'Defect Density', 
+          description: 'Measurement of defects per unit in tower fabrication and assembly',
+          icon: TrendingDown,
+          benefits: ['Quality Assessment', 'Improvement Tracking', 'Benchmarking']
+        },
+        { 
+          title: 'Cycle Time', 
+          description: 'Monitoring of fabrication, inspection, and delivery cycles',
+          icon: Clock,
+          benefits: ['Efficiency Analysis', 'Bottleneck Identification', 'Process Speed']
+        },
+        { 
+          title: 'Trend Analysis', 
+          description: 'Statistical analysis of quality data to identify patterns and improvements',
+          icon: PieChart,
+          benefits: ['Predictive Insights', 'Pattern Recognition', 'Proactive Actions']
+        },
+        { 
+          title: 'Reporting', 
+          description: 'Automated quality reports for stakeholders and management',
+          icon: FileBarChart,
+          benefits: ['Transparency', 'Communication', 'Accountability']
+        }
+      ]
+    }
+  ];
+
+  // Power Transmission Elements
+  const transmissionElements = [
+    { icon: TowerIcon, title: 'Transmission Towers', description: 'Lattice towers, monopoles, and H-frame structures' },
+    { icon: CableIcon, title: 'Conductors & OPGW', description: 'ACSR conductors, OPGW cables, and accessories' },
+    { icon: CircuitIcon, title: 'Substation Equipment', description: 'Transformers, circuit breakers, and switchgear' },
+    { icon: GridIcon, title: 'Grid Components', description: 'Insulators, hardware, and protection systems' },
+    { icon: Factory, title: 'Fabrication Shops', description: 'Steel fabrication, welding, and galvanizing facilities' },
+    { icon: HardHat, title: 'Field Installation', description: 'Erection, foundation, and commissioning services' }
+  ];
+
+  // Original content (unchanged)
   const qualityStandards = [
     {
       icon: Shield,
@@ -122,6 +288,8 @@ export default function QualityAssurancePage() {
     "Grid Modernization Projects"
   ];
 
+  const activeTab = frameworkTabs.find(tab => tab.id === activeFramework);
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
@@ -178,12 +346,183 @@ export default function QualityAssurancePage() {
         </div>
       </section>
 
+      {/* Power Transmission Elements Section */}
+      <section className="py-16 md:py-20 px-4 bg-gradient-to-b from-white to-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-3xl md:text-5xl font-black mb-4" style={{ color: primaryColor }}>
+              POWER TRANSMISSION <span style={{ color: secondaryColor }}>ELEMENTS</span>
+            </h2>
+            <div className="w-20 h-1.5 mx-auto rounded-full mb-6" style={{ backgroundColor: secondaryColor }}></div>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Comprehensive quality assurance for all critical components of power transmission infrastructure
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {transmissionElements.map((element, index) => {
+              const Icon = element.icon;
+              return (
+                <div 
+                  key={index}
+                  className="group relative bg-white rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200 hover:border-transparent overflow-hidden"
+                >
+                  <div className="absolute top-0 left-0 w-full h-1" style={{ 
+                    backgroundColor: index % 3 === 0 ? secondaryColor : 
+                                   index % 3 === 1 ? primaryColor : secondaryColor 
+                  }}></div>
+                  
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0">
+                      <div className="w-14 h-14 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
+                           style={{ 
+                             backgroundColor: index % 3 === 0 ? `${secondaryColor}15` : 
+                                            index % 3 === 1 ? `${primaryColor}15` : `${secondaryColor}15`
+                           }}>
+                        <Icon className="w-7 h-7" style={{ 
+                          color: index % 3 === 0 ? secondaryColor : 
+                                index % 3 === 1 ? primaryColor : secondaryColor 
+                        }} />
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <h3 className="text-xl font-bold mb-2" style={{ color: primaryColor }}>
+                        {element.title}
+                      </h3>
+                      <p className="text-gray-600">
+                        {element.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Quality Framework Tabs Section */}
+      <section className="py-16 md:py-20 px-4 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-3xl md:text-5xl font-black mb-4" style={{ color: primaryColor }}>
+              QUALITY MANAGEMENT <span style={{ color: secondaryColor }}>FRAMEWORK</span>
+            </h2>
+            <div className="w-20 h-1.5 mx-auto rounded-full mb-6" style={{ backgroundColor: secondaryColor }}></div>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Comprehensive quality systems covering all aspects of transmission infrastructure assurance
+            </p>
+          </div>
+
+          {/* Tabs Navigation */}
+          <div className="mb-8 md:mb-12">
+            <div className="flex flex-wrap gap-2 justify-center">
+              {frameworkTabs.map((tab) => {
+                const Icon = tab.icon;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveFramework(tab.id)}
+                    className={`flex items-center gap-2 px-5 py-3 rounded-xl transition-all duration-300 ${
+                      activeFramework === tab.id 
+                        ? 'shadow-lg transform -translate-y-1' 
+                        : 'hover:bg-gray-100'
+                    }`}
+                    style={{
+                      backgroundColor: activeFramework === tab.id ? tab.color : 'white',
+                      color: activeFramework === tab.id ? 'white' : tab.color,
+                      border: `2px solid ${activeFramework === tab.id ? tab.color : '#e5e7eb'}`
+                    }}
+                  >
+                    <Icon className="w-4 h-4" />
+                    <span className="font-semibold">{tab.title.split(' ')[0]}</span>
+                    {activeFramework === tab.id && (
+                      <ChevronRight className="w-4 h-4" />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Active Tab Content */}
+          {activeTab && (
+            <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
+              <div className="p-6 md:p-8 border-b border-gray-200" style={{ backgroundColor: `${activeTab.color}05` }}>
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: activeTab.color }}>
+                      <activeTab.icon className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl md:text-3xl font-bold" style={{ color: primaryColor }}>
+                        {activeTab.title}
+                      </h3>
+                      <p className="text-gray-600 mt-1">{activeTab.description}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-6 md:p-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {activeTab.points.map((point, index) => {
+                    const PointIcon = point.icon;
+                    return (
+                      <div 
+                        key={index}
+                        className="group relative bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-all duration-300"
+                      >
+                        <div className="flex items-start gap-4">
+                          <div 
+                            className="flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center mt-1"
+                            style={{ backgroundColor: `${activeTab.color}15` }}
+                          >
+                            <PointIcon className="w-6 h-6" style={{ color: activeTab.color }} />
+                          </div>
+                          
+                          <div className="flex-1">
+                            <h4 className="text-lg font-bold mb-2" style={{ color: primaryColor }}>
+                              {point.title}
+                            </h4>
+                            
+                            <p className="text-gray-600 mb-4">
+                              {point.description}
+                            </p>
+                            
+                            <div className="flex flex-wrap gap-2">
+                              {point.benefits.map((benefit, idx) => (
+                                <span 
+                                  key={idx}
+                                  className="px-3 py-1 text-xs font-medium rounded-full"
+                                  style={{ 
+                                    backgroundColor: `${activeTab.color}10`,
+                                    color: activeTab.color
+                                  }}
+                                >
+                                  {benefit}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+
       {/* Introduction Section */}
-      <section className="py-20 px-4 bg-gradient-to-b from-white to-gray-50">
+      <section className="py-16 md:py-20 px-4 bg-gradient-to-b from-white to-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-4xl md:text-5xl font-black mb-6" style={{ color: primaryColor }}>
+              <h2 className="text-3xl md:text-5xl font-black mb-6" style={{ color: primaryColor }}>
                 WHY QUALITY ASSURANCE <span style={{ color: secondaryColor }}>MATTERS</span>
               </h2>
               <div className="w-24 h-1.5 rounded-full mb-6" style={{ backgroundColor: secondaryColor }}></div>
@@ -238,7 +577,7 @@ export default function QualityAssurancePage() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 px-4" style={{ backgroundColor: `${primaryColor}05` }}>
+      <section className="py-16 md:py-20 px-4" style={{ backgroundColor: `${primaryColor}05` }}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-black mb-4" style={{ color: primaryColor }}>
@@ -272,14 +611,14 @@ export default function QualityAssurancePage() {
       </section>
 
       {/* Core QA Services */}
-      <section className="py-20 px-4 bg-white">
+      <section className="py-16 md:py-20 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black mb-4" style={{ color: primaryColor }}>
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-3xl md:text-5xl font-black mb-4" style={{ color: primaryColor }}>
               COMPREHENSIVE QA <span style={{ color: secondaryColor }}>SERVICES</span>
             </h2>
             <div className="w-24 h-1.5 mx-auto rounded-full mb-6" style={{ backgroundColor: secondaryColor }}></div>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               End-to-end quality assurance for transmission line structures
             </p>
           </div>
@@ -309,14 +648,14 @@ export default function QualityAssurancePage() {
       </section>
 
       {/* Quality Standards */}
-      <section className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
+      <section className="py-16 md:py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black mb-4" style={{ color: primaryColor }}>
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-3xl md:text-5xl font-black mb-4" style={{ color: primaryColor }}>
               CERTIFIED <span style={{ color: secondaryColor }}>EXCELLENCE</span>
             </h2>
             <div className="w-24 h-1.5 mx-auto rounded-full mb-6" style={{ backgroundColor: secondaryColor }}></div>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               Our commitment validated by international certifications
             </p>
           </div>
@@ -348,14 +687,14 @@ export default function QualityAssurancePage() {
       </section>
 
       {/* QA Process */}
-      <section className="py-20 px-4" style={{ backgroundColor: primaryColor }}>
+      <section className="py-16 md:py-20 px-4" style={{ backgroundColor: primaryColor }}>
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-4">
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-3xl md:text-5xl font-black text-white mb-4">
               OUR QA <span style={{ color: secondaryColor }}>PROCESS</span>
             </h2>
             <div className="w-24 h-1.5 mx-auto rounded-full mb-6" style={{ backgroundColor: secondaryColor }}></div>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            <p className="text-lg text-gray-300 max-w-3xl mx-auto">
               Systematic approach ensuring excellence at every stage
             </p>
           </div>
@@ -398,14 +737,14 @@ export default function QualityAssurancePage() {
       </section>
 
       {/* QA Capabilities */}
-      <section className="py-20 px-4 bg-white">
+      <section className="py-16 md:py-20 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black mb-4" style={{ color: primaryColor }}>
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-3xl md:text-5xl font-black mb-4" style={{ color: primaryColor }}>
               COMPREHENSIVE <span style={{ color: secondaryColor }}>CAPABILITIES</span>
             </h2>
             <div className="w-24 h-1.5 mx-auto rounded-full mb-6" style={{ backgroundColor: secondaryColor }}></div>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               Full-spectrum quality assurance for transmission infrastructure
             </p>
           </div>
@@ -429,10 +768,10 @@ export default function QualityAssurancePage() {
       </section>
 
       {/* Industries Served */}
-      <section className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
+      <section className="py-16 md:py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black mb-4" style={{ color: primaryColor }}>
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-3xl md:text-5xl font-black mb-4" style={{ color: primaryColor }}>
               INDUSTRIES <span style={{ color: secondaryColor }}>WE SERVE</span>
             </h2>
             <div className="w-24 h-1.5 mx-auto rounded-full mb-6" style={{ backgroundColor: secondaryColor }}></div>
@@ -456,7 +795,7 @@ export default function QualityAssurancePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 relative overflow-hidden" style={{ backgroundColor: secondaryColor }}>
+      <section className="py-16 md:py-20 px-4 relative overflow-hidden" style={{ backgroundColor: secondaryColor }}>
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
             backgroundImage: 'linear-gradient(white 2px, transparent 2px), linear-gradient(90deg, white 2px, transparent 2px)',
@@ -465,19 +804,19 @@ export default function QualityAssurancePage() {
         </div>
 
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
+          <h2 className="text-3xl md:text-5xl font-black text-white mb-6">
             Ready to Ensure Quality Excellence?
           </h2>
-          <p className="text-xl text-white/90 mb-10">
+          <p className="text-lg text-white/90 mb-10">
             Partner with SANPEC for comprehensive quality assurance that safeguards your transmission infrastructure investments
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-10 py-4 bg-white rounded-xl font-bold transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+            <button className="px-8 py-4 bg-white rounded-xl font-bold transition-all duration-300 hover:scale-105 hover:shadow-2xl"
                     style={{ color: secondaryColor }}>
               Request QA Consultation
             </button>
-            <button className="group px-10 py-4 border-2 border-white rounded-xl font-bold transition-all duration-300 hover:scale-105 hover:bg-white">
+            <button className="group px-8 py-4 border-2 border-white rounded-xl font-bold transition-all duration-300 hover:scale-105 hover:bg-white">
               <span className="text-white group-hover:text-[#CD091B] transition-colors duration-300">Download QA Brochure</span>
             </button>
           </div>
