@@ -4,7 +4,7 @@ export const menuData = {
   // Top menu items
   topMenuItems: [
     { id: 1, title: "About", path: "/about", newTab: false },
-    { id: 2, title: "Engineering Excellence", path: "/careers", newTab: false },
+    { id: 2, title: "Engineering Excellence", path: "/engineering-excellence", newTab: false },
     { id: 3, title: "Resources", path: "/contact", newTab: false },
     { id: 4, title: "Contact", path: "/news", newTab: false }
   ],

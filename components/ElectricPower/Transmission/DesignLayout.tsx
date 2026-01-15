@@ -2,20 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { 
   ChevronRight, 
   CheckCircle, 
-  Settings, 
-  TestTube2, 
-  Zap, 
-  Battery,
-  Building,
   LineChart,
   Shield,
-  Droplets,
   Cpu,
   Menu,
   X
 } from 'lucide-react';
-
-const mainTabIcons = [Settings, TestTube2, Zap, Battery];
 
 export default function DesignEngineeringTabs() {
   const [activeMainTab, setActiveMainTab] = useState(0);
@@ -35,10 +27,7 @@ export default function DesignEngineeringTabs() {
       }
     };
 
-    // Check hash on mount
     handleHashChange();
-
-    // Listen for hash changes
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
@@ -51,16 +40,16 @@ export default function DesignEngineeringTabs() {
   ];
 
   const designSubTabs = [
-    { id: 0, title: 'Transmission', icon: Building },
-    { id: 1, title: 'Engineering Excellence', icon: LineChart },
-    { id: 2, title: 'Structure Optimization', icon: Shield },
-    { id: 3, title: 'Robust Transmission Line', icon: Droplets }
+    { id: 0, title: 'Transmission' },
+    { id: 1, title: 'Engineering Excellence' },
+    { id: 2, title: 'Structure Optimization' },
+    { id: 3, title: 'Robust Transmission Line' }
   ];
 
   const towerTestingSubTabs = [
-    { id: 0, title: 'T Line Structures Testing', icon: Building },
-    { id: 1, title: 'Source Inspections', icon: Shield },
-    { id: 2, title: 'Drone Field Inspections', icon: Cpu }
+    { id: 0, title: 'T Line Structures Testing' },
+    { id: 1, title: 'Source Inspections' },
+    { id: 2, title: 'Drone Field Inspections' }
   ];
 
   const designContent = [
@@ -195,8 +184,6 @@ export default function DesignEngineeringTabs() {
     setActiveMainTab(tabId);
     setActiveSubTab(0);
     setMobileMenuOpen(false);
-    
-    // Update URL hash
     window.history.pushState(null, '', `#${tabId}`);
   };
 
@@ -220,12 +207,7 @@ export default function DesignEngineeringTabs() {
 
           <div className="grid lg:grid-cols-2 gap-6">
             <div className="bg-white rounded-xl p-6 border border-gray-200 hover:border-[#101631] transition-colors">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-2 bg-[#101631] rounded-lg">
-                  <LineChart className="w-5 h-5 text-white" />
-                </div>
-                <h4 className="text-lg font-semibold text-gray-900">Key Features</h4>
-              </div>
+              <h4 className="text-lg font-semibold text-gray-900 mb-6">Key Features</h4>
               <ul className="space-y-3">
                 {content.points.map((point, idx) => (
                   <li key={idx} className="flex items-start gap-3">
@@ -288,12 +270,7 @@ export default function DesignEngineeringTabs() {
 
           <div className="grid lg:grid-cols-2 gap-6">
             <div className="bg-white rounded-xl p-6 border border-gray-200 hover:border-[#101631] transition-colors">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-2 bg-[#CD091B] rounded-lg">
-                  <Shield className="w-5 h-5 text-white" />
-                </div>
-                <h4 className="text-lg font-semibold text-gray-900">Testing Protocols</h4>
-              </div>
+              <h4 className="text-lg font-semibold text-gray-900 mb-6">Testing Protocols</h4>
               <ul className="space-y-3">
                 {content.points.map((point, idx) => (
                   <li key={idx} className="flex items-start gap-3">
@@ -391,12 +368,7 @@ export default function DesignEngineeringTabs() {
 
           <div className="grid lg:grid-cols-2 gap-6">
             <div className="bg-white rounded-xl p-6 border border-gray-200 hover:border-[#101631] transition-colors">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-2 bg-[#101631] rounded-lg">
-                  <Cpu className="w-5 h-5 text-white" />
-                </div>
-                <h4 className="text-lg font-semibold text-gray-900">Testing Services</h4>
-              </div>
+              <h4 className="text-lg font-semibold text-gray-900 mb-6">Testing Services</h4>
               <ul className="space-y-3">
                 {[
                   'Inspection of T Line Materials (Steel Poles, Towers, Substation Structures, Insulators, etc.)',
@@ -470,11 +442,10 @@ export default function DesignEngineeringTabs() {
         </button>
       </div>
 
-      {/* Main Tabs */}
+      {/* Main Tabs - No Icons */}
       <div className="mb-6">
         <div className={`grid grid-cols-1 lg:grid-cols-4 gap-3 ${mobileMenuOpen ? 'block' : 'hidden lg:grid'}`}>
           {mainTabs.map((tab) => {
-            const Icon = mainTabIcons[tab.id];
             const isActive = activeMainTab === tab.id;
             
             return (
@@ -488,14 +459,7 @@ export default function DesignEngineeringTabs() {
                 }`}
               >
                 <div className="flex flex-col">
-                  <div className="flex items-center gap-3">
-                    <div className={`p-2 rounded-lg ${
-                      isActive ? 'bg-white/20' : 'bg-gray-100'
-                    }`}>
-                      <Icon className={`w-5 h-5 ${isActive ? 'text-white' : 'text-[#101631]'}`} />
-                    </div>
-                    <h3 className="font-semibold text-base">{tab.title}</h3>
-                  </div>
+                  <h3 className="font-semibold text-base">{tab.title}</h3>
                   <p className={`text-xs mt-2 ${isActive ? 'text-gray-300' : 'text-gray-500'}`}>
                     {tab.description}
                   </p>
@@ -506,12 +470,11 @@ export default function DesignEngineeringTabs() {
         </div>
       </div>
 
-      {/* Sub Tabs */}
+      {/* Sub Tabs - No Icons */}
       {(activeMainTab === 0 || activeMainTab === 1) && (
         <div className="mb-6">
           <div className="flex overflow-x-auto gap-2 pb-2 scrollbar-hide">
             {(activeMainTab === 0 ? designSubTabs : towerTestingSubTabs).map((tab) => {
-              const Icon = tab.icon;
               const isActive = activeSubTab === tab.id;
               
               return (
@@ -524,7 +487,6 @@ export default function DesignEngineeringTabs() {
                       : 'bg-white text-gray-700 border-gray-200 hover:border-[#CD091B]'
                   }`}
                 >
-                  <Icon className="w-4 h-4" />
                   <span className="font-medium text-sm">{tab.title}</span>
                   {isActive && <ChevronRight className="w-3 h-3 ml-1" />}
                 </button>
@@ -537,23 +499,6 @@ export default function DesignEngineeringTabs() {
       {/* Content Area */}
       <div className="bg-white rounded-xl p-6 lg:p-8 min-h-[500px] border border-gray-200">
         {renderContent()}
-      </div>
-
-      {/* Stats Footer */}
-      <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
-        {[
-          { label: 'Projects', value: '500+' },
-          { label: 'Experience', value: '15+ Years' },
-          { label: 'Engineers', value: '50+' },
-          { label: 'Testing Labs', value: '4' }
-        ].map((stat, idx) => (
-          <div key={idx} className="bg-white rounded-xl p-4 text-center border border-gray-200 hover:border-[#101631] transition-colors">
-            <div className="text-2xl font-bold text-[#101631]">
-              {stat.value}
-            </div>
-            <div className="text-gray-600 text-sm mt-1">{stat.label}</div>
-          </div>
-        ))}
       </div>
     </div>
   );

@@ -124,43 +124,49 @@ const EngineeringTabsSlider = () => {
         </div>
       </div>
 
-      {/* Tabs - Mobile Optimized */}
-      <div className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-10 md:mb-12 lg:mb-16 px-4">
-        <button
-          onClick={() => setActiveTab("projects")}
-          className={`w-full sm:w-auto relative px-6 sm:px-10 md:px-16 lg:px-20 py-4 sm:py-5 md:py-7 lg:py-10 rounded-xl sm:rounded-2xl transition-all duration-500 ${
-            activeTab === "projects" 
-              ? "bg-gradient-to-br from-red-600/90 to-red-700/90 scale-100" 
-              : "bg-slate-800/40 border-2 border-slate-700 scale-95 sm:scale-90 opacity-60"
-          }`}
-        >
-          <div className="relative z-10 flex flex-row sm:flex-col items-center gap-3 sm:gap-4">
-            <div className={`p-2 sm:p-3 md:p-4 rounded-lg sm:rounded-xl ${activeTab === "projects" ? "bg-white/10" : "bg-slate-700/30"}`}>
-              <svg className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-14 lg:h-14 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      {/* Tabs - Sleek Modern Design */}
+      <div className="relative z-10 flex items-center justify-center mb-8 sm:mb-10 md:mb-12 lg:mb-16 px-4">
+        <div className=" relative inline-flex bg-white/20 backdrop-blur-sm p-1.5 sm:p-2 rounded-full border border-white/40 shadow-xl">
+          {/* Sliding background indicator */}
+          <div 
+            className={`absolute top-1.5 sm:top-2 bottom-1.5 sm:bottom-2 bg-gradient-to-r from-red-600 to-red-700 rounded-full transition-all duration-300 ease-out shadow-lg shadow-red-500/50 ${
+              activeTab === "projects" ? "left-1.5 sm:left-2" : "left-1/2"
+            }`}
+            style={{ width: 'calc(50% - 0.375rem)' }}
+          ></div>
+          
+          <button
+            onClick={() => setActiveTab("projects")}
+            className="relative z-10 px-6 sm:px-8 md:px-12 lg:px-16 py-3 sm:py-4 md:py-5 rounded-full transition-all duration-300"
+          >
+            <div className="flex items-center gap-2 sm:gap-3">
+              <svg className={`w-5 h-5 sm:w-6 sm:h-6 transition-all duration-300 ${activeTab === "projects" ? "text-white" : "text-slate-400"}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
               </svg>
+              <span className={`font-bold text-sm sm:text-base md:text-lg lg:text-xl uppercase tracking-wide transition-all duration-300 whitespace-nowrap ${
+                activeTab === "projects" ? "text-white" : "text-slate-400"
+              }`}>
+                Our Projects
+              </span>
             </div>
-            <span className="text-white font-black text-sm sm:text-lg md:text-xl lg:text-3xl tracking-wider sm:tracking-widest uppercase">Our Projectsssss</span>
-          </div>
-        </button>
+          </button>
 
-        <button
-          onClick={() => setActiveTab("research")}
-          className={`w-full sm:w-auto relative px-6 sm:px-10 md:px-16 lg:px-20 py-4 sm:py-5 md:py-7 lg:py-10 rounded-xl sm:rounded-2xl transition-all duration-500 ${
-            activeTab === "research" 
-              ? "bg-gradient-to-br from-red-600/90 to-red-700/90 scale-100" 
-              : "bg-slate-800/40 border-2 border-slate-700 scale-95 sm:scale-90 opacity-60"
-          }`}
-        >
-          <div className="relative z-10 flex flex-row sm:flex-col items-center gap-3 sm:gap-4">
-            <div className={`p-2 sm:p-3 md:p-4 rounded-lg sm:rounded-xl ${activeTab === "research" ? "bg-white/10" : "bg-slate-700/30"}`}>
-              <svg className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-14 lg:h-14 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <button
+            onClick={() => setActiveTab("research")}
+            className="relative z-10 px-6 sm:px-8 md:px-12 lg:px-16 py-3 sm:py-4 md:py-5 rounded-full transition-all duration-300"
+          >
+            <div className="flex items-center gap-2 sm:gap-3">
+              <svg className={`w-5 h-5 sm:w-6 sm:h-6 transition-all duration-300 ${activeTab === "research" ? "text-white" : "text-slate-400"}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
               </svg>
+              <span className={`font-bold text-sm sm:text-base md:text-lg lg:text-xl uppercase tracking-wide transition-all duration-300 whitespace-nowrap ${
+                activeTab === "research" ? "text-white" : "text-slate-400"
+              }`}>
+                Research & Innovation
+              </span>
             </div>
-            <span className="text-white font-black text-sm sm:text-lg md:text-xl lg:text-3xl tracking-wider sm:tracking-widest uppercase">Research & Innovation</span>
-          </div>
-        </button>
+          </button>
+        </div>
       </div>
 
       {/* Slider - Mobile Optimized */}

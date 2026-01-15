@@ -32,6 +32,9 @@ module.exports = {
       // => @media (min-width: 1400px) { ... }
     },
     extend: {
+       maxWidth: {
+        '7_5xl': '90rem', // 1440px (feel free to adjust)
+      },
       colors: {
         current: "currentColor",
         transparent: "transparent",
