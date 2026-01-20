@@ -1,16 +1,16 @@
 'use client';
 import React, { useState } from 'react';
-import { Users, Target, Recycle, CloudRain, Leaf, Award, Shield, Lightbulb, CheckCircle } from 'lucide-react';
+import { CheckCircle } from 'lucide-react';
 
 export default function PremiumTabsSection() {
   const [activeTab, setActiveTab] = useState('quality-of-life');
 
   const tabs = [
-    { id: 'quality-of-life', label: 'Quality of Life', icon: Users, color: '#101631' },
-    { id: 'leadership', label: 'Leadership', icon: Award, color: '#CD091B' },
-    { id: 'resource-allocation', label: 'Resource Allocation', icon: Recycle, color: '#101631' },
-    { id: 'climate-and-resilience', label: 'Climate and Resilience', icon: CloudRain, color: '#CD091B' },
-    { id: 'natural-world', label: 'Natural World', icon: Leaf, color: '#101631' }
+    { id: 'quality-of-life', label: 'Quality of Life', number: '1', color: '#101631' },
+    { id: 'leadership', label: 'Leadership', number: '2', color: '#CD091B' },
+    { id: 'resource-allocation', label: 'Resource Allocation', number: '3', color: '#101631' },
+    { id: 'climate-and-resilience', label: 'Climate and Resilience', number: '4', color: '#CD091B' },
+    { id: 'natural-world', label: 'Natural World', number: '5', color: '#101631' }
   ];
 
   const tabContent = {
@@ -134,39 +134,49 @@ export default function PremiumTabsSection() {
 
       <div className="max-w-7xl mx-auto relative z-10">
         
-        {/* Clean Tabs Navigation */}
+        {/* Clean Tabs Navigation with Numbers */}
         <div className="mb-12">
           <div className="flex flex-wrap gap-3 justify-center">
             {tabs.map((tab) => {
-              const Icon = tab.icon;
               const isActive = activeTab === tab.id;
               return (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`group relative px-6 py-4 border-2 font-semibold text-sm transition-all duration-300 ${
+                  className={`group relative px-6 py-4 border-2 font-semibold text-sm transition-all duration-300 flex items-center gap-3 ${
                     isActive
-                      ? 'text-white shadow-lg scale-105'
-                      : 'bg-white text-gray-700 border-gray-200 hover:border-gray-400'
+                      ? 'text-white shadow-lg scale-105 hover:shadow-xl hover:scale-110'
+                      : 'bg-white text-gray-700 border-gray-200 hover:border-gray-400 hover:shadow-md hover:-translate-y-1'
                   }`}
                   style={{
                     backgroundColor: isActive ? tab.color : 'white',
                     borderColor: isActive ? tab.color : undefined
                   }}
                 >
-                  <div className="flex items-center gap-3">
-                    <Icon className="w-5 h-5" />
-                    <span className="whitespace-nowrap">{tab.label}</span>
+                  {/* Number Badge */}
+                  <div 
+                    className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300 group-hover:scale-110 ${
+                      isActive 
+                        ? 'bg-white/20 text-white border border-white/30' 
+                        : 'border-2 text-gray-700'
+                    }`}
+                    style={{
+                      borderColor: isActive ? 'rgba(255,255,255,0.3)' : tab.color,
+                      color: isActive ? 'white' : tab.color
+                    }}
+                  >
+                    {tab.number}
                   </div>
+                  <span className="whitespace-nowrap">{tab.label}</span>
                 </button>
               );
             })}
           </div>
           
           {/* Progress Bar */}
-          <div className="relative h-1 w-full mt-6 bg-gray-200">
+          <div className="relative h-1 w-full mt-6 bg-gray-200 rounded-full">
             <div 
-              className="absolute h-full transition-all duration-500"
+              className="absolute h-full rounded-full transition-all duration-500"
               style={{
                 backgroundColor: currentTab.color,
                 width: `${100 / tabs.length}%`,
@@ -177,15 +187,17 @@ export default function PremiumTabsSection() {
         </div>
 
         {/* Content Area */}
-        <div className="bg-white border-2 border-gray-200 shadow-lg">
+        <div className="bg-white border-2 border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300">
           
-          {/* Title Bar */}
+          {/* Title Bar with Number */}
           <div className="p-6 md:p-8 border-b-4" style={{ borderColor: currentTab.color }}>
             <div className="flex items-center gap-4">
-              {React.createElement(currentTab.icon, { 
-                className: 'w-10 h-10',
-                style: { color: currentTab.color }
-              })}
+              <div 
+                className="w-12 h-12 rounded-full flex items-center justify-center text-white text-lg font-bold"
+                style={{ backgroundColor: currentTab.color }}
+              >
+                {currentTab.number}
+              </div>
               <h2 className="text-3xl md:text-4xl font-bold" style={{ color: currentTab.color }}>
                 {currentContent.title}
               </h2>
@@ -197,12 +209,12 @@ export default function PremiumTabsSection() {
               
               {/* Image Section */}
               {currentContent.image && (
-                <div className="lg:col-span-5">
-                  <div className="border-4 border-gray-200 overflow-hidden">
+                <div className="lg:col-span-5 group">
+                  <div className="border-4 border-gray-200 overflow-hidden hover:border-gray-300 transition-all duration-300">
                     <img 
                       src={currentContent.image} 
                       alt={currentContent.title}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
                 </div>
@@ -214,14 +226,16 @@ export default function PremiumTabsSection() {
                   {currentContent.items.map((item, index) => (
                     <div 
                       key={index}
-                      className="flex items-start gap-3 p-4 bg-gray-50 border-l-4 hover:bg-white transition-all duration-300"
+                      className="flex items-start gap-3 p-4 bg-gray-50 border-l-4 hover:bg-white hover:shadow-md hover:-translate-y-1 transition-all duration-300 group/item cursor-pointer"
                       style={{ borderColor: currentTab.color }}
                     >
-                      <CheckCircle 
-                        className="w-5 h-5 flex-shrink-0 mt-0.5" 
-                        style={{ color: currentTab.color }}
-                      />
-                      <p className="text-gray-700 text-sm leading-relaxed font-medium">
+                      <div className="relative">
+                        <CheckCircle 
+                          className="w-5 h-5 flex-shrink-0 mt-0.5 group-hover/item:scale-110 transition-transform duration-300" 
+                          style={{ color: currentTab.color }}
+                        />
+                      </div>
+                      <p className="text-gray-700 text-sm leading-relaxed font-medium group-hover/item:text-gray-900 transition-colors duration-300">
                         {item}
                       </p>
                     </div>
@@ -233,16 +247,17 @@ export default function PremiumTabsSection() {
           </div>
         </div>
 
-        {/* Clean Indicators */}
+        {/* Clean Indicators with Hover Effects */}
         <div className="flex justify-center mt-8 gap-2">
           {tabs.map((tab, idx) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className="transition-all duration-300"
+              className="transition-all duration-300 hover:scale-125"
               style={{
                 width: activeTab === tab.id ? '32px' : '8px',
                 height: '8px',
+                borderRadius: '4px',
                 backgroundColor: activeTab === tab.id ? tab.color : '#d1d5db',
                 opacity: activeTab === tab.id ? 1 : 0.5
               }}

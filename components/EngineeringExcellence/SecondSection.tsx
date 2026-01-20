@@ -1,5 +1,5 @@
 import React from 'react';
-import { Zap, Award, Lightbulb, TrendingUp } from 'lucide-react';
+import { Zap } from 'lucide-react';
 
 export default function SanpecEngineeringSection() {
   return (
@@ -71,50 +71,32 @@ export default function SanpecEngineeringSection() {
             </h1>
             
             <p className="text-sm sm:text-base leading-relaxed" style={{ color: '#4a5568' }}>
-              At SANPEC, engineering is more than solving problems—it's about redefining possibilities, 
-              discovering unique solutions, setting new standards, uplifting humanity, and inspiring 
-              curiosity and learning. During Engineers Week, we celebrated our dedicated engineers who 
-              tirelessly develop innovative solutions crucial for operational and organizational success.
+             At SANPEC, engineering is more than solving problems—it’s about redefining possibilities, discovering unique solutions, setting new standards, uplifting humanity, and inspiring curiosity and learning. During Engineers Week, we celebrated our dedicated engineers who tirelessly develop innovative solutions crucial for operational and organizational success. They define, standardize, innovate, and automate essential business processes and digital strategies, driving systematic and accelerated innovation to thrive in a complex energy landscape.
             </p>
           </div>
 
-          {/* Right Side - Content Cards with Icons */}
+          {/* Right Side - Content Cards without Icons */}
           <div className="flex flex-col justify-center gap-4 sm:gap-6">
             
             <div className="bg-gradient-to-br from-gray-50 to-white rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-lg border-l-4 hover:shadow-xl transition-shadow" style={{ borderColor: '#CD091B' }}>
-              <div className="flex items-start gap-3 sm:gap-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#CD091B' }}>
-                  <Award className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-base sm:text-lg mb-2" style={{ color: '#101631' }}>
-                    Engineering Excellence for a Better Tomorrow
-                  </h3>
-                  <p className="text-xs sm:text-sm leading-relaxed" style={{ color: '#4a5568' }}>
-                    This Engineers Week, we celebrated not only the remarkable minds driving systematic 
-                    innovation of products, processes, and services, but also the spirit of entrepreneurial 
-                    engineering that positively impacts American families, education, health, quality of life, 
-                    and industries.
-                  </p>
-                </div>
+              <div>
+                <h3 className="font-bold text-base sm:text-lg mb-2" style={{ color: '#101631' }}>
+                  Engineering Excellence for a Better Tomorrow
+                </h3>
+                <p className="text-xs sm:text-sm leading-relaxed" style={{ color: '#4a5568' }}>
+                 This Engineers Week, we celebrated not only the remarkable minds driving systematic innovation of products, processes, and services, but also the spirit of entrepreneurial engineering that positively impacts American families, education, health, quality of life, and industries. At SANPEC, we are committed to transforming how engineers think and work—because the possibilities are limitless when engineering is driven by purpose and innovation.
+                </p>
               </div>
             </div>
 
             <div className="bg-gradient-to-br from-gray-50 to-white rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-lg border-l-4 hover:shadow-xl transition-shadow" style={{ borderColor: '#CD091B' }}>
-              <div className="flex items-start gap-3 sm:gap-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#CD091B' }}>
-                  <Lightbulb className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-base sm:text-lg mb-2" style={{ color: '#101631' }}>
-                    Engineering for Resilient, 21st Century America
-                  </h3>
-                  <p className="text-xs sm:text-sm leading-relaxed" style={{ color: '#4a5568' }}>
-                    SANPEC is a distinctive and transformative business that embodies our innovative vision 
-                    of "Engineering 21st Century America." Our core principles are integrated into every 
-                    aspect of our business.
-                  </p>
-                </div>
+              <div>
+                <h3 className="font-bold text-base sm:text-lg mb-2" style={{ color: '#101631' }}>
+                  Engineering for Resilient, 21st Century America
+                </h3>
+                <p className="text-xs sm:text-sm leading-relaxed" style={{ color: '#4a5568' }}>
+                  SANPEC is a distinctive and transformative business that embodies our innovative vision of “ Engineering 21st Century America. ” Our core principles are integrated into every aspect of our business, enhancing the performance of our products and services while maximizing their impact on our triple bottom line.
+                </p>
               </div>
             </div>
 

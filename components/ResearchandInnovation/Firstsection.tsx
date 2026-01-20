@@ -191,7 +191,7 @@ const PowerStructureResearch = () => {
             </div>
 
             {/* Stats Cards */}
-            <div className="grid grid-cols-2 gap-4">
+            {/* <div className="grid grid-cols-2 gap-4">
               <div className="bg-gradient-to-br from-white to-gray-50 rounded-lg p-4 shadow-lg border-l-4 border-red-600 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                 <div className="text-3xl font-black text-gray-900">15+</div>
                 <div className="text-xs text-gray-600 font-semibold uppercase">Years Research</div>
@@ -200,7 +200,7 @@ const PowerStructureResearch = () => {
                 <div className="text-3xl font-black text-gray-900">100+</div>
                 <div className="text-xs text-gray-600 font-semibold uppercase">Projects</div>
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* Right Content - Modern Accordion */}
@@ -228,13 +228,13 @@ const PowerStructureResearch = () => {
                       >
                         <div className="flex items-center gap-4 flex-1">
                           {/* Icon */}
-                          <div className={`flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center transition-all duration-500 ${
+                          {/* <div className={`flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center transition-all duration-500 ${
                             openAccordion === index
                               ? 'bg-gradient-to-br from-red-600 to-red-700 text-white scale-110'
                               : 'bg-gradient-to-br from-gray-900 to-gray-800 text-white group-hover/btn:scale-110'
                           }`}>
                             {item.icon}
-                          </div>
+                          </div> */}
                           
                           {/* Title */}
                           <span className={`text-base md:text-lg font-bold transition-all duration-300 ${

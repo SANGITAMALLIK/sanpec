@@ -1,14 +1,20 @@
 import React from 'react';
-import { Zap, Target, Rocket } from 'lucide-react';
 
 export default function SanpecBeaconSection() {
   return (
     <div className="relative bg-white py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      {/* Subtle Grid Background */}
+      <div className="absolute inset-0" style={{
+        backgroundImage: `
+          linear-gradient(to right, rgba(16, 22, 49, 0.02) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(16, 22, 49, 0.02) 1px, transparent 1px)
+        `,
+        backgroundSize: '40px 40px'
+      }}></div>
+      
       {/* Background Power Grid SVG */}
       <div className="absolute inset-0 opacity-4">
         <svg className="w-full h-full" viewBox="0 0 1200 800">
-          {/* Large Circuit Pattern */}
-         
           {/* Power Tower Silhouettes */}
           <g transform="translate(150, 500)">
             <polygon points="0,-50 -15,0 15,0" fill="#101631" opacity="0.3"/>
@@ -26,7 +32,7 @@ export default function SanpecBeaconSection() {
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Hero Section with Timeline Design */}
+        {/* Hero Section */}
         <div className="mb-16">
           <div className="relative">
             {/* Red Accent Bar */}
@@ -34,7 +40,7 @@ export default function SanpecBeaconSection() {
             
             <div className="pl-8">
               <div className="inline-block mb-3 px-4 py-1 rounded-full" style={{ backgroundColor: 'rgba(205, 9, 27, 0.1)', border: '2px solid #CD091B' }}>
-                <span className="text-xs font-bold tracking-widest" style={{ color: '#CD091B' }}>⚡ GOLDEN ERA</span>
+                <span className="text-xs font-bold tracking-widest" style={{ color: '#CD091B' }}>GOLDEN ERA</span>
               </div>
               
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-black mb-6 leading-tight" style={{ color: '#101631' }}>
@@ -46,27 +52,21 @@ export default function SanpecBeaconSection() {
           </div>
           
           <div className="grid md:grid-cols-2 gap-8 mt-8">
-            <div className="relative p-6 rounded-xl" style={{ backgroundColor: '#f8f9fa' }}>
-              <div className="absolute -top-3 -left-3 w-12 h-12 rounded-full flex items-center justify-center" style={{ backgroundColor: '#CD091B' }}>
-                <Zap className="w-6 h-6 text-white" />
-              </div>
-              <p className="text-sm leading-relaxed pt-4" style={{ color: '#4a5568' }}>
+            <div className="relative p-6 rounded-xl border-l-4" style={{ backgroundColor: '#f8f9fa', borderColor: '#CD091B' }}>
+              <p className="text-sm leading-relaxed" style={{ color: '#4a5568' }}>
                 At SANPEC, we recognize that engineers build more than structures; they create new possibilities and shape the future of our communities. 21st century businesses are seeking new paths to organize dynamic knowledge and information. In this volatile, uncertain, complex, and ambiguously defined world, making effective decisions demands a deep alignment with our soul, a creative vision for the future, a willingness to innovate, and the resilience to learn from the challenges we face.
               </p>
             </div>
             
-            <div className="relative p-6 rounded-xl border-2" style={{ borderColor: '#101631' }}>
-              <div className="absolute -top-3 -right-3 w-12 h-12 rounded-full flex items-center justify-center" style={{ backgroundColor: '#101631' }}>
-                <Target className="w-6 h-6 text-white" />
-              </div>
-              <p className="text-sm leading-relaxed pt-4" style={{ color: '#4a5568' }}>
+            <div className="relative p-6 rounded-xl border-l-4" style={{ backgroundColor: '#f8f9fa', borderColor: '#101631' }}>
+              <p className="text-sm leading-relaxed" style={{ color: '#4a5568' }}>
                 The company's six pillars of excellence business model promises to succeed where the outdated, centralized, command-based structures of the 20th century have faltered in meeting the evolving demands of the energy and infrastructure markets.
               </p>
             </div>
           </div>
         </div>
 
-        {/* Horizontal Timeline Cards */}
+        {/* Cards Section */}
         <div className="relative">
           {/* Timeline Line */}
           <div className="hidden md:block absolute top-0 left-0 right-0 h-1 mt-8" style={{ backgroundColor: '#e5e7eb' }}>
@@ -76,17 +76,14 @@ export default function SanpecBeaconSection() {
           <div className="grid md:grid-cols-3 gap-8 relative">
             {/* Card 1 */}
             <div className="relative flex flex-col h-full">
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg z-10 transform rotate-12 hover:rotate-0 transition-transform duration-300" style={{ backgroundColor: '#CD091B' }}>
-                <Zap className="w-8 h-8 text-white" />
+              {/* Power Icon */}
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg z-10" style={{ backgroundColor: '#CD091B' }}>
+                <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                </svg>
               </div>
               
-              <div className="bg-white rounded-2xl p-6 pt-16 shadow-lg hover:shadow-2xl transition-shadow duration-300 flex-1 flex flex-col" style={{ border: '3px solid #CD091B' }}>
-                <div className="text-center mb-4">
-                  <div className="inline-block px-3 py-1 rounded-full text-xs font-bold" style={{ backgroundColor: '#CD091B', color: 'white' }}>
-                    PILLAR 01
-                  </div>
-                </div>
-                
+              <div className="bg-white rounded-2xl p-6 pt-16 shadow-lg hover:shadow-2xl transition-shadow duration-300 flex-1 flex flex-col border-t-4" style={{ borderColor: '#CD091B' }}>
                 <h3 className="text-xl font-bold mb-4 text-center" style={{ color: '#101631' }}>
                   Bridging the Gap Between Technology and Humanity
                 </h3>
@@ -94,24 +91,19 @@ export default function SanpecBeaconSection() {
                 <p className="text-sm leading-relaxed text-center flex-1" style={{ color: '#4a5568' }}>
                   Engineering isn't just about technical advancements; it's about improving lives. Every innovation we develop is focused on making the grid more resilient, accessible, and equitable, ensuring that urban and rural communities have reliable power for future generations.
                 </p>
-                
-              
               </div>
             </div>
 
             {/* Card 2 */}
             <div className="relative flex flex-col h-full">
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg z-10 transform rotate-12 hover:rotate-0 transition-transform duration-300" style={{ backgroundColor: '#101631' }}>
-                <Target className="w-8 h-8 text-white" />
+              {/* Power Icon */}
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg z-10" style={{ backgroundColor: '#101631' }}>
+                <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                </svg>
               </div>
               
-              <div className="bg-white rounded-2xl p-6 pt-16 shadow-lg hover:shadow-2xl transition-shadow duration-300 flex-1 flex flex-col" style={{ border: '3px solid #101631' }}>
-                <div className="text-center mb-4">
-                  <div className="inline-block px-3 py-1 rounded-full text-xs font-bold" style={{ backgroundColor: '#101631', color: 'white' }}>
-                    PILLAR 02
-                  </div>
-                </div>
-                
+              <div className="bg-white rounded-2xl p-6 pt-16 shadow-lg hover:shadow-2xl transition-shadow duration-300 flex-1 flex flex-col border-t-4" style={{ borderColor: '#101631' }}>
                 <h3 className="text-xl font-bold mb-4 text-center" style={{ color: '#101631' }}>
                   Delivering Excellence Through Continuous Improvement
                 </h3>
@@ -119,24 +111,19 @@ export default function SanpecBeaconSection() {
                 <p className="text-sm leading-relaxed text-center flex-1" style={{ color: '#4a5568' }}>
                   At SANPEC, we set the bar high for engineering quality, safety, and performance. Through cutting-edge technology, rigorous testing, and data-driven decision-making, we continuously refine our designs and processes to ensure best-in-class reliability and efficiency in power transmission. We believe innovation isn't a one-time breakthrough but a relentless pursuit of better solutions.
                 </p>
-                
-              
               </div>
             </div>
 
             {/* Card 3 */}
             <div className="relative flex flex-col h-full">
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg z-10 transform rotate-12 hover:rotate-0 transition-transform duration-300" style={{ backgroundColor: '#CD091B' }}>
-                <Rocket className="w-8 h-8 text-white" />
+              {/* Power Icon */}
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg z-10" style={{ backgroundColor: '#CD091B' }}>
+                <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                </svg>
               </div>
               
-              <div className="bg-white rounded-2xl p-6 pt-16 shadow-lg hover:shadow-2xl transition-shadow duration-300 flex-1 flex flex-col" style={{ border: '3px solid #CD091B' }}>
-                <div className="text-center mb-4">
-                  <div className="inline-block px-3 py-1 rounded-full text-xs font-bold" style={{ backgroundColor: '#CD091B', color: 'white' }}>
-                    PILLAR 03
-                  </div>
-                </div>
-                
+              <div className="bg-white rounded-2xl p-6 pt-16 shadow-lg hover:shadow-2xl transition-shadow duration-300 flex-1 flex flex-col border-t-4" style={{ borderColor: '#CD091B' }}>
                 <h3 className="text-xl font-bold mb-4 text-center" style={{ color: '#101631' }}>
                   Empowering the Next Generation of Engineers
                 </h3>
@@ -144,8 +131,6 @@ export default function SanpecBeaconSection() {
                 <p className="text-sm leading-relaxed text-center flex-1" style={{ color: '#4a5568' }}>
                   America's energy future depends on the innovators of tomorrow. At SANPEC, we cultivate a learning-driven culture within our organization while actively collaborating with universities and research institutions to bridge the gap between academia and industry. Through hands-on experience, expert mentorship, and real-world exposure to cutting-edge grid modernization projects, we equip young engineers with the skills and knowledge they need to lead the next era of power transmission innovation.
                 </p>
-                
-             
               </div>
             </div>
           </div>

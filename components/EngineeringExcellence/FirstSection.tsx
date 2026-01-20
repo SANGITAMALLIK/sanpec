@@ -1,10 +1,40 @@
-// app/engineering-excellence/page.tsx
-import React from 'react';
+'use client';
+import React, { useState, useEffect } from 'react';
 
 const EngineeringExcellencePage = () => {
+  const [currentImage, setCurrentImage] = useState(0);
+  
+  // Images from the services folder
+  const serviceImages = [
+    '/images/home/services/1.jpg',
+    '/images/home/services/2.jpg',
+    '/images/home/services/3.png',
+    '/images/home/services/4.jpg',
+    '/images/home/services/5.webp',
+    '/images/home/services/6.jpg',
+    '/images/home/services/35.jpg'
+  ];
+
+  // Auto slide effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % serviceImages.length);
+    }, 3000); // Change image every 3 seconds
+    
+    return () => clearInterval(interval);
+  }, [serviceImages.length]);
+
+  const nextImage = () => {
+    setCurrentImage((prev) => (prev + 1) % serviceImages.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImage((prev) => (prev - 1 + serviceImages.length) % serviceImages.length);
+  };
+
   return (
     <div className="relative min-h-screen overflow-hidden bg-white">
-      {/* Background Power Grid Pattern - WAPIS AAGAYA */}
+      {/* Background Power Grid Pattern */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         {/* Power Grid Pattern */}
         <div className="absolute inset-0 opacity-[0.03] bg-[length:50px_50px] bg-[linear-gradient(to_right,#101631_1px,transparent_1px),linear-gradient(to_bottom,#101631_1px,transparent_1px)]"></div>
@@ -19,9 +49,7 @@ const EngineeringExcellencePage = () => {
         {/* Electrical Towers Pattern */}
         <div className="absolute left-[15%] top-1/4 transform -translate-y-1/2">
           <div className="relative">
-            {/* Tower Pole */}
             <div className="absolute left-1/2 transform -translate-x-1/2 w-1.5 h-32 bg-gradient-to-b from-[#101631]/20 via-[#101631]/10 to-transparent"></div>
-            {/* Cross Arms */}
             <div className="absolute top-8 left-1/2 transform -translate-x-1/2 w-16 h-0.5 bg-[#CD091B]/10"></div>
             <div className="absolute top-16 left-1/2 transform -translate-x-1/2 w-12 h-0.5 bg-[#101631]/10"></div>
             <div className="absolute top-24 left-1/2 transform -translate-x-1/2 w-8 h-0.5 bg-[#CD091B]/10"></div>
@@ -68,7 +96,7 @@ const EngineeringExcellencePage = () => {
           
           {/* Left Column - Text Content */}
           <div className="space-y-8">
-            {/* Main Heading - Improved Design */}
+            {/* Main Heading */}
             <div className="relative">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-12 h-1 bg-[#CD091B]"></div>
@@ -77,10 +105,9 @@ const EngineeringExcellencePage = () => {
                 </span>
               </div>
               <h2 className="text-5xl lg:text-6xl font-bold leading-tight whitespace-nowrap">
-  <span className="inline text-[#101631]">Engineering</span>{' '}
-  <span className="inline text-[#CD091B]">Excellence</span>
-</h2>
-
+                <span className="inline text-[#101631]">Engineering</span>{' '}
+                <span className="inline text-[#CD091B]">Excellence</span>
+              </h2>
               <div className="mt-4 flex items-center gap-2">
                 <div className="w-8 h-0.5 bg-[#101631]"></div>
                 <div className="w-4 h-0.5 bg-[#CD091B]"></div>
@@ -139,7 +166,7 @@ const EngineeringExcellencePage = () => {
             </div>
           </div>
 
-          {/* Right Column - Visual Content */}
+          {/* Right Column - Image Slider */}
           <div className="relative">
             {/* Tower Frame Container */}
             <div className="relative bg-white border-2 border-gray-300 rounded-2xl p-4 shadow-xl hover:shadow-2xl transition-shadow duration-500 group">
@@ -160,81 +187,55 @@ const EngineeringExcellencePage = () => {
               {/* Grid Background Inside Container */}
               <div className="absolute inset-4 rounded-lg opacity-5 bg-[length:20px_20px] bg-[linear-gradient(to_right,#101631_1px,transparent_1px),linear-gradient(to_bottom,#101631_1px,transparent_1px)]"></div>
               
-              {/* Main Visual Area */}
-              <div className="relative h-[500px] bg-gray-50 rounded-lg overflow-hidden border border-gray-200">
-                {/* Abstract Tower Illustration */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center p-8">
-                  <div className="relative w-48 h-72 mb-8">
-                    {/* Tower Structure */}
-                    <div className="absolute left-1/2 transform -translate-x-1/2 w-3 h-64 bg-[#101631] rounded-t"></div>
-                    
-                    {/* Cross Arms with Insulators */}
-                    <div className="absolute top-16 left-1/2 transform -translate-x-1/2">
-                      <div className="relative">
-                        <div className="w-32 h-1.5 bg-[#CD091B] rounded-full"></div>
-                        <div className="absolute -left-4 top-1/2 transform -translate-y-1/2 w-3 h-8 bg-gray-300 rounded-full"></div>
-                        <div className="absolute -right-4 top-1/2 transform -translate-y-1/2 w-3 h-8 bg-gray-300 rounded-full"></div>
-                      </div>
-                    </div>
-                    
-                    <div className="absolute top-32 left-1/2 transform -translate-x-1/2">
-                      <div className="relative">
-                        <div className="w-24 h-1.5 bg-[#101631] rounded-full"></div>
-                        <div className="absolute -left-3 top-1/2 transform -translate-y-1/2 w-2.5 h-6 bg-gray-300 rounded-full"></div>
-                        <div className="absolute -right-3 top-1/2 transform -translate-y-1/2 w-2.5 h-6 bg-gray-300 rounded-full"></div>
-                      </div>
-                    </div>
-                    
-                    <div className="absolute top-48 left-1/2 transform -translate-x-1/2 w-16 h-1.5 bg-[#CD091B] rounded-full"></div>
-                    
-                    {/* Tower Base */}
-                    <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2">
-                      <div className="w-16 h-8 bg-[#101631] rounded-t-lg"></div>
-                      <div className="w-20 h-2 bg-gray-400 rounded-lg mt-1"></div>
-                    </div>
+              {/* Main Image Slider Area */}
+              <div className="relative h-[500px] rounded-lg overflow-hidden border border-gray-200">
+                {/* Images */}
+                {serviceImages.map((img, index) => (
+                  <div
+                    key={index}
+                    className={`absolute inset-0 transition-all duration-1000 ${
+                      index === currentImage 
+                        ? 'opacity-100 scale-100' 
+                        : 'opacity-0 scale-105'
+                    }`}
+                  >
+                    <img 
+                      src={img} 
+                      alt={`Engineering Service ${index + 1}`} 
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                  
-                  {/* Text Content */}
-                  <div className="text-center space-y-4">
-                    <div className="space-y-2">
-                      <h3 className="text-2xl font-bold text-[#101631]">
-                        Power Infrastructure
-                      </h3>
-                      <div className="flex items-center justify-center gap-2">
-                        <div className="w-4 h-0.5 bg-[#CD091B]"></div>
-                        <div className="w-6 h-0.5 bg-[#101631]"></div>
-                        <div className="w-4 h-0.5 bg-[#CD091B]"></div>
-                      </div>
-                    </div>
-                    
-                    <p className="text-gray-600 max-w-md">
-                      Precision engineering meets innovative design in every transmission project
-                    </p>
-                    
-                    {/* Engineering Stats */}
-                    <div className="grid grid-cols-3 gap-6 pt-6">
-                      <div className="text-center">
-                        <div className="text-3xl font-bold text-[#101631]">500+</div>
-                        <div className="text-sm text-gray-600">Engineers</div>
-                      </div>
-                      <div className="text-center">
-                        <div className="text-3xl font-bold text-[#CD091B]">1000+</div>
-                        <div className="text-sm text-gray-600">Projects</div>
-                      </div>
-                      <div className="text-center">
-                        <div className="text-3xl font-bold text-[#101631]">50+</div>
-                        <div className="text-sm text-gray-600">Years</div>
-                      </div>
-                    </div>
-                  </div>
+                ))}
+                
+                {/* Navigation Buttons */}
+                <button
+                  onClick={prevImage}
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-black/30 hover:bg-black/50 text-white rounded-full flex items-center justify-center transition-all duration-300"
+                >
+                  <div className="w-0 h-0 border-r-[8px] border-r-white border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent"></div>
+                </button>
+                
+                <button
+                  onClick={nextImage}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-black/30 hover:bg-black/50 text-white rounded-full flex items-center justify-center transition-all duration-300"
+                >
+                  <div className="w-0 h-0 border-l-[8px] border-l-white border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent"></div>
+                </button>
+                
+                {/* Dots Indicator */}
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+                  {serviceImages.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentImage(index)}
+                      className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                        index === currentImage 
+                          ? 'bg-[#CD091B] scale-125' 
+                          : 'bg-white/70 hover:bg-white'
+                      }`}
+                    />
+                  ))}
                 </div>
-                
-                {/* Overlay Pattern */}
-                <div className="absolute inset-0 bg-gradient-to-t from-white/30 via-transparent to-transparent"></div>
-                
-                {/* Animated Elements */}
-                <div className="absolute top-40 left-1/4 w-1.5 h-1.5 bg-[#CD091B] rounded-full animate-ping opacity-75"></div>
-                <div className="absolute top-60 right-1/3 w-1 h-1 bg-[#101631] rounded-full animate-ping opacity-75 animation-delay-500"></div>
               </div>
             </div>
             
@@ -243,9 +244,6 @@ const EngineeringExcellencePage = () => {
             <div className="absolute -z-10 -bottom-6 -right-6 w-40 h-40 bg-[#101631]/5 rounded-full"></div>
           </div>
         </div>
-        
-        {/* Bottom Divider */}
-       
       </div>
     </div>
   );

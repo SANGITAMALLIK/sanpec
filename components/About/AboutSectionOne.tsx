@@ -7,7 +7,7 @@ const tabsData = [
     icon: "⚡",
     title: "ENGINEERING TYPE TESTING (HVAC/HVDC)",
     heading: "Engineering, Testing",
-    image: "images/home/services/1.jpg",
+    image: "images/home/services/15.jpeg",
     points: [
       "Transmission Line Engineering and Manufacturing of Steel Structures (Sustainability Approach)",
       "Structural Analysis, Design and Detailing of Steel Poles and Lattice Tower",
@@ -55,7 +55,7 @@ const tabsData = [
     icon: "🚚",
     title: "LOGISTICS CONSTRUCTION SUPPORT",
     heading: "Logistics and Construction support",
-    image: "images/home/services/4.jpg",
+    image: "images/home/services/36.jpeg",
     points: [
       "Follow up logistics planning from vendors",
       "Perform inspection of material upon arrival at port and Yards",
@@ -85,7 +85,7 @@ const tabsData = [
     icon: "🎯",
     title: "OUR COMMITMENTS",
     heading: "OUR COMMITMENTS",
-    image: "images/home/services/6.jpg",
+    image: "images/home/services/30.jpeg",
     points: [
       "Reliability and Resiliency based Design for Transmission Structures with Engineering Excellence",
       "Innovative and Cost-Effective solutions",
@@ -104,45 +104,25 @@ const ModernTabs = () => {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <div className="relative w-full bg-gradient-to-br from-slate-50 to-slate-100 py-20 px-4 overflow-hidden">
-      {/* Decorative Tower SVG - Left Side */}
-      <div className="absolute left-0 top-0 h-full w-64 opacity-5 pointer-events-none">
-        <svg viewBox="0 0 200 800" className="h-full w-full" fill="none">
-          <path d="M100 50 L80 150 L60 250 L40 350 L30 450 L25 550 L20 650 L15 750" stroke="#171530" strokeWidth="8" strokeLinecap="round"/>
-          <path d="M100 50 L120 150 L140 250 L160 350 L170 450 L175 550 L180 650 L185 750" stroke="#171530" strokeWidth="8" strokeLinecap="round"/>
-          
-          <line x1="40" y1="150" x2="160" y2="150" stroke="#171530" strokeWidth="6"/>
-          <line x1="50" y1="250" x2="150" y2="250" stroke="#171530" strokeWidth="6"/>
-          <line x1="60" y1="350" x2="140" y2="350" stroke="#171530" strokeWidth="6"/>
-          <line x1="70" y1="450" x2="130" y2="450" stroke="#171530" strokeWidth="5"/>
-          <line x1="75" y1="550" x2="125" y2="550" stroke="#171530" strokeWidth="5"/>
-          
-          <path d="M60 250 L100 200 L140 250" stroke="#CD091B" strokeWidth="4" fill="none"/>
-          <path d="M60 350 L100 300 L140 350" stroke="#CD091B" strokeWidth="4" fill="none"/>
-          <path d="M70 450 L100 400 L130 450" stroke="#CD091B" strokeWidth="3" fill="none"/>
-          
-          <path d="M40 150 Q20 180 10 220" stroke="#CD091B" strokeWidth="3" opacity="0.6"/>
-          <path d="M160 150 Q180 180 190 220" stroke="#CD091B" strokeWidth="3" opacity="0.6"/>
-        </svg>
+    <div className="relative w-full bg-[#e8e9ea] py-20 px-4 overflow-hidden">
+      {/* Decorative Tower Image - Left Side */}
+      <div className="absolute left-0 top-0 h-full w-80 pointer-events-none overflow-hidden">
+        <img 
+          src="images/home/services/pole_background.png" 
+          alt="Power Pole Background"
+          className="h-full w-full object-cover opacity-15"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#e8e9ea]/50 to-[#e8e9ea]"></div>
       </div>
 
-      {/* Decorative Tower SVG - Right Side */}
-      <div className="absolute right-0 bottom-0 h-full w-64 opacity-5 pointer-events-none transform scale-x-[-1]">
-        <svg viewBox="0 0 200 800" className="h-full w-full" fill="none">
-          <path d="M100 50 L80 150 L60 250 L40 350 L30 450 L25 550 L20 650 L15 750" stroke="#171530" strokeWidth="8" strokeLinecap="round"/>
-          <path d="M100 50 L120 150 L140 250 L160 350 L170 450 L175 550 L180 650 L185 750" stroke="#171530" strokeWidth="8" strokeLinecap="round"/>
-          
-          <line x1="40" y1="150" x2="160" y2="150" stroke="#171530" strokeWidth="6"/>
-          <line x1="50" y1="250" x2="150" y2="250" stroke="#171530" strokeWidth="6"/>
-          <line x1="60" y1="350" x2="140" y2="350" stroke="#171530" strokeWidth="6"/>
-          <line x1="70" y1="450" x2="130" y2="450" stroke="#171530" strokeWidth="5"/>
-          
-          <path d="M60 250 L100 200 L140 250" stroke="#CD091B" strokeWidth="4" fill="none"/>
-          <path d="M60 350 L100 300 L140 350" stroke="#CD091B" strokeWidth="4" fill="none"/>
-          
-          <path d="M40 150 Q20 180 10 220" stroke="#CD091B" strokeWidth="3" opacity="0.6"/>
-          <path d="M160 150 Q180 180 190 220" stroke="#CD091B" strokeWidth="3" opacity="0.6"/>
-        </svg>
+      {/* Decorative Tower Image - Right Side */}
+      <div className="absolute right-0 top-0 h-full w-80 pointer-events-none overflow-hidden transform scale-x-[-1]">
+        <img 
+          src="images/home/services/pole_background.png" 
+          alt="Power Pole Background"
+          className="h-full w-full object-cover opacity-15"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#e8e9ea]/50 to-[#e8e9ea]"></div>
       </div>
 
       {/* Floating Power Pole Icons */}

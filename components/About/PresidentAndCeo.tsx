@@ -1,5 +1,4 @@
 import React from 'react';
-import { Award, Users, BookOpen, Zap, Lightbulb, GraduationCap } from 'lucide-react';
 
 export default function SanpecProfile() {
   return (
@@ -116,9 +115,6 @@ export default function SanpecProfile() {
             {/* Company Info */}
             <div className="md:col-span-3 p-8 md:p-10 flex flex-col justify-center">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#CD091B] to-red-600 flex items-center justify-center shadow-lg">
-                  <Award className="w-7 h-7 text-white" />
-                </div>
                 <div className="flex-1">
                   <h3 className="text-4xl font-bold text-[#101631] mb-1">The Company</h3>
                   <div className="h-1 w-24 bg-gradient-to-r from-[#CD091B] to-transparent rounded-full"></div>
@@ -148,9 +144,7 @@ export default function SanpecProfile() {
         {/* Experience Section - Full Width */}
         <div className="bg-white rounded-2xl shadow-lg p-8 mb-6 border-l-4 border-[#CD091B] hover:shadow-xl transition-shadow">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#CD091B] to-red-600 flex items-center justify-center shadow-lg">
-              <Zap className="w-6 h-6 text-white" />
-            </div>
+            <div className="w-12 h-0.5 bg-[#CD091B] rounded-full"></div>
             <h3 className="text-2xl font-bold text-[#101631]">Experience in T&D Line Engineering, Testing and Inspections (QA/QC)</h3>
           </div>
           <div className="flex gap-3 items-start">
@@ -164,9 +158,7 @@ export default function SanpecProfile() {
         {/* Project Management Section */}
         <div className="bg-white rounded-2xl shadow-lg p-8 mb-6 border-l-4 border-[#101631] hover:shadow-xl transition-shadow">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#101631] to-[#1a2847] flex items-center justify-center shadow-lg">
-              <Users className="w-6 h-6 text-white" />
-            </div>
+            <div className="w-12 h-0.5 bg-[#101631] rounded-full"></div>
             <h3 className="text-2xl font-bold text-[#101631]">Project Management Team</h3>
           </div>
           <div className="flex gap-3 items-start">
@@ -180,9 +172,7 @@ export default function SanpecProfile() {
         {/* Professional Membership Section */}
         <div className="bg-white rounded-2xl shadow-lg p-8 mb-6 border-l-4 border-[#CD091B] hover:shadow-xl transition-shadow">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#CD091B] to-red-600 flex items-center justify-center shadow-lg">
-              <BookOpen className="w-6 h-6 text-white" />
-            </div>
+            <div className="w-12 h-0.5 bg-[#CD091B] rounded-full"></div>
             <h3 className="text-2xl font-bold text-[#101631]">Professional Membership</h3>
           </div>
           <div className="space-y-3">
@@ -201,9 +191,7 @@ export default function SanpecProfile() {
           <div className="absolute top-0 right-0 w-64 h-64 bg-[#CD091B]/10 rounded-full blur-3xl"></div>
           <div className="relative z-10">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-xl bg-[#CD091B] flex items-center justify-center shadow-lg">
-                <GraduationCap className="w-6 h-6 text-white" />
-              </div>
+              <div className="w-12 h-0.5 bg-[#CD091B] rounded-full"></div>
               <h3 className="text-2xl font-bold">Academic Affiliation</h3>
             </div>
             <div className="space-y-3">

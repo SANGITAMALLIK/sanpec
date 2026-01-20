@@ -50,9 +50,8 @@ export default function HolisticImpactSection() {
             {/* Description Box */}
             <div className="border-l-4 border-[#101631] bg-gray-50 p-8 shadow-lg">
               <p className="text-gray-700 text-lg leading-relaxed">
-                Responsible management of natural resources and ecosystems to ensure they endure for future generations. 
-                Our approach integrates <span className="text-[#101631] font-semibold">environmental stewardship</span> with
-                <span className="text-[#CD091B] font-semibold"> sustainable practices</span> for lasting impact.
+                Responsible management of natural<span className="text-[#101631] font-semibold"> resources and ecosystems</span> to
+                <span className="text-[#CD091B] font-semibold"> ensure they endure</span> for future generations
               </p>
             </div>
 

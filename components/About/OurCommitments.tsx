@@ -192,17 +192,15 @@ export default function SanpecCommitments() {
                     <div className="mr-3 mt-1">
                       <div className="w-3 h-3 bg-[#CD091B] transform rotate-45"></div>
                     </div>
-                    <h3 className="text-lg font-semibold text-[#101631]">
-                      Our Vision & Mission
-                    </h3>
-                  </div>
-                  <p className="text-lg text-gray-700 leading-relaxed">
-                    Our strategic and operational goals are integrated to achieve excellence at all levels. We strive for excellence in intellectual work, leadership, innovation, and creativity by harnessing the full spectrum of human wisdom. We conduct our operations with the highest standards of integrity and actively seek new knowledge to create value for our stakeholders, community, and the natural world.
+                   <p className="text-lg text-gray-700 leading-relaxed">
+                   Our strategic and operational goals are integrated to achieve excellence at all levels. We strive for excellence in intellectual work, leadership, innovation, and creativity by harnessing the full spectrum of human wisdom. We conduct our operations with the highest standards of integrity and actively seek new knowledge to create value for our stakeholders, community, and the natural world. We realize efficiency across business units through analysis, innovation, learning, and information and knowledge sharing. Our processes and measures continuously track progress.
                   </p>
+                  </div>
+                  
                   
                   {/* Progress Indicator */}
                   <div className="mt-6 flex items-center gap-3">
-                    <div className="text-sm font-semibold text-[#101631]">100% Commitment</div>
+                    {/* <div className="text-sm font-semibold text-[#101631]">100% Commitment</div> */}
                     <div className="flex-1 h-1.5 bg-gray-200 rounded-full overflow-hidden">
                       <div className="h-full bg-[#CD091B] w-full"></div>
                     </div>
@@ -213,7 +211,7 @@ export default function SanpecCommitments() {
           </div>
 
           {/* Key Highlights Bar */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto lg:mx-0">
+          {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto lg:mx-0">
             {[
               { icon: <Award className="w-5 h-5" />, label: 'Engineering Excellence', color: 'bg-[#CD091B]' },
               { icon: <Sparkles className="w-5 h-5" />, label: 'Innovation', color: 'bg-[#101631]' },
@@ -235,7 +233,7 @@ export default function SanpecCommitments() {
                 </div>
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
 
         {/* Enhanced Cards Grid */}
@@ -263,7 +261,7 @@ export default function SanpecCommitments() {
                   <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
                   
                   {/* Icon Badge */}
-                  <div className="absolute top-4 right-4 transform group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-300">
+                  {/* <div className="absolute top-4 right-4 transform group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-300">
                     <div className={`w-12 h-12 ${
                       index % 4 < 2 ? 'bg-[#CD091B]' : 'bg-[#101631]'
                     } flex items-center justify-center rounded-xl shadow-lg`}>
@@ -271,7 +269,7 @@ export default function SanpecCommitments() {
                         {card.icon}
                       </div>
                     </div>
-                  </div>
+                  </div> */}
 
                   {/* Top Accent Bar */}
                   <div className={`absolute top-0 left-0 right-0 h-1 ${
@@ -303,10 +301,10 @@ export default function SanpecCommitments() {
 
                 {/* Bottom Hover Indicator */}
                 <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                  <div className="flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-md">
+                  {/* <div className="flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-md">
                     <span className="text-xs font-semibold text-[#101631]">Explore</span>
                     <ArrowRight className="w-3 h-3 text-[#CD091B]" />
-                  </div>
+                  </div> */}
                 </div>
               </div>
 

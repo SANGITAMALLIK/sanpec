@@ -4,19 +4,19 @@ export default function InnovationSection() {
   const features = [
     {
       title: "A Culture of Entrepreneurship and Innovation",
-      description: "SANPEC embraces a culture of innovation and entrepreneurship to continuously deliver value in a changing world."
+      description: "– SANPEC embraces a culture of innovation and entrepreneurship to continuously deliver value in a changing world. From pioneering excellence in project execution to leading advancements in infrastructure management, our engineers continually push the limits of what is possible."
     },
     {
       title: "Data-driven Decision",
-      description: "Our engineers are trained to think beyond conventional solutions, incorporating AI-driven grid design and predictive analytics."
+      description: " Our engineers are trained to think beyond conventional solutions, incorporating AI-driven grid design, predictive analytics, and next-generation materials into modern transmission infrastructure."
     },
     {
       title: "Collaboration Across Disciplines",
-      description: "We bring together structural engineers, material scientists, sustainability experts, and digital innovators."
+      description: " – We bring together structural engineers, material scientists, sustainability experts, data analysts, and digital innovators to create future-ready transmission networks."
     },
     {
       title: "Purpose-Led Engineering",
-      description: "Every project is an opportunity to make a difference, deploying resilient transmission structures responsibly."
+      description: " – Every project is an opportunity to make a difference. Whether strengthening high-voltage lines in urban centers or deploying resilient transmission structures in climate-vulnerable regions, our engineers work responsibly and purposefully."
     }
   ];
 
@@ -28,19 +28,20 @@ export default function InnovationSection() {
           {/* Left Content - Compact Design */}
           <div className="lg:w-3/5 space-y-6">
             <div className="space-y-4">
-              <div className="flex items-center gap-3">
+              {/* <div className="flex items-center gap-3">
                 <div className="w-8 h-1 bg-[#CD091B] rounded-full"></div>
                 <span className="text-sm font-semibold text-[#CD091B] uppercase tracking-wider">
                   Innovation Excellence
                 </span>
-              </div>
+              </div> */}
               
               <h2 className="text-2xl md:text-3xl font-bold text-white leading-tight">
                 Transforming the Way Engineers Think
               </h2>
               
               <p className="text-gray-300 text-sm md:text-base leading-relaxed">
-                Innovation at SANPEC is a deliberate and structured approach embedded in every aspect of our business culture, strategically aligned with mission-critical outcomes.
+                
+Innovation at SANPEC is a deliberate and structured approach embedded in every aspect of our business culture. The innovation process is strategically aligned with mission-critical outcomes. We believe that engineering excellence is not a milestone—it’s a journey which is shaped by:
               </p>
             </div>
 
@@ -104,7 +105,7 @@ export default function InnovationSection() {
         {/* Compact Footer Note */}
         <div className="mt-8 pt-6 border-t border-white/10">
           <p className="text-center text-gray-400 text-sm">
-            Engineering excellence is a continuous journey of innovation and purpose-driven design.
+           Bringing Engineering Excellence. Improving Power Grid Reliability
           </p>
         </div>
       </div>

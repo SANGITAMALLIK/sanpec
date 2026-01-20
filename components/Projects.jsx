@@ -367,9 +367,7 @@ const EngineeringTabsSlider = () => {
                     {/* Category Badge on Image */}
                     <div className="absolute top-5 left-5">
                       <div className="flex items-center gap-2 px-4 py-2 bg-[#CD091B]/90 backdrop-blur-sm rounded-lg">
-                        <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
-                        </svg>
+                       
                         <span className="text-white text-xs sm:text-sm font-bold uppercase tracking-wider">
                           {item.category}
                         </span>

@@ -88,7 +88,7 @@ export default function StrategicInnovation() {
             <div className="space-y-8">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#101631] text-white text-sm font-semibold shadow-lg">
                 <Zap className="w-4 h-4" />
-                <span>Next-Gen Engineering</span>
+                {/* <span>Next-Gen Engineering</span> */}
               </div>
 
               <div className="space-y-3">
@@ -109,8 +109,11 @@ export default function StrategicInnovation() {
               <div className="bg-white p-6 shadow-xl border-l-4 border-[#101631]">
                 <p className="text-gray-700 text-lg leading-relaxed">
                   As global energy infrastructure faces increasing complexity, innovation in transmission 
-                  line engineering requires a <span className="font-bold text-[#101631]">system-wide transformation</span>. 
-                  SANPEC's approach ensures every part of the transmission ecosystem is optimized for 
+                  line engineering is no longer about just improving individual components—it requires a
+                   system-wide transformation. SANPEC’s approach to systemic innovation ensures that every
+                    part of the transmission ecosystem, from design and materials to project execution 
+                      <span className="font-bold text-[#101631]"> and 
+                    workforce development, is optimized for</span>. 
                   <span className="font-bold text-[#CD091B]"> reliability, quality, sustainability, and resilience</span>.
                 </p>
               </div>
@@ -131,7 +134,7 @@ export default function StrategicInnovation() {
               </div>
 
               <button className="group flex items-center gap-3 bg-[#CD091B] hover:opacity-90 text-white px-8 py-4 font-bold text-lg shadow-2xl transition-all transform hover:scale-105">
-                <span>Explore Our Approach</span>
+                <span>Read More</span>
                 <ChevronRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
               </button>
             </div>
@@ -166,9 +169,9 @@ export default function StrategicInnovation() {
       <section className="py-24 bg-gray-50">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <div className="inline-block bg-[#CD091B] text-white px-6 py-2 font-bold mb-4">
+            {/* <div className="inline-block bg-[#CD091B] text-white px-6 py-2 font-bold mb-4">
               FEATURED PROJECT
-            </div>
+            </div> */}
             <h2 className="text-6xl font-bold text-gray-900 mb-4">
               The <span className="text-[#101631]">SunZia</span> Story
             </h2>
@@ -197,8 +200,7 @@ export default function StrategicInnovation() {
                 <div className="absolute top-0 right-0 text-9xl font-bold opacity-10">"</div>
                 <div className="relative z-10">
                   <p className="text-xl font-semibold italic mb-4">
-                    "After 17 years of dedication, seeing the project come to life was an emotional 
-                    and fulfilling moment – proof that teamwork can turn vision into reality."
+                    "I'm very thankful for the Pattern team and the quanta team they had trust in us, ensuring we had a way of making the thing successful."
                   </p>
                   <div className="flex items-center gap-3">
                     <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
@@ -217,14 +219,13 @@ export default function StrategicInnovation() {
               <div className="space-y-4">
                 <div className="bg-white p-6 shadow-lg border-l-4 border-[#101631] hover:shadow-xl transition-shadow">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-[#101631] bg-opacity-10 flex items-center justify-center flex-shrink-0">
+                    {/* <div className="w-12 h-12 bg-[#101631] bg-opacity-10 flex items-center justify-center flex-shrink-0">
                       <TrendingUp className="w-6 h-6 text-[#101631]" />
-                    </div>
+                    </div> */}
                     <div>
-                      <h3 className="font-bold text-gray-900 mb-2">Quality Leadership</h3>
+                      {/* <h3 className="font-bold text-gray-900 mb-2">Quality Leadership</h3> */}
                       <p className="text-gray-600 text-sm">
-                        Ensuring SunZia's transmission materials met the highest quality standards 
-                        through rigorous testing and validation.
+                       Ajay Mallik, P.E. President and CEO of SANPEC Engineering, shares his team’s critical role in ensuring SunZia’s transmission materials met the highest quality standards.
                       </p>
                     </div>
                   </div>
@@ -232,14 +233,13 @@ export default function StrategicInnovation() {
 
                 <div className="bg-white p-6 shadow-lg border-l-4 border-[#CD091B] hover:shadow-xl transition-shadow">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-[#CD091B] bg-opacity-10 flex items-center justify-center flex-shrink-0">
+                    {/* <div className="w-12 h-12 bg-[#CD091B] bg-opacity-10 flex items-center justify-center flex-shrink-0">
                       <Zap className="w-6 h-6 text-[#CD091B]" />
-                    </div>
+                    </div> */}
                     <div>
-                      <h3 className="font-bold text-gray-900 mb-2">Complex Transition</h3>
+                      {/* <h3 className="font-bold text-gray-900 mb-2">Complex Transition</h3> */}
                       <p className="text-gray-600 text-sm">
-                        Successfully navigated the transition from HVAC to HVDC while managing 
-                        global suppliers and logistics.
+                       SANPEC successfully navigated complex challenges and delivered exceptional results in the management of global suppliers, logistics, engineering, quality, and supply chains while transitioning the project plan from HVAC to HVDC.
                       </p>
                     </div>
                   </div>
@@ -247,31 +247,30 @@ export default function StrategicInnovation() {
 
                 <div className="bg-white p-6 shadow-lg border-l-4 border-gray-800 hover:shadow-xl transition-shadow">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-gray-100 flex items-center justify-center flex-shrink-0">
+                    {/* <div className="w-12 h-12 bg-gray-100 flex items-center justify-center flex-shrink-0">
                       <Award className="w-6 h-6 text-gray-800" />
-                    </div>
+                    </div> */}
                     <div>
-                      <h3 className="font-bold text-gray-900 mb-2">Collaborative Excellence</h3>
+                      {/* <h3 className="font-bold text-gray-900 mb-2">Collaborative Excellence</h3> */}
                       <p className="text-gray-600 text-sm">
-                        Close collaboration with Pattern and Quanta to secure committed vendors 
-                        for timely delivery.
+                      SANPEC collaborated closely with Pattern and Quanta to secure committed vendors for timely delivery, aligning with the construction schedule and project specifications. From material type testing to specialized dulling processes, SANPEC delivered unparalleled excellence and innovation throughout the project. After 12 years of dedication, seeing the project come to life was an emotional and fulfilling moment – proof that teamwork can turn vision into reality.
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-gray-100 p-6">
+              {/* <div className="bg-gray-100 p-6">
                 <h4 className="font-bold text-gray-900 mb-3 text-lg">Our Process</h4>
                 <p className="text-gray-700 text-sm leading-relaxed">
                   From material type testing to specialized dulling processes, SANPEC delivered 
                   unparalleled excellence and innovation throughout the project, managing engineering, 
                   quality, and supply chains with precision.
                 </p>
-              </div>
+              </div> */}
 
               <button className="w-full group flex items-center justify-center gap-3 bg-[#CD091B] hover:opacity-90 text-white px-6 py-4 font-bold shadow-lg transition-all">
-                <span>Read Complete Case Study</span>
+                <span>Read More</span>
                 <ExternalLink className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
               </button>
             </div>

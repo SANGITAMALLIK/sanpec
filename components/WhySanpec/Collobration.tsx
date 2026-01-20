@@ -1,6 +1,5 @@
 'use client';
 import React, { useState } from 'react';
-import { ChevronDown, Users, Shield, GraduationCap, Zap, Network, Target, TrendingUp, Activity } from 'lucide-react';
 
 const CollaborationsSection = () => {
   const [openAccordion, setOpenAccordion] = useState(0);
@@ -9,7 +8,6 @@ const CollaborationsSection = () => {
     {
       id: 1,
       title: "Engaging Communities For Co-Creation",
-      icon: Users,
       content: {
         heading: "Engaging Communities for Co-Creation",
         description: "SANPEC actively engages local communities to ensure shared ownership in energy projects.",
@@ -33,7 +31,6 @@ const CollaborationsSection = () => {
     {
       id: 2,
       title: "Building Alliances for Grid Reliability, Resilience and Sustainability",
-      icon: Shield,
       content: {
         heading: "Building Alliances for Grid Reliability, Resilience and Sustainability",
         description: "SANPEC understands the interconnected nature of today's global challenges and actively fosters cross-sector partnerships to drive grid reliability, resilience and sustainability.",
@@ -57,7 +54,6 @@ const CollaborationsSection = () => {
     {
       id: 3,
       title: "Strengthening Industry-Academia-Government Collaboration",
-      icon: GraduationCap,
       content: {
         heading: "Strengthening Industry-Academia-Government Collaboration",
         description: "SANPEC recognizes the transformative power of collaboration across industry, academia, and government to address complex energy challenges.",
@@ -138,7 +134,7 @@ const CollaborationsSection = () => {
             <div className="bg-[#101631] p-8 md:p-10 shadow-2xl border-2 border-[#CD091B]">
               <div className="flex items-center gap-3 mb-6">
                 <div className="p-3 bg-[#CD091B]">
-                  <Network className="w-8 h-8 text-white" />
+                  <div className="w-8 h-8 bg-white"></div>
                 </div>
                 <h2 className="text-3xl md:text-4xl font-bold text-white">
                   Collaborations
@@ -168,37 +164,12 @@ const CollaborationsSection = () => {
               </div>
             </div>
 
-            {/* Stats Cards */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-white p-5 border-2 border-[#101631] shadow-xl hover:shadow-2xl transition-shadow">
-                <Target className="w-8 h-8 text-[#CD091B] mb-2" />
-                <div className="text-2xl font-bold text-gray-900 mb-1">50+</div>
-                <div className="text-xs text-gray-600 font-semibold">Active Partners</div>
-              </div>
-              <div className="bg-white p-5 border-2 border-[#101631] shadow-xl hover:shadow-2xl transition-shadow">
-                <TrendingUp className="w-8 h-8 text-[#CD091B] mb-2" />
-                <div className="text-2xl font-bold text-gray-900 mb-1">100+</div>
-                <div className="text-xs text-gray-600 font-semibold">Joint Projects</div>
-              </div>
-            </div>
-
-            {/* Status Indicator */}
-            <div className="bg-green-50 p-6 border-2 border-green-400 shadow-xl">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
-                <span className="text-green-700 font-bold text-sm">COLLABORATION STATUS</span>
-              </div>
-              <div className="text-gray-900 font-bold text-lg">ACTIVE & EXPANDING</div>
-              <div className="text-green-700 text-xs mt-1 font-semibold">Global Partnership Network</div>
-            </div>
-
           </div>
 
           {/* Right Side - Accordions */}
           <div className="lg:col-span-8 space-y-4">
             {accordions.map((accordion, idx) => {
               const isOpen = openAccordion === idx;
-              const IconComponent = accordion.icon;
               
               return (
                 <div
@@ -218,9 +189,11 @@ const CollaborationsSection = () => {
                       <div className={`p-3 flex-shrink-0 transition-all duration-500 ${
                         isOpen ? 'bg-[#CD091B]' : 'bg-[#101631] bg-opacity-10'
                       }`}>
-                        <IconComponent className={`w-6 h-6 md:w-7 md:h-7 ${
+                        <div className={`w-6 h-6 md:w-7 md:h-7 ${
                           isOpen ? 'text-white' : 'text-[#101631]'
-                        }`} />
+                        }`}>
+                          <span className="text-lg font-bold">{idx + 1}</span>
+                        </div>
                       </div>
                       <h3 className={`font-bold text-base md:text-lg lg:text-xl transition-colors ${
                         isOpen ? 'text-white' : 'text-gray-800 group-hover:text-[#CD091B]'
@@ -228,9 +201,11 @@ const CollaborationsSection = () => {
                         {accordion.title}
                       </h3>
                     </div>
-                    <ChevronDown className={`w-6 h-6 md:w-7 md:h-7 flex-shrink-0 ml-4 transition-all duration-500 ${
-                      isOpen ? 'rotate-180 text-white' : 'text-gray-500 group-hover:text-[#CD091B]'
-                    }`} />
+                    <div className={`w-6 h-6 md:w-7 md:h-7 flex-shrink-0 ml-4 transition-all duration-500 ${
+                      isOpen ? 'rotate-180' : ''
+                    }`}>
+                      <div className="w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[10px] border-t-gray-500 group-hover:border-t-[#CD091B]"></div>
+                    </div>
                   </button>
 
                   {/* Accordion Content */}
@@ -256,7 +231,7 @@ const CollaborationsSection = () => {
                           >
                             <div className="flex gap-4 items-start">
                               <div className="w-10 h-10 bg-[#CD091B] flex items-center justify-center flex-shrink-0">
-                                <Activity className="w-5 h-5 text-white" />
+                                <span className="text-white font-bold">{pIdx + 1}</span>
                               </div>
                               <div className="flex-1 min-w-0">
                                 <h5 className="font-bold text-white text-sm md:text-base mb-2">
@@ -285,27 +260,6 @@ const CollaborationsSection = () => {
             })}
           </div>
 
-        </div>
-
-        {/* Bottom Stats */}
-        <div className="mt-12 max-w-[1800px] mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-            <div className="bg-white p-6 border-2 border-[#101631] shadow-xl text-center hover:shadow-2xl hover:border-[#CD091B] transition-all">
-              <Zap className="w-10 h-10 text-[#CD091B] mx-auto mb-3" />
-              <div className="text-3xl font-bold text-gray-900 mb-2">Innovation</div>
-              <div className="text-gray-700 text-sm font-semibold">Driving Technology Forward</div>
-            </div>
-            <div className="bg-white p-6 border-2 border-[#101631] shadow-xl text-center hover:shadow-2xl hover:border-[#CD091B] transition-all">
-              <Network className="w-10 h-10 text-[#CD091B] mx-auto mb-3" />
-              <div className="text-3xl font-bold text-gray-900 mb-2">Partnership</div>
-              <div className="text-gray-700 text-sm font-semibold">Global Network Expansion</div>
-            </div>
-            <div className="bg-white p-6 border-2 border-[#101631] shadow-xl text-center hover:shadow-2xl hover:border-[#CD091B] transition-all">
-              <Shield className="w-10 h-10 text-[#CD091B] mx-auto mb-3" />
-              <div className="text-3xl font-bold text-gray-900 mb-2">Excellence</div>
-              <div className="text-gray-700 text-sm font-semibold">Industry Leadership</div>
-            </div>
-          </div>
         </div>
 
       </div>

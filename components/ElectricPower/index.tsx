@@ -362,7 +362,7 @@ export default function SidebarMenu() {
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 bg-white min-h-screen">
+        <main className="flex-1 p-2 sm:p-3 lg:p-4 bg-white min-h-screen">
           {/* Main Content Card */}
           <div className="relative bg-white rounded-xl sm:rounded-2xl shadow-sm border border-gray-200 overflow-hidden mb-6 sm:mb-8 hover:shadow-md transition-shadow duration-300">
             <div className="h-0.5 bg-[#CD091B]" />
@@ -391,30 +391,7 @@ export default function SidebarMenu() {
           </div>
 
           {/* Additional Info Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
-            {[
-              { title: 'Quick Access', desc: 'Navigate through sections', color: '#101631' },
-              { title: 'Detailed Info', desc: 'Comprehensive solutions', color: '#CD091B' },
-              { title: 'Expert Support', desc: '24/7 assistance available', color: '#101631' }
-            ].map((card, idx) => (
-              <div 
-                key={idx}
-                className="bg-white rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 shadow-md border border-gray-200 hover:shadow-lg hover:border-gray-300 transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
-              >
-                <div 
-                  className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300"
-                  style={{ backgroundColor: `${card.color}15` }}
-                >
-                  <div 
-                    className="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-2.5 md:h-2.5 rounded-full"
-                    style={{ backgroundColor: card.color }}
-                  />
-                </div>
-                <h4 className="text-sm sm:text-base md:text-lg font-bold text-gray-800 mb-1 sm:mb-2">{card.title}</h4>
-                <p className="text-xs sm:text-sm text-gray-600">{card.desc}</p>
-              </div>
-            ))}
-          </div>
+        
         </main>
       </div>
     </div>

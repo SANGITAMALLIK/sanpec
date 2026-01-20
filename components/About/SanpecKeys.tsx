@@ -185,32 +185,7 @@ export default function SanpecEdgeProducts() {
             <span className="text-[#CD091B] ml-4">EDGE & PRODUCTS</span>
           </h1>
           
-          <div className="max-w-3xl mx-auto">
-            <p className="text-lg text-gray-600 mb-8">
-              Combining unrivaled engineering excellence with innovative product solutions for 
-              resilient power infrastructure
-            </p>
-            
-            {/* Stats Bar */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
-              <div className="text-center p-4 bg-white rounded-xl shadow-sm border border-gray-100">
-                <div className="text-2xl font-bold text-[#101631]">19+</div>
-                <div className="text-sm text-gray-600">Edge Factors</div>
-              </div>
-              <div className="text-center p-4 bg-white rounded-xl shadow-sm border border-gray-100">
-                <div className="text-2xl font-bold text-[#CD091B]">13+</div>
-                <div className="text-sm text-gray-600">Products</div>
-              </div>
-              <div className="text-center p-4 bg-white rounded-xl shadow-sm border border-gray-100">
-                <div className="text-2xl font-bold text-[#101631]">50+</div>
-                <div className="text-sm text-gray-600">Engineers</div>
-              </div>
-              <div className="text-center p-4 bg-white rounded-xl shadow-sm border border-gray-100">
-                <div className="text-2xl font-bold text-[#CD091B]">100%</div>
-                <div className="text-sm text-gray-600">Quality</div>
-              </div>
-            </div>
-          </div>
+         
         </div>
 
         {/* SANPEC Edge Section */}
@@ -236,19 +211,7 @@ export default function SanpecEdgeProducts() {
               >
                 <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 h-full">
                   {/* Category Header */}
-                  <div className={`p-4 ${category.color} relative overflow-hidden`}>
-                    <div className="absolute inset-0 opacity-20">
-                      <div className="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
-                    </div>
-                    <div className="relative z-10 flex items-center gap-3">
-                      <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center">
-                        <div className="text-white">
-                          {category.icon}
-                        </div>
-                      </div>
-                      <h3 className="text-lg font-bold text-white">{category.title}</h3>
-                    </div>
-                  </div>
+                
 
                   {/* Category Items */}
                   <div className="p-4">
@@ -277,31 +240,7 @@ export default function SanpecEdgeProducts() {
           </div>
 
           {/* Edge Highlights */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-gradient-to-br from-[#101631] to-[#1a2459] text-white p-6 rounded-xl">
-              <div className="flex items-center gap-3 mb-4">
-                <Award className="w-8 h-8" />
-                <h4 className="text-lg font-bold">Award-Winning</h4>
-              </div>
-              <p className="text-sm opacity-90">Nationally recognized engineering excellence</p>
-            </div>
-            
-            <div className="bg-gradient-to-br from-[#CD091B] to-[#e11d3d] text-white p-6 rounded-xl">
-              <div className="flex items-center gap-3 mb-4">
-                <UsersIcon className="w-8 h-8" />
-                <h4 className="text-lg font-bold">Licensed Nationwide</h4>
-              </div>
-              <p className="text-sm opacity-90">Professional engineers licensed in all 50 states</p>
-            </div>
-            
-            <div className="bg-gradient-to-br from-[#101631] to-[#1a2459] text-white p-6 rounded-xl">
-              <div className="flex items-center gap-3 mb-4">
-                <Globe className="w-8 h-8" />
-                <h4 className="text-lg font-bold">Sustainable Impact</h4>
-              </div>
-              <p className="text-sm opacity-90">Triple bottom line approach to engineering</p>
-            </div>
-          </div>
+       
         </div>
 
         {/* SANPEC Products Section */}
@@ -327,32 +266,7 @@ export default function SanpecEdgeProducts() {
               >
                 <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 h-full">
                   {/* Category Header */}
-                  <div className="relative">
-                    <div className={`p-4 ${category.color} relative overflow-hidden`}>
-                      <div className="absolute inset-0 opacity-20">
-                        <div className="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
-                      </div>
-                      <div className="relative z-10 flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center">
-                            <div className="text-white">
-                              {category.icon}
-                            </div>
-                          </div>
-                          <h3 className="text-lg font-bold text-white">{category.title}</h3>
-                        </div>
-                        <ArrowRight className="w-5 h-5 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      </div>
-                    </div>
-
-                    {/* Voltage Badge */}
-                    <div className="absolute -top-3 -right-3">
-                      <div className="w-12 h-12 bg-gradient-to-br from-white to-gray-100 rounded-full flex items-center justify-center shadow-lg border border-gray-200">
-                        <div className="text-xs font-bold text-[#101631]">{catIndex % 2 === 0 ? '500kV+' : '765kV+'}</div>
-                      </div>
-                    </div>
-                  </div>
-
+                
                   {/* Products List */}
                   <div className="p-4">
                     <ul className="space-y-3">

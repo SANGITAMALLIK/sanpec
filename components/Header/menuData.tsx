@@ -6,7 +6,8 @@ export const menuData = {
     { id: 1, title: "About", path: "/about", newTab: false },
     { id: 2, title: "Engineering Excellence", path: "/engineering-excellence", newTab: false },
     { id: 3, title: "Resources", path: "/contact", newTab: false },
-    { id: 4, title: "Contact", path: "/news", newTab: false }
+    { id: 4, title: "Contact", path: "/news", newTab: false },
+    
   ],
 
   // Main navigation items
@@ -159,6 +160,7 @@ export const menuData = {
     { id: 4, title: "Projects", path: "https://news.sanpec-excellence.com/td-projects/", newTab: true },
     { id: 5, title: "Why SANPEC", path: "/why-sanpec", newTab: false },
     { id: 6, title: "Resilience", path: "/resilience-and-sustainabilty", newTab: false },
+    { id: 7, title: "Projects Gallery", path: "/project-gallery", newTab: false },
     { id: 8, title: "Blog", path: "/blog", newTab: false }
   ]
 };

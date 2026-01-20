@@ -1,6 +1,5 @@
 'use client';
 import React, { useState } from 'react';
-import { ChevronRight, Target, Award, Users, CheckCircle2, Zap, Activity, Radio } from 'lucide-react';
 
 const VerticalTabs = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -9,7 +8,6 @@ const VerticalTabs = () => {
     {
       id: 1,
       title: "Strategic Positioning",
-      icon: Target,
       content: {
         description: "As a leading transmission and distribution & engineering company, SANPEC is committed to engineering excellence, innovation, and customer-centric solutions. To maintain its position as an industry leader, SANPEC integrates cutting-edge structural analysis, advanced materials, and digital tools while fostering strong industry partnerships and driven innovation practices.",
         secondParagraph: "The table below presents SANPEC's strategic approaches/examples, structured into three key functional areas: Leadership, Operations, and Delivery. These functional areas ensure SANPEC remains at the forefront of engineering excellence, client engagement, and innovative practices, delivering value-driven, high-performance solutions for grid infrastructure in the United States.",
@@ -19,7 +17,6 @@ const VerticalTabs = () => {
     {
       id: 2,
       title: "Excellent Project Delivery",
-      icon: Award,
       content: {
         projects: [
           {
@@ -63,7 +60,6 @@ const VerticalTabs = () => {
     {
       id: 3,
       title: "Building Talent as the Foundation of Progress",
-      icon: Users,
       content: {
         description: "SANPEC recognizes that a skilled and empowered workforce is the cornerstone of driving innovation, ensuring operational excellence, and achieving sustainable growth in the energy sector. By prioritizing workforce development, SANPEC fosters a culture of continuous learning and professional advancement, equipping individuals with the expertise needed to navigate the complexities of modern energy systems.",
         strategies: [
@@ -103,14 +99,6 @@ const VerticalTabs = () => {
         }}></div>
       </div>
 
-      {/* Floating Elements */}
-      <div className="absolute top-20 right-20 opacity-[0.04] hidden lg:block">
-        <Zap className="w-32 h-32 text-[#101631]" />
-      </div>
-      <div className="absolute bottom-32 left-20 opacity-[0.04] hidden lg:block">
-        <Activity className="w-40 h-40 text-[#CD091B]" />
-      </div>
-
       {/* Main Content */}
       <div className="w-full px-3 md:px-6 lg:px-8 py-6 md:py-10 relative z-10">
         <div className="flex flex-col lg:flex-row gap-4 md:gap-6">
@@ -118,7 +106,6 @@ const VerticalTabs = () => {
           {/* Vertical Tabs */}
           <div className="w-full lg:w-80 flex flex-row lg:flex-col gap-3 overflow-x-auto lg:overflow-x-visible scrollbar-hide">
             {tabs.map((tab, index) => {
-              const IconComponent = tab.icon;
               const isActive = activeTab === index;
               return (
                 <button
@@ -131,10 +118,10 @@ const VerticalTabs = () => {
                   }`}
                 >
                   <div className="flex items-start gap-3">
-                    <div className={`p-2.5 flex-shrink-0 ${
+                    <div className={`w-10 h-10 flex items-center justify-center flex-shrink-0 ${
                       isActive ? 'bg-[#CD091B]' : 'bg-[#101631]'
                     }`}>
-                      <IconComponent className="w-5 h-5 text-white" />
+                      <span className="text-white font-bold text-lg">{index + 1}</span>
                     </div>
                     <div className="flex-1 min-w-0">
                       <h3 className={`font-bold text-sm md:text-base transition-colors ${
@@ -142,9 +129,6 @@ const VerticalTabs = () => {
                       }`}>
                         {tab.title}
                       </h3>
-                      <ChevronRight className={`w-4 h-4 mt-1 transition-all duration-300 ${
-                        isActive ? 'text-[#CD091B] translate-x-1' : 'text-gray-400'
-                      }`} />
                     </div>
                   </div>
                 </button>
@@ -167,11 +151,11 @@ const VerticalTabs = () => {
                     <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify">
                       {tabs[activeTab].content.secondParagraph}
                     </p>
-                    <div className="mt-6 border-2 border-[#101631]">
+                    <div className="mt-6 border-2 border-[#101631] h-[400px] md:h-[500px] lg:h-[550px] overflow-hidden">
                       <img 
                         src={tabs[activeTab].content.image} 
                         alt="Strategic Positioning" 
-                        className="w-full h-auto"
+                        className="w-full h-full object-cover"
                       />
                     </div>
                   </div>
@@ -196,7 +180,9 @@ const VerticalTabs = () => {
                           <div className="space-y-2.5">
                             {project.contributions.map((contribution, cIdx) => (
                               <div key={cIdx} className="flex gap-2.5 items-start">
-                                <CheckCircle2 className="w-4 h-4 text-[#CD091B] flex-shrink-0 mt-1" />
+                                <div className="w-5 h-5 flex items-center justify-center flex-shrink-0 mt-1">
+                                  <div className="w-3 h-3 bg-[#CD091B] transform rotate-45"></div>
+                                </div>
                                 <p className="text-gray-700 leading-relaxed text-sm md:text-base text-justify">
                                   {contribution}
                                 </p>
@@ -255,86 +241,6 @@ const VerticalTabs = () => {
 
               </div>
             </div>
-          </div>
-
-          {/* Power Structure - Right Side */}
-          <div className="hidden xl:block w-64 space-y-4">
-            
-            {/* Transmission Tower */}
-            <div className="bg-white p-6 border-2 border-[#101631] shadow-lg">
-              <div className="flex flex-col items-center">
-                <svg className="w-32 h-40 mb-3" viewBox="0 0 100 160">
-                  <line x1="50" y1="10" x2="30" y2="40" stroke="#101631" strokeWidth="3"/>
-                  <line x1="50" y1="10" x2="70" y2="40" stroke="#101631" strokeWidth="3"/>
-                  <line x1="30" y1="40" x2="20" y2="80" stroke="#101631" strokeWidth="3"/>
-                  <line x1="70" y1="40" x2="80" y2="80" stroke="#101631" strokeWidth="3"/>
-                  <line x1="20" y1="80" x2="10" y2="140" stroke="#101631" strokeWidth="4"/>
-                  <line x1="80" y1="80" x2="90" y2="140" stroke="#101631" strokeWidth="4"/>
-                  <line x1="10" y1="140" x2="90" y2="140" stroke="#101631" strokeWidth="5"/>
-                  <circle cx="50" cy="10" r="4" fill="#CD091B"/>
-                  <circle cx="30" cy="40" r="3" fill="#CD091B"/>
-                  <circle cx="70" cy="40" r="3" fill="#CD091B"/>
-                </svg>
-                <h4 className="text-sm font-bold text-gray-800 text-center">Transmission Tower</h4>
-                <p className="text-xs text-gray-600 text-center mt-1">500kV Structure</p>
-              </div>
-            </div>
-
-            {/* Power Flow Indicator */}
-            <div className="bg-gray-50 p-6 border-2 border-[#CD091B] shadow-lg">
-              <div className="flex items-center gap-3 mb-3">
-                <Radio className="w-6 h-6 text-[#CD091B] animate-pulse" />
-                <h4 className="text-sm font-bold text-gray-800">Power Flow</h4>
-              </div>
-              <div className="space-y-2">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-[#101631]"></div>
-                  <span className="text-xs text-gray-700">Active Line</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-[#CD091B]"></div>
-                  <span className="text-xs text-gray-700">High Voltage</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-gray-400"></div>
-                  <span className="text-xs text-gray-700">Monitoring</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Technical Specs */}
-            <div className="bg-white p-6 border-2 border-gray-200 shadow-lg">
-              <h4 className="text-sm font-bold text-gray-800 mb-3">Technical Specs</h4>
-              <div className="space-y-2.5">
-                <div className="flex justify-between items-center pb-2 border-b border-gray-200">
-                  <span className="text-xs text-gray-600">Voltage</span>
-                  <span className="text-xs font-semibold text-[#101631]">500kV</span>
-                </div>
-                <div className="flex justify-between items-center pb-2 border-b border-gray-200">
-                  <span className="text-xs text-gray-600">Capacity</span>
-                  <span className="text-xs font-semibold text-[#101631]">2000MW</span>
-                </div>
-                <div className="flex justify-between items-center pb-2 border-b border-gray-200">
-                  <span className="text-xs text-gray-600">Distance</span>
-                  <span className="text-xs font-semibold text-[#101631]">150km</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-xs text-gray-600">Efficiency</span>
-                  <span className="text-xs font-semibold text-green-600">98.5%</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Grid Status */}
-            <div className="bg-green-50 p-6 border-2 border-green-400 shadow-lg">
-              <div className="flex items-center gap-2 mb-3">
-                <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
-                <h4 className="text-sm font-bold text-gray-800">Grid Status</h4>
-              </div>
-              <p className="text-xs text-gray-700 font-semibold">OPERATIONAL</p>
-              <p className="text-xs text-gray-600 mt-1">All systems nominal</p>
-            </div>
-
           </div>
 
         </div>

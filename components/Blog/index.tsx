@@ -62,7 +62,7 @@ const BlogCarousel = () => {
               {/* Background Image */}
               <div className="absolute inset-0">
                 <img 
-                  src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1200&h=1600&fit=crop" 
+                  src="images/sanpec_2026/1.jpeg"
                   alt="Power Tower Background"
                   className="w-full h-full object-cover"
                   loading="lazy"

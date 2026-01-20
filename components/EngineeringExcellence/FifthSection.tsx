@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { Sparkles, TrendingUp, Target, Award, ArrowRight, Zap, Users, Leaf, Shield, Lightbulb } from "lucide-react";
 
 const EngineeringExcellence = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -8,33 +7,29 @@ const EngineeringExcellence = () => {
   const tabs = [
     {
       id: 0,
-      title: "Innovation",
-      icon: Sparkles,
-      content: "Aligned with the ISO 56000 series—specifically ISO 56001:2024—SANPEC systematically manages innovation through a structured approach that drives sustainable growth and secures a competitive edge by continuously exploring and implementing cutting-edge solutions in transmission and distribution."
+      title: "Innovation Management",
+      content: "Aligned with the ISO 56000 series—specifically ISO. 56001:2024—SANPEC systematically manages innovation through a structured approach that drives sustainable growth and secures a competitive edge by continuously exploring and implementing cutting-edge solutions in transmission and distribution. By fostering innovation in its R&D, design, and operational processes, SANPEC maximizes value creation by unlocking increased value from new products, services, processes, and methods, thereby delivering tangible benefits for both the organization and its stakeholders. This approach not only boosts immediate performance but also steadily builds long-term innovation capabilities, even amid uncertainty."
     },
     {
       id: 1,
-      title: "Change",
-      icon: TrendingUp,
+      title: "Change Management",
       content: "Leveraging industry-leading practices, SANPEC adeptly manages organizational change to ensure smooth transitions and enhanced adaptability during strategic shifts across all its functions—from R&D and design to manufacturing, operations, supply chain management, and material sourcing."
     },
     {
       id: 2,
-      title: "Excellence",
-      icon: Target,
+      title: "Engineering Excellence at the core",
       content: "At SANPEC, engineering excellence transcends technical proficiency—it embodies a commitment to creating socio-economic and environmental value that benefits local communities, economies, education, youth, and the planet while addressing America's energy challenges.",
       features: [
-        { icon: Zap, title: "Innovative Design", desc: "State-of-the-art technologies maximizing efficiency" },
-        { icon: Users, title: "Community Engagement", desc: "Collaborating with local communities" },
-        { icon: Lightbulb, title: "Economic Empowerment", desc: "Driving local economic growth" },
-        { icon: Leaf, title: "Environmental Stewardship", desc: "Sustainable construction practices" },
-        { icon: Shield, title: "Grid Resilience", desc: "Infrastructure withstanding disasters" }
+        { title: "Innovative Design", desc: "State-of-the-art technologies maximizing efficiency" },
+        { title: "Community Engagement", desc: "Collaborating with local communities" },
+        { title: "Economic Empowerment", desc: "Driving local economic growth" },
+        { title: "Environmental Stewardship", desc: "Sustainable construction practices" },
+        { title: "Grid Resilience", desc: "Infrastructure withstanding disasters" }
       ]
     },
     {
       id: 3,
-      title: "System-Wide",
-      icon: Award,
+      title: "Faster Inovation, System-wide Change",
       content: "SANPEC's model represents a groundbreaking shift in how businesses approach innovation. By embracing a decentralized, automated, and connected enterprise structure, SANPEC offers real-time insights into project performance, resource allocation, and integrated project management."
     }
   ];
@@ -74,7 +69,6 @@ const EngineeringExcellence = () => {
 
         <svg className="absolute bottom-32 right-32 w-14 h-14 text-[#CD091B] rotate-45" viewBox="0 0 24 24" fill="currentColor">
           <path d="M12 2L4 7v14l8-5 8 5V7l-8-5z" opacity="0.3"/>
-          <circle cx="12" cy="12" r="1.5"/>
         </svg>
 
         {/* Grid Lines */}
@@ -96,12 +90,6 @@ const EngineeringExcellence = () => {
         </svg>
       </div>
 
-      {/* Glowing Dots - Power Nodes */}
-      <div className="absolute top-20 left-1/4 w-3 h-3 rounded-full bg-[#CD091B] animate-pulse shadow-lg shadow-[#CD091B]/50"></div>
-      <div className="absolute top-40 right-1/3 w-2 h-2 rounded-full bg-[#101631] animate-pulse shadow-lg shadow-[#101631]/50" style={{animationDelay: '0.5s'}}></div>
-      <div className="absolute bottom-32 left-1/3 w-3 h-3 rounded-full bg-[#CD091B] animate-pulse shadow-lg shadow-[#CD091B]/50" style={{animationDelay: '1s'}}></div>
-      <div className="absolute bottom-20 right-1/4 w-2 h-2 rounded-full bg-[#101631] animate-pulse shadow-lg shadow-[#101631]/50" style={{animationDelay: '1.5s'}}></div>
-
       {/* Floating Circuit Elements */}
       <div className="absolute top-16 right-20 w-32 h-32 border-2 border-[#CD091B]/10 rounded-lg rotate-12"></div>
       <div className="absolute bottom-24 left-16 w-24 h-24 border-2 border-[#101631]/10 rounded-full"></div>
@@ -112,16 +100,12 @@ const EngineeringExcellence = () => {
           {/* Left Side - Content & Images */}
           <div className="space-y-6">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white border border-[#CD091B]/20 shadow-md backdrop-blur-sm">
-              <div className="w-2 h-2 rounded-full bg-[#CD091B] animate-pulse"></div>
-              <span className="text-[#CD091B] text-sm font-bold">Engineering Excellence</span>
-            </div>
-
+           
             {/* Heading */}
             <div>
               <h2 className="text-4xl lg:text-5xl font-black text-[#101631] leading-[1.1] mb-4">
-                Building Tomorrow's
-                <span className="block text-[#CD091B] mt-1">Infrastructure Today</span>
+              Engineering
+                <span className="block text-[#CD091B] mt-1">Excellence</span>
               </h2>
               <div className="flex items-center gap-2">
                 <div className="h-1 w-20 bg-[#CD091B] rounded-full"></div>
@@ -132,7 +116,10 @@ const EngineeringExcellence = () => {
 
             {/* Description */}
             <p className="text-gray-600 text-base leading-relaxed">
-              At SANPEC, engineering excellence is achieved through a comprehensive approach that integrates advanced technology, continuous improvement, and an unwavering commitment to quality.
+            
+At SANPEC, engineering excellence is achieved through a comprehensive, multi-dimensional approach that integrates advanced technology, continuous improvement, and an unwavering commitment to quality. By embedding these principles into every facet of its operations, SANPEC consistently delivers
+projects that surpass industry benchmarks. A culture of continuous improvement is central to SANPEC’s operational philosophy—feedback is actively solicited at all levels, and lessons learned from both
+successes and setbacks are meticulously integrated into future projects.
             </p>
 
             {/* Images Grid */}
@@ -162,13 +149,7 @@ const EngineeringExcellence = () => {
               </div>
             </div>
 
-            {/* Stats */}
-        
-            {/* CTA */}
-            <button className="group inline-flex items-center gap-2 px-7 py-3.5 bg-[#CD091B] text-white rounded-lg font-bold hover:bg-[#b00817] transition-all hover:shadow-xl hover:shadow-[#CD091B]/40 hover:-translate-y-1">
-              <span>Get Started</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </button>
+          
           </div>
 
           {/* Right Side - Tabs */}
@@ -176,28 +157,22 @@ const EngineeringExcellence = () => {
             {/* Tabs Header */}
             <div className="bg-white/90 backdrop-blur-sm rounded-xl p-2 shadow-lg border border-gray-200">
               <div className="grid grid-cols-4 gap-2">
-                {tabs.map((tab) => {
-                  const IconComponent = tab.icon;
-                  return (
-                    <button
-                      key={tab.id}
-                      onClick={() => setActiveTab(tab.id)}
-                      className={`group relative flex flex-col items-center gap-2 px-3 py-4 rounded-lg font-bold text-xs transition-all duration-300 ${
-                        activeTab === tab.id
-                          ? 'bg-[#CD091B] text-white shadow-lg shadow-[#CD091B]/30 scale-105'
-                          : 'text-gray-600 hover:bg-gray-50 hover:scale-105'
-                      }`}
-                    >
-                      <IconComponent className={`w-5 h-5 transition-transform duration-300 ${
-                        activeTab === tab.id ? 'scale-110' : 'group-hover:scale-110'
-                      }`} />
-                      <span className="leading-tight text-center">{tab.title}</span>
-                      {activeTab === tab.id && (
-                        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-2 h-2 bg-[#CD091B] rounded-full"></div>
-                      )}
-                    </button>
-                  );
-                })}
+                {tabs.map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`group relative flex flex-col items-center gap-2 px-3 py-4 rounded-lg font-bold text-xs transition-all duration-300 ${
+                      activeTab === tab.id
+                        ? 'bg-[#CD091B] text-white shadow-lg shadow-[#CD091B]/30 scale-105'
+                        : 'text-gray-600 hover:bg-gray-50 hover:scale-105'
+                    }`}
+                  >
+                    <span className="leading-tight text-center">{tab.title}</span>
+                    {activeTab === tab.id && (
+                      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-2 h-2 bg-[#CD091B] rounded-full"></div>
+                    )}
+                  </button>
+                ))}
               </div>
             </div>
 
@@ -205,17 +180,14 @@ const EngineeringExcellence = () => {
             <div className="bg-white/90 backdrop-blur-sm rounded-xl border border-gray-200 shadow-xl overflow-hidden">
               <div className="p-6">
                 <div className="flex items-start gap-4 mb-4">
-                  {(() => {
-                    const IconComponent = tabs[activeTab].icon;
-                    return (
-                      <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#CD091B]/10 to-[#101631]/10 flex items-center justify-center flex-shrink-0 shadow-inner">
-                        <IconComponent className="w-7 h-7 text-[#CD091B]" />
-                      </div>
-                    );
-                  })()}
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#CD091B]/10 to-[#101631]/10 flex items-center justify-center flex-shrink-0 shadow-inner">
+                    <svg className="w-6 h-6 text-[#CD091B]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
                   <div>
                     <h3 className="text-xl font-black text-[#101631] mb-2">
-                      {tabs[activeTab].title} Management
+                      {tabs[activeTab].title}
                     </h3>
                     <p className="text-gray-600 text-sm leading-relaxed">
                       {tabs[activeTab].content}
@@ -229,7 +201,19 @@ const EngineeringExcellence = () => {
                     {tabs[activeTab].features.map((feature, idx) => (
                       <div key={idx} className="group flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-all cursor-pointer">
                         <div className="w-8 h-8 rounded-lg bg-[#CD091B]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[#CD091B]/20 transition-colors">
-                          <feature.icon className="w-4 h-4 text-[#CD091B]" />
+                          <svg 
+                            className="w-4 h-4 text-[#CD091B]" 
+                            fill="none" 
+                            viewBox="0 0 24 24" 
+                            stroke="currentColor" 
+                            strokeWidth="3"
+                          >
+                            <path 
+                              strokeLinecap="round" 
+                              strokeLinejoin="round" 
+                              d="M5 13l4 4L19 7" 
+                            />
+                          </svg>
                         </div>
                         <div>
                           <div className="text-sm font-bold text-[#101631]">{feature.title}</div>
@@ -255,22 +239,26 @@ const EngineeringExcellence = () => {
             </div>
 
             {/* Feature Cards */}
-            <div className="grid grid-cols-2 gap-3">
+            {/* <div className="grid grid-cols-2 gap-3">
               <div className="group bg-white/80 backdrop-blur-sm rounded-lg p-4 border border-gray-200 hover:border-[#CD091B]/30 hover:shadow-lg transition-all duration-300 cursor-pointer">
                 <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#CD091B]/10 to-[#CD091B]/5 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                  <div className="w-4 h-4 rounded-full bg-[#CD091B]"></div>
+                  <svg className="w-5 h-5 text-[#CD091B]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
                 </div>
                 <div className="text-sm font-bold text-[#101631]">Advanced Technology</div>
                 <div className="text-xs text-gray-500 mt-1">Innovation driven solutions</div>
               </div>
               <div className="group bg-white/80 backdrop-blur-sm rounded-lg p-4 border border-gray-200 hover:border-[#101631]/30 hover:shadow-lg transition-all duration-300 cursor-pointer">
                 <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#101631]/10 to-[#101631]/5 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                  <div className="w-4 h-4 rounded-full bg-[#101631]"></div>
+                  <svg className="w-5 h-5 text-[#101631]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
                 </div>
                 <div className="text-sm font-bold text-[#101631]">Quality Assurance</div>
                 <div className="text-xs text-gray-500 mt-1">ISO certified standards</div>
               </div>
-            </div>
+            </div> */}
           </div>
 
         </div>

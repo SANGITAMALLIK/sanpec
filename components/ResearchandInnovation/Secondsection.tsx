@@ -239,10 +239,7 @@ const TechnicalPapersGallery = () => {
                   Showing <span className="font-bold text-gray-900">{filteredPapers.length}</span> papers
                 </span>
               </div>
-              <div className="hidden sm:block w-8 h-[2px] bg-gray-300"></div>
-              <span className="text-xs text-gray-500 font-medium">
-                Click on any paper to read full research
-              </span>
+              <div className="hidden sm:block w-8 h-[2px] bg-gray-300"></div> 
             </div>
             
             <div className="flex items-center gap-2">
@@ -264,7 +261,7 @@ const TechnicalPapersGallery = () => {
             </div>
           </div>
 
-          {/* Triangle Grid Cards */}
+          {/* Improved Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredPapers.map((paper, index) => (
               <div
@@ -274,9 +271,9 @@ const TechnicalPapersGallery = () => {
                   animation: `revealCard 0.6s ease-out ${index * 0.1}s both`
                 }}
               >
-                {/* Triangle Background Elements */}
-                <div className="absolute -top-2 -right-2 w-12 h-12 bg-red-600/10 transform rotate-45 group-hover:rotate-90 transition-transform duration-500"></div>
-                <div className="absolute -bottom-2 -left-2 w-8 h-8 bg-gray-900/5 transform rotate-45 group-hover:rotate-90 transition-transform duration-500"></div>
+                {/* Triangle Corner Accents */}
+                <div className="absolute -top-2 -right-2 w-8 h-8 bg-red-600/10 transform rotate-45 group-hover:rotate-90 transition-transform duration-500"></div>
+                <div className="absolute -bottom-2 -left-2 w-6 h-6 bg-gray-900/5 transform rotate-45 group-hover:rotate-90 transition-transform duration-500"></div>
 
                 <a
                   href={paper.link}
@@ -286,7 +283,10 @@ const TechnicalPapersGallery = () => {
                   onMouseEnter={() => setHoveredCard(paper.id)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
-                  {/* Image Container with Triangle Cut */}
+                  {/* Top Red Triangle Corner */}
+                  <div className="absolute top-0 right-0 w-0 h-0 border-l-[80px] border-l-transparent border-t-[80px] border-t-red-600 z-10"></div>
+
+                  {/* Image Container */}
                   <div className="relative h-56 overflow-hidden">
                     {/* Loading Skeleton */}
                     {!loadedImages[paper.id] && (
@@ -307,44 +307,30 @@ const TechnicalPapersGallery = () => {
                       onLoad={() => handleImageLoad(paper.id)}
                     />
                     
-                    {/* Triangle Overlay */}
-                    <div className="absolute bottom-0 right-0 w-0 h-0 border-l-[100px] border-l-transparent border-b-[100px] border-b-white/90"></div>
+                    {/* Dark Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
                     
-                    {/* Year Badge with Triangle Shape */}
-                    <div className="absolute top-4 right-4 z-10">
-                      <div className="relative">
-                        <div className="w-16 h-16 bg-red-600 transform -rotate-45 flex items-center justify-center">
-                          <span className="text-white text-xs font-bold transform rotate-45">
-                            {paper.year}
-                          </span>
-                        </div>
-                        {/* Small triangle accent */}
-                        <div className="absolute -top-1 -right-1 w-3 h-3 bg-gray-900 transform rotate-45"></div>
+                    {/* Category Badge */}
+                    <div className="absolute top-4 left-4 z-10">
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 bg-red-600 transform rotate-45"></div>
+                        <span className="text-xs font-bold text-white uppercase tracking-wider bg-black/70 px-3 py-1.5 rounded">
+                          {paper.category === 'transmission' ? 'Transmission' : 'Recent'}
+                        </span>
                       </div>
                     </div>
 
                     {/* Hover Effect Lines */}
-                    <div className="absolute inset-0 border-2 border-transparent group-hover:border-red-600/30 transition-all duration-500">
-                      <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100"></div>
-                      <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-200"></div>
-                      <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-300"></div>
+                    <div className="absolute inset-0 border-2 border-transparent group-hover:border-red-600/20 transition-all duration-500">
+                      <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100"></div>
+                      <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-200"></div>
+                      <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-300"></div>
                     </div>
-
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900/50 via-transparent to-transparent"></div>
                   </div>
 
                   {/* Content Section */}
                   <div className="p-6 relative">
-                    {/* Category Indicator with Triangle */}
-                    <div className="flex items-center gap-2 mb-3">
-                      <div className="w-2 h-2 bg-red-600 transform rotate-45"></div>
-                      <span className="text-xs font-bold text-red-600 uppercase tracking-wider">
-                        {paper.category === 'transmission' ? 'Transmission Engineering' : 'Recent Research'}
-                      </span>
-                    </div>
-
                     {/* Title */}
                     <h4 className="text-lg font-bold text-gray-900 mb-4 leading-tight group-hover:text-red-700 transition-colors duration-300">
                       {paper.title}
@@ -352,45 +338,31 @@ const TechnicalPapersGallery = () => {
 
                     {/* Bottom Section with Triangle Button */}
                     <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                      <div className="flex items-center gap-2">
+                      {/* <div className="flex items-center gap-2">
                         <FileText className="w-4 h-4 text-gray-400" />
                         <span className="text-xs text-gray-500">PDF Available</span>
-                      </div>
+                      </div> */}
                       
                       {/* Triangle Button */}
-                      <div className="relative group/btn">
+                      {/* <div className="relative group/btn">
                         <div className="w-10 h-10 bg-gray-100 group-hover/btn:bg-red-600 transform rotate-45 transition-all duration-300 flex items-center justify-center">
                           <ExternalLink className="w-4 h-4 text-gray-600 group-hover/btn:text-white transform -rotate-45 transition-colors duration-300" />
                         </div>
                         {/* Tooltip */}
-                        <div className="absolute -top-10 right-0 bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+                        {/* <div className="absolute -top-10 right-0 bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300 whitespace-nowrap">
                           Read Full Paper
-                        </div>
-                      </div>
+                        </div> */}
+                      {/* </div>  */}
                     </div>
 
                     {/* Progress Triangle Line */}
                     <div className="absolute bottom-0 left-0 right-0 h-1 overflow-hidden">
-                      <div className={`h-full bg-gradient-to-r from-red-600 to-red-400 transform -skew-x-45 transition-all duration-1000 ${
+                      <div className={`h-full bg-red-600 transform -skew-x-45 transition-all duration-1000 ${
                         hoveredCard === paper.id ? 'w-full' : 'w-0'
                       }`}></div>
                     </div>
                   </div>
-
-                  {/* Floating Triangles on Hover */}
-                  {hoveredCard === paper.id && (
-                    <>
-                      <div className="absolute top-1/4 -left-2 w-4 h-4 bg-red-600/20 transform rotate-45 animate-float"></div>
-                      <div className="absolute bottom-1/4 -right-2 w-3 h-3 bg-red-600/20 transform rotate-45 animate-float" style={{ animationDelay: '0.2s' }}></div>
-                    </>
-                  )}
                 </a>
-
-                {/* Connection Lines between cards (desktop only) */}
-                <div className="hidden lg:block absolute -right-4 top-1/2 transform -translate-y-1/2">
-                  <div className="w-8 h-[1px] bg-gray-300 group-hover:bg-red-600 transition-colors duration-300"></div>
-                  <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-2 h-2 bg-gray-300 group-hover:bg-red-600 transform rotate-45 transition-colors duration-300"></div>
-                </div>
               </div>
             ))}
           </div>
@@ -404,11 +376,11 @@ const TechnicalPapersGallery = () => {
         @keyframes revealCard {
           from {
             opacity: 0;
-            transform: translateY(20px) rotateX(10deg);
+            transform: translateY(20px);
           }
           to {
             opacity: 1;
-            transform: translateY(0) rotateX(0);
+            transform: translateY(0);
           }
         }
 
@@ -419,26 +391,8 @@ const TechnicalPapersGallery = () => {
           }
         }
 
-        @keyframes float {
-          0%, 100% {
-            transform: translateY(0) rotate(45deg);
-          }
-          50% {
-            transform: translateY(-10px) rotate(45deg);
-          }
-        }
-
         .animate-ping-slow {
           animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite;
-        }
-
-        .animate-float {
-          animation: float 2s ease-in-out infinite;
-        }
-
-        /* Triangle clip path for future use if needed */
-        .triangle-clip {
-          clip-path: polygon(0% 0%, 100% 0%, 100% 85%, 50% 100%, 0% 85%);
         }
       `}</style>
     </div>

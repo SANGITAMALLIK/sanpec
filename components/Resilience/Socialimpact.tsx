@@ -1,6 +1,5 @@
 'use client';
 import React, { useState } from 'react';
-import { GraduationCap, Trophy, Heart, Zap, TrendingUp, Activity } from 'lucide-react';
 
 export default function SocialImpactSection() {
   const [hoveredCard, setHoveredCard] = useState(null);
@@ -8,30 +7,21 @@ export default function SocialImpactSection() {
   const impactAreas = [
     {
       id: 1,
-      icon: GraduationCap,
       title: 'Strong K-12 Support',
-      subtitle: 'Local Commitment',
       description: 'We have devoted our time, money, and resources to support the K-12 communities. The workforce members contribute to the well-being and improvement of the local communities.',
-      color: '#101631',
-      stats: '500+ Students'
+      color: '#101631'
     },
     {
       id: 2,
-      icon: Trophy,
       title: 'Youth Sports',
-      subtitle: 'Community Engagement',
       description: 'SANPEC is highly involved with local and statewide communities to support quality education, and youth sports programs through volunteer contributions.',
-      color: '#CD091B',
-      stats: '15+ Programs'
+      color: '#CD091B'
     },
     {
       id: 3,
-      icon: Heart,
       title: 'Fostering Well-Being',
-      subtitle: 'Workplace Culture',
       description: 'Creating a culture of well-being is essential for a thriving workplace. When employees feel supported, valued, and cared for, they are more engaged, productive, and innovative.',
-      color: '#101631',
-      stats: '100% Coverage'
+      color: '#101631'
     }
   ];
 
@@ -98,11 +88,9 @@ export default function SocialImpactSection() {
         {/* Header with Technical Style */}
         <div className="mb-12 md:mb-20">
           <div className="flex items-center gap-4 mb-8">
-            <div className="w-12 h-12 bg-[#CD091B] flex items-center justify-center">
-              <Activity className="w-6 h-6 text-white" />
-            </div>
+            <div className="w-12 h-12 bg-[#CD091B]"></div>
             <div className="flex-1 h-0.5 bg-[#101631]"></div>
-            <Zap className="w-8 h-8 text-[#CD091B]" />
+            <div className="w-8 h-8 bg-[#CD091B] opacity-80"></div>
             <div className="flex-1 h-0.5 bg-[#CD091B]"></div>
           </div>
           
@@ -138,21 +126,6 @@ export default function SocialImpactSection() {
                 <div className="absolute top-0 right-0 w-full h-2 bg-[#101631]"></div>
                 
                 <div className="p-8 md:p-12">
-                  <div className="flex items-start justify-between mb-6">
-                    <div className="flex items-center gap-4">
-                      <div className="w-20 h-20 bg-[#101631] flex items-center justify-center">
-                        <GraduationCap className="w-10 h-10 text-white" />
-                      </div>
-                      <div>
-                        <div className="text-xs font-semibold text-[#CD091B] tracking-wider mb-1">LOCAL COMMITMENT</div>
-                        <div className="text-2xl font-bold text-[#101631]">500+ Students</div>
-                      </div>
-                    </div>
-                    <div className={`w-12 h-12 border-2 border-[#101631] flex items-center justify-center transition-transform duration-500 ${hoveredCard === 1 ? 'rotate-45' : 'rotate-0'}`}>
-                      <TrendingUp className="w-6 h-6 text-[#101631]" />
-                    </div>
-                  </div>
-
                   <h3 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">
                     Strong K-12 Support
                   </h3>
@@ -177,13 +150,8 @@ export default function SocialImpactSection() {
                 <img 
                   src="https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture7.png" 
                   alt="Social Impact"
-                  className="w-full h-64 object-cover"
+                  className="w-full h-full object-cover min-h-[300px]"
                 />
-                
-                <div className="p-6 bg-[#101631]">
-                  <div className="text-white text-sm font-semibold mb-2">COMMUNITY IMPACT</div>
-                  <div className="text-white text-2xl font-bold">Together We Build</div>
-                </div>
               </div>
             </div>
 
@@ -193,7 +161,6 @@ export default function SocialImpactSection() {
           <div className="grid md:grid-cols-2 gap-6 md:gap-8">
             
             {impactAreas.slice(1).map((area) => {
-              const Icon = area.icon;
               const isHovered = hoveredCard === area.id;
               
               return (
@@ -208,16 +175,6 @@ export default function SocialImpactSection() {
                     <div className="absolute bottom-0 left-0 w-2 h-full" style={{ backgroundColor: area.color }}></div>
                     
                     <div className="p-8">
-                      <div className="flex items-start justify-between mb-6">
-                        <div className="w-16 h-16 flex items-center justify-center" style={{ backgroundColor: area.color }}>
-                          <Icon className="w-8 h-8 text-white" />
-                        </div>
-                        <div className="text-right">
-                          <div className="text-xs font-semibold text-[#CD091B] tracking-wider mb-1">{area.subtitle}</div>
-                          <div className="text-xl font-bold" style={{ color: area.color }}>{area.stats}</div>
-                        </div>
-                      </div>
-
                       <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 leading-tight">
                         {area.title}
                       </h3>
@@ -225,13 +182,6 @@ export default function SocialImpactSection() {
                       <p className="text-gray-600 leading-relaxed">
                         {area.description}
                       </p>
-
-                      <div className="mt-6 flex items-center gap-2">
-                        <div className="flex-1 h-1" style={{ backgroundColor: area.color }}></div>
-                        <div className={`w-8 h-8 border-2 flex items-center justify-center transition-transform duration-500 ${isHovered ? 'rotate-90' : 'rotate-0'}`} style={{ borderColor: area.color }}>
-                          <Zap className="w-4 h-4" style={{ color: area.color }} />
-                        </div>
-                      </div>
                     </div>
 
                     <div 
