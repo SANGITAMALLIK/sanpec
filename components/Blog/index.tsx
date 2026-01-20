@@ -104,24 +104,24 @@ const BlogCarousel = () => {
 
           {/* RIGHT SIDE - Blogs */}
           <div className="w-full lg:w-7/12 relative">
-            {/* Navigation Arrows */}
-            <div className="absolute -top-16 right-0 flex gap-3 z-20">
+            {/* Navigation Arrows - Updated with white arrows on hover */}
+            <div className="absolute -top-6 right-0 flex gap-3 z-20">
               <button
                 onClick={prevSlide}
                 disabled={currentIndex === 0 || loading}
-                className={`${currentIndex === 0 || loading ? 'opacity-40 cursor-not-allowed' : 'hover:scale-125 hover:bg-[#171530]'} bg-white shadow-xl text-[#171530] p-3 md:p-4 rounded-full border-2 border-[#171530] transition-all`}
+                className={`${currentIndex === 0 || loading ? 'opacity-40 cursor-not-allowed' : 'hover:scale-110 hover:bg-[#171530] hover:text-white'} bg-white shadow-xl text-[#171530] p-3 md:p-4 rounded-full border-2 border-[#171530] transition-all duration-300 group`}
               >
-                <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
+                <svg className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-[-2px] transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
                 </svg>
               </button>
               <button
                 onClick={nextSlide}
                 disabled={currentIndex + 2 >= blogs.length || loading}
-                className={`${currentIndex + 2 >= blogs.length || loading ? 'opacity-40 cursor-not-allowed' : 'hover:scale-125 hover:bg-[#171530]'} bg-white shadow-xl text-[#171530] p-3 md:p-4 rounded-full border-2 border-[#171530] transition-all`}
+                className={`${currentIndex + 2 >= blogs.length || loading ? 'opacity-40 cursor-not-allowed' : 'hover:scale-110 hover:bg-[#171530] hover:text-white'} bg-white shadow-xl text-[#171530] p-3 md:p-4 rounded-full border-2 border-[#171530] transition-all duration-300 group`}
               >
-                <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
+                <svg className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-[2px] transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                 </svg>
               </button>
             </div>
@@ -145,21 +145,21 @@ const BlogCarousel = () => {
                 {visibleBlogs.map((blog) => (
                   <div
                     key={blog.id}
-                    className="group relative bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200 hover:shadow-2xl hover:border-[#CD091B] transition-all"
+                    className="group relative bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200 hover:shadow-2xl hover:border-[#CD091B] transition-all duration-500 hover:-translate-y-3 hover:rotate-[0.5deg] hover:shadow-[0_20px_40px_rgba(205,9,27,0.15)]"
                   >
-                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#CD091B] to-[#171530]"></div>
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#CD091B] to-[#171530] group-hover:h-2 transition-all duration-300"></div>
 
-                    {/* Image */}
+                    {/* Image with improved hover */}
                     <div className="relative h-56 overflow-hidden bg-gray-900">
                       <img
                         src={blog.image}
                         alt={blog.title}
                         loading="lazy"
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover:from-black/90 group-hover:via-black/40 transition-all duration-500"></div>
                       
-                      <div className="absolute bottom-4 right-4 w-12 h-12 bg-[#CD091B] rounded-full flex items-center justify-center">
+                      <div className="absolute bottom-4 right-4 w-12 h-12 bg-[#CD091B] rounded-full flex items-center justify-center group-hover:scale-110 group-hover:bg-[#171530] transition-all duration-300">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
                           <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" />
                         </svg>
@@ -168,16 +168,16 @@ const BlogCarousel = () => {
 
                     {/* Content */}
                     <div className="p-5 space-y-3">
-                      <h3 className="text-lg md:text-xl font-bold text-[#171530] leading-tight line-clamp-2 group-hover:text-[#CD091B]">
+                      <h3 className="text-lg md:text-xl font-bold text-[#171530] leading-tight line-clamp-2 group-hover:text-[#CD091B] transition-colors duration-300 group-hover:translate-x-2">
                         {blog.title}
                       </h3>
 
                       <div className="flex items-center gap-2">
-                        <div className="h-1 w-12 bg-[#CD091B] rounded-full"></div>
-                        <div className="flex-1 h-px bg-gray-200"></div>
+                        <div className="h-1 w-12 bg-[#CD091B] rounded-full group-hover:w-20 group-hover:bg-gradient-to-r group-hover:from-[#CD091B] group-hover:to-[#171530] transition-all duration-500"></div>
+                        <div className="flex-1 h-px bg-gray-200 group-hover:bg-gradient-to-r group-hover:from-gray-200 group-hover:to-transparent transition-all duration-500"></div>
                       </div>
 
-                      <p className="text-gray-600 text-sm leading-relaxed line-clamp-2">
+                      <p className="text-gray-600 text-sm leading-relaxed line-clamp-2 group-hover:text-gray-800 transition-colors duration-300 group-hover:translate-x-1">
                         {blog.excerpt}
                       </p>
 
@@ -185,10 +185,10 @@ const BlogCarousel = () => {
                         href={blog.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 bg-gradient-to-r from-[#CD091B] to-[#CD091B] hover:from-[#171530] hover:to-[#171530] text-white px-5 py-2.5 rounded-full font-semibold text-sm transition-all"
+                        className="inline-flex items-center gap-2 bg-gradient-to-r from-[#CD091B] to-[#CD091B] hover:from-[#171530] hover:to-[#171530] text-white px-5 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 group-hover:gap-3 group-hover:translate-y-[-2px] hover:shadow-lg"
                       >
                         Read Article
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>
                       </a>
@@ -205,7 +205,7 @@ const BlogCarousel = () => {
                   <button
                     key={idx}
                     onClick={() => setCurrentIndex(idx * 2)}
-                    className={`h-2.5 rounded-full transition-all ${
+                    className={`h-2.5 rounded-full transition-all duration-300 hover:scale-125 hover:bg-gradient-to-r hover:from-[#CD091B] hover:to-[#171530] ${
                       Math.floor(currentIndex / 2) === idx
                         ? 'w-12 bg-gradient-to-r from-[#CD091B] to-[#171530]' 
                         : 'w-2.5 bg-gray-300 hover:bg-gray-500'
