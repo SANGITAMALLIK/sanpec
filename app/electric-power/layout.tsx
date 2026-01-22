@@ -246,19 +246,19 @@ export default function ElectricPowerLayout({
                     className={`
                       flex items-center px-6 py-4 cursor-pointer border-l-4 transition-colors
                       ${isExpanded 
-                        ? 'bg-gray-50 border-navy font-semibold' 
-                        : 'border-transparent hover:bg-gray-50'
+                        ? 'bg-gray-50 border-navy font-semibold text-gray-900' 
+                        : 'border-transparent hover:bg-gray-50 text-gray-700'
                       }
                     `}
                   >
-                    <span className="mr-3">
+                    <span className="mr-3 text-gray-900">
                       {isExpanded ? (
                         <ChevronDown size={18} />
                       ) : (
                         <ChevronRight size={18} />
                       )}
                     </span>
-                    <span className="text-sm">{parent.title}</span>
+                    <span className="text-sm text-gray-900">{parent.title}</span>
                   </div>
 
                   {/* Child Menu Items */}
@@ -277,8 +277,8 @@ export default function ElectricPowerLayout({
                             className={`
                               flex items-center px-6 py-3 pl-10 cursor-pointer border-l-4 transition-colors
                               ${isActive
-                                ? 'bg-white border-navy font-semibold'
-                                : 'border-transparent hover:bg-white'
+                                ? 'bg-white border-navy font-semibold text-gray-900'
+                                : 'border-transparent hover:bg-white text-gray-700'
                               }
                             `}
                           >
@@ -288,7 +288,7 @@ export default function ElectricPowerLayout({
                                 ${isActive ? 'bg-navy' : 'bg-gray-400'}
                               `}
                             />
-                            <span className="text-sm">{child.title}</span>
+                            <span className="text-sm text-gray-900">{child.title}</span>
                           </div>
                         );
                       })}
