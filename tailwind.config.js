@@ -6,6 +6,67 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: "class",
+  
+  // Safelist for Electric Power Layout - ensures these classes aren't purged in production
+  safelist: [
+    // Background colors
+    'bg-gray-50',
+    'bg-white',
+    'bg-[#101631]',
+    'bg-[#CD091B]',
+    'bg-gray-100',
+    'bg-gray-400',
+    'bg-black/50',
+    
+    // Border colors
+    'border-[#101631]',
+    'border-[#CD091B]',
+    'border-transparent',
+    'border-gray-200',
+    
+    // Text colors
+    'text-white',
+    'text-gray-400',
+    'text-[#CD091B]',
+    
+    // Font weights
+    'font-semibold',
+    'font-bold',
+    
+    // Border widths
+    'border-l-2',
+    'border-l-4',
+    'border-r-2',
+    'border-r',
+    
+    // Hover states
+    'hover:bg-gray-50',
+    'hover:bg-white',
+    
+    // Transitions
+    'transition-colors',
+    
+    // Z-index
+    'z-10',
+    'z-30',
+    'z-40',
+    
+    // Positioning
+    'fixed',
+    'sticky',
+    'absolute',
+    'relative',
+    
+    // Display
+    'hidden',
+    'block',
+    'flex',
+    
+    // Custom heights
+    'h-[370px]',
+    'min-h-screen',
+  ],
+  
   theme: {
     container: {
       center: true,
@@ -31,10 +92,12 @@ module.exports = {
       "2xl": "1400px",
       // => @media (min-width: 1400px) { ... }
     },
+    
     extend: {
-       maxWidth: {
-        '7_5xl': '90rem', // 1440px (feel free to adjust)
+      maxWidth: {
+        '7_5xl': '90rem', // 1440px
       },
+      
       colors: {
         current: "currentColor",
         transparent: "transparent",
@@ -66,6 +129,7 @@ module.exports = {
         "btn-hover": "0px 1px 2px rgba(0, 0, 0, 0.15)",
         "btn-light": "0px 1px 2px rgba(0, 0, 0, 0.1)",
       },
+      
       dropShadow: {
         three: "0px 5px 15px rgba(6, 8, 15, 0.05)",
       },
