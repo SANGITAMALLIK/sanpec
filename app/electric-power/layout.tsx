@@ -138,63 +138,64 @@ export default function ElectricPowerLayout({
       {/* Mobile Menu Button */}
       <button
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        className="lg:hidden fixed top-24 left-4 z-30 p-3 bg-[#101631] rounded-lg shadow-md"
+        className="lg:hidden fixed top-24 left-4 z-30 p-3 rounded-lg shadow-md"
+        style={{ backgroundColor: '#101631' }}
       >
         {isMobileMenuOpen ? <X size={24} className="text-white" /> : <Menu size={24} className="text-white" />}
       </button>
 
       {/* Hero Section */}
-      <div className="relative bg-[#101631] overflow-hidden" style={{ height: '370px' }}>
+      <div className="relative overflow-hidden" style={{ height: '370px', backgroundColor: '#101631' }}>
         {/* Power tower decorations */}
         <div className="absolute inset-0 opacity-10">
           {/* Transmission Tower 1 - Left */}
           <div className="absolute left-16 top-20">
             <div className="relative w-8 h-48">
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-2 h-full bg-[#CD091B]"></div>
-              <div className="absolute top-16 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-[#CD091B]"></div>
-              <div className="absolute top-28 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-[#CD091B]"></div>
-              <div className="absolute top-40 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-[#CD091B]"></div>
-              <div className="absolute top-16 left-1/2 w-10 h-32 border-l-2 border-[#CD091B] transform -translate-x-8 rotate-12"></div>
-              <div className="absolute top-16 right-1/2 w-10 h-32 border-r-2 border-[#CD091B] transform translate-x-8 -rotate-12"></div>
+              <div className="absolute left-1/2 transform -translate-x-1/2 w-2 h-full" style={{ backgroundColor: '#CD091B' }}></div>
+              <div className="absolute top-16 left-1/2 transform -translate-x-1/2 w-20 h-1" style={{ backgroundColor: '#CD091B' }}></div>
+              <div className="absolute top-28 left-1/2 transform -translate-x-1/2 w-16 h-1" style={{ backgroundColor: '#CD091B' }}></div>
+              <div className="absolute top-40 left-1/2 transform -translate-x-1/2 w-12 h-1" style={{ backgroundColor: '#CD091B' }}></div>
+              <div className="absolute top-16 left-1/2 w-10 h-32 border-l-2" style={{ borderColor: '#CD091B' }}></div>
+              <div className="absolute top-16 right-1/2 w-10 h-32 border-r-2" style={{ borderColor: '#CD091B' }}></div>
             </div>
           </div>
 
           {/* Transmission Tower 2 - Right */}
           <div className="absolute right-20 top-24">
             <div className="relative w-8 h-52">
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-2 h-full bg-[#CD091B]"></div>
-              <div className="absolute top-20 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-[#CD091B]"></div>
-              <div className="absolute top-32 left-1/2 transform -translate-x-1/2 w-18 h-1 bg-[#CD091B]"></div>
-              <div className="absolute top-44 left-1/2 transform -translate-x-1/2 w-14 h-1 bg-[#CD091B]"></div>
-              <div className="absolute top-20 left-1/2 w-12 h-32 border-l-2 border-[#CD091B] transform -translate-x-10 rotate-12"></div>
-              <div className="absolute top-20 right-1/2 w-12 h-32 border-r-2 border-[#CD091B] transform translate-x-10 -rotate-12"></div>
+              <div className="absolute left-1/2 transform -translate-x-1/2 w-2 h-full" style={{ backgroundColor: '#CD091B' }}></div>
+              <div className="absolute top-20 left-1/2 transform -translate-x-1/2 w-24 h-1" style={{ backgroundColor: '#CD091B' }}></div>
+              <div className="absolute top-32 left-1/2 transform -translate-x-1/2 w-18 h-1" style={{ backgroundColor: '#CD091B' }}></div>
+              <div className="absolute top-44 left-1/2 transform -translate-x-1/2 w-14 h-1" style={{ backgroundColor: '#CD091B' }}></div>
+              <div className="absolute top-20 left-1/2 w-12 h-32 border-l-2" style={{ borderColor: '#CD091B' }}></div>
+              <div className="absolute top-20 right-1/2 w-12 h-32 border-r-2" style={{ borderColor: '#CD091B' }}></div>
             </div>
           </div>
 
           {/* Electric Pole 1 - Center Left */}
           <div className="absolute left-1/3 top-32">
             <div className="relative w-6 h-40">
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-2 h-full bg-[#CD091B]"></div>
-              <div className="absolute top-8 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-[#CD091B]"></div>
-              <div className="absolute top-8 -left-4 w-2 h-2 rounded-full bg-[#CD091B]"></div>
-              <div className="absolute top-8 -right-4 w-2 h-2 rounded-full bg-[#CD091B]"></div>
+              <div className="absolute left-1/2 transform -translate-x-1/2 w-2 h-full" style={{ backgroundColor: '#CD091B' }}></div>
+              <div className="absolute top-8 left-1/2 transform -translate-x-1/2 w-12 h-1" style={{ backgroundColor: '#CD091B' }}></div>
+              <div className="absolute top-8 -left-4 w-2 h-2 rounded-full" style={{ backgroundColor: '#CD091B' }}></div>
+              <div className="absolute top-8 -right-4 w-2 h-2 rounded-full" style={{ backgroundColor: '#CD091B' }}></div>
             </div>
           </div>
 
           {/* Electric Pole 2 - Center Right */}
           <div className="absolute right-1/3 top-28">
             <div className="relative w-6 h-36">
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-2 h-full bg-[#CD091B]"></div>
-              <div className="absolute top-6 left-1/2 transform -translate-x-1/2 w-10 h-1 bg-[#CD091B]"></div>
-              <div className="absolute top-6 -left-3 w-2 h-2 rounded-full bg-[#CD091B]"></div>
-              <div className="absolute top-6 -right-3 w-2 h-2 rounded-full bg-[#CD091B]"></div>
+              <div className="absolute left-1/2 transform -translate-x-1/2 w-2 h-full" style={{ backgroundColor: '#CD091B' }}></div>
+              <div className="absolute top-6 left-1/2 transform -translate-x-1/2 w-10 h-1" style={{ backgroundColor: '#CD091B' }}></div>
+              <div className="absolute top-6 -left-3 w-2 h-2 rounded-full" style={{ backgroundColor: '#CD091B' }}></div>
+              <div className="absolute top-6 -right-3 w-2 h-2 rounded-full" style={{ backgroundColor: '#CD091B' }}></div>
             </div>
           </div>
 
           {/* Power Lines */}
-          <div className="absolute top-36 left-20 right-24 h-0.5 bg-[#CD091B]"></div>
-          <div className="absolute top-48 left-20 right-24 h-0.5 bg-[#CD091B]"></div>
-          <div className="absolute top-60 left-20 right-24 h-0.5 bg-[#CD091B]"></div>
+          <div className="absolute top-36 left-20 right-24 h-0.5" style={{ backgroundColor: '#CD091B' }}></div>
+          <div className="absolute top-48 left-20 right-24 h-0.5" style={{ backgroundColor: '#CD091B' }}></div>
+          <div className="absolute top-60 left-20 right-24 h-0.5" style={{ backgroundColor: '#CD091B' }}></div>
         </div>
 
         <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12 h-full flex flex-col justify-end pb-5">
@@ -203,7 +204,7 @@ export default function ElectricPowerLayout({
           </h1>
           
           <nav className="flex items-center gap-2 text-gray-400 text-sm">
-            <Home className="w-4 h-4 text-[#CD091B]" />
+            <Home className="w-4 h-4" style={{ color: '#CD091B' }} />
             <ChevronRight className="w-4 h-4" />
             <span>Electric Power</span>
             <ChevronRight className="w-4 h-4" />
@@ -212,7 +213,7 @@ export default function ElectricPowerLayout({
             {currentChild && <span className="text-white">{currentChild.title}</span>}
           </nav>
         </div>
-        <div className="absolute bottom-0 left-0 w-full h-1 bg-[#CD091B]"></div>
+        <div className="absolute bottom-0 left-0 w-full h-1" style={{ backgroundColor: '#CD091B' }}></div>
       </div>
 
       {/* Sidebar + Content */}
@@ -237,9 +238,12 @@ export default function ElectricPowerLayout({
                   onClick={() => setExpandedParent(expandedParent === parent.id ? '' : parent.id)}
                   className={`flex items-center px-6 py-4 cursor-pointer border-l-4 ${
                     expandedParent === parent.id
-                      ? 'bg-gray-50 border-[#101631] font-semibold'
+                      ? 'bg-gray-50 font-semibold'
                       : 'border-transparent hover:bg-gray-50'
                   }`}
+                  style={{ 
+                    borderColor: expandedParent === parent.id ? '#101631' : 'transparent' 
+                  }}
                 >
                   <span className="mr-3">
                     {expandedParent === parent.id ? <ChevronDown size={18} /> : <ChevronRight size={18} />}
@@ -258,13 +262,20 @@ export default function ElectricPowerLayout({
                         }}
                         className={`flex items-center px-6 py-3 pl-10 cursor-pointer border-l-4 ${
                           activeItem === child.id
-                            ? 'bg-white border-[#101631] font-semibold'
+                            ? 'bg-white font-semibold'
                             : 'border-transparent hover:bg-white'
                         }`}
+                        style={{ 
+                          borderColor: activeItem === child.id ? '#101631' : 'transparent',
+                          backgroundColor: activeItem === child.id ? 'white' : 'transparent'
+                        }}
                       >
-                        <span className={`w-2 h-2 rounded-full mr-3 ${
-                          activeItem === child.id ? 'bg-[#101631]' : 'bg-gray-400'
-                        }`} />
+                        <span 
+                          className="w-2 h-2 rounded-full mr-3"
+                          style={{ 
+                            backgroundColor: activeItem === child.id ? '#101631' : '#9CA3AF'
+                          }}
+                        />
                         <span className="text-sm">{child.title}</span>
                       </div>
                     ))}
@@ -278,7 +289,7 @@ export default function ElectricPowerLayout({
         {/* Content Area */}
         <main className="flex-1 p-4 bg-white min-h-screen">
           <div className="bg-white rounded-2xl shadow-sm border overflow-hidden">
-            <div className="h-0.5 bg-[#CD091B]" />
+            <div className="h-0.5" style={{ backgroundColor: '#CD091B' }} />
             <div className="p-8">
               {children}
             </div>
