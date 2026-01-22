@@ -249,7 +249,7 @@ export default function HeroSlider() {
       {/* Main Slider Container with Thumbnails Sidebar */}
       <div className="relative h-full w-full flex flex-col lg:flex-row">
         {/* Main Content Area - Full width on mobile, increased width on desktop */}
-        <div className="relative h-full w-full lg:w-4/5">
+        <div className="relative h-full w-full lg:w-11/12">
           {slides.map((slide, index) => {
             const { firstLine, secondLine } = splitTitleIntoTwoLines(slide.title);
             
@@ -406,7 +406,7 @@ export default function HeroSlider() {
                           
                           {/* Corner accents */}
                           <div className="absolute top-0 left-0 w-2 h-2 md:w-3 md:h-3 border-t-2 border-l-2 border-[#cd091b] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                          <div className="absolute bottom-0 right-0 w-2 h-2 md:w-3 md:h-3 border-b-2 border-r-2 border-[#cd091b] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                          <div className="absolute bottom-0 right-0 w-2 h-2 md:w-3 md:h-3 border-b-2 borderr-2 border-[#cd091b] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         </button>
                       </div>
                     </div>
@@ -436,8 +436,8 @@ export default function HeroSlider() {
           </div>
         </div>
 
-        {/* Thumbnails Sidebar - Hidden on mobile, shown on desktop with REDUCED WIDTH AND FIXED HEIGHT */}
-        <div className="hidden lg:block w-1/5 h-full bg-black/40 backdrop-blur-sm border-l border-white/10 relative">
+        {/* Thumbnails Sidebar - Hidden on mobile, shown on desktop with HALF WIDTH */}
+        <div className="hidden lg:block w-1/12 h-full bg-black/40 backdrop-blur-sm border-l border-white/10 relative">
           {/* LIGHT GRID PATTERN BACKGROUND */}
           <div 
             className="absolute inset-0 pointer-events-none"

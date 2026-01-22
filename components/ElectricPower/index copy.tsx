@@ -23,7 +23,7 @@ export default function SidebarMenu() {
 
  
   const DesignLayout = dynamic(
-    () => import("@/components/ElectricPower/Transmission/DesignLayout"),
+    () => import("@/components/ElectricPower/TransmissionAndDistribution/DesignLayout"),
     { ssr: false }
   );
 

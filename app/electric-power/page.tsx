@@ -1,15 +1,5 @@
+import { redirect } from 'next/navigation';
 
-import ElectricPower from "@/components/ElectricPower";
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Electric Power",
-  description: "",
-  // other metadata
-};
-
-export default function ElectricPowerPage(){
-    return(
-        <ElectricPower/>
-    );
+export default function ElectricPowerPage() {
+  redirect('/electric-power/transmission/design-engineering');
 }

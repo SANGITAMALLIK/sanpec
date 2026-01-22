@@ -16,7 +16,7 @@ export const menuData = {
     { 
       id: 2,
       title: "Electric Power", 
-      path: "/electric-power",
+      path: "/electric-power/transmisson/design-engineering",
       newTab: false,
       hasDropdown: true,
       megaMenu: {
@@ -30,7 +30,7 @@ export const menuData = {
                 title: 'Design and engineering',
                 desc: 'Transmission, Engineering Excellence, Structure Optimization, Robust Transmission Line',
                 image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=300&h=192&fit=crop',
-                link: '/electric-tower/transmission/design-engineering'
+                link: '/electric-power/transmisson/design-engineering'
               },  
               {
                 title: 'Tower Testing',
