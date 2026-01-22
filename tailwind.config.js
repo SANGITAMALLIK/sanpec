@@ -7,66 +7,6 @@ module.exports = {
   ],
   darkMode: "class",
   
-  // Safelist for Electric Power Layout - ensures these classes aren't purged in production
-  safelist: [
-    // Background colors
-    'bg-gray-50',
-    'bg-white',
-    'bg-[#101631]',
-    'bg-[#CD091B]',
-    'bg-gray-100',
-    'bg-gray-400',
-    'bg-black/50',
-    
-    // Border colors
-    'border-[#101631]',
-    'border-[#CD091B]',
-    'border-transparent',
-    'border-gray-200',
-    
-    // Text colors
-    'text-white',
-    'text-gray-400',
-    'text-[#CD091B]',
-    
-    // Font weights
-    'font-semibold',
-    'font-bold',
-    
-    // Border widths
-    'border-l-2',
-    'border-l-4',
-    'border-r-2',
-    'border-r',
-    
-    // Hover states
-    'hover:bg-gray-50',
-    'hover:bg-white',
-    
-    // Transitions
-    'transition-colors',
-    
-    // Z-index
-    'z-10',
-    'z-30',
-    'z-40',
-    
-    // Positioning
-    'fixed',
-    'sticky',
-    'absolute',
-    'relative',
-    
-    // Display
-    'hidden',
-    'block',
-    'flex',
-    
-    // Custom heights
-    'h-[370px]',
-    'min-h-screen',
-  ],
-  
   theme: {
     container: {
       center: true,
@@ -75,22 +15,11 @@ module.exports = {
 
     screens: {
       xs: "450px",
-      // => @media (min-width: 450px) { ... }
-
       sm: "575px",
-      // => @media (min-width: 576px) { ... }
-
       md: "768px",
-      // => @media (min-width: 768px) { ... }
-
       lg: "992px",
-      // => @media (min-width: 992px) { ... }
-
       xl: "1200px",
-      // => @media (min-width: 1200px) { ... }
-
       "2xl": "1400px",
-      // => @media (min-width: 1400px) { ... }
     },
     
     extend: {
@@ -113,6 +42,9 @@ module.exports = {
         stroke: "#E3E8EF",
         "stroke-dark": "#353943",
         "bg-color-dark": "#171C28",
+        // Electric Power brand colors - IMPORTANT!
+        "navy": "#101631",
+        "brand-red": "#CD091B",
       },
 
       boxShadow: {
