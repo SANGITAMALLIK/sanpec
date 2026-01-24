@@ -427,8 +427,8 @@ export default function SanpecHeader() {
                       <Link
                         key={idx}
                         href={
-                      item.hash
-                        ? { pathname: item.link, hash: item.hash }
+                      item.link
+                        ? { pathname: item.link, hash: item.link }
                         : item.link
                     } 
                         className="group bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 hover:border-[#CD091B] hover:shadow-lg hover:shadow-[#CD091B]/20 transition-all overflow-hidden"

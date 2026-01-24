@@ -11,22 +11,22 @@ const menuData = [
       { 
         id: 'design-engineering', 
         title: 'Design and engineering',
-        url: '/electric-power/transmission/design-engineering'
+        url: '/electric-power/transmisson/design-and-engineering'
       },
       { 
         id: 'tower-testing', 
         title: 'Tower Testing',
-        url: '/electric-power/transmission/tower-testing'
+        url: '/electric-power/transmisson/tower-testing'
       },
       { 
         id: 'electrical-testing', 
         title: 'Electrical Testing',
-        url: '/electric-power/transmission/electrical-testing'
+        url: '/electric-power/transmisson/electrical-testing'
       },
       { 
         id: 'type-testing', 
         title: 'Type Testing',
-        url: '/electric-power/transmission/type-testing'
+        url: '/electric-power/transmisson/type-testing'
       }
     ]
   },
