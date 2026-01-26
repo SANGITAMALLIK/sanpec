@@ -377,31 +377,52 @@ export default function HeroSlider() {
         </div>
       </div>
 
-      {/* Bottom Tabs - 700px max width, perfectly centered, scrollable - Hide when video is playing */}
-      <div className={`absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20 transition-opacity duration-300 ${isVideoPlaying ? 'opacity-0 pointer-events-none' : 'opacity-100'}`} style={{ maxWidth: '700px', width: 'calc(100% - 32px)' }}>
-        <div className="bg-black/20 backdrop-blur-md rounded-lg border border-white/10 overflow-hidden relative">
-          {/* Scroll Indicators */}
-          <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-black/40 to-transparent pointer-events-none z-10"></div>
-          <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-black/40 to-transparent pointer-events-none z-10"></div>
-          
-          <div ref={tabsContainerRef} className="flex overflow-x-auto scroll-smooth">
+      {/* Bottom Tabs - Pagination Style */}
+      <div className={`absolute bottom-4 md:bottom-6 left-1/2 transform -translate-x-1/2 z-20 transition-opacity duration-300 ${isVideoPlaying ? 'opacity-0 pointer-events-none' : 'opacity-100'}`} style={{ maxWidth: '550px', width: 'calc(100% - 24px)' }}>
+        <div className="flex items-center justify-center gap-2 px-2">
+          {/* Prev Button */}
+          <button
+            onClick={prevSlide}
+            disabled={active === 0}
+            className={`px-4 py-2 rounded-md border-2 bg-white text-sm font-medium transition-all duration-300 ${
+              active === 0
+                ? 'border-gray-200 text-gray-400 cursor-not-allowed'
+                : 'border-gray-300 text-gray-600 hover:border-[#cd091b] hover:text-[#cd091b]'
+            }`}
+          >
+            ← Prev
+          </button>
+
+          {/* Numbers Container - Scrollable */}
+          <div ref={tabsContainerRef} className="flex overflow-x-auto scroll-smooth gap-2 items-center max-w-[300px] px-1">
             {slides.map((slide, index) => (
               <button
                 key={slide.id}
                 ref={el => tabRefs.current[index] = el}
                 onClick={() => goToSlide(index)}
-                className={`flex-shrink-0 min-w-[120px] px-4 py-3 text-xs font-medium transition-all duration-300 border-b-2 ${
+                className={`flex-shrink-0 w-10 h-10 rounded-md border-2 text-sm font-semibold transition-all duration-300 ${
                   index === active 
-                    ? 'text-white border-[#cd091b] bg-white/5' 
-                    : 'text-white/60 border-transparent hover:text-white/80 hover:bg-white/5'
+                    ? 'bg-[#cd091b] border-[#cd091b] text-white shadow-lg' 
+                    : 'bg-white border-gray-300 text-gray-700 hover:border-[#cd091b] hover:text-[#cd091b]'
                 }`}
               >
-                <div className="line-clamp-2 leading-tight text-center">
-                  {slide.title || slide.preTitle}
-                </div>
+                {index + 1}
               </button>
             ))}
           </div>
+
+          {/* Next Button */}
+          <button
+            onClick={nextSlide}
+            disabled={active === slides.length - 1}
+            className={`px-4 py-2 rounded-md border-2 bg-white text-sm font-medium transition-all duration-300 ${
+              active === slides.length - 1
+                ? 'border-gray-200 text-gray-400 cursor-not-allowed'
+                : 'border-gray-300 text-gray-600 hover:border-[#cd091b] hover:text-[#cd091b]'
+            }`}
+          >
+            Next →
+          </button>
         </div>
       </div>
 

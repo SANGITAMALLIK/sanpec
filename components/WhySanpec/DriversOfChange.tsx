@@ -162,7 +162,7 @@ const TabGallery = () => {
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-[#0F152F] mb-3 md:mb-4 tracking-tight">
           Drivers Of <span className="text-[#D62B2B]">Change</span>
         </h1>
-        <div className="w-24 md:w-32 h-1 bg-[#D62B2B] mx-auto mb-4 md:mb-6 rounded-full"></div>
+        <div className="w-24   md:w-32 h-1 bg-[#D62B2B] mx-auto mb-4 md:mb-6 rounded-full"></div>
         <p className="text-gray-700 text-base md:text-xl max-w-4xl mx-auto font-medium leading-relaxed px-4">
           Leading the transformation in transmission & distribution through innovation, excellence, and strategic vision
         </p>

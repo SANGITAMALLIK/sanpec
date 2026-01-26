@@ -148,76 +148,95 @@ export default function ElectricPowerLayout({
       </button>
 
       {/* Hero Section */}
-      <div className="relative bg-navy overflow-hidden h-[370px]">
-        {/* Power tower decorations */}
-        <div className="absolute inset-0 opacity-10">
-          {/* Transmission Tower 1 - Left */}
-          <div className="absolute left-16 top-20">
-            <div className="relative w-8 h-48">
-              <div className="absolute left-1/2 -translate-x-1/2 w-2 h-full bg-brand-red"></div>
-              <div className="absolute top-16 left-1/2 -translate-x-1/2 w-20 h-1 bg-brand-red"></div>
-              <div className="absolute top-28 left-1/2 -translate-x-1/2 w-16 h-1 bg-brand-red"></div>
-              <div className="absolute top-40 left-1/2 -translate-x-1/2 w-12 h-1 bg-brand-red"></div>
-              <div className="absolute top-16 left-1/2 w-10 h-32 border-l-2 border-brand-red -translate-x-8 rotate-12"></div>
-              <div className="absolute top-16 right-1/2 w-10 h-32 border-r-2 border-brand-red translate-x-8 -rotate-12"></div>
-            </div>
-          </div>
+     <div className="relative overflow-hidden h-[300px]">
+  {/* Background Image - Page Related */}
+  <div className="absolute inset-0">
+    <img 
+      src="/images/home/services/15.jpeg" 
+      alt="Electric Power Background"
+      className="w-full h-full object-cover"
+    />
+    {/* Enhanced Gradient Overlay - Better readability */}
+    <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/50"></div>
+    
+    {/* Subtle Pattern Overlay for depth */}
+    <div 
+      className="absolute inset-0 opacity-[0.03]"
+      style={{
+        backgroundImage: `
+          repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,.1) 10px, rgba(255,255,255,.1) 20px)
+        `
+      }}
+    ></div>
+  </div>
 
-          {/* Transmission Tower 2 - Right */}
-          <div className="absolute right-20 top-24">
-            <div className="relative w-8 h-52">
-              <div className="absolute left-1/2 -translate-x-1/2 w-2 h-full bg-brand-red"></div>
-              <div className="absolute top-20 left-1/2 -translate-x-1/2 w-24 h-1 bg-brand-red"></div>
-              <div className="absolute top-32 left-1/2 -translate-x-1/2 w-18 h-1 bg-brand-red"></div>
-              <div className="absolute top-44 left-1/2 -translate-x-1/2 w-14 h-1 bg-brand-red"></div>
-              <div className="absolute top-20 left-1/2 w-12 h-32 border-l-2 border-brand-red -translate-x-10 rotate-12"></div>
-              <div className="absolute top-20 right-1/2 w-12 h-32 border-r-2 border-brand-red translate-x-10 -rotate-12"></div>
-            </div>
-          </div>
-
-          {/* Electric Pole 1 - Center Left */}
-          <div className="absolute left-1/3 top-32">
-            <div className="relative w-6 h-40">
-              <div className="absolute left-1/2 -translate-x-1/2 w-2 h-full bg-brand-red"></div>
-              <div className="absolute top-8 left-1/2 -translate-x-1/2 w-12 h-1 bg-brand-red"></div>
-              <div className="absolute top-8 -left-4 w-2 h-2 rounded-full bg-brand-red"></div>
-              <div className="absolute top-8 -right-4 w-2 h-2 rounded-full bg-brand-red"></div>
-            </div>
-          </div>
-
-          {/* Electric Pole 2 - Center Right */}
-          <div className="absolute right-1/3 top-28">
-            <div className="relative w-6 h-36">
-              <div className="absolute left-1/2 -translate-x-1/2 w-2 h-full bg-brand-red"></div>
-              <div className="absolute top-6 left-1/2 -translate-x-1/2 w-10 h-1 bg-brand-red"></div>
-              <div className="absolute top-6 -left-3 w-2 h-2 rounded-full bg-brand-red"></div>
-              <div className="absolute top-6 -right-3 w-2 h-2 rounded-full bg-brand-red"></div>
-            </div>
-          </div>
-
-          {/* Power Lines */}
-          <div className="absolute top-36 left-20 right-24 h-0.5 bg-brand-red"></div>
-          <div className="absolute top-48 left-20 right-24 h-0.5 bg-brand-red"></div>
-          <div className="absolute top-60 left-20 right-24 h-0.5 bg-brand-red"></div>
-        </div>
-
-        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12 h-full flex flex-col justify-end pb-5">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
-            {currentParent?.title.toUpperCase() || 'ELECTRIC POWER SOLUTIONS'}
-          </h1>
-          
-          <nav className="flex items-center gap-2 text-gray-400 text-sm">
-            <Home className="w-4 h-4 text-brand-red" />
-            <ChevronRight className="w-4 h-4" />
-            <span>Electric Power</span>
-            <ChevronRight className="w-4 h-4" />
-            {currentParent && <span>{currentParent.title}</span>}
-            <ChevronRight className="w-4 h-4" />
-            {currentChild && <span className="text-white">{currentChild.title}</span>}
-          </nav>
-        </div>
-        <div className="absolute bottom-0 left-0 w-full h-1 bg-brand-red"></div>
+  {/* Content Area */}
+  <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12 h-full flex flex-col justify-end pb-8">
+    {/* Page Title */}
+    <div className="mb-5">
+      <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 tracking-tight drop-shadow-lg">
+        {currentParent?.title.toUpperCase() || 'ELECTRIC POWER SOLUTIONS'}
+      </h1>
+      {/* Elegant Underline */}
+      <div className="flex items-center gap-2">
+        <div className="h-[3px] w-16 bg-[#cd091b] rounded-full"></div>
+        <div className="h-[2px] w-8 bg-[#cd091b]/60 rounded-full"></div>
+        <div className="h-[2px] w-4 bg-[#cd091b]/40 rounded-full"></div>
       </div>
+    </div>
+    
+    {/* Simple Breadcrumb Navigation - No Boxes */}
+    <nav className="flex items-center flex-wrap gap-2 text-sm">
+      {/* Home Link with Icon */}
+      <a 
+        href="/" 
+        className="group flex items-center gap-1.5 text-white/70 hover:text-white transition-colors duration-300"
+      >
+        <Home className="w-4 h-4" />
+        <span className="font-medium">Home</span>
+      </a>
+
+      {/* Separator */}
+      <ChevronRight className="w-4 h-4 text-white/50" />
+
+      {/* Electric Power Link */}
+      <a 
+        href="/electric-power" 
+        className="text-white/70 hover:text-white transition-colors duration-300 font-medium"
+      >
+        Electric Power
+      </a>
+
+      {/* Current Parent */}
+      {currentParent && (
+        <>
+          <ChevronRight className="w-4 h-4 text-white/50" />
+          <a 
+            href="#" 
+            className="text-white/70 hover:text-white transition-colors duration-300 font-medium"
+          >
+            {currentParent.title}
+          </a>
+        </>
+      )}
+
+      {/* Current Child (Active Page) */}
+      {currentChild && (
+        <>
+          <ChevronRight className="w-4 h-4 text-white/50" />
+          <span className="text-[#cd091b] font-semibold">
+            {currentChild.title}
+          </span>
+        </>
+      )}
+    </nav>
+  </div>
+
+  {/* Bottom Accent Line - Subtle */}
+  <div className="absolute bottom-0 left-0 w-full h-[2px]">
+    <div className="h-full w-full bg-gradient-to-r from-transparent via-[#cd091b]/80 to-transparent"></div>
+  </div>
+</div>
 
       {/* Sidebar + Content */}
       <div className="max-w-7_5xl mx-auto">
