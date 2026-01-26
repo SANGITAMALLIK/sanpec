@@ -19,14 +19,14 @@ export default function QualityControls() {
   return (
     <div className="flex flex-col gap-6">
       {/* Header Card */}
-      <div className="bg-gradient-to-br from-gray-50 to-white rounded-xl p-4 border border-gray-300 shadow-sm">
+      {/* <div className="bg-gradient-to-br from-gray-50 to-white rounded-xl p-4 border border-gray-300 shadow-sm">
         <div className="mb-4 pb-3 border-b border-gray-300">
           <div className="flex items-center gap-2 text-[#CD091B]">
             <div className="w-1.5 h-1.5 bg-[#CD091B] rounded-full"></div>
             <span className="text-xs font-semibold uppercase tracking-wider">Manufacturing and Operations</span>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Content Area */}
       <div className="bg-white rounded-xl p-4 lg:p-6 min-h-[500px] border border-gray-300 shadow-sm">

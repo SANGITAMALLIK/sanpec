@@ -98,14 +98,7 @@ export default function DesignEngineering() {
   return (
     <div className="flex flex-col gap-6">
       {/* Horizontal Tabs */}
-      <div className="bg-gradient-to-br from-gray-50 to-white rounded-xl p-4 border border-gray-300 shadow-sm">
-        <div className="mb-4 pb-3 border-b border-gray-300">
-          <div className="flex items-center gap-2 text-[#CD091B]">
-            <div className="w-1.5 h-1.5 bg-[#CD091B] rounded-full"></div>
-            <span className="text-xs font-semibold uppercase tracking-wider">Design & Engineering</span>
-          </div>
-        </div>
-        
+      <div className="bg-gradient-to-br from-gray-50 to-white rounded-xl p-4 border border-gray-300 shadow-sm">       
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           {designSubTabs.map((tab) => {
             const isActive = activeSubTab === tab.id;
@@ -151,7 +144,7 @@ export default function DesignEngineering() {
                     <div className="flex-shrink-0 mt-1">
                       <div className="w-1 h-1 bg-[#CD091B] rounded-full group-hover:scale-150 transition-transform"></div>
                     </div>
-                    <span className="text-gray-700 text-xs leading-snug group-hover:text-gray-900 transition-colors">{point}</span>
+                    <span className="key-feature-list text-gray-700 leading-snug group-hover:text-gray-900 transition-colors">{point}</span>
                   </div>
                 ))}
               </div>

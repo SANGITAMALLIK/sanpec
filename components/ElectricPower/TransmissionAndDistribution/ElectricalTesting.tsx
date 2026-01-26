@@ -28,7 +28,7 @@ export default function ElectricalTesting() {
               ].map((point, idx) => (
                 <div key={idx} className="flex items-center gap-2 group">
                   <div className="w-1 h-1 bg-[#CD091B] rounded-full group-hover:scale-150 transition-transform"></div>
-                  <span className="text-gray-700 text-xs group-hover:text-gray-900 transition-colors">{point}</span>
+                  <span className="text-gray-700 key-feature-list group-hover:text-gray-900 transition-colors">{point}</span>
                 </div>
               ))}
             </div>

@@ -220,96 +220,152 @@ export default function ElectricPowerLayout({
       </div>
 
       {/* Sidebar + Content */}
-      <div className="flex flex-col lg:flex-row">
-        {/* Mobile Overlay */}
-        {isMobileMenuOpen && (
-          <div 
-            className="fixed inset-0 bg-black/50 z-30 lg:hidden"
-            onClick={() => setIsMobileMenuOpen(false)}
-          />
-        )}
+      <div className="max-w-7_5xl mx-auto">
+        <div className="flex flex-col lg:flex-row">
+          {/* Mobile Overlay */}
+          {isMobileMenuOpen && (
+            <div 
+              className="fixed inset-0 bg-black/50 z-30 lg:hidden"
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+          )}
 
-        {/* Sidebar */}
-        <aside className={`
-          w-full lg:w-80 bg-white lg:sticky lg:top-0 h-full lg:min-h-screen border-r
-          ${isMobileMenuOpen ? 'fixed left-0 top-0 z-40 w-4/5 max-w-sm' : 'hidden lg:block'}
-        `}>
-          <nav className="py-4">
-            {menuData.map((parent) => {
-              const isExpanded = expandedParent === parent.id;
+          {/* Sidebar - Transmission Tower Design */}
+          <aside className={`
+            w-full lg:w-80 bg-gradient-to-b from-gray-50 to-white lg:sticky lg:top-0 h-full lg:min-h-screen
+            ${isMobileMenuOpen ? 'fixed left-0 top-0 z-40 w-4/5 max-w-sm shadow-2xl' : 'hidden lg:block'}
+            border-r border-gray-200
+          `}>
+            <nav className="py-8 px-6 relative">
+              {/* Central Tower Pole */}
+              <div className="absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-gray-300 via-gray-400 to-gray-300"></div>
               
-              return (
-                <div key={parent.id} className="mb-2">
-                  {/* Parent Menu Item */}
-                  <div 
-                    onClick={() => setExpandedParent(isExpanded ? '' : parent.id)}
-                    className={`
-                      flex items-center px-6 py-4 cursor-pointer border-l-4 transition-colors
-                      ${isExpanded 
-                        ? 'bg-gray-50 border-navy font-semibold text-gray-900' 
-                        : 'border-transparent hover:bg-gray-50 text-gray-700'
-                      }
-                    `}
-                  >
-                    <span className="mr-3 text-gray-900">
-                      {isExpanded ? (
-                        <ChevronDown size={18} />
-                      ) : (
-                        <ChevronRight size={18} />
-                      )}
-                    </span>
-                    <span className="text-sm text-gray-900">{parent.title}</span>
-                  </div>
+              {menuData.map((parent, idx) => {
+                const isExpanded = expandedParent === parent.id;
+                const hasActiveChild = parent.children.some(c => c.id === activeItem);
+                const totalParents = menuData.length;
+                const verticalPosition = (idx / (totalParents - 1)) * 100;
+                
+                return (
+                  <div key={parent.id} className="mb-6 relative">
+                    {/* Connection Point on Tower (Insulator) */}
+                    <div className="absolute left-2 top-5 w-3 h-3 bg-white border-2 border-gray-400 rounded-full shadow-md z-20"></div>
+                    
+                    {/* Horizontal Beam from Tower */}
+                    <div className={`absolute left-5 top-6 w-6 h-0.5 bg-gray-400 transition-all duration-300 ${isExpanded ? 'bg-gray-600' : ''}`}></div>
 
-                  {/* Child Menu Items */}
-                  {isExpanded && (
-                    <div className="bg-gray-50 ml-6 border-l-2 border-gray-200">
-                      {parent.children.map((child) => {
-                        const isActive = activeItem === child.id;
-                        
-                        return (
-                          <div
-                            key={child.id}
-                            onClick={() => {
-                              router.push(child.url);
-                              if (isMobileMenuOpen) setIsMobileMenuOpen(false);
-                            }}
-                            className={`
-                              flex items-center px-6 py-3 pl-10 cursor-pointer border-l-4 transition-colors
-                              ${isActive
-                                ? 'bg-white border-navy font-semibold text-gray-900'
-                                : 'border-transparent hover:bg-white text-gray-700'
-                              }
-                            `}
-                          >
-                            <span 
-                              className={`
-                                w-2 h-2 rounded-full mr-3
-                                ${isActive ? 'bg-navy' : 'bg-gray-400'}
-                              `}
-                            />
-                            <span className="text-sm text-gray-900">{child.title}</span>
-                          </div>
-                        );
-                      })}
+                    {/* Parent Menu Item (Transformer Box) */}
+                    <div 
+                      onClick={() => setExpandedParent(isExpanded ? '' : parent.id)}
+                      className={`
+                        relative ml-11 group flex items-center justify-between px-4 py-3.5 cursor-pointer
+                        transition-all duration-300 ease-out rounded-lg border-2
+                        ${isExpanded || hasActiveChild
+                          ? 'border-gray-300 text-gray-900 shadow-xl' 
+                          : 'bg-white border-gray-300 text-gray-700 hover:border-gray-400 hover:shadow-lg'
+                        }
+                      `}
+                      style={isExpanded || hasActiveChild ? {backgroundColor: '#F3F3F3'} : {}}
+                    >
+                      <span className="text-sm font-semibold flex-1">{parent.title}</span>
+                      
+                      <span className={`
+                        transition-all duration-300
+                        ${isExpanded || hasActiveChild ? 'text-gray-900' : 'text-gray-400'}
+                      `}>
+                        <ChevronDown size={18} className={`transition-transform duration-300 ${isExpanded ? '' : '-rotate-90'}`} />
+                      </span>
                     </div>
-                  )}
-                </div>
-              );
-            })}
-          </nav>
-        </aside>
 
-        {/* Content Area */}
-        <main className="flex-1 p-4 bg-white min-h-screen">
-          <div className="bg-white rounded-2xl shadow-sm border overflow-hidden">
-            <div className="h-0.5 bg-brand-red" />
-            <div className="p-8">
-              {children}
+                    {/* Child Menu Items (Power Lines Distribution) */}
+                    {isExpanded && (
+                      <div className="mt-3 relative">
+                        {/* Vertical distribution line from transformer */}
+                        <div className="absolute left-16 top-0 bottom-0 w-px bg-gradient-to-b from-gray-400 via-gray-300 to-transparent"></div>
+                        
+                        {parent.children.map((child, childIdx) => {
+                          const isActive = activeItem === child.id;
+                          const isLast = childIdx === parent.children.length - 1;
+                          
+                          return (
+                            <div
+                              key={child.id}
+                              className="relative ml-11 mb-2"
+                            >
+                              {/* Power Line from Distribution Pole */}
+                              <div className={`
+                                absolute left-5 top-1/2 w-4 h-px transition-all duration-300
+                                ${isActive ? 'bg-gray-600 w-5' : 'bg-gray-300'}
+                              `}></div>
+                              
+                              {/* Connection Node (Small Insulator) */}
+                              <div className={`
+                                absolute left-4 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full transition-all duration-300
+                                ${isActive 
+                                  ? 'bg-gray-800 ring-4 ring-gray-300 scale-125' 
+                                  : 'bg-gray-400 ring-2 ring-gray-200'
+                                }
+                              `}></div>
+
+                              {/* Menu Item (End Point Device) */}
+                              <div
+                                onClick={() => {
+                                  router.push(child.url);
+                                  if (isMobileMenuOpen) setIsMobileMenuOpen(false);
+                                }}
+                                className={`
+                                  relative flex items-center px-4 py-3 ml-9 cursor-pointer
+                                  transition-all duration-300 ease-out rounded-lg border
+                                  ${isActive
+                                    ? 'bg-gradient-to-r from-gray-100 to-white border-gray-400 text-gray-900 font-semibold shadow-lg'
+                                    : 'bg-white border-gray-200 text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:shadow-md'
+                                  }
+                                `}
+                              >
+                                <span className="text-sm">{child.title}</span>
+                                
+                                {/* Active Power Indicator */}
+                                {isActive && (
+                                  <div className="absolute -right-1 top-1/2 -translate-y-1/2">
+                                    <div className="w-2 h-2 bg-gray-800 rounded-full animate-pulse"></div>
+                                    <div className="absolute inset-0 w-2 h-2 bg-gray-600 rounded-full animate-ping"></div>
+                                  </div>
+                                )}
+
+                                {/* Power Line to Content */}
+                                {isActive && (
+                                  <div className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center">
+                                    <div className="w-8 h-px bg-gradient-to-r from-gray-400 to-gray-300"></div>
+                                    <div className="w-1.5 h-1.5 rotate-45 bg-gray-400 -ml-0.5"></div>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+
+              {/* Tower Base Foundation */}
+              <div className="absolute left-4 bottom-8 w-9 h-12 bg-gradient-to-b from-gray-400 to-gray-500 opacity-30" 
+                   style={{clipPath: 'polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%)'}}></div>
+            </nav>
+          </aside>
+
+          {/* Content Area */}
+          <main className="flex-1 p-4 bg-white min-h-screen">
+            <div className="bg-white rounded-2xl shadow-sm border overflow-hidden">
+              <div className="h-0.5 bg-brand-gray" />
+              <div className="p-8">
+                {children}
+              </div>
+              <div className="h-2 bg-gray-100" />
             </div>
-            <div className="h-2 bg-gray-100" />
-          </div>
-        </main>
+          </main>
+        </div>
       </div>
     </div>
   );

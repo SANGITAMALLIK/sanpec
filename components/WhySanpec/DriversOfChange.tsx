@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Plus, Minus } from 'lucide-react';
 
 const TabGallery = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -133,29 +133,16 @@ const TabGallery = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-[#101631] to-slate-900 relative overflow-hidden">
-      {/* Animated Grid Background */}
-      <div className="absolute inset-0 opacity-[0.08]">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 relative overflow-hidden">
+      {/* Subtle Grid Background */}
+      <div className="absolute inset-0 opacity-[0.03]">
         <div className="absolute inset-0" style={{
-          backgroundImage: 'linear-gradient(rgba(205, 9, 27, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(205, 9, 27, 0.4) 1px, transparent 1px)',
-          backgroundSize: '60px 60px',
-          animation: 'gridMove 20s linear infinite'
+          backgroundImage: 'linear-gradient(#0F152F 1px, transparent 1px), linear-gradient(90deg, #0F152F 1px, transparent 1px)',
+          backgroundSize: '60px 60px'
         }}></div>
       </div>
 
       <style>{`
-        @keyframes gridMove {
-          0% { transform: translate(0, 0); }
-          100% { transform: translate(60px, 60px); }
-        }
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-20px); }
-        }
-        @keyframes pulse-glow {
-          0%, 100% { opacity: 0.3; }
-          50% { opacity: 0.6; }
-        }
         .scrollbar-hide::-webkit-scrollbar {
           display: none;
         }
@@ -165,29 +152,26 @@ const TabGallery = () => {
         }
       `}</style>
 
-      {/* Floating Orbs */}
-      <div className="absolute top-20 left-1/4 w-72 h-72 bg-[#101631]/20 rounded-full blur-3xl" style={{animation: 'pulse-glow 4s ease-in-out infinite'}}></div>
-      <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-[#CD091B]/20 rounded-full blur-3xl" style={{animation: 'pulse-glow 4s ease-in-out infinite', animationDelay: '2s'}}></div>
-
       {/* Hero Section */}
       <div className="relative z-10 text-center py-12 md:py-16 px-4">
-        <div className="inline-flex items-center gap-2 md:gap-3 bg-gradient-to-r from-[#101631]/20 to-[#CD091B]/20 backdrop-blur-xl border border-[#CD091B]/40 px-4 md:px-8 py-2 md:py-3 rounded-full mb-4 md:mb-6 shadow-2xl">
-          <span className="w-4 h-4 md:w-5 md:h-5 bg-yellow-400 rounded-full animate-pulse flex-shrink-0"></span>
-          <span className="text-white font-bold text-xs md:text-sm tracking-wide">TRANSFORMING ENERGY INFRASTRUCTURE</span>
-          <span className="w-4 h-4 md:w-5 md:h-5 bg-yellow-400 rounded-full flex-shrink-0"></span>
+        <div className="inline-flex items-center gap-2 md:gap-3 bg-white border-2 border-gray-200 px-4 md:px-8 py-2 md:py-3 rounded-full mb-4 md:mb-6 shadow-lg">
+          <span className="w-2 h-2 md:w-2.5 md:h-2.5 bg-[#D62B2B] rounded-full animate-pulse flex-shrink-0"></span>
+          <span className="text-[#0F152F] font-bold text-xs md:text-sm tracking-wide uppercase">Transforming Energy Infrastructure</span>
+          <span className="w-2 h-2 md:w-2.5 md:h-2.5 bg-[#D62B2B] rounded-full flex-shrink-0"></span>
         </div>
-        <h1 className="text-5xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#101631] via-gray-200 to-[#CD091B] mb-3 md:mb-4 tracking-tighter drop-shadow-2xl">
-          Drivers Of Change
+        <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-[#0F152F] mb-3 md:mb-4 tracking-tight">
+          Drivers Of <span className="text-[#D62B2B]">Change</span>
         </h1>
-        <p className="text-blue-100 text-base md:text-xl max-w-4xl mx-auto font-light leading-relaxed px-4">
+        <div className="w-24 md:w-32 h-1 bg-[#D62B2B] mx-auto mb-4 md:mb-6 rounded-full"></div>
+        <p className="text-gray-700 text-base md:text-xl max-w-4xl mx-auto font-medium leading-relaxed px-4">
           Leading the transformation in transmission & distribution through innovation, excellence, and strategic vision
         </p>
       </div>
 
       {/* Tabs Navigation */}
-      <div className="relative z-20 backdrop-blur-2xl bg-gradient-to-r from-slate-900/60 via-[#101631]/60 to-slate-900/60 border-y border-white/20 sticky top-0 shadow-2xl">
+      <div className="relative z-20 bg-white border-y-2 border-gray-200 sticky top-0 shadow-lg">
         <div className="max-w-full px-3 md:px-6">
-          <div className="flex justify-start md:justify-center gap-2 py-4 md:py-5 overflow-x-auto scrollbar-hide">
+          <div className="flex justify-start md:justify-center gap-2 md:gap-3 py-4 md:py-5 overflow-x-auto scrollbar-hide">
             {tabs.map((tab, index) => (
               <button
                 key={tab.id}
@@ -195,14 +179,16 @@ const TabGallery = () => {
                   setActiveTab(index);
                   setOpenAccordion(null);
                 }}
-                className={`group relative flex items-center gap-2 md:gap-3 px-4 md:px-6 py-3 md:py-3.5 rounded-xl font-bold whitespace-nowrap transition-all duration-500 ${
+                className={`group relative flex items-center gap-2 md:gap-3 px-4 md:px-6 py-3 md:py-3.5 rounded-xl font-bold whitespace-nowrap transition-all duration-300 border-2 ${
                   activeTab === index
-                    ? 'bg-gradient-to-r from-[#CD091B] via-[#CD091B]/90 to-[#CD091B] text-white shadow-2xl scale-105'
-                    : 'text-white/70 hover:text-white hover:bg-white/10 hover:scale-105'
+                    ? 'bg-[#D62B2B] text-white border-[#D62B2B] shadow-lg scale-105'
+                    : 'bg-white text-gray-700 border-gray-200 hover:border-[#D62B2B] hover:text-[#D62B2B] hover:scale-105'
                 }`}
               >
-                <div className="w-5 h-5 md:w-6 md:h-6 bg-white/20 rounded flex items-center justify-center flex-shrink-0">
-                  <span className="text-xs font-bold">{index + 1}</span>
+                <div className={`w-6 h-6 md:w-7 md:h-7 rounded-lg flex items-center justify-center flex-shrink-0 font-bold text-sm ${
+                  activeTab === index ? 'bg-white text-[#D62B2B]' : 'bg-gray-100 text-gray-600 group-hover:bg-[#D62B2B] group-hover:text-white'
+                }`}>
+                  {index + 1}
                 </div>
                 <span className="text-xs md:text-sm">{tab.title}</span>
               </button>
@@ -212,20 +198,17 @@ const TabGallery = () => {
       </div>
 
       {/* Content Area */}
-      <div className="relative z-10 px-4 md:px-6 py-8 md:py-10 max-w-7xl mx-auto">
-        <div className="bg-gradient-to-br from-slate-900/95 to-[#101631]/95 backdrop-blur-2xl rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden border border-white/10">
+      <div className="relative z-10 px-4 md:px-6 py-8 md:py-12 max-w-7xl mx-auto">
+        <div className="bg-white rounded-2xl md:rounded-3xl shadow-xl overflow-hidden border-2 border-gray-200">
           {/* Header */}
-          <div className="bg-gradient-to-r from-[#CD091B] via-[#CD091B]/90 to-[#CD091B] p-6 md:p-10 relative overflow-hidden">
-            <div className="absolute inset-0 bg-black/30"></div>
-            <div className="absolute -right-20 -top-20 w-56 h-56 bg-white/10 rounded-full blur-3xl"></div>
-            <div className="absolute -left-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
-            <div className="relative z-10 flex items-center gap-3 md:gap-5">
-              <div className="w-12 h-12 md:w-16 md:h-16 text-white bg-white/30 p-2.5 md:p-4 rounded-xl md:rounded-2xl backdrop-blur-md shadow-xl flex items-center justify-center">
-                <span className="text-2xl font-bold">{activeTab + 1}</span>
+          <div className="bg-gradient-to-r from-[#0F152F] to-[#0F152F]/90 p-6 md:p-10">
+            <div className="flex items-center gap-3 md:gap-5">
+              <div className="w-12 h-12 md:w-16 md:h-16 text-white bg-[#D62B2B] rounded-xl md:rounded-2xl shadow-lg flex items-center justify-center flex-shrink-0">
+                <span className="text-2xl md:text-3xl font-black">{activeTab + 1}</span>
               </div>
               <div>
-                <h2 className="text-2xl md:text-5xl font-black text-white drop-shadow-2xl tracking-tight">{tabs[activeTab].content.heading}</h2>
-                <div className="h-1 md:h-1.5 w-20 md:w-32 bg-white/90 mt-2 md:mt-3 rounded-full shadow-lg"></div>
+                <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-white tracking-tight">{tabs[activeTab].content.heading}</h2>
+                <div className="h-1 md:h-1.5 w-20 md:w-32 bg-[#D62B2B] mt-2 md:mt-3 rounded-full"></div>
               </div>
             </div>
           </div>
@@ -234,83 +217,65 @@ const TabGallery = () => {
           <div className="p-6 md:p-10">
             {/* Fourth Tab Special Layout */}
             {activeTab === 3 ? (
-              // Workforce Development Tab - 2 column layout
               <div className="grid lg:grid-cols-2 gap-6 md:gap-8">
-                {/* Left Column - Bullets */}
+                {/* Left Column */}
                 <div className="space-y-5 md:space-y-6">
-                  <div className="relative group">
-                    <div className="absolute -left-2 md:-left-3 top-0 bottom-0 w-1 md:w-1.5 bg-gradient-to-b from-[#CD091B] via-[#CD091B]/90 to-[#CD091B] rounded-full"></div>
-                    <p className="text-gray-200 text-sm md:text-base leading-relaxed pl-6 md:pl-8 text-justify bg-gradient-to-br from-slate-800/60 to-[#101631]/30 p-5 md:p-7 rounded-xl md:rounded-2xl border border-white/10 shadow-xl hover:shadow-2xl transition-shadow">
+                  <div className="bg-gray-50 p-5 md:p-7 rounded-xl md:rounded-2xl border-2 border-gray-200 shadow-sm">
+                    <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify">
                       {tabs[activeTab].content.description}
                     </p>
                   </div>
                   
-                  <div className="bg-gradient-to-br from-slate-800/60 to-[#101631]/40 p-5 md:p-7 rounded-xl md:rounded-2xl border border-white/10 space-y-3 md:space-y-4 shadow-xl">
+                  <div className="bg-gray-50 p-5 md:p-7 rounded-xl md:rounded-2xl border-2 border-gray-200 space-y-3 md:space-y-4 shadow-sm">
                     {tabs[activeTab].content.bullets.map((bullet, idx) => (
-                      <div key={idx} className="flex gap-3 md:gap-4 items-start group">
-                        <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-gradient-to-r from-[#CD091B] via-[#CD091B]/90 to-[#CD091B] mt-1.5 md:mt-2 group-hover:scale-150 transition-transform shadow-lg flex-shrink-0"></div>
-                        <span className="text-gray-200 text-sm md:text-base leading-relaxed">{bullet}</span>
+                      <div key={idx} className="flex gap-3 md:gap-4 items-start">
+                        <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-[#D62B2B] mt-1.5 md:mt-2 flex-shrink-0"></div>
+                        <span className="text-gray-700 text-sm md:text-base leading-relaxed">{bullet}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Right Column - Skills */}
+                {/* Right Column */}
                 <div className="space-y-5 md:space-y-6">
-                  <div className="space-y-4 md:space-y-5">
-                    <h3 className="text-2xl md:text-3xl font-black bg-gradient-to-r from-[#CD091B] via-[#CD091B]/90 to-[#CD091B] bg-clip-text text-transparent drop-shadow-lg">
-                      {tabs[activeTab].content.subtitle}
-                    </h3>
-                    {tabs[activeTab].content.skills && (
-                      <div className="grid grid-cols-1 gap-2.5 md:gap-3">
-                        {tabs[activeTab].content.skills.map((skill, idx) => (
-                          <div key={idx} className="flex gap-3 md:gap-4 items-center bg-gradient-to-r from-slate-800/60 to-transparent p-3 md:p-4 rounded-lg md:rounded-xl border border-white/10 hover:border-white/30 transition-all group shadow-lg hover:shadow-xl">
-                            <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-gradient-to-r from-[#CD091B] via-[#CD091B]/90 to-[#CD091B] flex items-center justify-center text-white text-sm md:text-base font-bold group-hover:scale-110 transition-transform shadow-lg flex-shrink-0">
-                              {idx + 1}
-                            </div>
-                            <span className="text-gray-200 text-sm md:text-base font-medium">{skill}</span>
-                          </div>
-                        ))}
+                  <h3 className="text-2xl md:text-3xl font-black text-[#0F152F]">
+                    {tabs[activeTab].content.subtitle}
+                  </h3>
+                  <div className="grid grid-cols-1 gap-2.5 md:gap-3">
+                    {tabs[activeTab].content.skills.map((skill, idx) => (
+                      <div key={idx} className="flex gap-3 md:gap-4 items-center bg-white p-3 md:p-4 rounded-lg md:rounded-xl border-2 border-gray-200 hover:border-[#D62B2B] transition-all group shadow-sm">
+                        <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-[#D62B2B] flex items-center justify-center text-white text-sm md:text-base font-bold flex-shrink-0">
+                          {idx + 1}
+                        </div>
+                        <span className="text-gray-700 text-sm md:text-base font-medium">{skill}</span>
                       </div>
-                    )}
+                    ))}
                   </div>
                 </div>
               </div>
             ) : (
-              // Other Tabs - Original Layout
               <div className="grid lg:grid-cols-2 gap-6 md:gap-8">
                 {/* Left Column */}
                 <div className="space-y-5 md:space-y-6">
-                  <div className="relative group">
-                    <div className="absolute -left-2 md:-left-3 top-0 bottom-0 w-1 md:w-1.5 bg-gradient-to-b from-[#CD091B] via-[#CD091B]/90 to-[#CD091B] rounded-full"></div>
-                    <p className="text-gray-200 text-sm md:text-base leading-relaxed pl-6 md:pl-8 text-justify bg-gradient-to-br from-slate-800/60 to-[#101631]/30 p-5 md:p-7 rounded-xl md:rounded-2xl border border-white/10 shadow-xl hover:shadow-2xl transition-shadow">
+                  <div className="bg-gray-50 p-5 md:p-7 rounded-xl md:rounded-2xl border-2 border-gray-200 shadow-sm">
+                    <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify">
                       {tabs[activeTab].content.description}
                     </p>
                   </div>
-                  {tabs[activeTab].content.bullets && (
-                    <div className="bg-gradient-to-br from-slate-800/60 to-[#101631]/40 p-5 md:p-7 rounded-xl md:rounded-2xl border border-white/10 space-y-3 md:space-y-4 shadow-xl">
-                      {tabs[activeTab].content.bullets.map((bullet, idx) => (
-                        <div key={idx} className="flex gap-3 md:gap-4 items-start group">
-                          <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-gradient-to-r from-[#CD091B] via-[#CD091B]/90 to-[#CD091B] mt-1.5 md:mt-2 group-hover:scale-150 transition-transform shadow-lg flex-shrink-0"></div>
-                          <span className="text-gray-200 text-sm md:text-base leading-relaxed">{bullet}</span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-
+                  
                   {tabs[activeTab].content.subtitle && (
                     <div className="space-y-4 md:space-y-5">
-                      <h3 className="text-2xl md:text-3xl font-black bg-gradient-to-r from-[#CD091B] via-[#CD091B]/90 to-[#CD091B] bg-clip-text text-transparent drop-shadow-lg">
+                      <h3 className="text-2xl md:text-3xl font-black text-[#0F152F]">
                         {tabs[activeTab].content.subtitle}
                       </h3>
                       {tabs[activeTab].content.skills && (
                         <div className="grid grid-cols-1 gap-2.5 md:gap-3">
                           {tabs[activeTab].content.skills.map((skill, idx) => (
-                            <div key={idx} className="flex gap-3 md:gap-4 items-center bg-gradient-to-r from-slate-800/60 to-transparent p-3 md:p-4 rounded-lg md:rounded-xl border border-white/10 hover:border-white/30 transition-all group shadow-lg hover:shadow-xl">
-                              <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-gradient-to-r from-[#CD091B] via-[#CD091B]/90 to-[#CD091B] flex items-center justify-center text-white text-sm md:text-base font-bold group-hover:scale-110 transition-transform shadow-lg flex-shrink-0">
+                            <div key={idx} className="flex gap-3 md:gap-4 items-center bg-white p-3 md:p-4 rounded-lg md:rounded-xl border-2 border-gray-200 hover:border-[#D62B2B] transition-all group shadow-sm">
+                              <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-[#D62B2B] flex items-center justify-center text-white text-sm md:text-base font-bold flex-shrink-0">
                                 {idx + 1}
                               </div>
-                              <span className="text-gray-200 text-sm md:text-base font-medium">{skill}</span>
+                              <span className="text-gray-700 text-sm md:text-base font-medium">{skill}</span>
                             </div>
                           ))}
                         </div>
@@ -319,43 +284,43 @@ const TabGallery = () => {
                   )}
                 </div>
 
-                {/* Right Column */}
-                <div className="space-y-5 md:space-y-6">
-                  {tabs[activeTab].content.accordions && (
-                    <div className="space-y-3 md:space-y-4">
-                      {tabs[activeTab].content.accordions.map((accordion, idx) => {
-                        const isOpen = openAccordion === idx;
-                        return (
-                          <div
-                            key={idx}
-                            className={`bg-gradient-to-br from-slate-800/60 to-[#101631]/40 rounded-xl md:rounded-2xl overflow-hidden border-2 transition-all duration-500 shadow-xl ${
-                              isOpen ? 'border-white/40 shadow-2xl' : 'border-white/10 hover:border-white/25'
-                            }`}
-                          >
-                            <button
-                              onClick={() => setOpenAccordion(isOpen ? null : idx)}
-                              className="w-full p-4 md:p-5 font-bold text-white text-left flex items-center justify-between hover:bg-white/5 transition-colors group"
-                            >
-                              <span className="flex items-center gap-2.5 md:gap-3">
-                                <span className="w-7 h-7 md:w-9 md:h-9 rounded-lg bg-gradient-to-r from-[#CD091B] via-[#CD091B]/90 to-[#CD091B] flex items-center justify-center text-xs md:text-sm font-black shadow-lg flex-shrink-0">
-                                  {idx + 1}
-                                </span>
-                                <span className="text-sm md:text-base">{accordion.title}</span>
-                              </span>
-                              <div className={`w-5 h-5 md:w-6 md:h-6 transition-transform duration-500 flex-shrink-0 ${isOpen ? 'rotate-180' : ''}`}>
-                                <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[8px] border-t-white"></div>
-                              </div>
-                            </button>
-                            <div className={`transition-all duration-500 ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
-                              <div className="p-4 md:p-6 bg-slate-900/70 border-t border-white/10">
-                                <p className="text-gray-200 text-sm md:text-base leading-relaxed">{accordion.content}</p>
-                              </div>
-                            </div>
+                {/* Right Column - Accordions */}
+                <div className="space-y-3 md:space-y-4">
+                  {tabs[activeTab].content.accordions && tabs[activeTab].content.accordions.map((accordion, idx) => {
+                    const isOpen = openAccordion === idx;
+                    return (
+                      <div
+                        key={idx}
+                        className={`bg-white rounded-xl md:rounded-2xl overflow-hidden border-2 transition-all duration-300 shadow-sm ${
+                          isOpen ? 'border-[#D62B2B] shadow-lg' : 'border-gray-200 hover:border-gray-300'
+                        }`}
+                      >
+                        <button
+                          onClick={() => setOpenAccordion(isOpen ? null : idx)}
+                          className="w-full p-4 md:p-5 font-bold text-[#0F152F] text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
+                        >
+                          <span className="flex items-center gap-2.5 md:gap-3 flex-1 pr-3">
+                            <span className="w-8 h-8 md:w-9 md:h-9 rounded-lg bg-[#D62B2B] flex items-center justify-center text-white text-xs md:text-sm font-black flex-shrink-0">
+                              {idx + 1}
+                            </span>
+                            <span className="text-sm md:text-base">{accordion.title}</span>
+                          </span>
+                          <div className="flex-shrink-0">
+                            {isOpen ? (
+                              <Minus className="w-5 h-5 text-[#D62B2B]" />
+                            ) : (
+                              <Plus className="w-5 h-5 text-gray-600" />
+                            )}
                           </div>
-                        );
-                      })}
-                    </div>
-                  )}
+                        </button>
+                        <div className={`transition-all duration-300 ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
+                          <div className="p-4 md:p-6 bg-gray-50 border-t-2 border-gray-200">
+                            <p className="text-gray-700 text-sm md:text-base leading-relaxed">{accordion.content}</p>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             )}
@@ -365,14 +330,12 @@ const TabGallery = () => {
               <div className="mt-8 md:mt-12 text-center">
                 <a
                   href={tabs[activeTab].content.readMoreLink}
-                  className="group inline-flex items-center gap-3 md:gap-4 bg-gradient-to-r from-[#CD091B] via-[#CD091B]/90 to-[#CD091B] text-white px-8 md:px-12 py-4 md:py-5 rounded-full font-bold text-base md:text-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-110 relative overflow-hidden"
+                  className="inline-flex items-center gap-3 md:gap-4 bg-[#D62B2B] text-white px-8 md:px-12 py-4 md:py-5 rounded-full font-bold text-base md:text-lg hover:bg-[#0F152F] shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                 >
-                  <span className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></span>
-                  <span className="relative z-10">Explore More</span>
-                  <div className="relative z-10 w-5 h-5 md:w-6 md:h-6 group-hover:rotate-45 transition-transform duration-300">
-                    <div className="w-3 h-0.5 bg-white transform rotate-45"></div>
-                    <div className="w-0.5 h-3 bg-white mt-1.5 ml-1.5"></div>
-                  </div>
+                  <span>Explore More</span>
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
                 </a>
               </div>
             )}

@@ -30,7 +30,7 @@ export default function TypeTesting() {
                   <div className="flex-shrink-0 mt-1">
                     <div className="w-1 h-1 bg-[#101631] rounded-full group-hover:scale-150 transition-transform"></div>
                   </div>
-                  <span className="text-gray-700 text-xs leading-snug group-hover:text-gray-900 transition-colors">{point}</span>
+                  <span className="text-gray-700 key-feature-list leading-snug group-hover:text-gray-900 transition-colors">{point}</span>
                 </div>
               ))}
             </div>

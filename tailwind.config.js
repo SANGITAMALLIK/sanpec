@@ -23,6 +23,10 @@ module.exports = {
     },
     
     extend: {
+      fontFamily: {
+        sans: ['Open Sans', 'Arial', 'sans-serif'],
+      },
+      
       maxWidth: {
         '7_5xl': '90rem', // 1440px
       },

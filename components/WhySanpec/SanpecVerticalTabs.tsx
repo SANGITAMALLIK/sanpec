@@ -1,5 +1,6 @@
 'use client';
 import React, { useState } from 'react';
+import { ChevronDown } from 'lucide-react';
 
 const VerticalTabs = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -11,7 +12,53 @@ const VerticalTabs = () => {
       content: {
         description: "As a leading transmission and distribution & engineering company, SANPEC is committed to engineering excellence, innovation, and customer-centric solutions. To maintain its position as an industry leader, SANPEC integrates cutting-edge structural analysis, advanced materials, and digital tools while fostering strong industry partnerships and driven innovation practices.",
         secondParagraph: "The table below presents SANPEC's strategic approaches/examples, structured into three key functional areas: Leadership, Operations, and Delivery. These functional areas ensure SANPEC remains at the forefront of engineering excellence, client engagement, and innovative practices, delivering value-driven, high-performance solutions for grid infrastructure in the United States.",
-        image: "https://sanpec-excellence.com/wp-content/uploads/2025/06/Untitled-design-12-1024x486.png"
+        tableData: [
+          {
+            pillar: "Leadership",
+            effectiveApproaches: [
+              "Pioneering advanced structural analysis for steel poles and lattice towers, ensuring robust and resilient designs.",
+              "Setting industry benchmarks through the standard setting and publication of technical papers on advances in transmission engineering.",
+              "Utilizing state-of-the-art tools for structural analysis, enhancing precision in design and detailing."
+            ],
+            clientEngagement: [
+              "Cultivating partnerships with utilities, EPC contractors, and government agencies to deliver tailored transmission solutions.",
+              "Offering comprehensive services from design and testing to construction support, ensuring seamless project execution.",
+              "Providing client-centric solutions by customizing designs to meet specific project requirements and local social and environmental conditions."
+            ],
+            innovativePractices: [
+              "Investing in R&D to develop sustainable engineering solutions, such as eco-friendly materials and designs.",
+              "Implementing advanced technologies like full-scale structural testing and electrical testing to validate design integrity.",
+              "Adopting lean manufacturing principles to optimize resource utilization and reduce project timelines."
+            ]
+          },
+          {
+            pillar: "Operations",
+            effectiveApproaches: [
+              "Ensuring quality through rigorous site audits and source inspections, adhering to international standards."
+            ],
+            clientEngagement: [
+              "Maintaining open communication channels to address client feedback promptly and effectively."
+            ],
+            innovativePractices: [
+              "Leveraging digital technologies for real-time monitoring and management of project milestones."
+            ]
+          },
+          {
+            pillar: "Delivery",
+            effectiveApproaches: [
+              "Ensuring on-time delivery through meticulous project scheduling and logistics planning.",
+              "Providing end-to-end support, from material sourcing to construction oversight, guaranteeing project success."
+            ],
+            clientEngagement: [
+              "Offering post-project support to assist clients with maintenance and operational challenges.",
+              "Building long-term relationships by delivering consistent quality and reliability."
+            ],
+            innovativePractices: [
+              "Continuously updating engineering practices to incorporate the latest industry advancements and regulatory requirements.",
+              "Promoting a culture of interdisciplinary innovation to stay ahead in the dynamic field of transmission engineering."
+            ]
+          }
+        ]
       }
     },
     {
@@ -94,47 +141,90 @@ const VerticalTabs = () => {
       {/* Grid Pattern */}
       <div className="absolute inset-0 opacity-[0.03]">
         <div className="absolute inset-0" style={{
-          backgroundImage: 'repeating-linear-gradient(0deg, #101631 0px, #101631 1px, transparent 1px, transparent 20px), repeating-linear-gradient(90deg, #101631 0px, #101631 1px, transparent 1px, transparent 20px)',
+          backgroundImage: 'repeating-linear-gradient(0deg, #ffffff 0px, #ffffff 1px, transparent 1px, transparent 20px), repeating-linear-gradient(90deg, #ffffff 0px, #ffffff 1px, transparent 1px, transparent 20px)',
           backgroundSize: '20px 20px'
         }}></div>
       </div>
 
       {/* Main Content */}
-      <div className="w-full px-3 md:px-6 lg:px-8 py-6 md:py-10 relative z-10">
+      <div className="w-full max-w-7_5xl px-3 md:px-6 lg:px-8 py-6 md:py-10 relative z-10 mx-auto">
         <div className="flex flex-col lg:flex-row gap-4 md:gap-6">
           
-          {/* Vertical Tabs */}
-          <div className="w-full lg:w-80 flex flex-row lg:flex-col gap-3 overflow-x-auto lg:overflow-x-visible scrollbar-hide">
-            {tabs.map((tab, index) => {
-              const isActive = activeTab === index;
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(index)}
-                  className={`flex-shrink-0 lg:flex-shrink w-full text-left p-4 md:p-5 transition-all duration-300 border-2 ${
-                    isActive
-                      ? 'bg-white border-[#CD091B] shadow-lg'
-                      : 'bg-white border-gray-200 hover:border-[#101631]'
-                  }`}
-                >
-                  <div className="flex items-start gap-3">
-                    <div className={`w-10 h-10 flex items-center justify-center flex-shrink-0 ${
-                      isActive ? 'bg-[#CD091B]' : 'bg-[#101631]'
-                    }`}>
-                      <span className="text-white font-bold text-lg">{index + 1}</span>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className={`font-bold text-sm md:text-base transition-colors ${
-                        isActive ? 'text-[#CD091B]' : 'text-gray-700'
+          {/* Sidebar - Tower Design with Tabs */}
+          <aside className="w-full lg:w-96 bg-gradient-to-b from-white to-gray-50 border-2 border-gray-200 shadow-lg">
+            <nav className="py-8 px-6 relative">
+              {/* Central Tower Pole */}
+              <div className="absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-[#CD091B] via-gray-400 to-gray-300"></div>
+              
+              {tabs.map((tab, idx) => {
+                const isActive = activeTab === idx;
+                
+                return (
+                  <div key={tab.id} className="mb-6 relative">
+                    {/* Connection Point on Tower (Insulator) */}
+                    <div className={`absolute left-2 top-5 w-3 h-3 rounded-full shadow-md z-20 transition-all duration-300 ${
+                      isActive 
+                        ? 'bg-[#CD091B] border-2 border-red-800 ring-4 ring-red-200' 
+                        : 'bg-white border-2 border-gray-400'
+                    }`}></div>
+                    
+                    {/* Horizontal Beam from Tower */}
+                    <div className={`absolute left-5 top-6 w-6 h-0.5 transition-all duration-300 ${
+                      isActive ? 'bg-[#CD091B]' : 'bg-gray-400'
+                    }`}></div>
+
+                    {/* Tab Item (Transformer Box) */}
+                    <div 
+                      onClick={() => setActiveTab(idx)}
+                      className={`
+                        relative ml-11 group flex items-center gap-3 px-5 py-4 cursor-pointer
+                        transition-all duration-300 ease-out border-2
+                        ${isActive
+                          ? 'bg-white border-[#CD091B] text-gray-900 shadow-xl scale-105' 
+                          : 'bg-white border-gray-300 text-gray-700 hover:border-gray-400 hover:shadow-lg'
+                        }
+                      `}
+                    >
+                      {/* Number Badge */}
+                      <div className={`w-10 h-10 flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
+                        isActive ? 'bg-[#CD091B]' : 'bg-[#101631]'
                       }`}>
-                        {tab.title}
-                      </h3>
+                        <span className="text-white font-bold text-lg">{idx + 1}</span>
+                      </div>
+
+                      <div className="flex-1 min-w-0">
+                        <h3 className={`font-bold text-sm transition-colors ${
+                          isActive ? 'text-[#CD091B]' : 'text-gray-700'
+                        }`}>
+                          {tab.title}
+                        </h3>
+                      </div>
+                      
+                      {/* Active Power Indicator */}
+                      {isActive && (
+                        <div className="absolute -right-1 top-1/2 -translate-y-1/2">
+                          <div className="w-2 h-2 bg-[#CD091B] rounded-full animate-pulse"></div>
+                          <div className="absolute inset-0 w-2 h-2 bg-red-400 rounded-full animate-ping"></div>
+                        </div>
+                      )}
+
+                      {/* Power Line to Content */}
+                      {isActive && (
+                        <div className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center">
+                          <div className="w-8 h-px bg-gradient-to-r from-[#CD091B] to-gray-300"></div>
+                          <div className="w-1.5 h-1.5 rotate-45 bg-[#CD091B] -ml-0.5"></div>
+                        </div>
+                      )}
                     </div>
                   </div>
-                </button>
-              );
-            })}
-          </div>
+                );
+              })}
+
+              {/* Tower Base Foundation */}
+              <div className="absolute left-4 bottom-8 w-9 h-12 bg-gradient-to-b from-gray-400 to-gray-500 opacity-30" 
+                   style={{clipPath: 'polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%)'}}></div>
+            </nav>
+          </aside>
 
           {/* Content Area */}
           <div className="flex-1 min-w-0">
@@ -151,12 +241,63 @@ const VerticalTabs = () => {
                     <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify">
                       {tabs[activeTab].content.secondParagraph}
                     </p>
-                    <div className="mt-6 border-2 border-[#101631] h-[400px] md:h-[500px] lg:h-[550px] overflow-hidden">
-                      <img 
-                        src={tabs[activeTab].content.image} 
-                        alt="Strategic Positioning" 
-                        className="w-full h-full object-cover"
-                      />
+                    
+                    {/* Strategic Table */}
+                    <div className="mt-6 overflow-x-auto">
+                      <table className="w-full border-2 border-[#101631]">
+                        <thead>
+                          <tr>
+                            <th className="bg-[#101631] text-white p-4 text-left font-bold border-2 border-white text-sm md:text-base w-[15%]">
+                              Strategic Pillars
+                            </th>
+                            <th className="bg-gray-400 text-black p-4 text-center font-bold border-2 border-white text-sm md:text-base w-[28.33%]">
+                              Effective Approaches
+                            </th>
+                            <th className="bg-gray-300 text-black p-4 text-center font-bold border-2 border-white text-sm md:text-base w-[28.33%]">
+                              Client Engagement
+                            </th>
+                            <th className="bg-red-400 text-white p-4 text-center font-bold border-2 border-white text-sm md:text-base w-[28.33%]">
+                              Innovative Practices
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {tabs[activeTab].content.tableData.map((row, idx) => (
+                            <tr key={idx} className="border-2 border-gray-300">
+                              <td className="bg-gray-100 p-4 font-bold text-[#101631] border-2 border-gray-300 align-top text-sm md:text-base">
+                                {row.pillar}
+                              </td>
+                              <td className="bg-gray-200 p-4 border-2 border-gray-300 align-top">
+                                <ul className="space-y-2">
+                                  {row.effectiveApproaches.map((item, i) => (
+                                    <li key={i} className="text-gray-800 text-xs md:text-sm leading-relaxed text-justify">
+                                      - {item}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </td>
+                              <td className="bg-white p-4 border-2 border-gray-300 align-top">
+                                <ul className="space-y-2">
+                                  {row.clientEngagement.map((item, i) => (
+                                    <li key={i} className="text-gray-800 text-xs md:text-sm leading-relaxed text-justify">
+                                      - {item}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </td>
+                              <td className="bg-red-50 p-4 border-2 border-gray-300 align-top">
+                                <ul className="space-y-2">
+                                  {row.innovativePractices.map((item, i) => (
+                                    <li key={i} className="text-gray-800 text-xs md:text-sm leading-relaxed text-justify">
+                                      - {item}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                 )}

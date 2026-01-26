@@ -124,8 +124,9 @@ const EngineeringPublications = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 relative overflow-hidden">
+    <div className="min-h-screen bg-white relative overflow-hidden">
       
+      {/* Background Grid */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
           backgroundImage: `linear-gradient(90deg, transparent 95%, #D62B2B 100%),
@@ -134,24 +135,11 @@ const EngineeringPublications = () => {
           backgroundPosition: '0 0, 0 0'
         }}></div>
       </div>
-      
-      <div className="absolute left-0 top-0 bottom-0 w-20">
-        <div className="absolute top-1/4 left-4 w-12 h-1 bg-gradient-to-r from-[#D62B2B] to-transparent"></div>
-        <div className="absolute top-1/4 left-0 w-4 h-12 bg-[#D62B2B]"></div>
-        <div className="absolute bottom-1/3 left-4 w-12 h-1 bg-gradient-to-r from-[#0F152F] to-transparent"></div>
-        <div className="absolute bottom-1/3 left-0 w-4 h-12 bg-[#0F152F]"></div>
-      </div>
-      
-      <div className="absolute right-0 top-0 bottom-0 w-20">
-        <div className="absolute top-1/3 right-4 w-12 h-1 bg-gradient-to-l from-[#D62B2B] to-transparent"></div>
-        <div className="absolute top-1/3 right-0 w-4 h-12 bg-[#D62B2B]"></div>
-        <div className="absolute bottom-1/4 right-4 w-12 h-1 bg-gradient-to-l from-[#0F152F] to-transparent"></div>
-        <div className="absolute bottom-1/4 right-0 w-4 h-12 bg-[#0F152F]"></div>
-      </div>
 
       <div className="relative px-16 lg:px-20 py-12 max-w-full">
+        {/* Title Badge */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center gap-2 px-6 py-2 bg-gradient-to-r from-[#0F152F]/5 to-[#D62B2B]/5 rounded-full border border-[#0F152F]/10">
+          <div className="inline-flex items-center justify-center gap-2 px-6 py-2 bg-gray-50 rounded-full border border-gray-200">
             <div className="w-2 h-2 bg-[#D62B2B] rounded-full animate-pulse"></div>
             <span className="text-sm font-bold text-[#0F152F] uppercase tracking-wider">
               Engineering Research Publications
@@ -161,30 +149,33 @@ const EngineeringPublications = () => {
         </div>
 
         <div className="relative">
+          {/* Left Arrow */}
           <button 
             onClick={() => scroll('left')}
             disabled={!canScrollLeft}
             className={`absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-8 z-20 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg border border-gray-300 transition-all duration-300 hover:shadow-xl hover:scale-110 group ${!canScrollLeft ? 'opacity-30 cursor-not-allowed' : 'hover:border-[#D62B2B]'}`}
           >
-            <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${canScrollLeft ? 'group-hover:bg-gradient-to-r from-[#0F152F] to-[#D62B2B]' : 'bg-gray-200'}`}>
+            <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${canScrollLeft ? 'group-hover:bg-[#D62B2B]' : 'bg-gray-200'}`}>
               <svg className={`w-5 h-5 ${canScrollLeft ? 'text-gray-700 group-hover:text-white' : 'text-gray-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M15 19l-7-7 7-7" />
               </svg>
             </div>
           </button>
           
+          {/* Right Arrow */}
           <button 
             onClick={() => scroll('right')}
             disabled={!canScrollRight}
             className={`absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-8 z-20 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg border border-gray-300 transition-all duration-300 hover:shadow-xl hover:scale-110 group ${!canScrollRight ? 'opacity-30 cursor-not-allowed' : 'hover:border-[#D62B2B]'}`}
           >
-            <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${canScrollRight ? 'group-hover:bg-gradient-to-r from-[#0F152F] to-[#D62B2B]' : 'bg-gray-200'}`}>
+            <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${canScrollRight ? 'group-hover:bg-[#D62B2B]' : 'bg-gray-200'}`}>
               <svg className={`w-5 h-5 ${canScrollRight ? 'text-gray-700 group-hover:text-white' : 'text-gray-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M9 5l7 7-7 7" />
               </svg>
             </div>
           </button>
 
+          {/* Cards Container */}
           <div 
             ref={scrollContainerRef}
             className="flex overflow-x-auto pb-10 gap-8 scrollbar-hide scroll-smooth px-4"
@@ -196,6 +187,7 @@ const EngineeringPublications = () => {
               >
                 <div className="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-500 hover:-translate-y-1 group h-full">
                   
+                  {/* Image */}
                   <div className="relative h-64 bg-gray-50 flex items-center justify-center p-6">
                     <img
                       src={pub.image}
@@ -204,9 +196,10 @@ const EngineeringPublications = () => {
                     />
                   </div>
                   
+                  {/* Content */}
                   <div className="p-6">
                     <div className="mb-4">
-                      <span className="inline-block px-3 py-1 bg-[#0F152F]/5 text-[#0F152F] text-xs font-bold rounded border border-[#0F152F]/10">
+                      <span className="inline-block px-3 py-1 bg-gray-50 text-[#0F152F] text-xs font-bold rounded border border-gray-200">
                         {pub.category.split(' ')[0]}
                       </span>
                     </div>
@@ -216,41 +209,36 @@ const EngineeringPublications = () => {
                     </h3>
                     
                     <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
-                      {/* <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-[#0F152F] to-[#D62B2B] rounded-full flex items-center justify-center">
-                        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                        </svg>
-                      </div> */}
                       <p className="text-sm text-gray-700 font-medium flex-1">
                         {pub.authors}
                       </p>
                     </div>
                   </div>
 
-                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#D62B2B] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  {/* Bottom Border */}
+                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#D62B2B] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
               </div>
             ))}
           </div>
         </div>
         
+        {/* Dots Navigation */}
         <div className="flex justify-center items-center gap-2 mt-8">
           {Array.from({ length: Math.ceil(publications.length / itemsPerView) }).map((_, index) => (
             <button
               key={index}
               onClick={() => scrollToIndex(index)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+              className={`h-2 rounded-full transition-all duration-300 ${
                 index === currentIndex 
-                  ? 'w-8 bg-gradient-to-r from-[#0F152F] to-[#D62B2B]' 
-                  : 'bg-gray-300 hover:bg-gray-400'
+                  ? 'w-8 bg-[#D62B2B]' 
+                  : 'w-2 bg-gray-300 hover:bg-gray-400'
               }`}
             ></button>
           ))}
         </div>
-     
       </div>
 
-    
       <style jsx>{`
         .scrollbar-hide {
           -ms-overflow-style: none;

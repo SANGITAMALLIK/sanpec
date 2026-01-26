@@ -269,11 +269,11 @@ export default function InteractivePieWheel() {
 
       {!isMobile && (
         <div className="absolute inset-0 z-0 opacity-10 pointer-events-none">
-          <svg className="absolute top-10 left-20 w-40 h-40 animate-pulse" viewBox="0 0 100 100">
+          {/* <svg className="absolute top-10 left-20 w-40 h-40 animate-pulse" viewBox="0 0 100 100">
             <path d="M50 10 L55 40 L45 40 Z" fill={primaryColor} />
             <rect x="48" y="40" width="4" height="50" fill={primaryColor} />
             <path d="M30 90 L70 90 L65 80 L35 80 Z" fill={primaryColor} />
-          </svg>
+          </svg> */}
         </div>
       )}
 
@@ -369,9 +369,8 @@ export default function InteractivePieWheel() {
                   <div className="mb-4 lg:mb-6 pb-3 lg:pb-4 border-b relative" style={{ borderColor: `${primaryColor}20` }}>
                     <h2 className={`${isMobile ? 'text-xl' : 'text-2xl md:text-3xl'} font-bold relative`} style={{ color: primaryColor }}>
                       {currentSection.contentTitle}
-                      <div className="absolute -left-3 top-0 bottom-0 w-1 rounded-full" style={{ backgroundColor: secondaryColor }}></div>
                     </h2>
-                    <div className={`${isMobile ? 'w-16 h-1' : 'w-24 h-1.5'} rounded-full mt-2`} style={{ backgroundColor: secondaryColor }}></div>
+                    {/* <div className={`${isMobile ? 'w-16 h-1' : 'w-24 h-1.5'} rounded-full mt-2`} style={{ backgroundColor: secondaryColor }}></div> */}
                   </div>
                   
                   <div className="space-y-4 mb-6 pr-2">

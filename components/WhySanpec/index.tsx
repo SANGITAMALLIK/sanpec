@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import React, { useState } from 'react';
 import { ExternalLink, Zap, Award, TrendingUp, ChevronRight, Home } from 'lucide-react';
 
@@ -119,24 +120,22 @@ export default function StrategicInnovation() {
               </div>
 
               <div className="grid grid-cols-3 gap-4">
-                <div className="bg-[#101631] p-4 text-white text-center shadow-lg transform hover:scale-105 transition-transform">
-                  <div className="text-3xl font-bold">17+</div>
-                  <div className="text-xs uppercase tracking-wide mt-1">Years</div>
-                </div>
-                <div className="bg-[#CD091B] p-4 text-white text-center shadow-lg transform hover:scale-105 transition-transform">
-                  <div className="text-3xl font-bold">100%</div>
-                  <div className="text-xs uppercase tracking-wide mt-1">Quality</div>
-                </div>
+               <button className="group flex items-center gap-3 bg-[#CD091B] hover:opacity-90 text-white px-8 py-4 font-bold text-lg shadow-2xl transition-all transform hover:scale-105">
+                <span><Link href="/system-thinking-innovation">Read More</Link></span>
+                <ChevronRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+              </button>
+               
                 <div className="bg-gray-800 p-4 text-white text-center shadow-lg transform hover:scale-105 transition-transform">
                   <div className="text-3xl font-bold">∞</div>
                   <div className="text-xs uppercase tracking-wide mt-1">Innovation</div>
                 </div>
+                 <div className="bg-[#CD091B] p-4 text-white text-center shadow-lg transform hover:scale-105 transition-transform">
+                  <div className="text-3xl font-bold">100%</div>
+                  <div className="text-xs uppercase tracking-wide mt-1">Quality</div>
+                </div>
               </div>
 
-              <button className="group flex items-center gap-3 bg-[#CD091B] hover:opacity-90 text-white px-8 py-4 font-bold text-lg shadow-2xl transition-all transform hover:scale-105">
-                <span>Read More</span>
-                <ChevronRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
-              </button>
+              
             </div>
 
             <div className="relative">

@@ -6,17 +6,7 @@ export default function MaterialProjectManagement() {
 
   const sections = [
     {
-      title: 'Material and Project Management',
-      features: [
-        'Develop detailed project schedule to meet the construction demands',
-        'Develop detailed project schedule to meet the construction demands',
-        'Assist in negotiating the best pricing and delivery schedule from vendors',
-        'Risk Mitigation planning',
-        'Keep Track of all milestones and critical delivery items'
-      ],
-      images: ['https://sanpec-excellence.com/wp-content/uploads/2025/02/14-1024x512.jpg']
-    },
-    {
+      
       title: 'Material & Yard Management',
       features: [
         'Warehouse & Laydown Yard Sourcing & Management',
@@ -27,27 +17,6 @@ export default function MaterialProjectManagement() {
       ],
       images: ['https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture27-2.png']
     },
-    {
-      title: 'Inventory Reporting and Material Documentation',
-      features: [
-        'Provides Documentation of Material Delivery or Pick-Up',
-        'Dashboards Provide Real-Time Visibility of Material on Multiple Yards or in Delivery Phase',
-        'Identify Gaps in Material Availability or Quality Before Project Impact',
-        'Manage Care & Custody and Warranty Process',
-        'Reconcile Material Used with As-Builts & Manage Scrap & Un-used Material'
-      ],
-      images: [
-        'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture21.jpg',
-        'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture20-2.png',
-        'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture27-2.png',
-        'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture26-2.jpg',
-        'https://sanpec-excellence.com/wp-content/uploads/2025/02/24.jpg',
-        'https://sanpec-excellence.com/wp-content/uploads/2025/02/21.jpg',
-        'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture14-2.png',
-        'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture18-2.png',
-        'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture19-2.png'
-      ]
-    }
   ];
 
   const nextImage = () => {
