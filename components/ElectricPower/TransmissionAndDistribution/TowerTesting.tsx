@@ -21,9 +21,8 @@ export default function TowerTesting() {
         'Technical Specifications Review'
       ],
       images: [
-        'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture21.jpg',
-        'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture20-2.png',
-        'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture27-2.png'
+        '/images/electric_power/8.jpg',
+       
       ]
     },
     {
@@ -35,8 +34,7 @@ export default function TowerTesting() {
         'Reduce overall project risks and costs'
       ],
       images: [
-        'https://sanpec-excellence.com/wp-content/uploads/2025/01/home2.png',
-        'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture31.jpg'
+        '/images/electric_power/4.png',
       ]
     },
     {
@@ -50,8 +48,7 @@ export default function TowerTesting() {
         'Safe and healthy work environment'
       ],
       images: [
-        'https://sanpec-excellence.com/wp-content/uploads/2025/02/16.jpg',
-        'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture14-2.png'
+       '/images/electric_power/16.jpg',
       ]
     }
   ];

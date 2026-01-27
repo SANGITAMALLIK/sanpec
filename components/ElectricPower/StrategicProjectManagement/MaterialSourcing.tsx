@@ -16,7 +16,7 @@ export default function MaterialProjectManagement() {
       <div className="bg-white rounded-xl p-4 lg:p-6 border border-gray-300 shadow-sm">
         <div className="space-y-6">
           <div className="bg-gradient-to-r from-gray-50 to-white p-6 rounded-lg border-l-4 border-[#CD091B]">
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">Material & Yard Management</h3>
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">Material and Project Management</h3>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-5">
@@ -30,11 +30,10 @@ export default function MaterialProjectManagement() {
               </div>
               <div className="space-y-3">
                 {[
-                  'Warehouse & Laydown Yard Sourcing & Management',
-                  'Real-Time Inventory Management & Reporting',
-                  'QA/QC & BOM Reconciliation',
-                  'Storing, Staging, Kitting & Delivery of Material to Construction Site',
-                  'As-Built Documentation'
+                  'Develop detailed project schedule to meet the construction demands',
+                  'Assist  in negotiating the best pricing and delivery schedule from vendors',
+                  'Risk Mitigation planning',
+                  'Keep Track of all milestones and critical delivery items'
                 ].map((feature, idx) => (
                   <div key={idx} className="flex items-start gap-3 group">
                     <div className="flex-shrink-0 mt-1.5">
@@ -53,7 +52,7 @@ export default function MaterialProjectManagement() {
             {/* Image */}
             <div className="overflow-hidden rounded-xl border-2 border-gray-200 hover:border-[#CD091B] transition-all duration-300 shadow-md hover:shadow-xl">
               <img 
-                src="https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture27-2.png"
+                src="/images/electric_power/8.jpg"
                 alt="Material & Yard Management"
                 className="w-full h-auto object-cover hover:scale-105 transition-transform duration-500" 
               />

@@ -5,9 +5,28 @@ export const menuData = {
   topMenuItems: [
     { id: 1, title: "About", path: "/about", newTab: false },
     { id: 2, title: "Engineering Excellence", path: "/engineering-excellence", newTab: false },
-    { id: 3, title: "Resources", path: "/contact", newTab: false },
-    { id: 4, title: "Contact", path: "/news", newTab: false },
-    
+    { 
+      id: 3, 
+      title: "RESOURCES", 
+      path: "https://news.sanpec-excellence.com/",
+      newTab: false,
+      hasDropdown: true,
+      submenu: [
+        {
+          id: 1,
+          title: "SUNZIA PROJECT",
+          path: "/sunzia-project",
+          newTab: false
+        },
+        {
+          id: 2,
+          title: "SUNZIA PROJECT GALLERY",
+          path: "/project-gallery",
+          newTab: false
+        }
+      ]
+    },
+    { id: 4, title: "Contact", path: "/contact", newTab: false },
   ],
 
   // Main navigation items
@@ -24,7 +43,7 @@ export const menuData = {
           {
             id: 'transmission',
             title: 'Transmission and Distribution',
-            image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=400&h=250&fit=crop',
+            image: '/images/sanpec_2026/15.jpeg',
             items: [
               {
                 title: 'Design and engineering',
@@ -58,7 +77,7 @@ export const menuData = {
           {
             id: 'manufacturing',
             title: 'Manufacturing and Operations',
-            image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=400&h=250&fit=crop',
+            image: '/images/sanpec_2026/23.jpeg',
             items: [
               {
                 title: 'Failure/root cause analysis',
@@ -86,7 +105,7 @@ export const menuData = {
           {
             id: 'strategic',
             title: 'Strategic Project Management',
-            image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=250&fit=crop',
+            image: '/images/sanpec_2026/1.jpeg',
             items: [
               {
                 title: 'Material Sourcing',
@@ -112,7 +131,7 @@ export const menuData = {
           {
             id: 'constructability',
             title: 'Constructability Review',
-            image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&h=250&fit=crop',
+            image: '/images/sanpec_2026/47.jpeg',
             items: [
               {
                 title: 'Logistic and Construction Support',
@@ -125,7 +144,7 @@ export const menuData = {
           {
             id: 'resiliency',
             title: 'Resiliency Planning',
-            image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=400&h=250&fit=crop',
+            image: '/images/sanpec_2026/22.jpeg',
             items: [
               {
                 title: 'Grid Hardening',
@@ -154,22 +173,7 @@ export const menuData = {
     { id: 3, title: "Research and Innovation", path: "/research-and-innovation", newTab: false },
     { id: 4, title: "Projects", path: "https://news.sanpec-excellence.com/td-projects/", newTab: true },
     { id: 5, title: "Why SANPEC", path: "/why-sanpec", newTab: false },
-    { id: 6, title: "Resilience", path: "/resilience-and-sustainabilty", newTab: false },
-    { 
-      id: 7, 
-      title: "SUNZIA PROJECT", 
-      path: "/sunzia-project",
-      newTab: false,
-      hasDropdown: true,
-      submenu: [
-        {
-          id: 1,
-          title: "SUNZIA PROJECT GALLERY",
-          path: "/project-gallery",
-          newTab: false
-        }
-      ]
-    },
+    { id: 6, title: "Resilience and Sustainability", path: "/resilience-and-sustainabilty", newTab: false },
     { id: 8, title: "Blog", path: "/blog", newTab: false }
   ]
 };

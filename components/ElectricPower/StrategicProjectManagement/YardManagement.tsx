@@ -15,7 +15,7 @@ export default function MaterialProjectManagement() {
         'Storing, Staging, Kitting & Delivery of Material to Construction Site',
         'As-Built Documentation'
       ],
-      images: ['https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture27-2.png']
+      images: ['/images/electric_power/10.png']
     },
   ];
 

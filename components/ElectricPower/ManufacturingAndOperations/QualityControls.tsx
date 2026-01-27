@@ -24,7 +24,7 @@ const TabsComponent = () => {
         "Prototype and Proof of Fit Testing",
         "Technical Specifications Review"
       ],
-      image: 'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture1.png'
+      image: '/images/electric_power/8.webp'
     },
     {
       title: 'Source Inspections at manufacturing facilities',
@@ -35,8 +35,8 @@ const TabsComponent = () => {
         "Minimize liability for product failures and construction delays"
       ],
       images: [
-        'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture18-2.png',
-        'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture20-2.png'
+        '/images/electric_power/9.png',
+      
       ]
     },
     {
@@ -50,8 +50,7 @@ const TabsComponent = () => {
         "Safe and healthy work environment"
       ],
       images: [
-        'https://sanpec-excellence.com/wp-content/uploads/2025/02/16.jpg',
-        'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture24.jpg'
+        '/images/electric_power/16.jpg',
       ]
     }
   ];
@@ -135,7 +134,7 @@ const TabsComponent = () => {
                 </div>
               )}
               {content.images && (
-                <div className="grid grid-cols-2 gap-3">
+                <div className="gap-3">
                   {content.images.map((img, idx) => (
                     <div key={idx} className="overflow-hidden rounded-lg border-2 border-gray-200 hover:border-[#CD091B] transition-all duration-300 shadow-sm hover:shadow-md group">
                       <Image 

@@ -12,8 +12,7 @@ export default function QualityControls() {
   ];
 
   const images = [
-    'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture2-2.png',
-    'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture22.jpg'
+    '/images/electric_power/7.png',
   ];
 
   return (
@@ -68,28 +67,7 @@ export default function QualityControls() {
                 />
               </div>
 
-              <div className="overflow-hidden rounded-xl border-2 border-gray-200 hover:border-[#CD091B] transition-all duration-300 shadow-md hover:shadow-xl group">
-                <img 
-                  src={images[1]} 
-                  alt="Quality Control Inspection"
-                  className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom CTA Section */}
-          <div className="mt-8 pt-6 border-t-2 border-gray-100">
-            <div className="bg-gradient-to-r from-[#101631] to-gray-800 rounded-xl p-6 text-white shadow-lg">
-              <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-                <div>
-                  <h4 className="text-xl font-bold mb-2">Need Quality Assurance Services?</h4>
-                  <p className="text-gray-300 text-sm">Contact us for comprehensive inspection and audit solutions</p>
-                </div>
-                <button className="px-8 py-3 bg-[#CD091B] hover:bg-white hover:text-[#CD091B] text-white font-semibold rounded-lg transition-all duration-300 whitespace-nowrap border-2 border-[#CD091B] shadow-md hover:shadow-xl">
-                  Get In Touch
-                </button>
-              </div>
+              
             </div>
           </div>
         </div>

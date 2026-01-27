@@ -34,15 +34,12 @@ export default function ElectricalTesting() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="gap-3">
             {[
-              'https://sanpec-excellence.com/wp-content/uploads/2025/01/home6.png',
-              'https://sanpec-excellence.com/wp-content/uploads/2025/01/inspection.png',
-              'https://sanpec-excellence.com/wp-content/uploads/2025/01/services.png',
-              'https://sanpec-excellence.com/wp-content/uploads/2025/01/home2.png'
+              '/images/electric_power/3.png'
             ].map((img, idx) => (
               <div key={idx} className="overflow-hidden rounded-lg border-2 border-gray-200 hover:border-[#CD091B] transition-all duration-300 shadow-sm hover:shadow-md group">
-                <img src={img} alt={`Electrical Testing ${idx + 1}`} className="w-full h-40 object-cover group-hover:scale-110 transition-transform duration-500" />
+                <img src={img} alt={`Electrical Testing ${idx + 1}`} className="w-full object-cover group-hover:scale-110 transition-transform duration-500" />
               </div>
             ))}
           </div>

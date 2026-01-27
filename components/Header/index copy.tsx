@@ -195,7 +195,7 @@ export default function SanpecHeader() {
                               </button>
                               
                               {/* SunZia Simple Dropdown */}
-                              {openDropdown === 'sunzia' && item.submenu && (
+                              {/* {openDropdown === 'sunzia' && item.submenu && (
                                 <div 
                                   className="absolute top-full left-0 bg-white shadow-xl z-50 min-w-[200px] rounded-b-lg overflow-hidden"
                                   onMouseEnter={() => setOpenDropdown('sunzia')}
@@ -213,7 +213,7 @@ export default function SanpecHeader() {
                                     </Link>
                                   ))}
                                 </div>
-                              )}
+                              )} */}
                             </div>
                           )
                         ) : (
@@ -351,14 +351,14 @@ export default function SanpecHeader() {
                     // SunZia Project Mobile Menu - Simple Dropdown
                     <div key={idx} className="border-b border-white/10 last:border-0">
                       <button 
-                        onClick={() => setOpenDropdown(openDropdown === 'sunzia' ? null : 'sunzia')}
+                        // onClick={() => setOpenDropdown(openDropdown === 'sunzia' ? null : 'sunzia')}
                         className="flex items-center justify-between w-full px-6 py-4 text-white hover:bg-white/10 transition-all"
                       >
                         <span className="font-medium">{item.title}</span>
                         <ChevronDown size={20} className={`transition-transform duration-300 ${openDropdown === 'sunzia' ? 'rotate-180' : ''}`} />
                       </button>
 
-                      {openDropdown === 'sunzia' && item.submenu && (
+                      {/* {openDropdown === 'sunzia' && item.submenu && (
                         <div className="bg-white/5">
                           {item.submenu.map((subItem, subIdx) => (
                             <Link
@@ -371,7 +371,7 @@ export default function SanpecHeader() {
                             </Link>
                           ))}
                         </div>
-                      )}
+                      )} */}
                     </div>
                   )
                 ) : (
@@ -418,114 +418,126 @@ export default function SanpecHeader() {
         )}
 
         {/* Electric Power Mega Menu Dropdown - Desktop Only */}
-        {openDropdown === 'electric' && (
-          <div 
-            className="hidden lg:block absolute top-full left-0 w-full shadow-2xl z-50"
-            style={{
-              background: 'linear-gradient(135deg, #0D132D 0%, #1a1f3d 25%, #0D132D 50%, #1a1f3d 75%, #0D132D 100%)',
-              position: 'relative'
-            }}
-            onMouseEnter={() => setOpenDropdown('electric')}
-            onMouseLeave={() => setOpenDropdown(null)}
-          >
-            <div style={{
-              position: 'absolute',
-              inset: 0,
-              backgroundImage: `
-                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)
-              `,
-              backgroundSize: '50px 50px',
-              pointerEvents: 'none',
-              zIndex: 1
-            }} />
-            
-            <div style={{
-              position: 'absolute',
-              top: '0',
-              left: '-10%',
-              width: '40%',
-              height: '100%',
-              background: 'radial-gradient(circle, rgba(205, 9, 27, 0.25) 0%, transparent 70%)',
-              filter: 'blur(80px)',
-              pointerEvents: 'none',
-              zIndex: 0
-            }} />
-            
-            <div style={{
-              position: 'absolute',
-              top: '0',
-              right: '-10%',
-              width: '40%',
-              height: '100%',
-              background: 'radial-gradient(circle, rgba(13, 19, 45, 0.5) 0%, transparent 70%)',
-              filter: 'blur(80px)',
-              pointerEvents: 'none',
-              zIndex: 0
-            }} />
-            
-            <div className="max-w-[1400px] mx-auto px-[50px] py-8" style={{ position: 'relative', zIndex: 2 }}>
-              <div className="flex gap-6">
-                <div className="w-[280px] flex-shrink-0">
-                  <img 
-                    src={currentTab?.image}
-                    alt="Engineering" 
-                    className="w-full h-[200px] object-cover rounded-lg mb-4 border border-white/10"
-                  />
-                  <div className="text-gray-300 italic text-sm leading-relaxed">
-                    <p className="font-semibold text-white mb-2">Engineering is the difference between Chaos and Excellence.</p>
-                    <p className="text-gray-400">If you are going to do it, do it right.</p>
-                  </div>
-                </div>
-
-                <div className="w-[200px] flex-shrink-0 space-y-2">
-                  {menuData.navigationItems.find(item => item.hasDropdown && item.megaMenu)?.megaMenu.tabs.map((tab) => (
-                    <button
-                      key={tab.id}
-                      onMouseEnter={() => setActiveTab(tab.id)}
-                      className={`w-full text-left px-4 py-3 rounded transition-all flex items-center justify-between group ${
-                        activeTab === tab.id 
-                          ? 'bg-[#CD091B] text-white font-semibold' 
-                          : 'bg-white/5 text-gray-200 hover:bg-white/10 border border-white/10'
-                      }`}
-                    >
-                      <span className="text-sm uppercase leading-tight">{tab.title}</span>
-                      <ChevronRight size={16} className={`transition-transform ${activeTab === tab.id ? 'translate-x-1' : ''}`} />
-                    </button>
-                  ))}
-                </div>
-                {/* sub menu */}
-                <div className="flex-1">
-                  <div className="grid grid-cols-2 gap-4">
-                    {currentTab?.items.map((item, idx) => (
-                      <Link
-                        key={idx}
-                        href={item.link}
-                        onClick={closeDropdown}
-                        className="group bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 hover:border-[#CD091B] hover:shadow-lg hover:shadow-[#CD091B]/20 transition-all overflow-hidden"
-                      >
-                        <img 
-                          src={item.image}
-                          alt={item.title}
-                          className="w-full h-32 object-cover"
-                        />
-                        <div className="p-4">
-                          <h4 className="font-bold text-white group-hover:text-[#CD091B] mb-2 transition-colors">
-                            {item.title}
-                          </h4>
-                          <p className="text-sm text-gray-300 line-clamp-2">
-                            {item.desc}
-                          </p>
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              {/* end sub menu */}
+       {/* Electric Power Mega Menu Dropdown - Desktop Only */}
+{openDropdown === 'electric' && (
+  <div 
+    className="hidden lg:block absolute top-full left-0 w-full shadow-2xl z-50"
+    onMouseEnter={() => setOpenDropdown('electric')}
+    onMouseLeave={() => setOpenDropdown(null)}
+  >
+    <div className="max-w-[1400px] mx-auto">
+      <div className="flex">
+        {/* Left Section - Full Image Background */}
+        <div className="w-[320px] flex-shrink-0 relative overflow-hidden group">
+          {/* Background Image */}
+          <img 
+            src={currentTab?.image}
+            alt={currentTab?.title} 
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          />
+          
+          {/* Gradient Overlay for better text visibility */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/80"></div>
+          
+          {/* Content */}
+          <div className="relative z-10 h-full flex flex-col justify-end p-8">
+            {/* Category Name with Underline */}
+            <div>
+              <h3 className="text-white text-2xl font-bold leading-tight drop-shadow-lg inline-block">
+                {currentTab?.title}
+              </h3>
+              {/* Awesome Underline */}
+              <div className="mt-2 h-1 w-20 bg-gradient-to-r from-white via-white/80 to-transparent rounded-full"></div>
             </div>
           </div>
-        )}
+        </div>
+
+        {/* Right Section - White Background with Tabs and Submenu */}
+        <div className="flex-1 bg-white px-[50px] py-8">
+          <div className="flex gap-6">
+            <div className="w-[200px] flex-shrink-0 space-y-2">
+              {menuData.navigationItems.find(item => item.hasDropdown && item.megaMenu)?.megaMenu.tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onMouseEnter={() => setActiveTab(tab.id)}
+                  className={`w-full text-left px-4 py-3 rounded-lg transition-all flex items-center justify-between group ${
+                    activeTab === tab.id 
+                      ? 'text-white font-semibold shadow-md' 
+                      : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200 hover:border-gray-300'
+                  }`}
+                  style={activeTab === tab.id ? {
+                    background: 'linear-gradient(135deg, #101631 0%, #1a2347 100%)'
+                  } : {}}
+                >
+                  <span className="text-sm uppercase leading-tight">{tab.title}</span>
+                  <ChevronRight size={16} className={`transition-transform ${activeTab === tab.id ? 'translate-x-1' : ''}`} />
+                </button>
+              ))}
+            </div>
+
+            {/* Submenu */}
+            <div className="flex-1">
+              <div className="grid grid-cols-2 gap-4">
+                {currentTab?.items.map((item, idx) => (
+                  <Link
+                    key={idx}
+                    href={item.link}
+                    onClick={closeDropdown}
+                    className="group bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-1 border border-gray-200"
+                    style={{
+                      borderColor: 'transparent'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = '#CD091B';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = 'transparent';
+                    }}
+                  >
+                    <div className="relative overflow-hidden">
+                      <img 
+                        src={item.image}
+                        alt={item.title}
+                        className="w-full h-40 object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                      {/* Gradient overlay on hover with custom color */}
+                      <div 
+                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        style={{
+                          background: 'linear-gradient(to top, rgba(205, 9, 27, 0.3), transparent)'
+                        }}
+                      ></div>
+                    </div>
+                    <div className="p-4">
+                      <h4 
+                        className="font-bold text-gray-900 mb-2 transition-colors text-base leading-snug"
+                        style={{
+                          color: undefined
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.color = '#CD091B';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.color = '';
+                        }}
+                      >
+                        {item.title}
+                      </h4>
+                      <p className="text-sm text-gray-600 line-clamp-2 leading-relaxed">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+{/* electric power Desktop end code */}
       </header>
     </>
   );

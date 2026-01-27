@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ChevronDown, ChevronRight, Home } from 'lucide-react';
+import { ChevronDown, ChevronRight, Home } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 
 const menuData = [
@@ -116,7 +116,7 @@ export default function ElectricPowerLayout({
   
   const [expandedParent, setExpandedParent] = useState('transmission');
   const [activeItem, setActiveItem] = useState('design-engineering');
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mobileExpandedParent, setMobileExpandedParent] = useState('');
 
   useEffect(() => {
     menuData.forEach(parent => {
@@ -124,6 +124,7 @@ export default function ElectricPowerLayout({
         if (pathname === child.url) {
           setActiveItem(child.id);
           setExpandedParent(parent.id);
+          setMobileExpandedParent(parent.id);
         }
       });
     });
@@ -134,127 +135,168 @@ export default function ElectricPowerLayout({
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Mobile Menu Button */}
-      <button
-        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        className="lg:hidden fixed top-24 left-4 z-30 p-3 bg-navy rounded-lg shadow-md"
-        aria-label="Toggle menu"
-      >
-        {isMobileMenuOpen ? (
-          <X size={24} className="text-white" />
-        ) : (
-          <Menu size={24} className="text-white" />
-        )}
-      </button>
+      {/* Hero Section - RESPONSIVE */}
+      <div className="relative overflow-hidden h-64 sm:h-72 md:h-80 lg:h-[300px]">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <img 
+            src="/images/home/services/15.jpeg" 
+            alt="Electric Power Background"
+            className="w-full h-full object-cover"
+          />
+          {/* Enhanced Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/50"></div>
+          
+          {/* Subtle Pattern Overlay */}
+          <div 
+            className="absolute inset-0 opacity-[0.03]"
+            style={{
+              backgroundImage: `
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,.1) 10px, rgba(255,255,255,.1) 20px)
+              `
+            }}
+          ></div>
+        </div>
 
-      {/* Hero Section */}
-     <div className="relative overflow-hidden h-[300px]">
-  {/* Background Image - Page Related */}
-  <div className="absolute inset-0">
-    <img 
-      src="/images/home/services/15.jpeg" 
-      alt="Electric Power Background"
-      className="w-full h-full object-cover"
-    />
-    {/* Enhanced Gradient Overlay - Better readability */}
-    <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/50"></div>
-    
-    {/* Subtle Pattern Overlay for depth */}
-    <div 
-      className="absolute inset-0 opacity-[0.03]"
-      style={{
-        backgroundImage: `
-          repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,.1) 10px, rgba(255,255,255,.1) 20px)
-        `
-      }}
-    ></div>
-  </div>
+        {/* Content Area - WITH TOP PADDING FOR MOBILE */}
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12 h-full flex flex-col justify-end pb-6 sm:pb-8 pt-20 sm:pt-0">
+          {/* Page Title */}
+          <div className="mb-3 sm:mb-5">
+            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2 sm:mb-3 tracking-tight drop-shadow-lg">
+              {currentParent?.title.toUpperCase() || 'ELECTRIC POWER SOLUTIONS'}
+            </h1>
+            {/* Elegant Underline */}
+            <div className="flex items-center gap-2">
+              <div className="h-[3px] w-12 sm:w-16 bg-[#cd091b] rounded-full"></div>
+              <div className="h-[2px] w-6 sm:w-8 bg-[#cd091b]/60 rounded-full"></div>
+              <div className="h-[2px] w-3 sm:w-4 bg-[#cd091b]/40 rounded-full"></div>
+            </div>
+          </div>
+          
+          {/* Breadcrumb Navigation */}
+          <nav className="flex items-center flex-wrap gap-1.5 sm:gap-2 text-xs sm:text-sm">
+            <a 
+              href="/" 
+              className="group flex items-center gap-1 sm:gap-1.5 text-white/70 hover:text-white transition-colors duration-300"
+            >
+              <Home className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <span className="font-medium">Home</span>
+            </a>
 
-  {/* Content Area */}
-  <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12 h-full flex flex-col justify-end pb-8">
-    {/* Page Title */}
-    <div className="mb-5">
-      <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 tracking-tight drop-shadow-lg">
-        {currentParent?.title.toUpperCase() || 'ELECTRIC POWER SOLUTIONS'}
-      </h1>
-      {/* Elegant Underline */}
-      <div className="flex items-center gap-2">
-        <div className="h-[3px] w-16 bg-[#cd091b] rounded-full"></div>
-        <div className="h-[2px] w-8 bg-[#cd091b]/60 rounded-full"></div>
-        <div className="h-[2px] w-4 bg-[#cd091b]/40 rounded-full"></div>
+            <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/50" />
+
+            <a 
+              href="/electric-power" 
+              className="text-white/70 hover:text-white transition-colors duration-300 font-medium"
+            >
+              Electric Power
+            </a>
+
+            {currentParent && (
+              <>
+                <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/50" />
+                <span className="text-white/70 font-medium hidden sm:inline">
+                  {currentParent.title}
+                </span>
+              </>
+            )}
+
+            {currentChild && (
+              <>
+                <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/50 hidden sm:inline" />
+                <span className="text-[#cd091b] font-semibold">
+                  {currentChild.title}
+                </span>
+              </>
+            )}
+          </nav>
+        </div>
+
+        {/* Bottom Accent Line */}
+        <div className="absolute bottom-0 left-0 w-full h-[2px]">
+          <div className="h-full w-full bg-gradient-to-r from-transparent via-[#cd091b]/80 to-transparent"></div>
+        </div>
       </div>
-    </div>
-    
-    {/* Simple Breadcrumb Navigation - No Boxes */}
-    <nav className="flex items-center flex-wrap gap-2 text-sm">
-      {/* Home Link with Icon */}
-      <a 
-        href="/" 
-        className="group flex items-center gap-1.5 text-white/70 hover:text-white transition-colors duration-300"
-      >
-        <Home className="w-4 h-4" />
-        <span className="font-medium">Home</span>
-      </a>
 
-      {/* Separator */}
-      <ChevronRight className="w-4 h-4 text-white/50" />
+      {/* MOBILE TAB MENU - Compact Horizontal Design */}
+      <div className="lg:hidden bg-white border-b border-gray-200 sticky top-0 z-20 shadow-sm">
+        <div className="container mx-auto px-4">
+          {/* Horizontal scrollable tabs */}
+          <div className="flex gap-2 overflow-x-auto py-3 scrollbar-hide">
+            {menuData.map((parent) => {
+              const hasActiveChild = parent.children.some(c => c.id === activeItem);
+              const isMobileExpanded = mobileExpandedParent === parent.id;
+              
+              return (
+                <button
+                  key={parent.id}
+                  onClick={() => {
+                    setMobileExpandedParent(parent.id);
+                    // Automatically navigate to first child
+                    if (parent.children.length > 0) {
+                      router.push(parent.children[0].url);
+                    }
+                  }}
+                  className={`
+                    flex-shrink-0 px-4 py-2 rounded-full text-xs font-semibold
+                    transition-all duration-300 whitespace-nowrap
+                    ${hasActiveChild
+                      ? 'bg-[#cd091b] text-white shadow-md' 
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }
+                  `}
+                >
+                  {parent.title}
+                </button>
+              );
+            })}
+          </div>
+          
+          {/* Dropdown for children - only when parent is selected */}
+          {mobileExpandedParent && (
+            <div className="pb-3 flex gap-2 overflow-x-auto scrollbar-hide">
+              {menuData
+                .find(p => p.id === mobileExpandedParent)
+                ?.children.map((child) => {
+                  const isActive = activeItem === child.id;
+                  
+                  return (
+                    <button
+                      key={child.id}
+                      onClick={() => router.push(child.url)}
+                      className={`
+                        flex-shrink-0 px-3 py-1.5 rounded-md text-xs
+                        transition-all duration-200 whitespace-nowrap border
+                        ${isActive
+                          ? 'bg-[#cd091b] text-white border-[#cd091b] font-semibold'
+                          : 'bg-white text-gray-600 border-gray-300 hover:border-gray-400'
+                        }
+                      `}
+                    >
+                      {child.title}
+                    </button>
+                  );
+                })}
+            </div>
+          )}
+        </div>
+      </div>
 
-      {/* Electric Power Link */}
-      <a 
-        href="/electric-power" 
-        className="text-white/70 hover:text-white transition-colors duration-300 font-medium"
-      >
-        Electric Power
-      </a>
-
-      {/* Current Parent */}
-      {currentParent && (
-        <>
-          <ChevronRight className="w-4 h-4 text-white/50" />
-          <a 
-            href="#" 
-            className="text-white/70 hover:text-white transition-colors duration-300 font-medium"
-          >
-            {currentParent.title}
-          </a>
-        </>
-      )}
-
-      {/* Current Child (Active Page) */}
-      {currentChild && (
-        <>
-          <ChevronRight className="w-4 h-4 text-white/50" />
-          <span className="text-[#cd091b] font-semibold">
-            {currentChild.title}
-          </span>
-        </>
-      )}
-    </nav>
-  </div>
-
-  {/* Bottom Accent Line - Subtle */}
-  <div className="absolute bottom-0 left-0 w-full h-[2px]">
-    <div className="h-full w-full bg-gradient-to-r from-transparent via-[#cd091b]/80 to-transparent"></div>
-  </div>
-</div>
+      <style jsx global>{`
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
 
       {/* Sidebar + Content */}
       <div className="max-w-7_5xl mx-auto">
         <div className="flex flex-col lg:flex-row">
-          {/* Mobile Overlay */}
-          {isMobileMenuOpen && (
-            <div 
-              className="fixed inset-0 bg-black/50 z-30 lg:hidden"
-              onClick={() => setIsMobileMenuOpen(false)}
-            />
-          )}
-
-          {/* Sidebar - Transmission Tower Design */}
-          <aside className={`
-            w-full lg:w-80 bg-gradient-to-b from-gray-50 to-white lg:sticky lg:top-0 h-full lg:min-h-screen
-            ${isMobileMenuOpen ? 'fixed left-0 top-0 z-40 w-4/5 max-w-sm shadow-2xl' : 'hidden lg:block'}
-            border-r border-gray-200
-          `}>
+          {/* DESKTOP SIDEBAR - Tower Design (Hidden on Mobile) */}
+          <aside className="hidden lg:block w-80 bg-gradient-to-b from-gray-50 to-white lg:sticky lg:top-0 h-full lg:min-h-screen border-r border-gray-200">
             <nav className="py-8 px-6 relative">
               {/* Central Tower Pole */}
               <div className="absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-gray-300 via-gray-400 to-gray-300"></div>
@@ -262,8 +304,6 @@ export default function ElectricPowerLayout({
               {menuData.map((parent, idx) => {
                 const isExpanded = expandedParent === parent.id;
                 const hasActiveChild = parent.children.some(c => c.id === activeItem);
-                const totalParents = menuData.length;
-                const verticalPosition = (idx / (totalParents - 1)) * 100;
                 
                 return (
                   <div key={parent.id} className="mb-6 relative">
@@ -275,7 +315,17 @@ export default function ElectricPowerLayout({
 
                     {/* Parent Menu Item (Transformer Box) */}
                     <div 
-                      onClick={() => setExpandedParent(isExpanded ? '' : parent.id)}
+                      onClick={() => {
+                        if (isExpanded) {
+                          setExpandedParent('');
+                        } else {
+                          setExpandedParent(parent.id);
+                          // Automatically navigate to first child
+                          if (parent.children.length > 0) {
+                            router.push(parent.children[0].url);
+                          }
+                        }
+                      }}
                       className={`
                         relative ml-11 group flex items-center justify-between px-4 py-3.5 cursor-pointer
                         transition-all duration-300 ease-out rounded-lg border-2
@@ -302,9 +352,8 @@ export default function ElectricPowerLayout({
                         {/* Vertical distribution line from transformer */}
                         <div className="absolute left-16 top-0 bottom-0 w-px bg-gradient-to-b from-gray-400 via-gray-300 to-transparent"></div>
                         
-                        {parent.children.map((child, childIdx) => {
+                        {parent.children.map((child) => {
                           const isActive = activeItem === child.id;
-                          const isLast = childIdx === parent.children.length - 1;
                           
                           return (
                             <div
@@ -328,10 +377,7 @@ export default function ElectricPowerLayout({
 
                               {/* Menu Item (End Point Device) */}
                               <div
-                                onClick={() => {
-                                  router.push(child.url);
-                                  if (isMobileMenuOpen) setIsMobileMenuOpen(false);
-                                }}
+                                onClick={() => router.push(child.url)}
                                 className={`
                                   relative flex items-center px-4 py-3 ml-9 cursor-pointer
                                   transition-all duration-300 ease-out rounded-lg border
@@ -369,16 +415,16 @@ export default function ElectricPowerLayout({
               })}
 
               {/* Tower Base Foundation */}
-              <div className="absolute left-4 bottom-8 w-9 h-12 bg-gradient-to-b from-gray-400 to-gray-500 opacity-30" 
-                   style={{clipPath: 'polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%)'}}></div>
+              {/* <div className="absolute left-4 bottom-8 w-9 h-12 bg-gradient-to-b from-gray-400 to-gray-500 opacity-30" 
+                   style={{clipPath: 'polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%)'}}></div> */}
             </nav>
           </aside>
 
           {/* Content Area */}
           <main className="flex-1 p-4 bg-white min-h-screen">
             <div className="bg-white rounded-2xl shadow-sm border overflow-hidden">
-              <div className="h-0.5 bg-brand-gray" />
-              <div className="p-8">
+              <div className="h-0.5 bg-gray-300" />
+              <div className="p-4 sm:p-6 lg:p-8">
                 {children}
               </div>
               <div className="h-2 bg-gray-100" />

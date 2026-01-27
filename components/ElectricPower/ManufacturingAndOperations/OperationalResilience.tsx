@@ -15,30 +15,22 @@ export default function ManagementSystems() {
       title: 'Quality Management System',
       description: 'SANPEC employs a robust quality management system guided by our principles—customer focus, employee involvement, a process-oriented approach, integrated systems, strategic planning, continual improvement, fact-based decision-making, and effective communication. In building transmission and distribution infrastructure, SANPEC rigorously applies highest quality standards across every stage—from R&D and design to manufacturing, operations, supply chain management, and material sourcing—ensuring that each component and process meets the highest levels of reliability and performance. This steadfast commitment not only exceeds customer expectations but also cultivates an environment where every employee is empowered to drive ongoing quality enhancements.',
       images: [
-        'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture21.jpg',
-        'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture20-2.png',
-        'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture27-2.png',
-        'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture26-2.jpg',
-        'https://sanpec-excellence.com/wp-content/uploads/2025/02/24.jpg',
-        'https://sanpec-excellence.com/wp-content/uploads/2025/02/21.jpg',
-        'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture14-2.png',
-        'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture18-2.png',
-        'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture19-2.png'
+        '/images/electric_power/Picture21.jpg',
+     
       ]
     },
     {
       title: 'Innovation Management',
       description: 'Aligned with the ISO 56000 series—specifically ISO 56001:2024—SANPEC systematically manages innovation through a structured approach that drives sustainable growth and secures a competitive edge by continuously exploring and implementing cutting-edge solutions in transmission and distribution. By fostering innovation in its R&D, design, and operational processes, SANPEC maximizes value creation by unlocking increased value from new products, services, processes, and methods, thereby delivering tangible benefits for both the organization and its stakeholders. This approach not only boosts immediate performance but also steadily builds long-term innovation capabilities, even amid uncertainty.',
       images: [
-        'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture20-2.png'
+        '/images/electric_power/6.png'
       ]
     },
     {
       title: 'Change Management',
       description: 'Leveraging in house software and tools, SANPEC adeptly manages organizational change to ensure smooth transitions and enhanced adaptability during strategic shifts across all its functions—from R&D and design to manufacturing, operations, supply chain management, and material sourcing. By adopting changes faster, more completely, and proficiently, SANPEC remains fully engaged during disruptive periods, understanding the rationale behind each change. This comprehensive approach, which provides the necessary time, tools, and support for everyone involved, minimizes the risks and costs associated with mismanaged change while maximizing returns on project investments through the effective application of change management principles before, during, and after each project.',
       images: [
-        'https://sanpec-excellence.com/wp-content/uploads/2025/02/16.jpg',
-        'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture24.jpg'
+        '/images/electric_power/Picture24.jpg',
       ]
     }
   ];

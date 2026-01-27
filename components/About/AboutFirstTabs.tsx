@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { ChevronRight, Zap } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 
 export default function SanpecTabs() {
   const [activeTab, setActiveTab] = useState('who-we-are');
@@ -54,19 +54,19 @@ export default function SanpecTabs() {
             </p>
             <div className="bg-white p-6 rounded-xl border-l-4 border-[#101631] shadow-md hover:shadow-xl transition-shadow duration-300">
               <p className="flex items-start gap-4">
-                <Zap className="mt-1 flex-shrink-0" style={{ color: '#CD091B' }} size={24} />
+                <span className="text-2xl">⚡</span>
                 <span>Build a robust and reliable grid to power the American people.</span>
               </p>
             </div>
             <div className="bg-white p-6 rounded-xl border-l-4 border-[#CD091B] shadow-md hover:shadow-xl transition-shadow duration-300">
               <p className="flex items-start gap-4">
-                <Zap className="mt-1 flex-shrink-0" style={{ color: '#101631' }} size={24} />
+                <span className="text-2xl">🛡️</span>
                 <span>Enhance resilience to withstand disruptions and adapt to evolving demands.</span>
               </p>
             </div>
             <div className="bg-white p-6 rounded-xl border-l-4 border-[#101631] shadow-md hover:shadow-xl transition-shadow duration-300">
               <p className="flex items-start gap-4">
-                <Zap className="mt-1 flex-shrink-0" style={{ color: '#CD091B' }} size={24} />
+                <span className="text-2xl">✨</span>
                 <span>Drive innovation and champion responsible business practices for a cleaner future.</span>
               </p>
             </div>
@@ -182,90 +182,75 @@ export default function SanpecTabs() {
   const tabKeys = Object.keys(tabsData);
 
   return (
-    <div className="min-h-screen bg-gray-50 py-16 md:py-24 relative overflow-hidden">
-      {/* Power Tower SVG - Left Side */}
-      <div className="absolute left-0 top-32 opacity-[0.03] pointer-events-none">
-        <svg width="200" height="500" viewBox="0 0 200 500" fill="none">
-          <path d="M100 20 L85 100 L115 100 Z" fill="#101631"/>
-          <rect x="90" y="100" width="20" height="80" fill="#CD091B"/>
-          <line x1="60" y1="120" x2="140" y2="120" stroke="#101631" strokeWidth="4"/>
-          <line x1="50" y1="150" x2="150" y2="150" stroke="#CD091B" strokeWidth="4"/>
-          <rect x="85" y="180" width="30" height="120" fill="#101631"/>
-          <line x1="40" y1="220" x2="160" y2="220" stroke="#CD091B" strokeWidth="5"/>
-          <line x1="30" y1="260" x2="170" y2="260" stroke="#101631" strokeWidth="5"/>
-          <path d="M70 300 L70 450 M130 300 L130 450" stroke="#CD091B" strokeWidth="6"/>
-          <rect x="20" y="450" width="160" height="20" fill="#101631"/>
-        </svg>
-      </div>
-
-      {/* Electrical Tower SVG - Right Side */}
-      <div className="absolute right-0 top-64 opacity-[0.03] pointer-events-none">
-        <svg width="220" height="480" viewBox="0 0 220 480" fill="none">
-          <circle cx="110" cy="40" r="25" fill="#CD091B"/>
-          <path d="M110 65 L95 140 L125 140 Z" fill="#101631"/>
-          <rect x="100" y="140" width="20" height="60" fill="#CD091B"/>
-          <line x1="70" y1="160" x2="150" y2="160" stroke="#101631" strokeWidth="5"/>
-          <line x1="60" y1="200" x2="160" y2="200" stroke="#CD091B" strokeWidth="5"/>
-          <rect x="95" y="200" width="30" height="100" fill="#101631"/>
-          <line x1="50" y1="240" x2="170" y2="240" stroke="#CD091B" strokeWidth="6"/>
-          <line x1="40" y1="280" x2="180" y2="280" stroke="#101631" strokeWidth="6"/>
-          <path d="M75 300 L75 420 M145 300 L145 420" stroke="#CD091B" strokeWidth="7"/>
-          <line x1="60" y1="350" x2="75" y2="350" stroke="#101631" strokeWidth="3"/>
-          <line x1="145" y1="350" x2="160" y2="350" stroke="#101631" strokeWidth="3"/>
-          <line x1="60" y1="380" x2="75" y2="380" stroke="#CD091B" strokeWidth="3"/>
-          <line x1="145" y1="380" x2="160" y2="380" stroke="#CD091B" strokeWidth="3"/>
-          <rect x="30" y="420" width="160" height="25" fill="#101631"/>
-        </svg>
-      </div>
-
-      {/* Transmission Lines - Top */}
-      <div className="absolute top-0 left-0 right-0 opacity-[0.04] pointer-events-none">
-        <svg width="100%" height="100" viewBox="0 0 1200 100" preserveAspectRatio="none">
-          <path d="M0 50 Q300 20 600 50 T1200 50" stroke="#CD091B" strokeWidth="2" fill="none"/>
-          <path d="M0 60 Q300 30 600 60 T1200 60" stroke="#101631" strokeWidth="2" fill="none"/>
-        </svg>
-      </div>
-
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-16 md:py-10 relative overflow-hidden">
       <div className="container mx-auto px-4 md:px-8 max-w-7_5xl relative z-10">
-        {/* Modern Tabs Navigation */}
-        <div className="mb-12">
-          <div className="flex flex-wrap gap-4 justify-center">
-            {tabKeys.map((tabKey) => {
+        
+        {/* HORIZONTAL TRANSMISSION LINE NAVIGATION - Exactly like sidebar design */}
+        <div className="mb-12 relative mx-auto" style={{ maxWidth: '90rem' }}>
+          
+          {/* Main Horizontal Transmission Line (like the vertical tower pole) */}
+          <div className="hidden md:block absolute top-8 left-0 right-0 h-1 bg-gradient-to-r from-gray-300 via-gray-400 to-gray-300"></div>
+          
+          <div className="flex flex-wrap md:flex-nowrap justify-between gap-4 md:gap-6 relative px-4">
+            {tabKeys.map((tabKey, idx) => {
               const isActive = activeTab === tabKey;
               const tab = tabsData[tabKey];
               
               return (
-                <button
-                  key={tabKey}
-                  onClick={() => setActiveTab(tabKey)}
-                  className={`
-                    relative px-8 py-5 text-sm md:text-base font-black
-                    transition-all duration-300 rounded-2xl
-                    ${isActive 
-                      ? 'shadow-2xl transform scale-110' 
-                      : 'shadow-lg hover:shadow-xl hover:scale-105'
-                    }
-                  `}
-                  style={{
-                    backgroundColor: isActive ? '#CD091B' : 'white',
-                    color: isActive ? 'white' : '#101631',
-                    borderBottom: isActive ? 'none' : '4px solid #101631'
-                  }}
-                >
-                  <span className="relative z-10 tracking-wide">{tab.title}</span>
-                  {isActive && (
-                    <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2">
-                      <div className="w-4 h-4 bg-[#CD091B] rotate-45"></div>
-                    </div>
-                  )}
-                </button>
+                <div key={tabKey} className="relative flex-1 min-w-[200px] md:min-w-0">
+                  
+                  {/* Connection Point on Main Line (Insulator - like sidebar's connection point) */}
+                  <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-6 w-3 h-3 bg-white border-2 border-gray-400 rounded-full shadow-md z-20"></div>
+                  
+                  {/* Vertical Beam Down (like horizontal beam in sidebar) */}
+                  <div className={`
+                    hidden md:block absolute left-1/2 -translate-x-1/2 top-9 w-0.5 h-6 transition-all duration-300
+                    ${isActive ? 'bg-gray-600' : 'bg-gray-400'}
+                  `}></div>
+
+                  {/* Tab Button (like the Transformer Box in sidebar) */}
+                  <button
+                    onClick={() => setActiveTab(tabKey)}
+                    className={`
+                      w-full md:mt-14 px-6 py-4 text-sm md:text-base font-semibold
+                      transition-all duration-300 ease-out rounded-lg border-2 relative
+                      ${isActive 
+                        ? 'border-gray-300 text-gray-900 shadow-xl' 
+                        : 'bg-white border-gray-300 text-gray-700 hover:border-gray-400 hover:shadow-lg'
+                      }
+                    `}
+                    style={isActive ? {backgroundColor: '#F3F3F3'} : {}}
+                  >
+                    <span className="relative z-10 tracking-wide">{tab.title}</span>
+                    
+                    {/* Active Power Indicator (like sidebar's animate-pulse dot) */}
+                    {isActive && (
+                      <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 flex items-center">
+                        <div className="w-2 h-2 bg-gray-800 rounded-full animate-pulse"></div>
+                        <div className="absolute inset-0 w-2 h-2 bg-gray-600 rounded-full animate-ping"></div>
+                      </div>
+                    )}
+                    
+                    {/* Power Line to Content (like sidebar's arrow) */}
+                    {isActive && (
+                      <div className="hidden md:block absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full">
+                        <div className="w-px h-8 bg-gradient-to-b from-gray-400 to-gray-300"></div>
+                        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rotate-45 bg-gray-400 -mb-1"></div>
+                      </div>
+                    )}
+                  </button>
+                </div>
               );
             })}
           </div>
         </div>
 
-        {/* Content Area */}
-        <div className="bg-white shadow-2xl rounded-3xl overflow-hidden border-t-8 border-[#CD091B]">
+        {/* Content Area - Wider than tabs */}
+        <div className="mx-auto px-4" style={{ maxWidth: '90rem' }}>
+          <div className="bg-white shadow-lg rounded-2xl overflow-hidden border-2 border-gray-200">
+          {/* Top Connection Line (like sidebar's distribution line) */}
+          <div className="h-0.5 bg-gray-300"></div>
+          
           <div className="p-10 md:p-16">
             <div className={`grid ${activeContent.image ? 'lg:grid-cols-2' : 'lg:grid-cols-1'} gap-12 md:gap-16 items-start`}>
               {/* Text Content */}
@@ -276,8 +261,16 @@ export default function SanpecTabs() {
               {/* Image */}
               {activeContent.image && (
                 <div className="relative group">
-                  <div className="absolute inset-0 bg-[#101631] rounded-2xl transform rotate-3 group-hover:rotate-6 transition-transform duration-500"></div>
-                  <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-[#CD091B] transform group-hover:-translate-y-2 transition-all duration-500">
+                  {/* Connection nodes at corners (like small insulators) */}
+                  <div className="absolute -top-2 -left-2 w-2 h-2 bg-gray-400 ring-2 ring-gray-200 rounded-full"></div>
+                  <div className="absolute -top-2 -right-2 w-2 h-2 bg-gray-400 ring-2 ring-gray-200 rounded-full"></div>
+                  <div className="absolute -bottom-2 -left-2 w-2 h-2 bg-gray-400 ring-2 ring-gray-200 rounded-full"></div>
+                  <div className="absolute -bottom-2 -right-2 w-2 h-2 bg-gray-400 ring-2 ring-gray-200 rounded-full"></div>
+                  
+                  {/* Frame border */}
+                  <div className="absolute -inset-2 border-2 border-gray-300 rounded-xl"></div>
+                  
+                  <div className="relative rounded-xl overflow-hidden shadow-xl border-4 border-gray-200 transform group-hover:-translate-y-2 transition-all duration-500">
                     <img
                       src={activeContent.image}
                       alt={activeContent.title}
@@ -289,6 +282,9 @@ export default function SanpecTabs() {
               )}
             </div>
           </div>
+
+          {/* Bottom Connection Line */}
+        </div>
         </div>
       </div>
     </div>

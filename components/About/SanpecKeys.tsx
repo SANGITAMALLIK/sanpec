@@ -114,7 +114,7 @@ export default function SanpecEdgeProducts() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 relative py-16 md:py-14 overflow-hidden">
+    <div className="min-h-screen bg-gray-50 relative py-16 md:py-14 overflow-hidden">
       {/* Engineering Grid Background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 opacity-[0.03]">
@@ -172,13 +172,13 @@ export default function SanpecEdgeProducts() {
       <div className="container mx-auto px-4 relative z-10 max-w-8xl">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-3 mb-6 px-4 py-2 bg-white rounded-full shadow-sm border border-gray-100">
+          {/* <div className="inline-flex items-center gap-3 mb-6 px-4 py-2 bg-white rounded-full shadow-sm border border-gray-100">
             <Zap className="w-4 h-4 text-[#CD091B]" />
             <span className="text-sm font-semibold uppercase tracking-wider text-[#101631]">
               Engineering Excellence
             </span>
             <Zap className="w-4 h-4 text-[#CD091B]" />
-          </div>
+          </div> */}
           
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-6">
             <span className="text-[#101631]">SANPEC</span>
@@ -193,7 +193,6 @@ export default function SanpecEdgeProducts() {
           <div className="flex items-center gap-4 mb-8">
             <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#101631] to-transparent opacity-20"></div>
             <h2 className="text-2xl md:text-3xl font-bold text-[#101631] flex items-center gap-3">
-              <ShieldIcon className="w-8 h-8 text-[#CD091B]" />
               SANPEC EDGE
               <Sparkles className="w-6 h-6 text-[#CD091B]" />
             </h2>
@@ -248,7 +247,6 @@ export default function SanpecEdgeProducts() {
           <div className="flex items-center gap-4 mb-8">
             <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#CD091B] to-transparent opacity-20"></div>
             <h2 className="text-2xl md:text-3xl font-bold text-[#101631] flex items-center gap-3">
-              <Building className="w-8 h-8 text-[#CD091B]" />
               SANPEC PRODUCTS
               <Zap className="w-6 h-6 text-[#CD091B]" />
             </h2>

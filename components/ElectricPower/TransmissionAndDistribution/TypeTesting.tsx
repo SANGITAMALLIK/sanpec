@@ -38,10 +38,10 @@ export default function TypeTesting() {
 
           <div className="grid grid-cols-2 gap-3">
             {[
-              'https://sanpec-excellence.com/wp-content/uploads/2025/01/home2.png',
-              'https://sanpec-excellence.com/wp-content/uploads/2025/01/home3.png',
-              'https://sanpec-excellence.com/wp-content/uploads/2025/01/services.png',
-              'https://sanpec-excellence.com/wp-content/uploads/2025/01/home6.png'
+              '/images/electric_power/4.png',
+              '/images/electric_power/home3.png',
+              '/images/electric_power/services.png',
+              '/images/electric_power/home6.png'
             ].map((img, idx) => (
               <div key={idx} className="overflow-hidden rounded-lg border-2 border-gray-200 hover:border-[#101631] transition-all duration-300 shadow-sm hover:shadow-md group">
                 <img src={img} alt={`Type Testing ${idx + 1}`} className="w-full h-40 object-cover group-hover:scale-110 transition-transform duration-500" />

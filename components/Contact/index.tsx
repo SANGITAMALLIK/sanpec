@@ -1,86 +1,73 @@
-import NewsLatterBox from "./NewsLatterBox";
+'use client';
+import React from 'react';
+import { Home, ChevronRight } from 'lucide-react';
 
-const Contact = () => {
+const ContactPage: React.FC = () => {
   return (
-    <section id="contact" className="overflow-hidden py-16 md:py-20 lg:py-28">
-      <div className="container">
-        <div className="-mx-4 flex flex-wrap">
-          <div className="w-full px-4 lg:w-7/12 xl:w-8/12">
-            <div
-              className="wow fadeInUp shadow-three dark:bg-gray-dark mb-12 rounded-sm bg-white px-8 py-11 sm:p-[55px] lg:mb-5 lg:px-8 xl:p-[55px]"
-              data-wow-delay=".15s
-              "
-            >
-              <h2 className="mb-3 text-2xl font-bold text-black dark:text-white sm:text-3xl lg:text-2xl xl:text-3xl">
-                Need Help? Open a Ticket
-              </h2>
-              <p className="mb-12 text-base font-medium text-body-color">
-                Our support team will get back to you ASAP via email.
-              </p>
-              <form>
-                <div className="-mx-4 flex flex-wrap">
-                  <div className="w-full px-4 md:w-1/2">
-                    <div className="mb-8">
-                      <label
-                        htmlFor="name"
-                        className="mb-3 block text-sm font-medium text-dark dark:text-white"
-                      >
-                        Your Name
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="Enter your name"
-                        className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none"
-                      />
-                    </div>
-                  </div>
-                  <div className="w-full px-4 md:w-1/2">
-                    <div className="mb-8">
-                      <label
-                        htmlFor="email"
-                        className="mb-3 block text-sm font-medium text-dark dark:text-white"
-                      >
-                        Your Email
-                      </label>
-                      <input
-                        type="email"
-                        placeholder="Enter your email"
-                        className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none"
-                      />
-                    </div>
-                  </div>
-                  <div className="w-full px-4">
-                    <div className="mb-8">
-                      <label
-                        htmlFor="message"
-                        className="mb-3 block text-sm font-medium text-dark dark:text-white"
-                      >
-                        Your Message
-                      </label>
-                      <textarea
-                        name="message"
-                        rows={5}
-                        placeholder="Enter your Message"
-                        className="border-stroke dark:text-body-color-dark dark:shadow-two w-full resize-none rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none"
-                      ></textarea>
-                    </div>
-                  </div>
-                  <div className="w-full px-4">
-                    <button className="shadow-submit dark:shadow-submit-dark rounded-sm bg-primary px-9 py-4 text-base font-medium text-white duration-300 hover:bg-primary/90">
-                      Submit Ticket
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-          <div className="w-full px-4 lg:w-5/12 xl:w-4/12">
-            <NewsLatterBox />
+    <div className="relative overflow-hidden h-64 sm:h-72 md:h-80 lg:h-[300px]">
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <img 
+          src="/images/merged_power_towers.png" 
+          alt="About Background"
+          className="w-full h-full object-cover"
+        />
+        {/* Enhanced Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/50"></div>
+        
+        {/* Subtle Pattern Overlay for depth */}
+        <div 
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `
+              repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,.1) 10px, rgba(255,255,255,.1) 20px)
+            `
+          }}
+        ></div>
+      </div>
+
+      {/* Content Area */}
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12 h-full flex flex-col justify-end pb-6 sm:pb-8 pt-20 sm:pt-0">
+        {/* Page Title */}
+        <div className="mb-4 sm:mb-5">
+          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2 sm:mb-3 tracking-tight drop-shadow-lg">
+           CONTACT
+          </h1>
+          {/* Elegant Underline */}
+          <div className="flex items-center gap-2">
+            <div className="h-[3px] w-12 sm:w-16 bg-[#DC2626] rounded-full"></div>
+            <div className="h-[2px] w-6 sm:w-8 bg-[#DC2626]/60 rounded-full"></div>
+            <div className="h-[2px] w-3 sm:w-4 bg-[#DC2626]/40 rounded-full"></div>
           </div>
         </div>
+        
+        {/* Simple Breadcrumb Navigation */}
+        <nav className="flex items-center flex-wrap gap-1.5 sm:gap-2 text-xs sm:text-sm">
+          {/* Home Link with Icon */}
+          <a 
+            href="/" 
+            className="group flex items-center gap-1 sm:gap-1.5 text-white/70 hover:text-white transition-colors duration-300"
+          >
+            <Home className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            <span className="font-medium">Home</span>
+          </a>
+
+          {/* Separator */}
+          <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/50" />
+
+          {/* Current Page (Active) */}
+          <span className="text-[#DC2626] font-semibold">
+           Contact
+          </span>
+        </nav>
       </div>
-    </section>
+
+      {/* Bottom Accent Line */}
+      <div className="absolute bottom-0 left-0 w-full h-[2px]">
+        <div className="h-full w-full bg-gradient-to-r from-transparent via-[#DC2626]/80 to-transparent"></div>
+      </div>
+    </div>
   );
 };
 
-export default Contact;
+export default ContactPage;

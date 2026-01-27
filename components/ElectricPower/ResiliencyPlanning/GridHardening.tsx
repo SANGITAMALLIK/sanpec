@@ -49,7 +49,7 @@ export default function GridHardening() {
             {/* Image */}
             <div className="overflow-hidden rounded-xl border-2 border-gray-200 hover:border-[#CD091B] transition-all duration-300 shadow-md hover:shadow-xl">
               <img 
-                src="https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture14-2.png"
+                src="/images/electric_power/15.png"
                 alt="Grid Hardening Infrastructure"
                 className="w-full h-auto object-cover hover:scale-105 transition-transform duration-500" 
               />

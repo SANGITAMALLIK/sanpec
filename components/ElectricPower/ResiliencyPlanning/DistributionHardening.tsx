@@ -5,17 +5,10 @@ export default function FirePreventionDetection() {
   const [currentSlide, setCurrentSlide] = useState(0);
   
   const images = [
-    "https://sanpec-excellence.com/wp-content/uploads/2025/02/24-1024x615.jpg",
-    "https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture7.jpg"
+   '/images/electric_power/1.jpg',
   ];
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % images.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + images.length) % images.length);
-  };
+  
 
   return (
     <div className="flex flex-col gap-6">
@@ -65,55 +58,13 @@ export default function FirePreventionDetection() {
             </div>
 
             {/* Image Slider */}
-            <div className="relative overflow-hidden rounded-xl border-2 border-gray-200 hover:border-[#CD091B] transition-all duration-300 shadow-md hover:shadow-xl">
+            <div className="relative overflow-hidden">
               <div className="relative h-full">
                 <img 
                   src={images[currentSlide]}
                   alt={`Fire Prevention and Detection ${currentSlide + 1}`}
-                  className="w-full h-auto object-cover transition-transform duration-500" 
-                />
-                
-                {/* Previous Button */}
-                <button
-                  onClick={prevSlide}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-300 group"
-                  aria-label="Previous slide"
-                >
-                  <svg className="w-5 h-5 text-gray-700 group-hover:text-[#CD091B] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 34.2 32.3" strokeWidth="2">
-                    <line x1="0.5" y1="16" x2="33.5" y2="16"></line>
-                    <line x1="0.3" y1="16.5" x2="16.2" y2="0.7"></line>
-                    <line x1="0" y1="15.4" x2="16.2" y2="31.6"></line>
-                  </svg>
-                </button>
-
-                {/* Next Button */}
-                <button
-                  onClick={nextSlide}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-300 group"
-                  aria-label="Next slide"
-                >
-                  <svg className="w-5 h-5 text-gray-700 group-hover:text-[#CD091B] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 34.2 32.3" strokeWidth="2">
-                    <line x1="0" y1="16" x2="33" y2="16"></line>
-                    <line x1="17.3" y1="0.7" x2="33.2" y2="16.5"></line>
-                    <line x1="17.3" y1="31.6" x2="33.5" y2="15.4"></line>
-                  </svg>
-                </button>
-
-                {/* Pagination Dots */}
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-                  {images.map((_, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => setCurrentSlide(idx)}
-                      className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                        currentSlide === idx 
-                          ? 'bg-[#CD091B] w-8' 
-                          : 'bg-white/70 hover:bg-white'
-                      }`}
-                      aria-label={`Go to slide ${idx + 1}`}
-                    />
-                  ))}
-                </div>
+                  className="w-full object-cover transition-transform duration-500" 
+                />  
               </div>
             </div>
           </div>

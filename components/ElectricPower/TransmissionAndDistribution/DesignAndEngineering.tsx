@@ -30,7 +30,7 @@ export default function DesignEngineering() {
         'Utilize lifecycle economics and use best practice specs',
         'Optimize operational and maintenance practices'
       ],
-      image: 'https://sanpec-excellence.com/wp-content/uploads/2024/10/image-15.webp'
+      image: '/images/home/header_submenu_images/1.webp',
     },
     {
       title: 'Sustainability through Engineering Excellence',
@@ -50,8 +50,8 @@ export default function DesignEngineering() {
         'Other Misc. Cost ($$ Lump Sum)'
       ],
       images: [
-        'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture7.jpg',
-        'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture24.jpg'
+        '/images/electric_power/1.jpg',
+
       ]
     },
     {
@@ -68,8 +68,7 @@ export default function DesignEngineering() {
         'Total life cycle cost'
       ],
       images: [
-        'https://sanpec-excellence.com/wp-content/uploads/2025/02/23.jpg',
-        'https://sanpec-excellence.com/wp-content/uploads/2025/02/24.jpg'
+        '/images/electric_power/24.jpg',
       ]
     },
     {
@@ -87,8 +86,7 @@ export default function DesignEngineering() {
         'Use best practice specs'
       ],
       images: [
-        'https://sanpec-excellence.com/wp-content/uploads/2025/02/21.jpg',
-        'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture15.jpg'
+        '/images/electric_power/21.jpg',
       ]
     }
   ];
@@ -153,14 +151,15 @@ export default function DesignEngineering() {
             <div className="space-y-4">
               {content.image && (
                 <div className="overflow-hidden rounded-xl border-2 border-gray-200 hover:border-[#CD091B] transition-all duration-300 shadow-md hover:shadow-xl">
-                  <img src={content.image} alt={content.title} className="w-full h-56 object-cover hover:scale-105 transition-transform duration-500" />
+                  <img src={content.image} alt={content.title} className="w-full object-cover hover:scale-105 transition-transform duration-500" />
                 </div>
               )}
               {content.images && (
-                <div className="grid grid-cols-2 gap-3">
+                <div className="gap-3">
+                  {/* amit */}
                   {content.images.map((img, idx) => (
                     <div key={idx} className="overflow-hidden rounded-lg border-2 border-gray-200 hover:border-[#CD091B] transition-all duration-300 shadow-sm hover:shadow-md group">
-                      <img src={img} alt={`${content.title} ${idx + 1}`} className="w-full h-40 object-cover group-hover:scale-110 transition-transform duration-500" />
+                      <img src={img} alt={`${content.title} ${idx + 1}`} className="w-full object-cover group-hover:scale-110 transition-transform duration-500" />
                     </div>
                   ))}
                 </div>

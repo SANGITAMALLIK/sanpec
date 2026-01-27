@@ -1,4 +1,6 @@
 "use client";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 
 const tabsData = [
@@ -27,7 +29,7 @@ const tabsData = [
       "Prototype and Proof of Fit Testing",
       "Technical Specifications Review"
     ],
-    link: "/electric-tower/transmission-and-distribution/"
+    link: "/electric-power/transmisson/design-and-engineering"
   },
   {
     id: 2,
@@ -43,7 +45,7 @@ const tabsData = [
       "Failure/Root Cause Analysis",
       "Field Inspection for aging transmission structures"
     ],
-    link: "/manufacturing-and-operations/"
+    link: "/electric-power/manufacturing/failure-analysis"
   },
   {
     id: 3,
@@ -58,7 +60,7 @@ const tabsData = [
       "Risk Mitigation planning",
       "Keep track of all milestones and critical delivery items"
     ],
-    link: "/strategic-project-management/"
+    link: "/electric-power/strategic/material-sourcing"
   },
   {
     id: 4,
@@ -71,7 +73,7 @@ const tabsData = [
       "Perform inspection of material upon arrival at port and Yards",
       "Provide support during construction process for missing pieces or mis-fab pieces or new helicopter splice, damage members and any technical issues"
     ],
-    link: "/constructability-review/"
+    link: "/electric-power/constructability/logistic-construction"
   },
   {
     id: 5,
@@ -92,7 +94,7 @@ const tabsData = [
       "H2S Entrapment and Corrosion on Direct Embedded Galvanized Steel Transmission Poles: ASCE/SEI-2009",
       "Research paper on “Design and Analysis of Transmission Line Tower"
     ],
-    link: "/research/"
+    link: "/research-and-innovation"
   },
   {
     id: 6,
@@ -110,7 +112,7 @@ const tabsData = [
       "Advanced Engineering Tools and Technologies",
       "Value Added Services and Customer Focused Approach"
     ],
-    link: "/about/"
+    link: "/about"
   }
 ];
 
@@ -308,13 +310,13 @@ const ModernTabs = () => {
                     ))}
                   </ul>
 
-                  <a
+                  <Link
                     href={tab.link}
                     className="inline-flex items-center gap-2 bg-gradient-to-r from-[#CD091B] to-[#a0070f] hover:from-[#171530] hover:to-[#0a0a1a] text-white px-8 py-4 rounded-full font-bold uppercase text-sm tracking-wider shadow-lg hover:shadow-2xl transition-all duration-300 group/btn w-fit"
                   >
                     <span>Read More</span>
                     <span className="transform group-hover/btn:translate-x-1 transition-transform duration-300">→</span>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

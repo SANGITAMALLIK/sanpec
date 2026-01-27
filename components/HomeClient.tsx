@@ -8,7 +8,7 @@ const PieWheel = dynamic(() => import("./PieWheel"));
 const Projects = dynamic(() => import("./Projects"));
 const Blog = dynamic(() => import("./Blog"));
 
-import AboutSectionOne from "./About/AboutSectionOne";
+import OurUniqueServices from "./OurUniqueServices";
 import Brands from "./Brands";
 
 export default function HomeClient() {
@@ -17,7 +17,7 @@ export default function HomeClient() {
       <HeroSlider />
       <PieWheel />
       <Projects />
-      <AboutSectionOne />
+      <OurUniqueServices />
       <Blog />
       <Brands />
     </>

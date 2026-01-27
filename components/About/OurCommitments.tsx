@@ -17,49 +17,49 @@ export default function SanpecCommitments() {
 
   const commitmentCards = [
     {
-      image: 'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture5.jpg',
+      image: 'images/electric_power/12.jpg',
       title: 'Reliability and Resiliency based Design for Transmission Structures with Engineering Excellence',
       icon: <Award />
     },
     {
-      image: 'https://sanpec-excellence.com/wp-content/uploads/2020/04/Picture2.png',
+      image: 'images/electric_power/Picture2.png',
       title: 'Innovative and Cost-Effective solutions',
       icon: <Sparkles />
     },
     {
-      image: 'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture1.jpg',
+      image: 'images/electric_power/Picture1.jpg',
       title: 'Quality and Professional Services',
       icon: <Target />
     },
     {
-      image: 'https://sanpec-excellence.com/wp-content/uploads/2025/01/home6.png',
+      image: 'images/electric_power/home6.png',
       title: 'Unbeatable Project Management and Technical Services',
       icon: <Zap />
     },
     {
-      image: 'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture4.png',
+      image: 'images/electric_power/Picture24.jpg',
       title: 'R&D work in Transmission Line Engineering',
       icon: <Award />
     },
     {
-      image: 'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture8.png',
+      image: 'images/electric_power/Picture8.png',
       title: 'ON-Time Delivery and Seamless Project Execution',
       icon: <Target />
     },
     {
-      image: 'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture3.png',
+      image: 'images/electric_power/Picture3.png',
       title: 'Advanced Engineering Tools and Technologies',
       icon: <Sparkles />
     },
     {
-      image: 'https://sanpec-excellence.com/wp-content/uploads/2025/01/inspection.png',
+      image: 'images/electric_power/3.png',
       title: 'Value Added Services and Customer Focused Approach',
       icon: <Zap />
     }
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 relative overflow-hidden py-16 md:py-10">
+    <div className="min-h-screen bg-white relative overflow-hidden py-16 md:py-10">
       {/* Transmission Poles Background Pattern - Enhanced */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
         {/* Large Transmission Tower - Left */}
@@ -122,7 +122,7 @@ export default function SanpecCommitments() {
       </div>
 
       {/* Subtle Grid Background */}
-      <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
+      {/* <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
         <div className="absolute inset-0" style={{
           backgroundImage: `
             linear-gradient(to right, #101631 1px, transparent 1px),
@@ -130,7 +130,7 @@ export default function SanpecCommitments() {
           `,
           backgroundSize: '50px 50px'
         }}></div>
-      </div>
+      </div> */}
 
       <div className="container mx-auto px-4 relative z-10 max-w-8xl">
         {/* Enhanced Header Section - Title Left, Description Right */}
@@ -140,12 +140,12 @@ export default function SanpecCommitments() {
             {/* Left Column - Title */}
             <div className="lg:w-1/2">
               {/* Title Badge */}
-              <div className="inline-flex items-center gap-3 mb-8 px-4 py-2 bg-white rounded-lg shadow-sm border border-gray-100">
+              {/* <div className="inline-flex items-center gap-3 mb-8 px-4 py-2 bg-white rounded-lg shadow-sm border border-gray-100">
                 <Sparkles className="w-4 h-4 text-[#CD091B]" />
                 <span className="text-sm font-semibold uppercase tracking-wider text-[#101631]">
                   Engineering Excellence
                 </span>
-              </div>
+              </div> */}
 
               {/* Main Title */}
               <div className="relative">

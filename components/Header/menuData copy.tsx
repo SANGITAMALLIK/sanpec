@@ -24,7 +24,7 @@ export const menuData = {
           {
             id: 'transmission',
             title: 'Transmission and Distribution',
-            image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=400&h=250&fit=crop',
+            image: '/images/home/header_submenu_images/15.png',
             items: [
               {
                 title: 'Design and engineering',

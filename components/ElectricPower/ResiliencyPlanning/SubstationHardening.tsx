@@ -5,8 +5,7 @@ export default function DistributionLineHardening() {
   const [currentSlide, setCurrentSlide] = useState(0);
   
   const images = [
-    "https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture26-2.jpg",
-    "https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture27-2.png"
+    '/images/electric_power/22.jpg',
   ];
 
   const nextSlide = () => {

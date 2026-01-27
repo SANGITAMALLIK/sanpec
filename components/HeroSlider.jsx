@@ -1,8 +1,9 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
-import { ChevronLeft, ChevronRight, ArrowRight, Play, Pause } from 'lucide-react';
+import { useRouter } from "next/navigation";
+import { ChevronLeft, ChevronRight, ArrowRight, Pause } from 'lucide-react';
 
-// Sample data - FIRST SLIDE WILL BE VIDEO, REST WILL BE IMAGES
+// Sample data - VIDEO SLIDES HAVE NO BUTTONS, IMAGE SLIDES HAVE SEPARATE BUTTONS
 const slides = [
   {
     id: 1,
@@ -13,6 +14,7 @@ const slides = [
     desc: "",
     image: "images/slider/4.png",
     bgColor: "#cd091b"
+    // No button for video slides
   },
   {
     id: 2,
@@ -20,7 +22,9 @@ const slides = [
     title: "INNOVATING FOR CRITICAL GLOBAL INFRASTRUCTURE",
     desc: "Electrical Transmission & Substation Structures Conference",
     image: "images/slider/1.png",
-    bgColor: "#cd091b"
+    bgColor: "#cd091b",
+    buttonText: "Explore Now",
+    buttonLink: "/blog"
   },
   {
     id: 3,
@@ -28,7 +32,9 @@ const slides = [
     title: "Bringing Engineering Excellence Improving Power Grid Reliability",
     desc: "Leadership | Process Excellence | Quality and Safety | Resilience | Sustainability",
     image: "images/slider/2.png",
-    bgColor: "#cd091b"
+    bgColor: "#cd091b",
+    buttonText: "Explore Now",
+    buttonLink: "/electric-power/transmisson/design-and-engineering"
   },
   {
     id: 4,
@@ -36,7 +42,9 @@ const slides = [
     title: "U.S. Department of Energy Partnership for Aging Workforce",
     desc: "Training | Education | Research | Leadership",
     image: "images/slider/3.jpg",
-    bgColor: "#cd091b"
+    bgColor: "#cd091b",
+    buttonText: "Explore Now",
+    buttonLink: "/research-and-innovation"
   },
   {
     id: 5,
@@ -47,6 +55,7 @@ const slides = [
     desc: "grid resilience | business resilience | Value chain resilience",
     image: "images/slider/1.png",
     bgColor: "#cd091b"
+    // No button for video slides
   },
   {
     id: 6,
@@ -54,7 +63,9 @@ const slides = [
     title: "Building Resilient transmission line Improving the quality of life",
     desc: "PURPOSE-LED | VALUE-ALIGNED | INNOVATION-DRIVEN BUSINESS MODEL",
     image: "images/slider/6.jpg",
-    bgColor: "#cd091b"
+    bgColor: "#cd091b",
+    buttonText: "Explore Solutions",
+    buttonLink: "/about"
   },
   {
     id: 7,
@@ -62,11 +73,14 @@ const slides = [
     title: "Implementing the process of the future, today",
     desc: "OPTIMIZED WORKFLOWS | operational efficiency | HIGH PERFORMING TEAM | superior outcome",
     image: "images/slider/7.png",
-    bgColor: "#cd091b"
+    bgColor: "#cd091b",
+    buttonText: "Join Our Team",
+    buttonLink: "#"
   },
 ];
 
 export default function HeroSlider() {
+  const router = useRouter();
   const [active, setActive] = useState(0);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
@@ -79,6 +93,27 @@ export default function HeroSlider() {
 
   const minSwipeDistance = 50;
 
+  // Preload adjacent slides for instant transitions
+  useEffect(() => {
+    const preloadImage = (src) => {
+      const img = new Image();
+      img.src = src;
+    };
+
+    // Preload current, next, and previous slides
+    if (slides[active] && slides[active].image) {
+      preloadImage(slides[active].image);
+    }
+    const nextIndex = (active + 1) % slides.length;
+    if (slides[nextIndex] && slides[nextIndex].image) {
+      preloadImage(slides[nextIndex].image);
+    }
+    const prevIndex = (active - 1 + slides.length) % slides.length;
+    if (slides[prevIndex] && slides[prevIndex].image) {
+      preloadImage(slides[prevIndex].image);
+    }
+  }, [active]);
+
   // Function to scroll tab into view
   const scrollTabIntoView = (index) => {
     if (tabRefs.current[index] && tabsContainerRef.current) {
@@ -89,7 +124,6 @@ export default function HeroSlider() {
       const tabWidth = tabElement.offsetWidth;
       const containerWidth = container.offsetWidth;
       
-      // Calculate the center position
       const targetScroll = tabLeft - (containerWidth / 2) + (tabWidth / 2);
       
       container.scrollTo({
@@ -139,6 +173,12 @@ export default function HeroSlider() {
   const handlePauseVideo = () => {
     setIsVideoPlaying(false);
     setShowPlayOverlay(true);
+  };
+
+  const handleButtonClick = (link) => {
+    if (link) {
+      router.push(link);
+    }
   };
 
   // Touch events for mobile swipe
@@ -201,13 +241,18 @@ export default function HeroSlider() {
   };
 
   return (
-    <section 
-      ref={containerRef}
-      className="relative w-full h-screen overflow-hidden bg-gray-900"
-      onTouchStart={onTouchStart}
-      onTouchMove={onTouchMove}
-      onTouchEnd={onTouchEnd}
-    >
+    <>
+      {/* Preload first slide image for instant loading */}
+      <link rel="preload" as="image" href={slides[0].image} />
+      {slides[1] && <link rel="preload" as="image" href={slides[1].image} />}
+      
+      <section 
+        ref={containerRef}
+        className="relative w-full h-screen overflow-hidden bg-gray-900"
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
       {/* Main Slider Container - Full Width */}
       <div className="relative h-full w-full">
         {slides.map((slide, index) => {
@@ -230,6 +275,8 @@ export default function HeroSlider() {
                           src={slide.image}
                           alt="Video thumbnail"
                           className="absolute inset-0 w-full h-full object-cover object-center"
+                          loading="eager"
+                          decoding="async"
                         />
                         
                         {showPlayOverlay && (
@@ -237,12 +284,18 @@ export default function HeroSlider() {
                         )}
                         
                         {isVideoPlaying && (
-                          <div className="absolute inset-0 w-full h-full">
+                          <div className="absolute inset-0 w-full h-full overflow-hidden bg-black">
                             <iframe
                               ref={videoIframeRef}
-                              src={`https://player.vimeo.com/video/${getVimeoVideoId(slide.videoUrl)}?autoplay=1&muted=0&title=0&byline=0&portrait=0&controls=1`}
-                              className="absolute top-0 left-0 w-full h-full"
-                              style={{ height: '100vh' }}
+                              src={`https://player.vimeo.com/video/${getVimeoVideoId(slide.videoUrl)}?autoplay=1&muted=0&title=0&byline=0&portrait=0&controls=1&background=0`}
+                              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                              style={{
+                                width: '100vw',
+                                height: '56.25vw', // 16:9 aspect ratio
+                                minHeight: '100vh',
+                                minWidth: '177.77vh', // 16:9 aspect ratio
+                                border: 'none'
+                              }}
                               frameBorder="0"
                               allow="autoplay; fullscreen; picture-in-picture"
                               allowFullScreen
@@ -257,6 +310,7 @@ export default function HeroSlider() {
                         muted
                         loop
                         playsInline
+                        preload="auto"
                       >
                         <source src={slide.videoUrl} type="video/mp4" />
                       </video>
@@ -275,7 +329,7 @@ export default function HeroSlider() {
                     
                     {slide.videoUrl.includes('vimeo.com') && isVideoPlaying && (
                       <div 
-                        className="absolute bottom-8 right-8 z-20 cursor-pointer"
+                        className="absolute bottom-8 right-8 z-30 cursor-pointer"
                         onClick={handlePauseVideo}
                       >
                         <div className="bg-black/50 backdrop-blur-sm rounded-full p-3 border border-white/20 hover:border-[#cd091b] transition-all duration-300">
@@ -290,38 +344,40 @@ export default function HeroSlider() {
                       src={slide.image}
                       alt={slide.title}
                       className="w-full h-full object-cover object-center"
+                      loading={index === 0 || index === active ? "eager" : "lazy"}
+                      decoding="async"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent lg:bg-gradient-to-r lg:from-black/50 lg:via-black/30 lg:to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent lg:bg-gradient-to-r lg:from-black/60 lg:via-black/40 lg:to-transparent"></div>
                   </>
                 )}
               </div>
 
               {/* Text Content Container - ONLY FOR IMAGE SLIDES */}
               {slide.type !== "video" && (
-                <div className="relative h-full flex items-end pb-32 md:pb-36">
-                  <div className="container mx-auto pl-12 sm:pl-16 lg:pl-24 xl:pl-32 pr-4 sm:pr-6 lg:pr-8">
-                    <div className="max-w-2xl md:max-w-3xl lg:max-w-4xl">
+                <div className="relative h-full flex items-end pb-28 sm:pb-32 md:pb-36 lg:pb-40">
+                  <div className="container mx-auto px-5 sm:px-6 md:px-8 lg:pl-16 xl:pl-24 lg:pr-8">
+                    <div className="max-w-full sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl">
                       {/* Pre-title with animated underline */}
-                      <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-4 overflow-hidden">
+                      <div className="flex items-center gap-2 md:gap-3 mb-3 sm:mb-4 md:mb-5 overflow-hidden">
                         <div className="relative">
-                          <div className="w-8 md:w-12 h-[2px] bg-[#cd091b] transform -rotate-45"></div>
-                          <div className="absolute -top-1 -right-1 w-2 h-2 md:w-3 md:h-3 border-2 border-[#cd091b]"></div>
+                          <div className="w-7 sm:w-9 md:w-11 lg:w-12 h-[2px] bg-[#cd091b] transform -rotate-45"></div>
+                          <div className="absolute -top-1 -right-1 w-2 h-2 md:w-2.5 md:h-2.5 lg:w-3 lg:h-3 border-2 border-[#cd091b]"></div>
                         </div>
-                        <span className="text-xs md:text-sm lg:text-base font-semibold text-white uppercase tracking-[2px] md:tracking-[3px] lg:tracking-[4px]">
+                        <span className="text-[10px] sm:text-xs md:text-sm lg:text-base font-semibold text-white uppercase tracking-[1.5px] sm:tracking-[2px] md:tracking-[3px] lg:tracking-[4px]">
                           {slide.preTitle}
                         </span>
                       </div>
 
                       {/* Main Title - Responsive typography */}
-                      <div className="mb-3 md:mb-4">
-                        <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white leading-tight md:leading-tight">
-                          <div className="h-[1.2em] overflow-hidden mb-1">
+                      <div className="mb-3 sm:mb-4 md:mb-5">
+                        <h1 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white leading-[1.2] sm:leading-tight">
+                          <div className="overflow-hidden mb-1 sm:mb-1.5">
                             <span className="inline-block">
                               {firstLine}
                             </span>
                           </div>
                           
-                          <div className="h-[1.2em] overflow-hidden">
+                          <div className="overflow-hidden">
                             <span className="inline-block">
                               <span className="text-[#cd091b]">{secondLine.split(' ')[0]}</span>
                               {secondLine.split(' ').slice(1).length > 0 && " " + secondLine.split(' ').slice(1).join(' ')}
@@ -329,26 +385,32 @@ export default function HeroSlider() {
                           </div>
                         </h1>
                         
-                        <div className="mt-2 md:mt-3 h-1 bg-gradient-to-r from-[#cd091b] to-transparent w-20"></div>
+                        <div className="mt-2 sm:mt-3 md:mt-4 h-1 bg-gradient-to-r from-[#cd091b] to-transparent w-14 sm:w-16 md:w-20"></div>
                       </div>
 
                       {/* Description */}
-                      <p className="text-sm md:text-base lg:text-lg text-white/90 mb-4 md:mb-6 max-w-xl md:max-w-2xl leading-relaxed">
+                      <p className="text-xs sm:text-sm md:text-base lg:text-lg text-white/95 mb-4 sm:mb-5 md:mb-6 max-w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl leading-relaxed">
                         {slide.desc}
                       </p>
 
-                      {/* CTA Button - Responsive */}
-                      <button className="group relative px-6 py-3 md:px-8 md:py-4 bg-transparent text-white font-bold text-sm md:text-base rounded-lg overflow-hidden transition-all duration-300 border-2 border-white/30 hover:border-[#cd091b]">
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#cd091b]/20 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-                        
-                        <span className="relative z-10 flex items-center gap-2">
-                          <span className="uppercase tracking-[1px] md:tracking-[2px]">Explore now</span>
-                          <ArrowRight className="w-4 h-4 md:w-5 md:h-5 transform transition-transform duration-300 group-hover:translate-x-2" />
-                        </span>
-                        
-                        <div className="absolute top-0 left-0 w-2 h-2 md:w-3 md:h-3 border-t-2 border-l-2 border-[#cd091b] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <div className="absolute bottom-0 right-0 w-2 h-2 md:w-3 md:h-3 border-b-2 border-r-2 border-[#cd091b] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      </button>
+                      {/* CTA Button - SEPARATE FOR EACH SLIDE WITH RED THEME - ONLY FOR IMAGE SLIDES */}
+                      {slide.buttonText && (
+                        <button 
+                          type="button"
+                          onClick={() => handleButtonClick(slide.buttonLink)}
+                          className="group relative px-5 sm:px-7 md:px-9 py-3 sm:py-3.5 md:py-4 bg-[#cd091b] text-white font-bold text-sm sm:text-base md:text-lg rounded-lg overflow-hidden transition-all duration-300 border-2 border-[#cd091b] hover:bg-[#a00716] hover:border-[#a00716] hover:shadow-xl hover:shadow-[#cd091b]/50 active:scale-95 shadow-lg"
+                        >
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                          
+                          <span className="relative z-10 flex items-center gap-2 sm:gap-2.5">
+                            <span className="uppercase tracking-[1px] sm:tracking-[1.5px] md:tracking-[2px]">{slide.buttonText}</span>
+                            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 transform transition-transform duration-300 group-hover:translate-x-2" />
+                          </span>
+                          
+                          <div className="absolute top-0 left-0 w-2.5 h-2.5 md:w-3 md:h-3 border-t-2 border-l-2 border-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                          <div className="absolute bottom-0 right-0 w-2.5 h-2.5 md:w-3 md:h-3 border-b-2 border-r-2 border-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -357,53 +419,68 @@ export default function HeroSlider() {
           );
         })}
 
-        {/* Navigation Arrows */}
+        {/* Navigation Arrows - Improved Mobile Responsiveness */}
         <div className="absolute top-1/2 left-2 md:left-4 lg:left-6 right-2 md:right-4 lg:right-8 transform -translate-y-1/2 z-20">
           <div className="flex justify-between">
             <button
+              type="button"
               onClick={prevSlide}
-              className="group w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 flex items-center justify-center bg-black/30 backdrop-blur-sm rounded-full border border-white/20 hover:border-[#cd091b] transition-all duration-300"
+              className="group w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 lg:w-14 lg:h-14 flex items-center justify-center bg-black/30 backdrop-blur-sm rounded-full border border-white/20 hover:border-[#cd091b] hover:bg-[#cd091b]/20 transition-all duration-300"
             >
-              <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 text-white" />
+              <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 md:w-6 md:h-6 lg:w-7 lg:h-7 text-white" />
             </button>
             
             <button
+              type="button"
               onClick={nextSlide}
-              className="group w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 flex items-center justify-center bg-black/30 backdrop-blur-sm rounded-full border border-white/20 hover:border-[#cd091b] transition-all duration-300"
+              className="group w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 lg:w-14 lg:h-14 flex items-center justify-center bg-black/30 backdrop-blur-sm rounded-full border border-white/20 hover:border-[#cd091b] hover:bg-[#cd091b]/20 transition-all duration-300"
             >
-              <ChevronRight className="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 text-white" />
+              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 md:w-6 md:h-6 lg:w-7 lg:h-7 text-white" />
             </button>
           </div>
         </div>
       </div>
 
-      {/* Bottom Tabs - Pagination Style */}
-      <div className={`absolute bottom-4 md:bottom-6 left-1/2 transform -translate-x-1/2 z-20 transition-opacity duration-300 ${isVideoPlaying ? 'opacity-0 pointer-events-none' : 'opacity-100'}`} style={{ maxWidth: '550px', width: 'calc(100% - 24px)' }}>
-        <div className="flex items-center justify-center gap-2 px-2">
+      {/* Bottom Tabs - Modern Pagination Style - Mobile Responsive */}
+      <div className={`absolute bottom-4 sm:bottom-5 md:bottom-6 left-1/2 transform -translate-x-1/2 z-20 transition-opacity duration-300 ${isVideoPlaying ? 'opacity-0 pointer-events-none' : 'opacity-100'}`} style={{ maxWidth: '550px', width: 'calc(100% - 20px)' }}>
+        <div className="flex items-center justify-center gap-1.5 sm:gap-2 px-1 sm:px-2">
           {/* Prev Button */}
           <button
+            type="button"
             onClick={prevSlide}
             disabled={active === 0}
-            className={`px-4 py-2 rounded-md border-2 bg-white text-sm font-medium transition-all duration-300 ${
+            className={`group px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 bg-white text-xs sm:text-sm font-semibold transition-all duration-300 border-2 ${
               active === 0
                 ? 'border-gray-200 text-gray-400 cursor-not-allowed'
-                : 'border-gray-300 text-gray-600 hover:border-[#cd091b] hover:text-[#cd091b]'
+                : 'border-gray-300 text-gray-600 hover:border-[#cd091b] hover:text-white hover:bg-[#cd091b] hover:shadow-lg hover:shadow-[#cd091b]/30'
             }`}
+            style={{
+              borderTopLeftRadius: '9999px',
+              borderBottomLeftRadius: '9999px',
+              borderTopRightRadius: '6px',
+              borderBottomRightRadius: '6px'
+            }}
           >
-            ← Prev
+            <span className="flex items-center gap-1 sm:gap-1.5">
+              <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+              </svg>
+              <span className="hidden xs:inline">Prev</span>
+            </span>
           </button>
 
           {/* Numbers Container - Scrollable */}
-          <div ref={tabsContainerRef} className="flex overflow-x-auto scroll-smooth gap-2 items-center max-w-[300px] px-1">
+          <div ref={tabsContainerRef} className="flex overflow-x-auto scroll-smooth gap-1.5 sm:gap-2 items-center max-w-[180px] sm:max-w-[240px] md:max-w-[300px] px-0.5 sm:px-1">
             {slides.map((slide, index) => (
               <button
+                type="button"
                 key={slide.id}
                 ref={el => tabRefs.current[index] = el}
                 onClick={() => goToSlide(index)}
-                className={`flex-shrink-0 w-10 h-10 rounded-md border-2 text-sm font-semibold transition-all duration-300 ${
+                className={`flex-shrink-0 w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-lg border-2 text-xs sm:text-sm font-bold transition-all duration-300 ${
                   index === active 
-                    ? 'bg-[#cd091b] border-[#cd091b] text-white shadow-lg' 
-                    : 'bg-white border-gray-300 text-gray-700 hover:border-[#cd091b] hover:text-[#cd091b]'
+                    ? 'bg-[#cd091b] border-[#cd091b] text-white shadow-lg shadow-[#cd091b]/40 scale-110' 
+                    : 'bg-white border-gray-300 text-gray-700 hover:border-[#cd091b] hover:text-[#cd091b] hover:scale-105'
                 }`}
               >
                 {index + 1}
@@ -413,15 +490,27 @@ export default function HeroSlider() {
 
           {/* Next Button */}
           <button
+            type="button"
             onClick={nextSlide}
             disabled={active === slides.length - 1}
-            className={`px-4 py-2 rounded-md border-2 bg-white text-sm font-medium transition-all duration-300 ${
+            className={`group px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 bg-white text-xs sm:text-sm font-semibold transition-all duration-300 border-2 ${
               active === slides.length - 1
                 ? 'border-gray-200 text-gray-400 cursor-not-allowed'
-                : 'border-gray-300 text-gray-600 hover:border-[#cd091b] hover:text-[#cd091b]'
+                : 'border-gray-300 text-gray-600 hover:border-[#cd091b] hover:text-white hover:bg-[#cd091b] hover:shadow-lg hover:shadow-[#cd091b]/30'
             }`}
+            style={{
+              borderTopLeftRadius: '6px',
+              borderBottomLeftRadius: '6px',
+              borderTopRightRadius: '9999px',
+              borderBottomRightRadius: '9999px'
+            }}
           >
-            Next →
+            <span className="flex items-center gap-1 sm:gap-1.5">
+              <span className="hidden xs:inline">Next</span>
+              <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+              </svg>
+            </span>
           </button>
         </div>
       </div>
@@ -441,15 +530,13 @@ export default function HeroSlider() {
           scroll-behavior: smooth;
         }
         
-        iframe {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100% !important;
-          height: 100% !important;
-          object-fit: cover !important;
+        @media (max-width: 640px) {
+          .xs\:inline {
+            display: inline;
+          }
         }
       `}</style>
     </section>
+    </>
   );
 }

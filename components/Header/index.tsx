@@ -1,7 +1,7 @@
 "use client";
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { Search, Menu, X, ChevronDown, ChevronRight } from 'lucide-react';
 import { menuData } from './menuData';
 
@@ -12,6 +12,7 @@ export default function SanpecHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [showTopMenu, setShowTopMenu] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -23,9 +24,12 @@ export default function SanpecHeader() {
     .find(item => item.hasDropdown && item.megaMenu)?.megaMenu.tabs
     .find(tab => tab.id === activeTab);
 
-  // Function to close dropdown
   const closeDropdown = () => {
     setOpenDropdown(null);
+  };
+
+  const isActiveLink = (path) => {
+    return pathname === path;
   };
 
   return (
@@ -104,13 +108,46 @@ export default function SanpecHeader() {
               <div className="lg:hidden bg-white/10 backdrop-blur-sm border-b border-white/10">
                 <div className="grid grid-cols-2 gap-2 p-3">
                   {menuData.topMenuItems.map((item, idx) => (
-                    <Link 
-                      key={idx} 
-                      href={item.path} 
-                      className="text-[10px] font-medium hover:bg-white/20 transition-all px-3 py-2 rounded text-center"
-                    >
-                      {item.title}
-                    </Link>
+                    item.hasDropdown && item.submenu ? (
+                      <div key={idx} className="col-span-2">
+                        <button 
+                          onClick={() => setOpenDropdown(openDropdown === `top-${idx}` ? null : `top-${idx}`)}
+                          className="w-full flex items-center justify-between text-[10px] font-medium hover:bg-white/20 transition-all px-3 py-2 rounded"
+                        >
+                          <span>{item.title}</span>
+                          <ChevronDown size={12} className={`transition-transform ${openDropdown === `top-${idx}` ? 'rotate-180' : ''}`} />
+                        </button>
+                        {openDropdown === `top-${idx}` && (
+                          <div className="mt-1 bg-white/10 rounded p-2 space-y-1">
+                            {item.submenu.map((sub, subIdx) => (
+                              <Link
+                                key={subIdx}
+                                href={sub.path}
+                                target={sub.newTab ? "_blank" : undefined}
+                                className={`block text-[10px] px-3 py-2 hover:bg-white/20 rounded transition-all ${
+                                  isActiveLink(sub.path) ? 'text-[#CD091B] font-bold' : ''
+                                }`}
+                                onClick={() => setShowTopMenu(false)}
+                              >
+                                {sub.title}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <Link 
+                        key={idx} 
+                        href={item.path}
+                        target={item.newTab ? "_blank" : undefined}
+                        className={`text-[10px] font-medium hover:bg-white/20 transition-all px-3 py-2 rounded text-center ${
+                          isActiveLink(item.path) ? 'text-[#CD091B] font-bold' : ''
+                        }`}
+                        onClick={() => setShowTopMenu(false)}
+                      >
+                        {item.title}
+                      </Link>
+                    )
                   ))}
                 </div>
               </div>
@@ -145,9 +182,57 @@ export default function SanpecHeader() {
                   <div className="flex items-center gap-2 md:gap-4 ml-auto">
                     <div className="flex items-center gap-3 lg:gap-4 uppercase">
                       {menuData.topMenuItems.map((item, idx) => (
-                        <Link key={idx} href={item.path} className="text-[11px] lg:text-[12px] hover:opacity-80 transition-all font-medium whitespace-nowrap">
-                          {item.title}
-                        </Link>
+                        item.hasDropdown && item.submenu ? (
+                          <div 
+                            key={idx}
+                            className="relative"
+                            onMouseEnter={() => setOpenDropdown(`top-${idx}`)}
+                            onMouseLeave={() => setOpenDropdown(null)}
+                          >
+                            <button className={`flex items-center gap-1 text-[11px] lg:text-[12px] transition-all font-medium whitespace-nowrap ${
+                              isActiveLink(item.path) ? 'text-[#CD091B]' : 'hover:opacity-80'
+                            }`}>
+                              <span>{item.title}</span>
+                              <ChevronDown size={14} className={`transition-transform ${openDropdown === `top-${idx}` ? 'rotate-180' : ''}`} />
+                            </button>
+                            
+                            {/* Resources Dropdown */}
+                            {openDropdown === `top-${idx}` && (
+                              <div 
+                                className="absolute top-full right-0 mt-1 bg-white shadow-xl rounded-lg overflow-hidden min-w-[220px] z-50"
+                                onMouseEnter={() => setOpenDropdown(`top-${idx}`)}
+                                onMouseLeave={() => setOpenDropdown(null)}
+                                style={{ paddingTop: '4px' }}
+                              >
+                                {item.submenu.map((sub, subIdx) => (
+                                  <Link
+                                    key={subIdx}
+                                    href={sub.path}
+                                    target={sub.newTab ? "_blank" : undefined}
+                                    className={`block px-5 py-3 transition-all text-[12px] font-medium border-b border-gray-200 last:border-0 hover:bg-gray-100 ${
+                                      isActiveLink(sub.path) ? 'text-[#CD091B] font-semibold' : ''
+                                    }`}
+                                    style={!isActiveLink(sub.path) ? { color: '#0D132D' } : {}}
+                                    onClick={closeDropdown}
+                                  >
+                                    {sub.title}
+                                  </Link>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        ) : (
+                          <Link 
+                            key={idx} 
+                            href={item.path}
+                            target={item.newTab ? "_blank" : undefined}
+                            className={`text-[11px] lg:text-[12px] transition-all font-medium whitespace-nowrap ${
+                              isActiveLink(item.path) ? 'text-[#CD091B]' : 'hover:opacity-80'
+                            }`}
+                          >
+                            {item.title}
+                          </Link>
+                        )
                       ))}
                     </div>
                   </div>
@@ -172,7 +257,9 @@ export default function SanpecHeader() {
                             >
                               <button 
                                 onClick={() => router.push(item.path)} 
-                                className="flex items-center gap-1 px-3 xl:px-4 py-4 text-white hover:bg-white/10 transition-all text-[13px] xl:text-[14px] font-medium whitespace-nowrap"
+                                className={`flex items-center gap-1 px-3 xl:px-4 py-4 hover:bg-white/10 transition-all text-[13px] xl:text-[14px] font-medium whitespace-nowrap ${
+                                  isActiveLink(item.path) ? 'text-[#CD091B]' : 'text-white'
+                                }`}
                               >
                                 <span>{item.title}</span>
                                 <ChevronDown size={16} className={`transition-transform duration-300 ${openDropdown === 'electric' ? 'rotate-180' : ''}`} />
@@ -188,14 +275,16 @@ export default function SanpecHeader() {
                             >
                               <button 
                                 onClick={() => router.push(item.path)} 
-                                className="flex items-center gap-1 px-3 xl:px-4 py-4 text-white hover:bg-white/10 transition-all text-[13px] xl:text-[14px] font-medium whitespace-nowrap"
+                                className={`flex items-center gap-1 px-3 xl:px-4 py-4 hover:bg-white/10 transition-all text-[13px] xl:text-[14px] font-medium whitespace-nowrap ${
+                                  isActiveLink(item.path) ? 'text-[#CD091B]' : 'text-white'
+                                }`}
                               >
                                 <span>{item.title}</span>
                                 <ChevronDown size={16} className={`transition-transform duration-300 ${openDropdown === 'sunzia' ? 'rotate-180' : ''}`} />
                               </button>
                               
                               {/* SunZia Simple Dropdown */}
-                              {openDropdown === 'sunzia' && item.submenu && (
+                              {/* {openDropdown === 'sunzia' && item.submenu && (
                                 <div 
                                   className="absolute top-full left-0 bg-white shadow-xl z-50 min-w-[200px] rounded-b-lg overflow-hidden"
                                   onMouseEnter={() => setOpenDropdown('sunzia')}
@@ -213,16 +302,20 @@ export default function SanpecHeader() {
                                     </Link>
                                   ))}
                                 </div>
-                              )}
+                              )} */}
                             </div>
                           )
                         ) : (
                           item.newTab ? (
-                            <a key={idx} href={item.path} className="px-3 xl:px-4 py-4 text-white hover:bg-white/10 transition-all text-[13px] xl:text-[14px] font-medium whitespace-nowrap">
+                            <a key={idx} href={item.path} target="_blank" className={`px-3 xl:px-4 py-4 hover:bg-white/10 transition-all text-[13px] xl:text-[14px] font-medium whitespace-nowrap ${
+                              isActiveLink(item.path) ? 'text-[#CD091B]' : 'text-white'
+                            }`}>
                               {item.title}
                             </a>
                           ) : (
-                            <Link key={idx} href={item.path} className="px-3 xl:px-4 py-4 text-white hover:bg-white/10 transition-all text-[13px] xl:text-[14px] font-medium whitespace-nowrap">
+                            <Link key={idx} href={item.path} className={`px-3 xl:px-4 py-4 hover:bg-white/10 transition-all text-[13px] xl:text-[14px] font-medium whitespace-nowrap ${
+                              isActiveLink(item.path) ? 'text-[#CD091B]' : 'text-white'
+                            }`}>
                               {item.title}
                             </Link>
                           )
@@ -232,7 +325,6 @@ export default function SanpecHeader() {
 
                     {/* Mobile Navigation */}
                     <div className="lg:hidden flex items-center justify-between w-full">
-                      {/* Mobile Menu Title */}
                       <div className="text-sm font-medium uppercase opacity-0">
                         Main Menu
                       </div>
@@ -291,7 +383,9 @@ export default function SanpecHeader() {
                     <div key={idx} className="border-b border-white/10 last:border-0">
                       <button 
                         onClick={() => setOpenDropdown(openDropdown === 'electric' ? null : 'electric')}
-                        className="flex items-center justify-between w-full px-6 py-4 text-white hover:bg-white/10 transition-all"
+                        className={`flex items-center justify-between w-full px-6 py-4 hover:bg-white/10 transition-all ${
+                          isActiveLink(item.path) ? 'text-[#CD091B]' : 'text-white'
+                        }`}
                       >
                         <span className="font-medium">{item.title}</span>
                         <ChevronDown size={20} className={`transition-transform duration-300 ${openDropdown === 'electric' ? 'rotate-180' : ''}`} />
@@ -307,7 +401,7 @@ export default function SanpecHeader() {
                                 onClick={() => setActiveTab(activeTab === tab.id ? null : tab.id)}
                                 className={`flex-shrink-0 px-4 py-3 text-sm font-medium whitespace-nowrap ${
                                   activeTab === tab.id 
-                                    ? 'bg-[#CD091B] text-white' 
+                                    ? 'text-[#CD091B] border-b-2 border-[#CD091B]' 
                                     : 'text-white/80 hover:bg-white/10'
                                 }`}
                               >
@@ -336,7 +430,9 @@ export default function SanpecHeader() {
                                       className="block p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-all"
                                       onClick={() => setMobileMenuOpen(false)}
                                     >
-                                      <div className="font-medium text-white mb-1">{subItem.title}</div>
+                                      <div className={`font-medium mb-1 ${
+                                        isActiveLink(subItem.link) ? 'text-[#CD091B]' : 'text-white'
+                                      }`}>{subItem.title}</div>
                                       <div className="text-sm text-white/70 line-clamp-2">{subItem.desc}</div>
                                     </Link>
                                   ))}
@@ -352,13 +448,15 @@ export default function SanpecHeader() {
                     <div key={idx} className="border-b border-white/10 last:border-0">
                       <button 
                         onClick={() => setOpenDropdown(openDropdown === 'sunzia' ? null : 'sunzia')}
-                        className="flex items-center justify-between w-full px-6 py-4 text-white hover:bg-white/10 transition-all"
+                        className={`flex items-center justify-between w-full px-6 py-4 hover:bg-white/10 transition-all ${
+                          isActiveLink(item.path) ? 'text-[#CD091B]' : 'text-white'
+                        }`}
                       >
                         <span className="font-medium">{item.title}</span>
                         <ChevronDown size={20} className={`transition-transform duration-300 ${openDropdown === 'sunzia' ? 'rotate-180' : ''}`} />
                       </button>
 
-                      {openDropdown === 'sunzia' && item.submenu && (
+                      {/* {openDropdown === 'sunzia' && item.submenu && (
                         <div className="bg-white/5">
                           {item.submenu.map((subItem, subIdx) => (
                             <Link
@@ -371,15 +469,18 @@ export default function SanpecHeader() {
                             </Link>
                           ))}
                         </div>
-                      )}
+                      )} */}
                     </div>
                   )
                 ) : (
                   item.newTab ? (
                     <a 
                       key={idx} 
-                      href={item.path} 
-                      className="px-6 py-4 text-white hover:bg-white/10 transition-all border-b border-white/10 font-medium"
+                      href={item.path}
+                      target="_blank"
+                      className={`px-6 py-4 hover:bg-white/10 transition-all border-b border-white/10 font-medium ${
+                        isActiveLink(item.path) ? 'text-[#CD091B]' : 'text-white'
+                      }`}
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       {item.title}
@@ -388,7 +489,9 @@ export default function SanpecHeader() {
                     <Link 
                       key={idx} 
                       href={item.path} 
-                      className="px-6 py-4 text-white hover:bg-white/10 transition-all border-b border-white/10 font-medium"
+                      className={`px-6 py-4 hover:bg-white/10 transition-all border-b border-white/10 font-medium ${
+                        isActiveLink(item.path) ? 'text-[#CD091B]' : 'text-white'
+                      }`}
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       {item.title}
@@ -402,14 +505,46 @@ export default function SanpecHeader() {
                 <div className="text-sm font-medium text-white/80 mb-3">Quick Links</div>
                 <div className="grid grid-cols-2 gap-2">
                   {menuData.topMenuItems.map((item, idx) => (
-                    <Link 
-                      key={idx} 
-                      href={item.path} 
-                      className="text-center px-3 py-2 text-sm bg-white/10 rounded hover:bg-white/20 transition-all"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      {item.title}
-                    </Link>
+                    item.hasDropdown && item.submenu ? (
+                      <div key={idx} className="col-span-2">
+                        <button 
+                          onClick={() => setOpenDropdown(openDropdown === `mob-top-${idx}` ? null : `mob-top-${idx}`)}
+                          className="w-full flex items-center justify-between text-sm px-3 py-2 bg-white/10 rounded hover:bg-white/20 transition-all"
+                        >
+                          <span>{item.title}</span>
+                          <ChevronDown size={16} className={`transition-transform ${openDropdown === `mob-top-${idx}` ? 'rotate-180' : ''}`} />
+                        </button>
+                        {openDropdown === `mob-top-${idx}` && (
+                          <div className="mt-2 bg-white/10 rounded p-2 space-y-1">
+                            {item.submenu.map((sub, subIdx) => (
+                              <Link
+                                key={subIdx}
+                                href={sub.path}
+                                target={sub.newTab ? "_blank" : undefined}
+                                className={`block text-sm px-3 py-2 hover:bg-white/20 rounded transition-all ${
+                                  isActiveLink(sub.path) ? 'text-[#CD091B] font-bold' : ''
+                                }`}
+                                onClick={() => setMobileMenuOpen(false)}
+                              >
+                                {sub.title}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <Link 
+                        key={idx} 
+                        href={item.path}
+                        target={item.newTab ? "_blank" : undefined}
+                        className={`text-center px-3 py-2 text-sm bg-white/10 rounded hover:bg-white/20 transition-all ${
+                          isActiveLink(item.path) ? 'text-[#CD091B] font-bold' : ''
+                        }`}
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        {item.title}
+                      </Link>
+                    )
                   ))}
                 </div>
               </div>
@@ -418,126 +553,124 @@ export default function SanpecHeader() {
         )}
 
         {/* Electric Power Mega Menu Dropdown - Desktop Only */}
-       {/* Electric Power Mega Menu Dropdown - Desktop Only */}
-{openDropdown === 'electric' && (
-  <div 
-    className="hidden lg:block absolute top-full left-0 w-full shadow-2xl z-50"
-    onMouseEnter={() => setOpenDropdown('electric')}
-    onMouseLeave={() => setOpenDropdown(null)}
-  >
-    <div className="max-w-[1400px] mx-auto">
-      <div className="flex">
-        {/* Left Section - Full Image Background */}
-        <div className="w-[320px] flex-shrink-0 relative overflow-hidden group">
-          {/* Background Image */}
-          <img 
-            src={currentTab?.image}
-            alt={currentTab?.title} 
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-          />
-          
-          {/* Gradient Overlay for better text visibility */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/80"></div>
-          
-          {/* Content */}
-          <div className="relative z-10 h-full flex flex-col justify-end p-8">
-            {/* Category Name with Underline */}
-            <div>
-              <h3 className="text-white text-2xl font-bold leading-tight drop-shadow-lg inline-block">
-                {currentTab?.title}
-              </h3>
-              {/* Awesome Underline */}
-              <div className="mt-2 h-1 w-20 bg-gradient-to-r from-white via-white/80 to-transparent rounded-full"></div>
-            </div>
-          </div>
-        </div>
-
-        {/* Right Section - White Background with Tabs and Submenu */}
-        <div className="flex-1 bg-white px-[50px] py-8">
-          <div className="flex gap-6">
-            <div className="w-[200px] flex-shrink-0 space-y-2">
-              {menuData.navigationItems.find(item => item.hasDropdown && item.megaMenu)?.megaMenu.tabs.map((tab) => (
-                <button
-                  key={tab.id}
-                  onMouseEnter={() => setActiveTab(tab.id)}
-                  className={`w-full text-left px-4 py-3 rounded-lg transition-all flex items-center justify-between group ${
-                    activeTab === tab.id 
-                      ? 'text-white font-semibold shadow-md' 
-                      : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200 hover:border-gray-300'
-                  }`}
-                  style={activeTab === tab.id ? {
-                    background: 'linear-gradient(135deg, #101631 0%, #1a2347 100%)'
-                  } : {}}
-                >
-                  <span className="text-sm uppercase leading-tight">{tab.title}</span>
-                  <ChevronRight size={16} className={`transition-transform ${activeTab === tab.id ? 'translate-x-1' : ''}`} />
-                </button>
-              ))}
-            </div>
-
-            {/* Submenu */}
-            <div className="flex-1">
-              <div className="grid grid-cols-2 gap-4">
-                {currentTab?.items.map((item, idx) => (
-                  <Link
-                    key={idx}
-                    href={item.link}
-                    onClick={closeDropdown}
-                    className="group bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-1 border border-gray-200"
-                    style={{
-                      borderColor: 'transparent'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = '#CD091B';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = 'transparent';
-                    }}
-                  >
-                    <div className="relative overflow-hidden">
-                      <img 
-                        src={item.image}
-                        alt={item.title}
-                        className="w-full h-40 object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
-                      {/* Gradient overlay on hover with custom color */}
-                      <div 
-                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                        style={{
-                          background: 'linear-gradient(to top, rgba(205, 9, 27, 0.3), transparent)'
-                        }}
-                      ></div>
+        {openDropdown === 'electric' && (
+          <div 
+            className="hidden lg:block absolute top-full left-0 w-full shadow-2xl z-50"
+            onMouseEnter={() => setOpenDropdown('electric')}
+            onMouseLeave={() => setOpenDropdown(null)}
+          >
+            <div className="max-w-[1400px] mx-auto">
+              <div className="flex">
+                {/* Left Section - Full Image Background */}
+                <div className="w-[320px] flex-shrink-0 relative overflow-hidden group">
+                  <img 
+                    src={currentTab?.image}
+                    alt={currentTab?.title} 
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/80"></div>
+                  
+                  <div className="relative z-10 h-full flex flex-col justify-end p-8">
+                    <div>
+                      <h3 className="text-white text-2xl font-bold leading-tight drop-shadow-lg inline-block">
+                        {currentTab?.title}
+                      </h3>
+                      <div className="mt-2 h-1 w-20 bg-gradient-to-r from-white via-white/80 to-transparent rounded-full"></div>
                     </div>
-                    <div className="p-4">
-                      <h4 
-                        className="font-bold text-gray-900 mb-2 transition-colors text-base leading-snug"
-                        style={{
-                          color: undefined
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.color = '#CD091B';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.color = '';
-                        }}
-                      >
-                        {item.title}
-                      </h4>
-                      <p className="text-sm text-gray-600 line-clamp-2 leading-relaxed">
-                        {item.desc}
-                      </p>
+                  </div>
+                </div>
+
+                {/* Right Section - White Background with Tabs and Submenu */}
+                <div className="flex-1 bg-white px-[50px] py-8">
+                  <div className="flex gap-6">
+                    <div className="w-[200px] flex-shrink-0 space-y-2">
+                      {menuData.navigationItems.find(item => item.hasDropdown && item.megaMenu)?.megaMenu.tabs.map((tab) => (
+                        <button
+                          key={tab.id}
+                          onMouseEnter={() => setActiveTab(tab.id)}
+                          className={`w-full text-left px-4 py-3 rounded-lg transition-all flex items-center justify-between group ${
+                            activeTab === tab.id 
+                              ? 'text-[#CD091B] font-semibold shadow-md border-l-4 border-[#CD091B] bg-gray-50' 
+                              : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200 hover:border-gray-300'
+                          }`}
+                        >
+                          <span className="text-sm uppercase leading-tight">{tab.title}</span>
+                          <ChevronRight size={16} className={`transition-transform ${activeTab === tab.id ? 'translate-x-1' : ''}`} />
+                        </button>
+                      ))}
                     </div>
-                  </Link>
-                ))}
+
+                    <div className="flex-1">
+                      <div className="grid grid-cols-2 gap-4">
+                        {currentTab?.items.map((item, idx) => (
+                          <Link
+                            key={idx}
+                            href={item.link}
+                            onClick={closeDropdown}
+                            className={`group bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-1 border ${
+                              isActiveLink(item.link) ? 'border-[#CD091B]' : 'border-gray-200'
+                            }`}
+                            style={{
+                              borderColor: isActiveLink(item.link) ? '#CD091B' : 'transparent'
+                            }}
+                            onMouseEnter={(e) => {
+                              if (!isActiveLink(item.link)) {
+                                e.currentTarget.style.borderColor = '#CD091B';
+                              }
+                            }}
+                            onMouseLeave={(e) => {
+                              if (!isActiveLink(item.link)) {
+                                e.currentTarget.style.borderColor = 'transparent';
+                              }
+                            }}
+                          >
+                            <div className="relative overflow-hidden">
+                              <img 
+                                src={item.image}
+                                alt={item.title}
+                                className="w-full h-40 object-cover transition-transform duration-500 group-hover:scale-110"
+                              />
+                              <div 
+                                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                                style={{
+                                  background: 'linear-gradient(to top, rgba(205, 9, 27, 0.3), transparent)'
+                                }}
+                              ></div>
+                            </div>
+                            <div className="p-4">
+                              <h4 
+                                className={`font-bold mb-2 transition-colors text-base leading-snug ${
+                                  isActiveLink(item.link) ? 'text-[#CD091B]' : 'text-gray-900'
+                                }`}
+                                style={{
+                                  color: isActiveLink(item.link) ? '#CD091B' : undefined
+                                }}
+                                onMouseEnter={(e) => {
+                                  e.currentTarget.style.color = '#CD091B';
+                                }}
+                                onMouseLeave={(e) => {
+                                  if (!isActiveLink(item.link)) {
+                                    e.currentTarget.style.color = '';
+                                  }
+                                }}
+                              >
+                                {item.title}
+                              </h4>
+                              <p className="text-sm text-gray-600 line-clamp-2 leading-relaxed">
+                                {item.desc}
+                              </p>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-)}
-{/* electric power Desktop end code */}
+        )}
       </header>
     </>
   );
