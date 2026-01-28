@@ -8,6 +8,8 @@ import "node_modules/react-modal-video/css/modal-video.css";
 import "../styles/index.css";
 import './globals.css'
 import SmoothScroll from '@/components/SmoothScroll';
+import { SliderProvider } from './context/SliderContext'; // Import SliderProvider
+import { Providers } from "./providers";
 
 const openSans = Open_Sans({ 
   subsets: ["latin"],
@@ -31,15 +33,15 @@ export default function RootLayout({
 
       <body className={`bg-[#FCFCFC] dark:bg-black ${openSans.variable}`}>
          <SmoothScroll />
-        <Providers>
-          <Header />
-          {children}
-          <Footer />
-          <ScrollToTop />
-        </Providers>
+        <SliderProvider>
+          <Providers>
+            <Header />
+            {children}
+            <Footer />
+            <ScrollToTop />
+          </Providers>
+        </SliderProvider>
       </body>
     </html>
   );
 }
-
-import { Providers } from "./providers";

@@ -1,6 +1,5 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 
 export default function SanpecTabs() {
@@ -22,14 +21,14 @@ export default function SanpecTabs() {
       image: 'https://sanpec-excellence.com/wp-content/uploads/2025/01/New-model-5.png',
       content: (
         <div>
-          <div className="mb-10">
-            <h2 className="text-5xl md:text-6xl font-black mb-3" style={{ color: '#101631', letterSpacing: '-0.02em' }}>
+          <div className="mb-6">
+            <h2 className="text-4xl md:text-5xl font-black mb-2" style={{ color: '#101631', letterSpacing: '-0.02em' }}>
               WHO WE ARE
             </h2>
-            <div className="w-24 h-1.5 bg-[#CD091B] rounded-full"></div>
+            <div className="w-20 h-1.5 bg-[#CD091B] rounded-full"></div>
           </div>
-          <div className="space-y-6 text-lg leading-relaxed text-gray-700">
-            <p className="relative pl-8 py-4 border-l-4 border-[#CD091B] bg-gray-50 rounded-r-lg">
+          <div className="space-y-4 text-base md:text-lg leading-relaxed text-gray-700">
+            <p className="pl-4 py-3 border-l-4 border-[#CD091B] bg-gray-50 rounded-r-lg">
               SANPEC is an innovation-driven, purpose-led company specializing in design, engineering, testing, inspection, quality, and complete lifecycle asset management services for the electric power and infrastructure industries.
             </p>
             <p>We discover, innovate, and disseminate best practices and new ideas that support evolution and create value for our stakeholders.</p>
@@ -43,33 +42,24 @@ export default function SanpecTabs() {
       image: 'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture7.jpg',
       content: (
         <div>
-          <div className="mb-10">
-            <h2 className="text-5xl md:text-6xl font-black mb-3" style={{ color: '#101631', letterSpacing: '-0.02em' }}>
+          <div className="mb-6">
+            <h2 className="text-4xl md:text-5xl font-black mb-2" style={{ color: '#101631', letterSpacing: '-0.02em' }}>
               VISION
             </h2>
-            <div className="w-24 h-1.5 bg-[#CD091B] rounded-full"></div>
+            <div className="w-20 h-1.5 bg-[#CD091B] rounded-full"></div>
           </div>
-          <div className="space-y-6 text-lg leading-relaxed text-gray-700">
-            <p className="relative pl-8 py-4 border-l-4 border-[#CD091B] bg-gray-50 rounded-r-lg">
+          <div className="space-y-4 text-base md:text-lg leading-relaxed text-gray-700">
+            <p className="pl-4 py-3 border-l-4 border-[#CD091B] bg-gray-50 rounded-r-lg">
               To be the trusted and innovative leader in designing and building electric transmission and distribution (T&D) lines. We aim to revolutionize the U.S. energy sector by achieving excellence, driving innovation, enhancing resilience, and improving the quality of life for the American people.
             </p>
-            <div className="bg-white p-6 rounded-xl border-l-4 border-[#101631] shadow-md hover:shadow-xl transition-shadow duration-300">
-              <p className="flex items-start gap-4">
-                <span className="text-2xl">⚡</span>
-                <span>Build a robust and reliable grid to power the American people.</span>
-              </p>
+            <div className="bg-white p-4 rounded-lg border-l-4 border-[#101631] shadow-sm">
+              <p>Build a robust and reliable grid to power the American people.</p>
             </div>
-            <div className="bg-white p-6 rounded-xl border-l-4 border-[#CD091B] shadow-md hover:shadow-xl transition-shadow duration-300">
-              <p className="flex items-start gap-4">
-                <span className="text-2xl">🛡️</span>
-                <span>Enhance resilience to withstand disruptions and adapt to evolving demands.</span>
-              </p>
+            <div className="bg-white p-4 rounded-lg border-l-4 border-[#CD091B] shadow-sm">
+              <p>Enhance resilience to withstand disruptions and adapt to evolving demands.</p>
             </div>
-            <div className="bg-white p-6 rounded-xl border-l-4 border-[#101631] shadow-md hover:shadow-xl transition-shadow duration-300">
-              <p className="flex items-start gap-4">
-                <span className="text-2xl">✨</span>
-                <span>Drive innovation and champion responsible business practices for a cleaner future.</span>
-              </p>
+            <div className="bg-white p-4 rounded-lg border-l-4 border-[#101631] shadow-sm">
+              <p>Drive innovation and champion responsible business practices for a cleaner future.</p>
             </div>
           </div>
         </div>
@@ -80,14 +70,14 @@ export default function SanpecTabs() {
       image: 'https://sanpec-excellence.com/wp-content/uploads/2025/01/WhatsApp-Image-2025-01-28-at-21.49.26-1024x512.jpg',
       content: (
         <div>
-          <div className="mb-10">
-            <h2 className="text-5xl md:text-6xl font-black mb-3" style={{ color: '#101631', letterSpacing: '-0.02em' }}>
+          <div className="mb-6">
+            <h2 className="text-4xl md:text-5xl font-black mb-2" style={{ color: '#101631', letterSpacing: '-0.02em' }}>
               MISSION
             </h2>
-            <div className="w-24 h-1.5 bg-[#CD091B] rounded-full"></div>
+            <div className="w-20 h-1.5 bg-[#CD091B] rounded-full"></div>
           </div>
-          <div className="space-y-6 text-lg leading-relaxed text-gray-700">
-            <p className="relative pl-8 py-4 border-l-4 border-[#CD091B] bg-gray-50 rounded-r-lg">
+          <div className="space-y-4 text-base md:text-lg leading-relaxed text-gray-700">
+            <p className="pl-4 py-3 border-l-4 border-[#CD091B] bg-gray-50 rounded-r-lg">
               We design, modernize, and manage electric power transmission and distribution grids with a strong commitment to innovation, excellence, and sustainability. At SANPEC, we aim to provide quality transmission and distribution (T&D) materials, innovative solutions, and exceptional services for a safe, robust, reliable, and resilient power grid.
             </p>
             <p>Our multidisciplinary, award-winning team utilizes expertise, wisdom, and entrepreneurial spirit to manage risks and create value that empowers individuals, enhances grid reliability, and strengthens the American economy.</p>
@@ -101,77 +91,56 @@ export default function SanpecTabs() {
       image: null,
       content: (
         <div>
-          <div className="mb-10">
-            <h2 className="text-5xl md:text-6xl font-black mb-3" style={{ color: '#101631', letterSpacing: '-0.02em' }}>
+          <div className="mb-6">
+            <h2 className="text-4xl md:text-5xl font-black mb-2" style={{ color: '#101631', letterSpacing: '-0.02em' }}>
               VALUES
             </h2>
-            <div className="w-24 h-1.5 bg-[#CD091B] rounded-full"></div>
+            <div className="w-20 h-1.5 bg-[#CD091B] rounded-full"></div>
           </div>
-          <div className="space-y-6 text-lg leading-relaxed text-gray-700">
-            <div className="bg-white p-6 rounded-xl border-l-4 border-[#CD091B] shadow-md">
-              <p><strong className="text-2xl block mb-3" style={{ color: '#CD091B' }}>Innovation and Resilience:</strong> We focus on enhancing innovation performance and building foresight capacity to manage uncertainty. This approach aims to increase the value realized in our products, services, and processes. We design and advocate for resilient power grids that withstand and adapt to changing conditions and unforeseen disruptions.</p>
+          <div className="space-y-4 text-base md:text-lg leading-relaxed text-gray-700">
+            <div className="bg-white p-4 rounded-lg border-l-4 border-[#CD091B] shadow-sm">
+              <p><strong className="text-xl block mb-2" style={{ color: '#CD091B' }}>Innovation and Resilience:</strong> We focus on enhancing innovation performance and building foresight capacity to manage uncertainty. This approach aims to increase the value realized in our products, services, and processes. We design and advocate for resilient power grids that withstand and adapt to changing conditions and unforeseen disruptions.</p>
             </div>
             
-            <div className="bg-white p-6 rounded-xl border-l-4 border-[#101631] shadow-md">
-              <p><strong className="text-2xl block mb-3" style={{ color: '#101631' }}>Quality and Excellence:</strong> We are committed to upholding the highest quality standards in all our projects and services, ensuring structural integrity and customer-focused excellence.</p>
+            <div className="bg-white p-4 rounded-lg border-l-4 border-[#101631] shadow-sm">
+              <p><strong className="text-xl block mb-2" style={{ color: '#101631' }}>Quality and Excellence:</strong> We are committed to upholding the highest quality standards in all our projects and services, ensuring structural integrity and customer-focused excellence.</p>
             </div>
             
-            <div className="ml-8 space-y-4">
-              <p className="flex items-start gap-3 hover:translate-x-2 transition-transform duration-300">
-                <ChevronRight className="mt-1 flex-shrink-0" style={{ color: '#CD091B' }} size={22} strokeWidth={3} />
-                <span>Continuous Improvement: We foster a culture of continuous improvement and sustained innovation to solve complex challenges in the energy sector.</span>
-              </p>
-              <p className="flex items-start gap-3 hover:translate-x-2 transition-transform duration-300">
-                <ChevronRight className="mt-1 flex-shrink-0" style={{ color: '#101631' }} size={22} strokeWidth={3} />
-                <span>High-performing teams: We focus on building high-performing teams and creating resilient energy systems.</span>
-              </p>
-              <p className="flex items-start gap-3 hover:translate-x-2 transition-transform duration-300">
-                <ChevronRight className="mt-1 flex-shrink-0" style={{ color: '#CD091B' }} size={22} strokeWidth={3} />
-                <span>Proven management framework: Our proven management systems, award-winning engineers, and leading foresight experts guide our strategic planning processes that drive impactful results.</span>
-              </p>
-              <p className="flex items-start gap-3 hover:translate-x-2 transition-transform duration-300">
-                <ChevronRight className="mt-1 flex-shrink-0" style={{ color: '#101631' }} size={22} strokeWidth={3} />
-                <span>Real-time, integrated quality management system: Our real-time quality management solutions enhance organizational visibility, optimize cross-functional workflows, and enable real-time data sharing. This unique system supports informed and faster decision-making, significantly contributing to positive business value and enhanced customer loyalty.</span>
-              </p>
-              <p className="flex items-start gap-3 hover:translate-x-2 transition-transform duration-300">
-                <ChevronRight className="mt-1 flex-shrink-0" style={{ color: '#CD091B' }} size={22} strokeWidth={3} />
-                <span>Customer-focused excellence: Our unique process excellence system has helped us achieve customer-focused excellence and faster responses to market and business changes.</span>
-              </p>
+            <div className="ml-4 space-y-2">
+              <p className="pl-3 border-l-2 border-gray-300">Continuous Improvement: We foster a culture of continuous improvement and sustained innovation to solve complex challenges in the energy sector.</p>
+              <p className="pl-3 border-l-2 border-gray-300">High-performing teams: We focus on building high-performing teams and creating resilient energy systems.</p>
+              <p className="pl-3 border-l-2 border-gray-300">Proven management framework: Our proven management systems, award-winning engineers, and leading foresight experts guide our strategic planning processes that drive impactful results.</p>
+              <p className="pl-3 border-l-2 border-gray-300">Real-time, integrated quality management system: Our real-time quality management solutions enhance organizational visibility, optimize cross-functional workflows, and enable real-time data sharing. This unique system supports informed and faster decision-making, significantly contributing to positive business value and enhanced customer loyalty.</p>
+              <p className="pl-3 border-l-2 border-gray-300">Customer-focused excellence: Our unique process excellence system has helped us achieve customer-focused excellence and faster responses to market and business changes.</p>
             </div>
             
-            <div className="bg-white p-6 rounded-xl border-l-4 border-[#CD091B] shadow-md">
-              <p><strong className="text-2xl block mb-3" style={{ color: '#CD091B' }}>Visionary Leadership:</strong> We focus on creating long-term value for all stakeholders.</p>
+            <div className="bg-white p-4 rounded-lg border-l-4 border-[#CD091B] shadow-sm">
+              <p><strong className="text-xl block mb-2" style={{ color: '#CD091B' }}>Visionary Leadership:</strong> We focus on creating long-term value for all stakeholders.</p>
             </div>
             
-            <div className="ml-8 space-y-4">
-              <p className="flex items-start gap-3 hover:translate-x-2 transition-transform duration-300">
-                <ChevronRight className="mt-1 flex-shrink-0" style={{ color: '#101631' }} size={22} strokeWidth={3} />
-                <span>Responsible behavior: We advocate for and implement sustainable practices to minimize environmental impact in our operations and projects.</span>
-              </p>
-              <p className="flex items-start gap-3 hover:translate-x-2 transition-transform duration-300">
-                <ChevronRight className="mt-1 flex-shrink-0" style={{ color: '#CD091B' }} size={22} strokeWidth={3} />
-                <span>Health and Safety: We ensure the health and safety of our workforce, clients, and the communities we serve is paramount in all our endeavors.</span>
-              </p>
+            <div className="ml-4 space-y-2">
+              <p className="pl-3 border-l-2 border-gray-300">Responsible behavior: We advocate for and implement sustainable practices to minimize environmental impact in our operations and projects.</p>
+              <p className="pl-3 border-l-2 border-gray-300">Health and Safety: We ensure the health and safety of our workforce, clients, and the communities we serve is paramount in all our endeavors.</p>
             </div>
             
-            <div className="bg-white p-6 rounded-xl border-l-4 border-[#101631] shadow-md">
-              <p><strong className="text-2xl block mb-3" style={{ color: '#101631' }}>Integrity:</strong> Committed to being whole, we model integrity by wholeheartedly living our mission. We conduct our business with the utmost integrity, fostering trust with clients, partners, and communities. We lead with clarity, kindness and authenticity.</p>
+            <div className="bg-white p-4 rounded-lg border-l-4 border-[#101631] shadow-sm">
+              <p><strong className="text-xl block mb-2" style={{ color: '#101631' }}>Integrity:</strong> Committed to being whole, we model integrity by wholeheartedly living our mission. We conduct our business with the utmost integrity, fostering trust with clients, partners, and communities. We lead with clarity, kindness and authenticity.</p>
             </div>
             
-            <div className="bg-white p-6 rounded-xl border-l-4 border-[#CD091B] shadow-md">
-              <p><strong className="text-2xl block mb-3" style={{ color: '#CD091B' }}>Trust:</strong> We strengthen trust through teamwork, open communication, and transparency.</p>
+            <div className="bg-white p-4 rounded-lg border-l-4 border-[#CD091B] shadow-sm">
+              <p><strong className="text-xl block mb-2" style={{ color: '#CD091B' }}>Trust:</strong> We strengthen trust through teamwork, open communication, and transparency.</p>
             </div>
             
-            <div className="bg-white p-6 rounded-xl border-l-4 border-[#101631] shadow-md">
-              <p><strong className="text-2xl block mb-3" style={{ color: '#101631' }}>Co-Creation:</strong> We believe in enhancing capabilities by collaborating with broader stakeholders to co-create solutions that advance the energy sector and create value for our stakeholders. We believe that our success is closely tied to the success of our value-chain partners.</p>
+            <div className="bg-white p-4 rounded-lg border-l-4 border-[#101631] shadow-sm">
+              <p><strong className="text-xl block mb-2" style={{ color: '#101631' }}>Co-Creation:</strong> We believe in enhancing capabilities by collaborating with broader stakeholders to co-create solutions that advance the energy sector and create value for our stakeholders. We believe that our success is closely tied to the success of our value-chain partners.</p>
             </div>
             
-            <div className="bg-white p-6 rounded-xl border-l-4 border-[#CD091B] shadow-md">
-              <p><strong className="text-2xl block mb-3" style={{ color: '#CD091B' }}>Curiosity:</strong> We practice curiosity through active listening and being fully present with every person we encounter.</p>
+            <div className="bg-white p-4 rounded-lg border-l-4 border-[#CD091B] shadow-sm">
+              <p><strong className="text-xl block mb-2" style={{ color: '#CD091B' }}>Curiosity:</strong> We practice curiosity through active listening and being fully present with every person we encounter.</p>
             </div>
             
-            <div className="bg-white p-6 rounded-xl border-l-4 border-[#101631] shadow-md">
-              <p><strong className="text-2xl block mb-3" style={{ color: '#101631' }}>Humility:</strong> We embody humility while balancing it with a strong sense of self and purpose.</p>
+            <div className="bg-white p-4 rounded-lg border-l-4 border-[#101631] shadow-sm">
+              <p><strong className="text-xl block mb-2" style={{ color: '#101631' }}>Humility:</strong> We embody humility while balancing it with a strong sense of self and purpose.</p>
             </div>
           </div>
         </div>
@@ -183,22 +152,30 @@ export default function SanpecTabs() {
   const tabKeys = Object.keys(tabsData);
 
   return (
-    <div className="min-h-screen bg-gray-50 relative overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden">
       
-      {/* Grid Pattern */}
-      <div className="absolute inset-0 opacity-[0.03]">
-        <div className="absolute inset-0" style={{
-          backgroundImage: 'repeating-linear-gradient(0deg, #ffffff 0px, #ffffff 1px, transparent 1px, transparent 20px), repeating-linear-gradient(90deg, #ffffff 0px, #ffffff 1px, transparent 1px, transparent 20px)',
-          backgroundSize: '20px 20px'
-        }}></div>
+      {/* Gradient Background - Gray to White */}
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-100 via-gray-50 to-white"></div>
+      
+      {/* Grid Pattern - Fades from bottom to top */}
+      <div className="absolute inset-0">
+        <div 
+          className="absolute inset-0 opacity-[0.15]"
+          style={{
+            backgroundImage: 'repeating-linear-gradient(0deg, #d1d5db 0px, #d1d5db 1px, transparent 1px, transparent 40px), repeating-linear-gradient(90deg, #d1d5db 0px, #d1d5db 1px, transparent 1px, transparent 40px)',
+            backgroundSize: '40px 40px',
+            maskImage: 'linear-gradient(to top, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 50%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(to top, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 50%, transparent 100%)'
+          }}
+        ></div>
       </div>
 
       {/* Main Content */}
       <div className="w-full max-w-[1800px] px-3 md:px-6 lg:px-8 py-6 md:py-10 relative z-10 mx-auto">
-        <div className="flex flex-col lg:flex-row gap-4 md:gap-6">
+        <div className="flex flex-col lg:flex-row gap-4 md:gap-6 lg:h-[calc(100vh-8rem)]">
           
-          {/* Sidebar - Tower Design with Tabs */}
-          <aside className="w-full lg:w-96 bg-gradient-to-b from-white to-gray-50 border-2 border-gray-200 shadow-lg">
+          {/* Sidebar - Fixed, No Scroll */}
+          <aside className="w-full lg:w-96 bg-gradient-to-b from-white to-gray-50 border-2 border-gray-200 shadow-lg lg:overflow-y-auto lg:h-full">
             <nav className="py-8 px-6 relative">
               {/* Central Tower Pole */}
               <div className="absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-[#CD091B] via-gray-400 to-gray-300"></div>
@@ -276,12 +253,12 @@ export default function SanpecTabs() {
             </nav>
           </aside>
 
-          {/* Content Area */}
-          <div className="flex-1 min-w-0">
+          {/* Content Area - Scrollable Only */}
+          <main className="flex-1 lg:overflow-y-auto lg:h-full">
             <div className="bg-white shadow-lg border-2 border-gray-200">
               
-              <div className="p-5 md:p-8 lg:p-10">
-                <div className={`grid ${activeContent.image ? 'lg:grid-cols-2' : 'lg:grid-cols-1'} gap-8 md:gap-12 items-start`}>
+              <div className="p-4 md:p-6 lg:p-8">
+                <div className={`grid ${activeContent.image ? 'lg:grid-cols-2' : 'lg:grid-cols-1'} gap-6 md:gap-8 items-start`}>
                   
                   {/* Text Content */}
                   <div className="space-y-4">
@@ -317,7 +294,7 @@ export default function SanpecTabs() {
                 </div>
               </div>
             </div>
-          </div>
+          </main>
 
         </div>
       </div>

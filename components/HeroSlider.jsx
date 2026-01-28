@@ -2,6 +2,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { ChevronLeft, ChevronRight, ArrowRight, Pause } from 'lucide-react';
+import { useSlider } from '@/app/context/SliderContext';
 
 // Sample data - VIDEO SLIDES HAVE NO BUTTONS, IMAGE SLIDES HAVE SEPARATE BUTTONS
 const slides = [
@@ -9,8 +10,8 @@ const slides = [
     id: 1,
     type: "video",
     videoUrl: "https://vimeo.com/1054591267?fl=pl&fe=sh",
-    preTitle: "visit us at booth no-900",
-    title:"Innovating Solutions",
+    preTitle: "VISIT US AT BOOTH NO-900",
+    title:"INNOVATING SOLUTIONS",
     desc: "",
     image: "images/slider/4.png",
     bgColor: "#cd091b"
@@ -18,7 +19,7 @@ const slides = [
   },
   {
     id: 2,
-    preTitle: "visit us at booth no-900",
+    preTitle: "VISIT US AT BOOTH NO-900",
     title: "INNOVATING FOR CRITICAL GLOBAL INFRASTRUCTURE",
     desc: "Electrical Transmission & Substation Structures Conference",
     image: "images/slider/1.png",
@@ -29,7 +30,7 @@ const slides = [
   {
     id: 3,
     preTitle: "THE JOURNEY OF EXCELLENCE",
-    title: "Bringing Engineering Excellence Improving Power Grid Reliability",
+    title: "BRINGING ENGINEERING EXCELLENCE IMPROVING POWER GRID RELIABILITY",
     desc: "Leadership | Process Excellence | Quality and Safety | Resilience | Sustainability",
     image: "images/slider/2.png",
     bgColor: "#cd091b",
@@ -38,8 +39,8 @@ const slides = [
   },
   {
     id: 4,
-    preTitle: "Powering the Future",
-    title: "U.S. Department of Energy Partnership for Aging Workforce",
+    preTitle: "POWERING THE FUTURE",
+    title: "U.S. DEPARTMENT OF ENERGY PARTNERSHIP FOR AGING WORKFORCE",
     desc: "Training | Education | Research | Leadership",
     image: "images/slider/3.jpg",
     bgColor: "#cd091b",
@@ -50,9 +51,9 @@ const slides = [
     id: 5,
     type: "video",
     videoUrl: "images/slider/5.mp4",
-    preTitle: "Data-driven, Integrated Systems",
-    title: "Quality solution and risk mitigation",
-    desc: "grid resilience | business resilience | Value chain resilience",
+    preTitle: "DATA-DRIVEN, INTEGRATED SYSTEMS",
+    title: "QUALITY SOLUTION AND RISK MITIGATION",
+    desc: "Grid Resilience | Business Resilience | Value Chain Resilience",
     image: "images/slider/1.png",
     bgColor: "#cd091b"
     // No button for video slides
@@ -60,21 +61,21 @@ const slides = [
   {
     id: 6,
     preTitle: "LEADING THE WAY",
-    title: "Building Resilient transmission line Improving the quality of life",
+    title: "BUILDING RESILIENT TRANSMISSION LINE IMPROVING THE QUALITY OF LIFE",
     desc: "PURPOSE-LED | VALUE-ALIGNED | INNOVATION-DRIVEN BUSINESS MODEL",
     image: "images/slider/6.jpg",
     bgColor: "#cd091b",
-    buttonText: "Explore Solutions",
+    buttonText: "Explore Now",
     buttonLink: "/about"
   },
   {
     id: 7,
-    preTitle: "High-performing, resilient workforce",
-    title: "Implementing the process of the future, today",
-    desc: "OPTIMIZED WORKFLOWS | operational efficiency | HIGH PERFORMING TEAM | superior outcome",
+    preTitle: "HIGH-PERFORMING, RESILIENT WORKFORCE",
+    title: "IMPLEMENTING THE PROCESS OF THE FUTURE, TODAY",
+    desc: "OPTIMIZED WORKFLOWS | OPERATIONAL EFFICIENCY | HIGH PERFORMING TEAM | SUPERIOR OUTCOME",
     image: "images/slider/7.png",
     bgColor: "#cd091b",
-    buttonText: "Join Our Team",
+    buttonText: "Explore Now",
     buttonLink: "#"
   },
 ];
@@ -90,8 +91,15 @@ export default function HeroSlider() {
   const videoIframeRef = useRef(null);
   const tabsContainerRef = useRef(null);
   const tabRefs = useRef([]);
+  const { setCurrentSlide } = useSlider(); // Get context
 
   const minSwipeDistance = 50;
+
+  // ✅ CRITICAL: Sync local active state with global context
+  useEffect(() => {
+    // console.log('🔄 Syncing slide:', active); // Debug log
+    setCurrentSlide(active);
+  }, [active, setCurrentSlide]);
 
   // Preload adjacent slides for instant transitions
   useEffect(() => {
@@ -139,6 +147,7 @@ export default function HeroSlider() {
       setShowPlayOverlay(true);
     }
     const newIndex = (active + 1) % slides.length;
+    // console.log('➡️ Next slide:', newIndex); // Debug log
     setActive(newIndex);
     scrollTabIntoView(newIndex);
   };
@@ -149,6 +158,7 @@ export default function HeroSlider() {
       setShowPlayOverlay(true);
     }
     const newIndex = (active - 1 + slides.length) % slides.length;
+    // console.log('⬅️ Prev slide:', newIndex); // Debug log
     setActive(newIndex);
     scrollTabIntoView(newIndex);
   };
@@ -161,6 +171,7 @@ export default function HeroSlider() {
       setShowPlayOverlay(true);
     }
     
+    // console.log('🎯 Go to slide:', index); // Debug log
     setActive(index);
     scrollTabIntoView(index);
   };
@@ -368,9 +379,9 @@ export default function HeroSlider() {
                         </span>
                       </div>
 
-                      {/* Main Title - Responsive typography */}
+                      {/* Main Title - UPPERCASE - Responsive typography */}
                       <div className="mb-3 sm:mb-4 md:mb-5">
-                        <h1 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white leading-[1.2] sm:leading-tight">
+                        <h1 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white leading-[1.2] sm:leading-tight uppercase">
                           <div className="overflow-hidden mb-1 sm:mb-1.5">
                             <span className="inline-block">
                               {firstLine}

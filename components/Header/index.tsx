@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter, usePathname } from "next/navigation";
 import { Search, Menu, X, ChevronDown, ChevronRight } from 'lucide-react';
 import { menuData } from './menuData';
+import { useSlider } from '@/app/context/SliderContext';
 
 export default function SanpecHeader() {
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -13,6 +14,14 @@ export default function SanpecHeader() {
   const [showTopMenu, setShowTopMenu] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
+  const { currentSlide, resetSlide } = useSlider();
+
+  // Reset slide when pathname changes to homepage
+  useEffect(() => {
+    if (pathname === '/') {
+      resetSlide();
+    }
+  }, [pathname, resetSlide]);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -31,6 +40,41 @@ export default function SanpecHeader() {
   const isActiveLink = (path) => {
     return pathname === path;
   };
+
+  // ✅ CORRECTED LOGO LOGIC WITH PRELOADING
+  // Show OLD logo ONLY when: Homepage + First Slide + Not Scrolled
+  // Show NEW logo in ALL other cases (other slides, scrolled, or other pages)
+  const isHomePage = pathname === '/';
+  const isFirstSlide = currentSlide === 0;
+  const isAtTop = !isScrolled;
+
+  const shouldShowOldLogo = isHomePage && isFirstSlide && isAtTop;
+  const logoSrc = shouldShowOldLogo
+    ? "/images/logo/sanpec-logo.png"      // OLD logo - ONLY homepage first slide without scroll
+    : "/images/logo/sanpec-logo.webp";    // NEW logo - Everything else
+
+  // Debug logging (comment out for production)
+  useEffect(() => {
+    // console.log('📊 Logo State:', {
+    //   currentSlide,
+    //   isHomePage,
+    //   isFirstSlide,
+    //   isAtTop,
+    //   shouldShowOldLogo,
+    //   logoSrc
+    // });
+  }, [currentSlide, isHomePage, isFirstSlide, isAtTop, shouldShowOldLogo, logoSrc]);
+
+  // Preload both logos to prevent flickering
+  useEffect(() => {
+    const preloadLogos = () => {
+      const oldLogo = new Image();
+      oldLogo.src = "/images/logo/sanpec-logo.png";
+      const newLogo = new Image();
+      newLogo.src = "/images/logo/sanpec-logo.webp";
+    };
+    preloadLogos();
+  }, []);
 
   return (
     <>
@@ -154,15 +198,18 @@ export default function SanpecHeader() {
             )}
 
             <div className="flex">
-              {/* Logo - Left Side */}
+              {/* Logo - Left Side - CORRECTED DYNAMIC LOGO */}
               <div className="flex items-stretch py-2 pr-4 md:pr-6">
-                <Link href="/">
+                <Link href="/" onClick={() => resetSlide()}>
                   <img 
-                    src="/images/logo/sanpec-logo.webp" 
+                    key={`${logoSrc}-${currentSlide}`} // Force re-render when logo OR slide changes
+                    src={logoSrc}
                     alt="Sanpec Logo" 
                     className={`w-auto transition-all duration-300 ${
                       isScrolled ? 'h-12 md:h-16' : 'h-14 md:h-20'
                     }`}
+                    loading="eager"
+                    decoding="async"
                   />
                 </Link>
               </div>
@@ -282,27 +329,6 @@ export default function SanpecHeader() {
                                 <span>{item.title}</span>
                                 <ChevronDown size={16} className={`transition-transform duration-300 ${openDropdown === 'sunzia' ? 'rotate-180' : ''}`} />
                               </button>
-                              
-                              {/* SunZia Simple Dropdown */}
-                              {/* {openDropdown === 'sunzia' && item.submenu && (
-                                <div 
-                                  className="absolute top-full left-0 bg-white shadow-xl z-50 min-w-[200px] rounded-b-lg overflow-hidden"
-                                  onMouseEnter={() => setOpenDropdown('sunzia')}
-                                  onMouseLeave={() => setOpenDropdown(null)}
-                                >
-                                  {item.submenu.map((subItem, subIdx) => (
-                                    <Link
-                                      key={subIdx}
-                                      href={subItem.path}
-                                      onClick={closeDropdown}
-                                      className="block px-6 py-3 hover:bg-gray-100 transition-all text-[13px] font-medium border-b border-gray-200 last:border-0"
-                                      style={{ color: '#0D132D' }}
-                                    >
-                                      {subItem.title}
-                                    </Link>
-                                  ))}
-                                </div>
-                              )} */}
                             </div>
                           )
                         ) : (
@@ -455,21 +481,6 @@ export default function SanpecHeader() {
                         <span className="font-medium">{item.title}</span>
                         <ChevronDown size={20} className={`transition-transform duration-300 ${openDropdown === 'sunzia' ? 'rotate-180' : ''}`} />
                       </button>
-
-                      {/* {openDropdown === 'sunzia' && item.submenu && (
-                        <div className="bg-white/5">
-                          {item.submenu.map((subItem, subIdx) => (
-                            <Link
-                              key={subIdx}
-                              href={subItem.path}
-                              className="block px-8 py-3 text-white/90 hover:bg-white/10 transition-all"
-                              onClick={() => setMobileMenuOpen(false)}
-                            >
-                              {subItem.title}
-                            </Link>
-                          ))}
-                        </div>
-                      )} */}
                     </div>
                   )
                 ) : (
