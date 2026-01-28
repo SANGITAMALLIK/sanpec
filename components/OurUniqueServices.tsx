@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import React, { useState, useEffect } from "react";
 
 const tabsData = [
@@ -58,7 +59,11 @@ const tabsData = [
       "Assist in Vendor Selections/evaluations",
       "Assist in negotiating the best pricing and delivery schedule from vendors",
       "Risk Mitigation planning",
-      "Keep track of all milestones and critical delivery items"
+      "Keep track of all milestones and critical delivery items",
+      "Follow up logistics planning from vendors",
+      "Perform inspection of material upon arrival at port and Yards",
+      "Help in tracking bundling/packaging list and BOL for tower components for each structure and payment process"
+     
     ],
     link: "/electric-power/strategic/material-sourcing"
   },
@@ -71,7 +76,10 @@ const tabsData = [
     points: [
       "Follow up logistics planning from vendors",
       "Perform inspection of material upon arrival at port and Yards",
-      "Provide support during construction process for missing pieces or mis-fab pieces or new helicopter splice, damage members and any technical issues"
+      "Provide support during construction process for missing pieces or mis-fab pieces or new helicopter splice, damage members and any technical issues",
+      "Review of Foundation materials and details before setting up foundation and pouring concrete",
+      "Provide support during construction process for missing pieces or mis-fab pieces or new helicopter splice, damage members and any technical issues",
+      "Review QA/QC process at sites during construction"
     ],
     link: "/electric-power/constructability/logistic-construction"
   },
@@ -92,7 +100,7 @@ const tabsData = [
       "Why Source Inspection is Critical for Transmission Structures: TSDOS-2012, EDM-2014",
       "Challenges in Executing large and complex Transmission Projects, Platts transmission planning and development forum-2010",
       "H2S Entrapment and Corrosion on Direct Embedded Galvanized Steel Transmission Poles: ASCE/SEI-2009",
-      "Research paper on “Design and Analysis of Transmission Line Tower"
+      "Research paper on Design and Analysis of Transmission Line Tower"
     ],
     link: "/research-and-innovation"
   },
@@ -139,28 +147,32 @@ const ModernTabs = () => {
   }, [activeTab]);
 
   return (
-    <div className="relative w-full bg-[#e8e9ea] py-20 px-4 overflow-hidden">
+    <div className="relative w-full bg-[#e8e9ea] py-12 md:py-20 px-4 overflow-hidden">
       {/* Decorative Tower Image - Left Side */}
-      <div className="absolute left-0 top-0 h-full w-80 pointer-events-none overflow-hidden">
-        <img 
-          src="images/home/services/pole_background.png" 
+      <div className="hidden lg:block absolute left-0 top-0 h-full w-60 xl:w-80 pointer-events-none overflow-hidden">
+        <Image 
+          src="/images/home/services/pole_background.png" 
           alt="Power Pole Background"
-          className="h-full w-full object-cover opacity-15"
+          fill
+          className="object-cover opacity-15"
+          priority
         />
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#e8e9ea]/50 to-[#e8e9ea]"></div>
       </div>
 
       {/* Decorative Tower Image - Right Side */}
-      <div className="absolute right-0 top-0 h-full w-80 pointer-events-none overflow-hidden transform scale-x-[-1]">
-        <img 
-          src="images/home/services/pole_background.png" 
+      <div className="hidden lg:block absolute right-0 top-0 h-full w-60 xl:w-80 pointer-events-none overflow-hidden transform scale-x-[-1]">
+        <Image 
+          src="/images/home/services/pole_background.png" 
           alt="Power Pole Background"
-          className="h-full w-full object-cover opacity-15"
+          fill
+          className="object-cover opacity-15"
+          priority
         />
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#e8e9ea]/50 to-[#e8e9ea]"></div>
       </div>
 
-      <div className="absolute bottom-32 right-32 opacity-10 pointer-events-none">
+      <div className="hidden md:block absolute bottom-32 right-32 opacity-10 pointer-events-none">
         <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
           <polygon points="40,10 30,30 20,50 15,70 40,65 65,70 60,50 50,30" fill="#171530" opacity="0.3"/>
           <line x1="20" y1="30" x2="60" y2="30" stroke="#CD091B" strokeWidth="3"/>
@@ -170,39 +182,39 @@ const ModernTabs = () => {
 
       <div className="relative max-w-7xl mx-auto">
         {/* Section Title */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 md:mb-16">
           <div className="inline-block">
-            <h2 className="text-5xl lg:text-6xl font-black uppercase tracking-tight mb-4">
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight mb-4">
               <span className="bg-gradient-to-r from-[#CD091B] via-[#CD091B] to-[#CD091B] bg-clip-text text-transparent">
                 Our Unique Services
               </span>
             </h2>
             <div className="h-2 bg-gradient-to-r from-transparent via-[#CD091B] to-transparent rounded-full"></div>
           </div>
-          <p className="text-gray-600 mt-4 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-600 mt-4 text-sm md:text-lg max-w-2xl mx-auto px-4">
             TRANSMISSION LINE ENGINEERING &  MATERIALS  MANAGEMENT
           </p>
         </div>
 
         {/* Tabs Navigation */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4 mb-8 md:mb-12">
           {tabsData.map((tab, index) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(index)}
-              className={`group relative overflow-hidden rounded-2xl p-6 transition-all duration-300 ${
+              className={`group relative overflow-hidden rounded-xl md:rounded-2xl p-4 md:p-6 transition-all duration-300 ${
                 activeTab === index
-                  ? "bg-gradient-to-br from-[#0f1631] to-[#0f1631] shadow-2xl shadow-[#171530]/50"
-                  : "bg-white hover:bg-gradient-to-br hover:from-gray-50 hover:to-gray-100 shadow-lg hover:shadow-xl"
+                  ? "bg-gradient-to-br from-[#0f1631] to-[#0f1631] shadow-xl md:shadow-2xl shadow-[#171530]/50"
+                  : "bg-white hover:bg-gradient-to-br hover:from-gray-50 hover:to-gray-100 shadow-md md:shadow-lg hover:shadow-xl"
               }`}
             >
               <div className={`absolute inset-0 bg-gradient-to-br from-[#0f1631]/10 to-[#0f1631]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${activeTab === index ? 'opacity-100' : ''}`} />
               
-              <div className="relative z-10 flex flex-col items-center gap-3">
-                <div className="text-4xl">
+              <div className="relative z-10 flex flex-col items-center gap-2 md:gap-3">
+                <div className="text-2xl md:text-4xl">
                   {tab.icon}
                 </div>
-                <h3 className={`text-xs font-bold text-center uppercase tracking-wider transition-colors duration-300 ${
+                <h3 className={`text-[10px] md:text-xs font-bold text-center uppercase tracking-wider transition-colors duration-300 leading-tight ${
                   activeTab === index ? "text-white" : "text-gray-700 group-hover:text-[#CD091B]"
                 }`}>
                   {tab.title}
@@ -217,15 +229,16 @@ const ModernTabs = () => {
         </div>
 
         {/* Tab Content */}
-        <div className="relative overflow-hidden rounded-3xl shadow-2xl">
+        <div className="relative overflow-hidden rounded-2xl md:rounded-3xl shadow-xl md:shadow-2xl">
           {tabsData.map((tab, index) => (
             <div
               key={tab.id}
               className={activeTab === index ? "" : "hidden"}
             >
-              <div className="grid lg:grid-cols-2 gap-0">
+              {/* Special layout for Technical Papers tab (index 4) */}
+              <div className={`grid ${index === 4 ? 'lg:grid-cols-[1fr,2fr]' : 'lg:grid-cols-2'} gap-0`}>
                 {/* Image Section with Slideshow for First Tab */}
-                <div className="relative h-[400px] lg:h-[600px] overflow-hidden group">
+                <div className={`relative ${index === 4 ? 'h-[300px] md:h-[400px] lg:h-[700px]' : 'h-[300px] md:h-[400px] lg:h-[600px]'} overflow-hidden group`}>
                   {index === 0 && tab.images ? (
                     // SLIDESHOW FOR FIRST TAB
                     <>
@@ -236,28 +249,31 @@ const ModernTabs = () => {
                             imgIndex === currentImageIndex ? 'opacity-100' : 'opacity-0'
                           }`}
                         >
-                          <img
-                            src={img}
+                          <Image
+                            src={`/${img}`}
                             alt={`${tab.heading} ${imgIndex + 1}`}
-                            className="w-full h-full object-cover"
+                            fill
+                            className="object-cover"
+                            priority={imgIndex === 0}
+                            sizes="(max-width: 768px) 100vw, 50vw"
                           />
                         </div>
                       ))}
                       
                       {/* Image Counter */}
-                      <div className="absolute bottom-6 right-6 bg-black/70 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-bold z-20">
+                      <div className="absolute bottom-4 md:bottom-6 right-4 md:right-6 bg-black/70 backdrop-blur-sm text-white px-3 md:px-4 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-bold z-20">
                         {currentImageIndex + 1} / {tab.images.length}
                       </div>
 
                       {/* Image Navigation Dots */}
-                      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
+                      <div className="absolute bottom-4 md:bottom-6 left-1/2 transform -translate-x-1/2 flex gap-1.5 md:gap-2 z-20">
                         {tab.images.map((_, dotIndex) => (
                           <button
                             key={dotIndex}
                             onClick={() => setCurrentImageIndex(dotIndex)}
-                            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                            className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full transition-all duration-300 ${
                               dotIndex === currentImageIndex 
-                                ? 'bg-[#CD091B] w-8' 
+                                ? 'bg-[#CD091B] w-6 md:w-8' 
                                 : 'bg-white/50 hover:bg-white/80'
                             }`}
                           />
@@ -266,35 +282,38 @@ const ModernTabs = () => {
                     </>
                   ) : (
                     // SINGLE IMAGE FOR OTHER TABS
-                    <img
-                      src={tab.image}
+                    <Image
+                      src={`/${tab.image}`}
                       alt={tab.heading}
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
+                      priority={index === activeTab}
+                      sizes="(max-width: 768px) 100vw, 50vw"
                     />
                   )}
                   
                   <div className="absolute inset-0 bg-gradient-to-t from-[#171530] via-[#171530]/60 to-transparent" />
                   
-                  <div className="absolute top-6 left-6 z-10">
-                    <div className="bg-gradient-to-r from-[#CD091B] to-[#a0070f] text-white px-6 py-3 rounded-full font-bold text-sm uppercase tracking-wider shadow-lg">
+                  <div className="absolute top-4 md:top-6 left-4 md:left-6 z-10">
+                    <div className="bg-gradient-to-r from-[#CD091B] to-[#a0070f] text-white px-3 md:px-6 py-2 md:py-3 rounded-full font-bold text-[10px] md:text-sm uppercase tracking-wider shadow-lg">
                       {tab.title}
                     </div>
                   </div>
                 </div>
 
                 {/* Content Section */}
-                <div className="bg-gradient-to-br from-gray-50 to-white p-8 lg:p-12 flex flex-col justify-center">
-                  <h2 className="text-3xl lg:text-4xl font-black uppercase text-[#171530] mb-8 tracking-tight">
+                <div className="bg-gradient-to-br from-gray-50 to-white p-6 md:p-8 lg:p-12 flex flex-col justify-center">
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-black uppercase text-[#171530] mb-6 md:mb-8 tracking-tight">
                     {tab.heading}
                   </h2>
 
-                  <ul className="space-y-4 mb-8">
+                  <ul className={`space-y-3 md:space-y-4 mb-6 md:mb-8 ${index === 4 ? 'max-h-[400px] md:max-h-[500px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-[#CD091B] scrollbar-track-gray-200' : ''}`}>
                     {tab.points.map((point, idx) => (
-                      <li key={idx} className="flex items-start gap-3 group/item">
-                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-br from-[#CD091B] to-[#a0070f] flex items-center justify-center text-white text-xs font-bold mt-0.5">
+                      <li key={idx} className="flex items-start gap-2 md:gap-3 group/item">
+                        <span className="flex-shrink-0 w-5 h-5 md:w-6 md:h-6 rounded-full bg-gradient-to-br from-[#CD091B] to-[#a0070f] flex items-center justify-center text-white text-[10px] md:text-xs font-bold mt-0.5">
                           ✓
                         </span>
-                        <span className="text-gray-700 text-sm leading-relaxed">
+                        <span className="text-gray-700 text-xs md:text-sm leading-relaxed">
                           {point}
                         </span>
                       </li>
@@ -303,7 +322,7 @@ const ModernTabs = () => {
 
                   <Link
                     href={tab.link}
-                    className="inline-flex items-center gap-2 bg-gradient-to-r from-[#CD091B] to-[#a0070f] hover:from-[#171530] hover:to-[#0a0a1a] text-white px-8 py-4 rounded-full font-bold uppercase text-sm tracking-wider shadow-lg hover:shadow-2xl transition-all duration-300 group/btn w-fit"
+                    className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#CD091B] to-[#a0070f] hover:from-[#171530] hover:to-[#0a0a1a] text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-bold uppercase text-xs md:text-sm tracking-wider shadow-lg hover:shadow-2xl transition-all duration-300 group/btn w-full md:w-fit"
                   >
                     <span>Read More</span>
                     <span className="transform group-hover/btn:translate-x-1 transition-transform duration-300">→</span>
