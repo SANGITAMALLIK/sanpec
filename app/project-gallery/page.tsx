@@ -67,151 +67,70 @@ export default function Gallery() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50">
       {/* Header with Animated SVG Power Infrastructure */}
-      <div className="relative bg-gradient-to-br from-[#0B1931] via-[#0F1F3D] to-[#0B1931] overflow-hidden" style={{ height: '400px' }}>
-        
-        {/* Animated SVG Power Infrastructure Background */}
-        <svg className="absolute inset-0 w-full h-full opacity-[0.12]" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-          <defs>
-            <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
-              <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#DC2626" strokeWidth="0.5" opacity="0.2"/>
-            </pattern>
-            <linearGradient id="powerGlow" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#DC2626" stopOpacity="0.8"/>
-              <stop offset="100%" stopColor="#FCD34D" stopOpacity="0.3"/>
-            </linearGradient>
-          </defs>
-          
-          <rect width="100%" height="100%" fill="url(#grid)" />
-          
-          {/* Large Transmission Tower - Left */}
-          <g transform="translate(100, 60)">
-            <line x1="30" y1="0" x2="30" y2="220" stroke="url(#powerGlow)" strokeWidth="4" strokeLinecap="round"/>
-            <line x1="0" y1="50" x2="60" y2="50" stroke="#DC2626" strokeWidth="3"/>
-            <line x1="8" y1="90" x2="52" y2="90" stroke="#DC2626" strokeWidth="2.5"/>
-            <line x1="15" y1="130" x2="45" y2="130" stroke="#DC2626" strokeWidth="2"/>
-            <line x1="30" y1="50" x2="10" y2="110" stroke="#DC2626" strokeWidth="2.5"/>
-            <line x1="30" y1="50" x2="50" y2="110" stroke="#DC2626" strokeWidth="2.5"/>
-            {/* Insulators */}
-            <circle cx="0" cy="50" r="4" fill="#DC2626">
-              <animate attributeName="opacity" values="1;0.4;1" dur="2s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="60" cy="50" r="4" fill="#DC2626">
-              <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="8" cy="90" r="3" fill="#FCD34D">
-              <animate attributeName="opacity" values="0.6;1;0.6" dur="1.5s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="52" cy="90" r="3" fill="#FCD34D">
-              <animate attributeName="opacity" values="1;0.6;1" dur="1.5s" repeatCount="indefinite"/>
-            </circle>
-          </g>
-
-          {/* Medium Transmission Tower - Center */}
-          <g transform="translate(320, 80)">
-            <line x1="25" y1="0" x2="25" y2="200" stroke="url(#powerGlow)" strokeWidth="3.5"/>
-            <line x1="0" y1="45" x2="50" y2="45" stroke="#DC2626" strokeWidth="2.5"/>
-            <line x1="7" y1="80" x2="43" y2="80" stroke="#DC2626" strokeWidth="2"/>
-            <line x1="13" y1="115" x2="37" y2="115" stroke="#DC2626" strokeWidth="1.8"/>
-            <line x1="25" y1="45" x2="8" y2="100" stroke="#DC2626" strokeWidth="2"/>
-            <line x1="25" y1="45" x2="42" y2="100" stroke="#DC2626" strokeWidth="2"/>
-            <circle cx="0" cy="45" r="3.5" fill="#DC2626"/>
-            <circle cx="50" cy="45" r="3.5" fill="#DC2626"/>
-          </g>
-
-          {/* Electric Pole - Right Center */}
-          <g transform="translate(540, 100)">
-            <line x1="18" y1="0" x2="18" y2="170" stroke="url(#powerGlow)" strokeWidth="3"/>
-            <line x1="0" y1="35" x2="36" y2="35" stroke="#DC2626" strokeWidth="2"/>
-            <circle cx="0" cy="35" r="3" fill="#DC2626">
-              <animate attributeName="fill-opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="36" cy="35" r="3" fill="#DC2626">
-              <animate attributeName="fill-opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite"/>
-            </circle>
-            <line x1="18" y1="35" x2="18" y2="25" stroke="#DC2626" strokeWidth="1.5"/>
-          </g>
-
-          {/* Large Tower - Far Right */}
-          <g transform="translate(750, 70)">
-            <line x1="28" y1="0" x2="28" y2="210" stroke="url(#powerGlow)" strokeWidth="4"/>
-            <line x1="0" y1="55" x2="56" y2="55" stroke="#DC2626" strokeWidth="3"/>
-            <line x1="8" y1="95" x2="48" y2="95" stroke="#DC2626" strokeWidth="2.5"/>
-            <line x1="16" y1="135" x2="40" y2="135" stroke="#DC2626" strokeWidth="2"/>
-            <line x1="28" y1="55" x2="10" y2="115" stroke="#DC2626" strokeWidth="2.5"/>
-            <line x1="28" y1="55" x2="46" y2="115" stroke="#DC2626" strokeWidth="2.5"/>
-          </g>
-
-          {/* Small Pole - Left Center */}
-          <g transform="translate(220, 110)" opacity="0.9">
-            <line x1="15" y1="0" x2="15" y2="150" stroke="#DC2626" strokeWidth="2.5"/>
-            <line x1="0" y1="30" x2="30" y2="30" stroke="#DC2626" strokeWidth="1.5"/>
-            <circle cx="0" cy="30" r="2.5" fill="#FCD34D"/>
-            <circle cx="30" cy="30" r="2.5" fill="#FCD34D"/>
-          </g>
-
-          {/* Animated Power Lines */}
-          <line x1="100" y1="110" x2="850" y2="125" stroke="#DC2626" strokeWidth="2" opacity="0.6" strokeDasharray="8,4">
-            <animate attributeName="stroke-dashoffset" from="0" to="12" dur="0.8s" repeatCount="indefinite"/>
-          </line>
-          <line x1="100" y1="150" x2="850" y2="160" stroke="#DC2626" strokeWidth="1.8" opacity="0.5" strokeDasharray="8,4">
-            <animate attributeName="stroke-dashoffset" from="0" to="12" dur="1s" repeatCount="indefinite"/>
-          </line>
-          <line x1="100" y1="190" x2="850" y2="195" stroke="#DC2626" strokeWidth="1.5" opacity="0.4" strokeDasharray="8,4">
-            <animate attributeName="stroke-dashoffset" from="0" to="12" dur="1.3s" repeatCount="indefinite"/>
-          </line>
-
-          {/* Electrical Sparks & Glow Effects */}
-          <circle cx="130" cy="110" r="3" fill="#FCD34D" opacity="0.9">
-            <animate attributeName="r" values="3;6;3" dur="1.8s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" values="0.9;0.3;0.9" dur="1.8s" repeatCount="indefinite"/>
-          </circle>
-          <circle cx="345" cy="125" r="2.5" fill="#FCD34D" opacity="0.7">
-            <animate attributeName="r" values="2.5;5.5;2.5" dur="2.2s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" values="0.7;0.2;0.7" dur="2.2s" repeatCount="indefinite"/>
-          </circle>
-          <circle cx="558" cy="135" r="3" fill="#FCD34D" opacity="0.8">
-            <animate attributeName="r" values="3;6.5;3" dur="2s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" values="0.8;0.25;0.8" dur="2s" repeatCount="indefinite"/>
-          </circle>
-          <circle cx="778" cy="125" r="2.8" fill="#FCD34D" opacity="0.75">
-            <animate attributeName="r" values="2.8;6;2.8" dur="1.6s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" values="0.75;0.2;0.75" dur="1.6s" repeatCount="indefinite"/>
-          </circle>
-        </svg>
-
-        {/* Radial Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-radial from-transparent via-[#0B1931]/30 to-[#0B1931]/60"></div>
-
-        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12 h-full flex flex-col justify-end pb-6">
-          <div className="max-w-5xl">
-            <div className="inline-block mb-3">
-              <span className="bg-[#DC2626]/20 border border-[#DC2626]/40 text-[#DC2626] px-4 py-1.5 rounded-full text-sm font-semibold backdrop-blur-sm">
-                ⚡ Powering The Future
-              </span>
-            </div>
-            
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 leading-tight tracking-tight">
-              Projects Gallery <span className="text-[#DC2626]">2026</span>
-            </h1>
-            
-            <p className="text-base md:text-lg lg:text-xl text-gray-300 mb-6 leading-relaxed max-w-3xl">
-              Transforming Global Energy Infrastructure Through Innovation & Excellence
-            </p>
-
-            <nav className="flex items-center gap-2 text-gray-400 text-sm font-medium">
-              <Home className="w-4 h-4 text-[#DC2626]" />
-              <ChevronRight className="w-3.5 h-3.5" />
-              <a href="/" className="hover:text-white transition-colors">Home</a>
-              <ChevronRight className="w-3.5 h-3.5" />
-              <span className="text-white font-semibold">Project Gallery</span>
-            </nav>
-          </div>
-        </div>
-
-        <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-[#DC2626] via-[#EF4444] to-[#DC2626]">
-          <div className="h-full bg-white/30 animate-pulse"></div>
-        </div>
-      </div>
+        <div className="relative overflow-hidden h-64 sm:h-72 md:h-80 lg:h-[300px]">
+           {/* Background Image */}
+           <div className="absolute inset-0">
+             <img 
+               src="/images/sanpec_2026/22.jpeg" 
+               alt="About Background"
+               className="w-full h-full object-cover"
+             />
+             {/* Enhanced Gradient Overlay */}
+             <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/50"></div>
+             
+             {/* Subtle Pattern Overlay for depth */}
+             <div 
+               className="absolute inset-0 opacity-[0.03]"
+               style={{
+                 backgroundImage: `
+                   repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,.1) 10px, rgba(255,255,255,.1) 20px)
+                 `
+               }}
+             ></div>
+           </div>
+     
+           {/* Content Area */}
+           <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12 h-full flex flex-col justify-end pb-6 sm:pb-8 pt-20 sm:pt-0">
+             {/* Page Title */}
+             <div className="mb-4 sm:mb-5">
+               <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2 sm:mb-3 tracking-tight drop-shadow-lg">
+                 SunZia - Gallery 2026
+               </h1>
+              
+               {/* Elegant Underline */}
+               <div className="flex items-center gap-2">
+                 <div className="h-[3px] w-12 sm:w-16 bg-[#DC2626] rounded-full"></div>
+                 <div className="h-[2px] w-6 sm:w-8 bg-[#DC2626]/60 rounded-full"></div>
+                 <div className="h-[2px] w-3 sm:w-4 bg-[#DC2626]/40 rounded-full"></div>
+               </div>
+             </div>
+             
+             {/* Simple Breadcrumb Navigation */}
+             <nav className="flex items-center flex-wrap gap-1.5 sm:gap-2 text-xs sm:text-sm">
+               {/* Home Link with Icon */}
+               <a 
+                 href="/" 
+                 className="group flex items-center gap-1 sm:gap-1.5 text-white/70 hover:text-white transition-colors duration-300"
+               >
+                 <Home className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                 <span className="font-medium">Home</span>
+               </a>
+     
+               {/* Separator */}
+               <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/50" />
+     
+               {/* Current Page (Active) */}
+               <span className="text-[#DC2626] font-semibold">
+               SunZia
+               </span>
+             </nav>
+           </div>
+     
+           {/* Bottom Accent Line */}
+           <div className="absolute bottom-0 left-0 w-full h-[2px]">
+             <div className="h-full w-full bg-gradient-to-r from-transparent via-[#DC2626]/80 to-transparent"></div>
+           </div>
+         </div>
 
       {/* Modern Filter Section with Tabs */}
       <div className="bg-white/90 backdrop-blur-xl border-b border-gray-200 sticky top-0 z-40 shadow-lg">

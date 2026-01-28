@@ -29,45 +29,9 @@ export default function SunZiaCaseStudy() {
 
   return (
     <div className="bg-gray-50 min-h-screen">
-      <div className="max-w-7xl mx-auto px-2 py-16">
-          <div className="bg-white rounded-2xl shadow-xl overflow-hidden mb-12">
-          <div className="relative min-h-[400px]">
-            {/* Background Image */}
-            <div 
-              className="absolute inset-0 bg-cover bg-center"
-              style={{ 
-                backgroundImage: 'url("/images/sanpec_2026/7.jpeg?auto=format&fit=crop&w=1920&q=80")',
-              }}
-            ></div>
-            {/* Dark Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/70 to-black/50"></div>
-            
-            {/* Content */}
-            <div className="relative px-8 py-12 md:px-12 md:py-16">
-              <div className="inline-block px-4 py-2 rounded-full mb-6" style={{ backgroundColor: '#CD091B' }}>
-                <span className="text-white text-sm font-semibold tracking-wider uppercase">SANPEC</span>
-              </div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight text-white">
-                SunZia - A Crown Jewel of American Infrastructure
-              </h1>
-              <div className="flex flex-wrap items-center gap-4 text-sm text-white">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#CD091B' }}></div>
-                  <span className="font-semibold">3,500 MW Capacity</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#CD091B' }}></div>
-                  <span className="font-semibold">550-Mile HVDC Line</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#CD091B' }}></div>
-                  <span className="font-semibold">Largest in U.S. History</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-</div>
+      <div className="max-w-7xl mx-auto px-2 py-10">
+         
+      </div>
       <div className="max-w-7_5xl mx-auto px-6">
         {/* Hero Section */}
       
