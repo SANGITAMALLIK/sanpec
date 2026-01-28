@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { ChevronRight } from 'lucide-react';
+import Image from 'next/image';
 
 export default function SanpecTabs() {
   const [activeTab, setActiveTab] = useState('who-we-are');
@@ -8,7 +9,7 @@ export default function SanpecTabs() {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
+      setIsMobile(window.innerWidth < 1024);
     };
     handleResize();
     window.addEventListener('resize', handleResize);
@@ -90,7 +91,7 @@ export default function SanpecTabs() {
               We design, modernize, and manage electric power transmission and distribution grids with a strong commitment to innovation, excellence, and sustainability. At SANPEC, we aim to provide quality transmission and distribution (T&D) materials, innovative solutions, and exceptional services for a safe, robust, reliable, and resilient power grid.
             </p>
             <p>Our multidisciplinary, award-winning team utilizes expertise, wisdom, and entrepreneurial spirit to manage risks and create value that empowers individuals, enhances grid reliability, and strengthens the American economy.</p>
-            <p>We have uniquely designed and implemented the process of the Future Today. As the inventors of the world's first ecosystem-focused business model, our founders have laid the foundation for a 21st-century value-creating business. Our award-winning engineers know the importance of process excellence and deliver solutions that create long-term, mid-term, and short-term value.</p>
+            <p>We have uniquely designed and implemented the process of the Future Today. As the inventors of the world&apos;s first ecosystem-focused business model, our founders have laid the foundation for a 21st-century value-creating business. Our award-winning engineers know the importance of process excellence and deliver solutions that create long-term, mid-term, and short-term value.</p>
           </div>
         </div>
       )
@@ -182,109 +183,142 @@ export default function SanpecTabs() {
   const tabKeys = Object.keys(tabsData);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-16 md:py-10 relative overflow-hidden">
-      <div className="container mx-auto px-4 md:px-8 max-w-7_5xl relative z-10">
-        
-        {/* HORIZONTAL TRANSMISSION LINE NAVIGATION - Exactly like sidebar design */}
-        <div className="mb-12 relative mx-auto" style={{ maxWidth: '90rem' }}>
+    <div className="min-h-screen bg-gray-50 relative overflow-hidden">
+      
+      {/* Grid Pattern */}
+      <div className="absolute inset-0 opacity-[0.03]">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'repeating-linear-gradient(0deg, #ffffff 0px, #ffffff 1px, transparent 1px, transparent 20px), repeating-linear-gradient(90deg, #ffffff 0px, #ffffff 1px, transparent 1px, transparent 20px)',
+          backgroundSize: '20px 20px'
+        }}></div>
+      </div>
+
+      {/* Main Content */}
+      <div className="w-full max-w-[1800px] px-3 md:px-6 lg:px-8 py-6 md:py-10 relative z-10 mx-auto">
+        <div className="flex flex-col lg:flex-row gap-4 md:gap-6">
           
-          {/* Main Horizontal Transmission Line (like the vertical tower pole) */}
-          <div className="hidden md:block absolute top-8 left-0 right-0 h-1 bg-gradient-to-r from-gray-300 via-gray-400 to-gray-300"></div>
-          
-          <div className="flex flex-wrap md:flex-nowrap justify-between gap-4 md:gap-6 relative px-4">
-            {tabKeys.map((tabKey, idx) => {
-              const isActive = activeTab === tabKey;
-              const tab = tabsData[tabKey];
+          {/* Sidebar - Tower Design with Tabs */}
+          <aside className="w-full lg:w-96 bg-gradient-to-b from-white to-gray-50 border-2 border-gray-200 shadow-lg">
+            <nav className="py-8 px-6 relative">
+              {/* Central Tower Pole */}
+              <div className="absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-[#CD091B] via-gray-400 to-gray-300"></div>
               
-              return (
-                <div key={tabKey} className="relative flex-1 min-w-[200px] md:min-w-0">
-                  
-                  {/* Connection Point on Main Line (Insulator - like sidebar's connection point) */}
-                  <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-6 w-3 h-3 bg-white border-2 border-gray-400 rounded-full shadow-md z-20"></div>
-                  
-                  {/* Vertical Beam Down (like horizontal beam in sidebar) */}
-                  <div className={`
-                    hidden md:block absolute left-1/2 -translate-x-1/2 top-9 w-0.5 h-6 transition-all duration-300
-                    ${isActive ? 'bg-gray-600' : 'bg-gray-400'}
-                  `}></div>
-
-                  {/* Tab Button (like the Transformer Box in sidebar) */}
-                  <button
-                    onClick={() => setActiveTab(tabKey)}
-                    className={`
-                      w-full md:mt-14 px-6 py-4 text-sm md:text-base font-semibold
-                      transition-all duration-300 ease-out rounded-lg border-2 relative
-                      ${isActive 
-                        ? 'border-gray-300 text-gray-900 shadow-xl' 
-                        : 'bg-white border-gray-300 text-gray-700 hover:border-gray-400 hover:shadow-lg'
-                      }
-                    `}
-                    style={isActive ? {backgroundColor: '#F3F3F3'} : {}}
-                  >
-                    <span className="relative z-10 tracking-wide">{tab.title}</span>
+              {tabKeys.map((tabKey, idx) => {
+                const isActive = activeTab === tabKey;
+                const tab = tabsData[tabKey];
+                
+                return (
+                  <div key={tabKey} className="mb-6 relative">
+                    {/* Connection Point on Tower (Insulator) */}
+                    <div className={`absolute left-2 top-5 w-3 h-3 rounded-full shadow-md z-20 transition-all duration-300 ${
+                      isActive 
+                        ? 'bg-[#CD091B] border-2 border-red-800 ring-4 ring-red-200' 
+                        : 'bg-white border-2 border-gray-400'
+                    }`}></div>
                     
-                    {/* Active Power Indicator (like sidebar's animate-pulse dot) */}
-                    {isActive && (
-                      <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 flex items-center">
-                        <div className="w-2 h-2 bg-gray-800 rounded-full animate-pulse"></div>
-                        <div className="absolute inset-0 w-2 h-2 bg-gray-600 rounded-full animate-ping"></div>
-                      </div>
-                    )}
-                    
-                    {/* Power Line to Content (like sidebar's arrow) */}
-                    {isActive && (
-                      <div className="hidden md:block absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full">
-                        <div className="w-px h-8 bg-gradient-to-b from-gray-400 to-gray-300"></div>
-                        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rotate-45 bg-gray-400 -mb-1"></div>
-                      </div>
-                    )}
-                  </button>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+                    {/* Horizontal Beam from Tower */}
+                    <div className={`absolute left-5 top-6 w-6 h-0.5 transition-all duration-300 ${
+                      isActive ? 'bg-[#CD091B]' : 'bg-gray-400'
+                    }`}></div>
 
-        {/* Content Area - Wider than tabs */}
-        <div className="mx-auto px-4" style={{ maxWidth: '90rem' }}>
-          <div className="bg-white shadow-lg rounded-2xl overflow-hidden border-2 border-gray-200">
-          {/* Top Connection Line (like sidebar's distribution line) */}
-          <div className="h-0.5 bg-gray-300"></div>
-          
-          <div className="p-10 md:p-16">
-            <div className={`grid ${activeContent.image ? 'lg:grid-cols-2' : 'lg:grid-cols-1'} gap-12 md:gap-16 items-start`}>
-              {/* Text Content */}
-              <div className="space-y-4">
-                {activeContent.content}
-              </div>
+                    {/* Tab Item (Transformer Box) */}
+                    <div 
+                      onClick={() => setActiveTab(tabKey)}
+                      aria-label={`View ${tab.title} content`}
+                      aria-pressed={isActive}
+                      className={`
+                        relative ml-11 group flex items-center gap-3 px-5 py-4 cursor-pointer
+                        transition-all duration-300 ease-out border-2
+                        ${isActive
+                          ? 'bg-white border-[#CD091B] text-gray-900 shadow-xl scale-105' 
+                          : 'bg-white border-gray-300 text-gray-700 hover:border-gray-400 hover:shadow-lg'
+                        }
+                      `}
+                    >
+                      {/* Number Badge */}
+                      <div className={`w-10 h-10 flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
+                        isActive ? 'bg-[#CD091B]' : 'bg-[#101631]'
+                      }`}>
+                        <span className="text-white font-bold text-lg">{idx + 1}</span>
+                      </div>
 
-              {/* Image */}
-              {activeContent.image && (
-                <div className="relative group">
-                  {/* Connection nodes at corners (like small insulators) */}
-                  <div className="absolute -top-2 -left-2 w-2 h-2 bg-gray-400 ring-2 ring-gray-200 rounded-full"></div>
-                  <div className="absolute -top-2 -right-2 w-2 h-2 bg-gray-400 ring-2 ring-gray-200 rounded-full"></div>
-                  <div className="absolute -bottom-2 -left-2 w-2 h-2 bg-gray-400 ring-2 ring-gray-200 rounded-full"></div>
-                  <div className="absolute -bottom-2 -right-2 w-2 h-2 bg-gray-400 ring-2 ring-gray-200 rounded-full"></div>
-                  
-                  {/* Frame border */}
-                  <div className="absolute -inset-2 border-2 border-gray-300 rounded-xl"></div>
-                  
-                  <div className="relative rounded-xl overflow-hidden shadow-xl border-4 border-gray-200 transform group-hover:-translate-y-2 transition-all duration-500">
-                    <img
-                      src={activeContent.image}
-                      alt={activeContent.title}
-                      className="w-full h-auto object-contain bg-white"
-                      loading="lazy"
-                    />
+                      <div className="flex-1 min-w-0">
+                        <h3 className={`font-bold text-sm transition-colors ${
+                          isActive ? 'text-[#CD091B]' : 'text-gray-700'
+                        }`}>
+                          {tab.title}
+                        </h3>
+                      </div>
+                      
+                      {/* Active Power Indicator */}
+                      {isActive && (
+                        <div className="absolute -right-1 top-1/2 -translate-y-1/2">
+                          <div className="w-2 h-2 bg-[#CD091B] rounded-full animate-pulse"></div>
+                          <div className="absolute inset-0 w-2 h-2 bg-red-400 rounded-full animate-ping"></div>
+                        </div>
+                      )}
+
+                      {/* Power Line to Content */}
+                      {isActive && (
+                        <div className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center">
+                          <div className="w-8 h-px bg-gradient-to-r from-[#CD091B] to-gray-300"></div>
+                          <div className="w-1.5 h-1.5 rotate-45 bg-[#CD091B] -ml-0.5"></div>
+                        </div>
+                      )}
+                    </div>
                   </div>
+                );
+              })}
+
+              {/* Tower Base Foundation */}
+              <div className="absolute left-4 bottom-8 w-9 h-12 bg-gradient-to-b from-gray-400 to-gray-500 opacity-30" 
+                   style={{clipPath: 'polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%)'}}></div>
+            </nav>
+          </aside>
+
+          {/* Content Area */}
+          <div className="flex-1 min-w-0">
+            <div className="bg-white shadow-lg border-2 border-gray-200">
+              
+              <div className="p-5 md:p-8 lg:p-10">
+                <div className={`grid ${activeContent.image ? 'lg:grid-cols-2' : 'lg:grid-cols-1'} gap-8 md:gap-12 items-start`}>
+                  
+                  {/* Text Content */}
+                  <div className="space-y-4">
+                    {activeContent.content}
+                  </div>
+
+                  {/* Image */}
+                  {activeContent.image && (
+                    <div className="relative group">
+                      {/* Connection nodes at corners */}
+                      <div className="absolute -top-2 -left-2 w-2 h-2 bg-gray-400 ring-2 ring-gray-200 rounded-full"></div>
+                      <div className="absolute -top-2 -right-2 w-2 h-2 bg-gray-400 ring-2 ring-gray-200 rounded-full"></div>
+                      <div className="absolute -bottom-2 -left-2 w-2 h-2 bg-gray-400 ring-2 ring-gray-200 rounded-full"></div>
+                      <div className="absolute -bottom-2 -right-2 w-2 h-2 bg-gray-400 ring-2 ring-gray-200 rounded-full"></div>
+                      
+                      {/* Frame border */}
+                      <div className="absolute -inset-2 border-2 border-gray-300 rounded-xl"></div>
+                      
+                      <div className="relative rounded-xl overflow-hidden shadow-xl border-4 border-gray-200 transform group-hover:-translate-y-2 transition-all duration-500">
+                        <Image
+                          src={activeContent.image}
+                          alt={activeContent.title}
+                          width={800}
+                          height={600}
+                          className="w-full h-auto object-contain bg-white"
+                          quality={90}
+                          priority={activeTab === 'who-we-are'}
+                          sizes="(max-width: 1024px) 100vw, 50vw"
+                        />
+                      </div>
+                    </div>
+                  )}
                 </div>
-              )}
+              </div>
             </div>
           </div>
 
-          {/* Bottom Connection Line */}
-        </div>
         </div>
       </div>
     </div>
