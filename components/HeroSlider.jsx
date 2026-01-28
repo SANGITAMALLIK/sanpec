@@ -368,12 +368,8 @@ export default function HeroSlider() {
                 <div className="relative h-full flex items-end pb-28 sm:pb-32 md:pb-36 lg:pb-40">
                   <div className="container mx-auto px-5 sm:px-6 md:px-8 lg:pl-16 xl:pl-24 lg:pr-8">
                     <div className="max-w-full sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl">
-                      {/* Pre-title with animated underline */}
+                      {/* Pre-title */}
                       <div className="flex items-center gap-2 md:gap-3 mb-3 sm:mb-4 md:mb-5 overflow-hidden">
-                        <div className="relative">
-                          <div className="w-7 sm:w-9 md:w-11 lg:w-12 h-[2px] bg-[#cd091b] transform -rotate-45"></div>
-                          <div className="absolute -top-1 -right-1 w-2 h-2 md:w-2.5 md:h-2.5 lg:w-3 lg:h-3 border-2 border-[#cd091b]"></div>
-                        </div>
                         <span className="text-[10px] sm:text-xs md:text-sm lg:text-base font-semibold text-white uppercase tracking-[1.5px] sm:tracking-[2px] md:tracking-[3px] lg:tracking-[4px]">
                           {slide.preTitle}
                         </span>
