@@ -160,15 +160,6 @@ const ModernTabs = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#e8e9ea]/50 to-[#e8e9ea]"></div>
       </div>
 
-      {/* Floating Power Pole Icons */}
-      <div className="absolute top-20 left-20 opacity-10 pointer-events-none">
-        <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-          <circle cx="30" cy="30" r="28" stroke="#171530" strokeWidth="3" strokeDasharray="5 5"/>
-          <rect x="26" y="10" width="8" height="40" fill="#171530" rx="2"/>
-          <line x1="15" y1="20" x2="45" y2="20" stroke="#CD091B" strokeWidth="4"/>
-        </svg>
-      </div>
-
       <div className="absolute bottom-32 right-32 opacity-10 pointer-events-none">
         <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
           <polygon points="40,10 30,30 20,50 15,70 40,65 65,70 60,50 50,30" fill="#171530" opacity="0.3"/>

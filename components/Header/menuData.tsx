@@ -14,13 +14,13 @@ export const menuData = {
       submenu: [
         {
           id: 1,
-          title: "SUNZIA PROJECT",
+          title: "SunZia PROJECT",
           path: "/sunzia-project",
           newTab: false
         },
         {
           id: 2,
-          title: "SUNZIA PROJECT GALLERY",
+          title: "SunZia PROJECT GALLERY",
           path: "/project-gallery",
           newTab: false
         }

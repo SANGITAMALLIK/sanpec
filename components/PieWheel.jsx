@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 const sections = [
   {
@@ -24,7 +25,7 @@ const sections = [
         text: "SANPEC strives to ensure that its supply chain is efficient and sustainable, aligning with its commitment to ethical standards."
       }
     ],
-    link: "/sanpec-six-pillars/#e-n-tab-title-843412765"
+    link: "/sanpec-six-pillars/ecosystem-innovation"
   },
   {
     tabTitle: "New Innovation",
@@ -48,7 +49,7 @@ const sections = [
         text: "Emphasis is placed on developing solutions that are aligned with ISO-Innovation management practices."
       }
     ],
-    link: "/sanpec-six-pillars/#e-n-tab-title-843412763"
+    link: "/sanpec-six-pillars/new-innovation"
   },
   {
     tabTitle: "Agility",
@@ -73,7 +74,7 @@ const sections = [
         text: "Our operational processes are designed to be scalable, enabling SANPEC to efficiently manage fluctuations in demand or shifts in market dynamics."
       }
     ],
-    link: "/sanpec-six-pillars/#agility"
+    link: "/sanpec-six-pillars/agility"
   },
   {
     tabTitle: "Collaboration & Co-Creation",
@@ -94,7 +95,7 @@ const sections = [
         text: "The company believes in co-creating value with stakeholders, including customers, local education institutions, sports organizations, and industry partners. This approach leads to solutions that are more aligned with stakeholders' needs and expectations."
       }
     ],
-    link: "/sanpec-six-pillars/#e-n-tab-title-843412766"
+    link: "/sanpec-six-pillars/collaboration-&-co-creation"
   },
   {
     tabTitle: "Process Excellence",
@@ -123,7 +124,7 @@ const sections = [
         text: "Employees are empowered to suggest improvements and innovations in processes, creating a culture of continuous improvement and excellence."
       }
     ],
-    link: "/sanpec-six-pillars/#e-n-tab-title-843412764"
+    link: "/sanpec-six-pillars/process-excellence"
   },
   {
     tabTitle: "Systems & Approach",
@@ -147,7 +148,7 @@ const sections = [
         text: "Regular feedback mechanisms are embedded within the system, allowing for continuous monitoring and adaptation of strategies based on real-time data and market trends."
       }
     ],
-    link: "/sanpec-six-pillars/"
+    link: "/sanpec-six-pillars/systems-and-structures"
   }
 ];
 
@@ -390,10 +391,8 @@ export default function InteractivePieWheel() {
                     ))}
                   </div>
                   
-                  <a 
+                  <Link 
                     href={currentSection.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="inline-flex items-center gap-3 px-4 lg:px-6 py-2 lg:py-3 rounded-lg lg:rounded-xl font-bold transition-all duration-300 hover:gap-5 hover:shadow-2xl group text-sm lg:text-base mb-4"
                     style={{ 
                       backgroundColor: secondaryColor,
@@ -405,7 +404,7 @@ export default function InteractivePieWheel() {
                     <svg className="w-4 h-4 lg:w-5 lg:h-5 transition-all duration-300 group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

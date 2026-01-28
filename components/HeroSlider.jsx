@@ -442,17 +442,17 @@ export default function HeroSlider() {
       </div>
 
       {/* Bottom Tabs - Modern Pagination Style - Mobile Responsive */}
-      <div className={`absolute bottom-4 sm:bottom-5 md:bottom-6 left-1/2 transform -translate-x-1/2 z-20 transition-opacity duration-300 ${isVideoPlaying ? 'opacity-0 pointer-events-none' : 'opacity-100'}`} style={{ maxWidth: '550px', width: 'calc(100% - 20px)' }}>
-        <div className="flex items-center justify-center gap-1.5 sm:gap-2 px-1 sm:px-2">
+      <div className={`absolute bottom-3 sm:bottom-4 md:bottom-5 lg:bottom-6 left-1/2 transform -translate-x-1/2 z-20 transition-opacity duration-300 ${isVideoPlaying ? 'opacity-0 pointer-events-none' : 'opacity-100'}`} style={{ maxWidth: '95%', width: 'auto' }}>
+        <div className="flex items-center justify-center gap-1 sm:gap-1.5 md:gap-2 px-1 sm:px-2">
           {/* Prev Button */}
           <button
             type="button"
             onClick={prevSlide}
             disabled={active === 0}
-            className={`group px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 bg-white text-xs sm:text-sm font-semibold transition-all duration-300 border-2 ${
+            className={`group px-2 sm:px-3 md:px-4 lg:px-5 py-1.5 sm:py-2 md:py-2.5 bg-white/20 backdrop-blur-md text-[10px] sm:text-xs md:text-sm font-semibold transition-all duration-300 border-2 ${
               active === 0
-                ? 'border-gray-200 text-gray-400 cursor-not-allowed'
-                : 'border-gray-300 text-gray-600 hover:border-[#cd091b] hover:text-white hover:bg-[#cd091b] hover:shadow-lg hover:shadow-[#cd091b]/30'
+                ? 'border-white/20 text-white/40 cursor-not-allowed'
+                : 'border-white/30 text-white hover:border-[#cd091b] hover:bg-[#cd091b] hover:shadow-lg hover:shadow-[#cd091b]/30'
             }`}
             style={{
               borderTopLeftRadius: '9999px',
@@ -461,26 +461,26 @@ export default function HeroSlider() {
               borderBottomRightRadius: '6px'
             }}
           >
-            <span className="flex items-center gap-1 sm:gap-1.5">
-              <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <span className="flex items-center gap-0.5 sm:gap-1 md:gap-1.5">
+              <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
               </svg>
-              <span className="hidden xs:inline">Prev</span>
+              <span className="hidden sm:inline">Prev</span>
             </span>
           </button>
 
-          {/* Numbers Container - Scrollable */}
-          <div ref={tabsContainerRef} className="flex overflow-x-auto scroll-smooth gap-1.5 sm:gap-2 items-center max-w-[180px] sm:max-w-[240px] md:max-w-[300px] px-0.5 sm:px-1">
+          {/* Numbers Container - Scrollable - Shows max 5 items */}
+          <div ref={tabsContainerRef} className="flex overflow-x-auto scroll-smooth gap-1 sm:gap-1.5 md:gap-2 items-center px-0.5 sm:px-1" style={{ maxWidth: 'calc(5 * (2.5rem + 0.25rem))', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             {slides.map((slide, index) => (
               <button
                 type="button"
                 key={slide.id}
                 ref={el => tabRefs.current[index] = el}
                 onClick={() => goToSlide(index)}
-                className={`flex-shrink-0 w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-lg border-2 text-xs sm:text-sm font-bold transition-all duration-300 ${
+                className={`flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 lg:w-11 lg:h-11 rounded-md sm:rounded-lg border-2 text-[10px] sm:text-xs md:text-sm font-bold transition-all duration-300 ${
                   index === active 
                     ? 'bg-[#cd091b] border-[#cd091b] text-white shadow-lg shadow-[#cd091b]/40 scale-110' 
-                    : 'bg-white border-gray-300 text-gray-700 hover:border-[#cd091b] hover:text-[#cd091b] hover:scale-105'
+                    : 'bg-white/20 backdrop-blur-md border-white/30 text-white hover:border-[#cd091b] hover:bg-[#cd091b]/30 hover:scale-105'
                 }`}
               >
                 {index + 1}
@@ -493,10 +493,10 @@ export default function HeroSlider() {
             type="button"
             onClick={nextSlide}
             disabled={active === slides.length - 1}
-            className={`group px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 bg-white text-xs sm:text-sm font-semibold transition-all duration-300 border-2 ${
+            className={`group px-2 sm:px-3 md:px-4 lg:px-5 py-1.5 sm:py-2 md:py-2.5 bg-white/20 backdrop-blur-md text-[10px] sm:text-xs md:text-sm font-semibold transition-all duration-300 border-2 ${
               active === slides.length - 1
-                ? 'border-gray-200 text-gray-400 cursor-not-allowed'
-                : 'border-gray-300 text-gray-600 hover:border-[#cd091b] hover:text-white hover:bg-[#cd091b] hover:shadow-lg hover:shadow-[#cd091b]/30'
+                ? 'border-white/20 text-white/40 cursor-not-allowed'
+                : 'border-white/30 text-white hover:border-[#cd091b] hover:bg-[#cd091b] hover:shadow-lg hover:shadow-[#cd091b]/30'
             }`}
             style={{
               borderTopLeftRadius: '6px',
@@ -505,9 +505,9 @@ export default function HeroSlider() {
               borderBottomRightRadius: '9999px'
             }}
           >
-            <span className="flex items-center gap-1 sm:gap-1.5">
-              <span className="hidden xs:inline">Next</span>
-              <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <span className="flex items-center gap-0.5 sm:gap-1 md:gap-1.5">
+              <span className="hidden sm:inline">Next</span>
+              <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
               </svg>
             </span>
@@ -528,12 +528,6 @@ export default function HeroSlider() {
         
         .scroll-smooth {
           scroll-behavior: smooth;
-        }
-        
-        @media (max-width: 640px) {
-          .xs\:inline {
-            display: inline;
-          }
         }
       `}</style>
     </section>

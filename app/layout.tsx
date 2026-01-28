@@ -13,7 +13,7 @@ const openSans = Open_Sans({
   subsets: ["latin"],
   weight: ['300', '400', '500', '600', '700'],
   display: 'swap',
-  variable: '--font-open-sans', // YE ADD KARO
+  variable: '--font-open-sans', 
 });
 
 export default function RootLayout({
@@ -23,7 +23,11 @@ export default function RootLayout({
 }) {
   return (
     <html suppressHydrationWarning lang="en" className="scroll-smooth">
-      <head />
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+      </head>
 
       <body className={`bg-[#FCFCFC] dark:bg-black ${openSans.variable}`}>
          <SmoothScroll />
