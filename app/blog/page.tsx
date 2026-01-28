@@ -89,91 +89,69 @@ const ProfessionalBlogPage = () => {
       </div>
 
       {/* Hero Section - Content starts 20px from bottom */}
-      <div className="relative bg-[#0B1931] overflow-hidden" style={{ height: '370px' }}>
-        {/* Power Poles and Towers Elements */}
-        <div className="absolute inset-0 opacity-15">
-          {/* Transmission Tower 1 - Left */}
-          <div className="absolute left-16 top-20">
-            <div className="relative w-8 h-48">
-              {/* Tower Main Pole */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-2 h-full bg-red-600"></div>
-              {/* Cross Arms */}
-              <div className="absolute top-16 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-red-600"></div>
-              <div className="absolute top-28 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-red-600"></div>
-              <div className="absolute top-40 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-red-600"></div>
-              {/* Support Lines */}
-              <div className="absolute top-16 left-1/2 w-10 h-32 border-l-2 border-red-600 transform -translate-x-8 rotate-12"></div>
-              <div className="absolute top-16 right-1/2 w-10 h-32 border-r-2 border-red-600 transform translate-x-8 -rotate-12"></div>
-            </div>
-          </div>
-
-          {/* Transmission Tower 2 - Right */}
-          <div className="absolute right-20 top-24">
-            <div className="relative w-8 h-52">
-              {/* Tower Main Pole */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-2 h-full bg-red-600"></div>
-              {/* Cross Arms */}
-              <div className="absolute top-20 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-red-600"></div>
-              <div className="absolute top-32 left-1/2 transform -translate-x-1/2 w-18 h-1 bg-red-600"></div>
-              <div className="absolute top-44 left-1/2 transform -translate-x-1/2 w-14 h-1 bg-red-600"></div>
-              {/* Support Lines */}
-              <div className="absolute top-20 left-1/2 w-12 h-32 border-l-2 border-red-600 transform -translate-x-10 rotate-12"></div>
-              <div className="absolute top-20 right-1/2 w-12 h-32 border-r-2 border-red-600 transform translate-x-10 -rotate-12"></div>
-            </div>
-          </div>
-
-          {/* Electric Pole 1 - Center Left */}
-          <div className="absolute left-1/3 top-32">
-            <div className="relative w-6 h-40">
-              {/* Pole */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-2 h-full bg-red-600"></div>
-              {/* Top Insulators */}
-              <div className="absolute top-8 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-red-600"></div>
-              <div className="absolute top-8 -left-4 w-2 h-2 rounded-full bg-red-600"></div>
-              <div className="absolute top-8 -right-4 w-2 h-2 rounded-full bg-red-600"></div>
-            </div>
-          </div>
-
-          {/* Electric Pole 2 - Center Right */}
-          <div className="absolute right-1/3 top-28">
-            <div className="relative w-6 h-36">
-              {/* Pole */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-2 h-full bg-red-600"></div>
-              {/* Top Insulators */}
-              <div className="absolute top-6 left-1/2 transform -translate-x-1/2 w-10 h-1 bg-red-600"></div>
-              <div className="absolute top-6 -left-3 w-2 h-2 rounded-full bg-red-600"></div>
-              <div className="absolute top-6 -right-3 w-2 h-2 rounded-full bg-red-600"></div>
-            </div>
-          </div>
-
-          {/* Power Lines connecting structures */}
-          <div className="absolute top-36 left-20 right-24 h-0.5 bg-red-500"></div>
-          <div className="absolute top-48 left-20 right-24 h-0.5 bg-red-500"></div>
-          <div className="absolute top-60 left-20 right-24 h-0.5 bg-red-500"></div>
-        </div>
-
-        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12 h-full flex flex-col justify-end pb-5">
-          <div className="max-w-4xl">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
-              Insights & Innovation
-            </h1>
-            
-            <p className="text-base md:text-lg text-gray-300 mb-5 leading-relaxed">
-              Transforming Global Energy Infrastructure Through Strategic Thinking
-            </p>
-
-            <nav className="flex items-center gap-2 text-gray-400 text-sm font-medium">
-              <Home className="w-4 h-4 text-[#DC2626]" />
-              <ChevronRight className="w-4 h-4" />
-              <a href="/" className="hover:text-white transition-colors">Home</a>
-              <ChevronRight className="w-4 h-4" />
-              <span className="text-white font-semibold">Blogs</span>
-            </nav>
-          </div>
-        </div>
-
-        <div className="absolute bottom-0 left-0 w-full h-1 bg-[#DC2626]"></div>
-      </div>
+      <div className="relative overflow-hidden h-64 sm:h-72 md:h-80 lg:h-[300px]">
+           {/* Background Image */}
+           <div className="absolute inset-0">
+             <img 
+               src="/images/23.jpg" 
+               alt="About Background"
+               className="w-full h-full object-cover"
+             />
+             {/* Enhanced Gradient Overlay */}
+             <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/50"></div>
+             
+             {/* Subtle Pattern Overlay for depth */}
+             <div 
+               className="absolute inset-0 opacity-[0.03]"
+               style={{
+                 backgroundImage: `
+                   repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,.1) 10px, rgba(255,255,255,.1) 20px)
+                 `
+               }}
+             ></div>
+           </div>
+     
+           {/* Content Area */}
+           <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12 h-full flex flex-col justify-end pb-6 sm:pb-8 pt-20 sm:pt-0">
+             {/* Page Title */}
+             <div className="mb-4 sm:mb-5">
+               <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2 sm:mb-3 tracking-tight drop-shadow-lg">
+                BLOG
+               </h1>
+               {/* Elegant Underline */}
+               <div className="flex items-center gap-2">
+                 <div className="h-[3px] w-12 sm:w-16 bg-[#DC2626] rounded-full"></div>
+                 <div className="h-[2px] w-6 sm:w-8 bg-[#DC2626]/60 rounded-full"></div>
+                 <div className="h-[2px] w-3 sm:w-4 bg-[#DC2626]/40 rounded-full"></div>
+               </div>
+             </div>
+             
+             {/* Simple Breadcrumb Navigation */}
+             <nav className="flex items-center flex-wrap gap-1.5 sm:gap-2 text-xs sm:text-sm">
+               {/* Home Link with Icon */}
+               <a 
+                 href="/" 
+                 className="group flex items-center gap-1 sm:gap-1.5 text-white/70 hover:text-white transition-colors duration-300"
+               >
+                 <Home className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                 <span className="font-medium">Home</span>
+               </a>
+     
+               {/* Separator */}
+               <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/50" />
+     
+               {/* Current Page (Active) */}
+               <span className="text-[#DC2626] font-semibold">
+                Blog
+               </span>
+             </nav>
+           </div>
+     
+           {/* Bottom Accent Line */}
+           <div className="absolute bottom-0 left-0 w-full h-[2px]">
+             <div className="h-full w-full bg-gradient-to-r from-transparent via-[#DC2626]/80 to-transparent"></div>
+           </div>
+         </div>
 
       {/* Search & Filter */}
       <div className="bg-white py-6 md:py-8 shadow-md border-b-2 border-gray-200 relative z-10">
@@ -374,14 +352,14 @@ const ProfessionalBlogPage = () => {
                   <h3 className="text-xl font-semibold text-[#0B1931]">SANPEC</h3>
                 </div>
                 <p className="text-gray-600 text-sm leading-relaxed">
-                  Transforming global energy infrastructure through innovation and excellence.
+                 Bringing Engineering Excellence. Improving Power Grid Reliability
                 </p>
               </div>
 
               <div className="bg-white p-6 shadow-sm border border-gray-300">
                 <div className="flex items-center gap-3 mb-6">
                   <TrendingUp className="w-5 h-5 text-[#DC2626]" />
-                  <h3 className="text-lg font-semibold text-[#0B1931]">Trending</h3>
+                  <h3 className="text-lg font-semibold text-[#0B1931]">Latest Updates</h3>
                 </div>
                 <div className="space-y-4">
                   {popularPosts.map((post, idx) => (
