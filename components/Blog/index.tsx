@@ -1,33 +1,77 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 const BlogCarousel = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // HTML entities decode karne ka function
+  const decodeHTML = (html: string): string => {
+    if (typeof document !== 'undefined') {
+      const txt = document.createElement('textarea');
+      txt.innerHTML = html;
+      return txt.value;
+    }
+    return html;
+  };
+
+  // URL-friendly slug banane ka function
+  const createSlug = (title: string): string => {
+    return title
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/--+/g, '-')
+      .trim();
+  };
+
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
+        // Cache check karo (exactly like BlogData)
+        const cachedData = localStorage.getItem('blogCarouselData');
+        const cacheTimestamp = localStorage.getItem('blogCarouselDataTimestamp');
+        const currentTime = new Date().getTime();
+        const cacheExpiry = 5 * 60 * 1000; // 5 minutes
+
+        if (cachedData && cacheTimestamp && (currentTime - parseInt(cacheTimestamp)) < cacheExpiry) {
+          setBlogs(JSON.parse(cachedData));
+          setLoading(false);
+          return;
+        }
+
+        // API se fetch karo
         const response = await fetch(
           'https://sanpec-excellence.com/wp-json/wp/v2/posts?per_page=10&_embed'
         );
         const data = await response.json();
         
-        const formattedBlogs = data.map((post) => ({
-          id: post.id,
-          title: post.title.rendered,
-          excerpt: post.excerpt.rendered.replace(/<[^>]*>/g, '').substring(0, 120) + '...',
-          image: post._embedded?.['wp:featuredmedia']?.[0]?.source_url || 
-                 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e',
-          link: post.link
-        }));
+        const formattedBlogs = data.map((post) => {
+          // Title ko decode karo
+          const decodedTitle = decodeHTML(post.title.rendered);
+          
+          return {
+            id: post.id,
+            title: decodedTitle,
+            slug: createSlug(decodedTitle),
+            excerpt: post.excerpt.rendered.replace(/<[^>]*>/g, '').substring(0, 120) + '...',
+            image: post._embedded?.['wp:featuredmedia']?.[0]?.source_url || 
+                   'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e',
+            link: post.link
+          };
+        });
+        
+        // Cache mein save karo
+        localStorage.setItem('blogCarouselData', JSON.stringify(formattedBlogs));
+        localStorage.setItem('blogCarouselDataTimestamp', currentTime.toString());
         
         setBlogs(formattedBlogs);
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching blogs:', error);
-      } finally {
         setLoading(false);
       }
     };
@@ -104,7 +148,7 @@ const BlogCarousel = () => {
 
           {/* RIGHT SIDE - Blogs */}
           <div className="w-full lg:w-7/12 relative">
-            {/* Navigation Arrows - Updated with white arrows on hover */}
+            {/* Navigation Arrows */}
             <div className="absolute -top-6 right-0 flex gap-3 z-20">
               <button
                 onClick={prevSlide}
@@ -181,17 +225,16 @@ const BlogCarousel = () => {
                         {blog.excerpt}
                       </p>
 
-                      <a
-                        href={blog.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      {/* Link component use kiya slug ke saath */}
+                      <Link
+                        href={`/blog/${blog.slug}`}
                         className="inline-flex items-center gap-2 bg-gradient-to-r from-[#CD091B] to-[#CD091B] hover:from-[#171530] hover:to-[#171530] text-white px-5 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 group-hover:gap-3 group-hover:translate-y-[-2px] hover:shadow-lg"
                       >
                         Read Article
                         <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 ))}
