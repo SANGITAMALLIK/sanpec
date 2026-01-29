@@ -4,6 +4,7 @@ import { ChevronDown } from 'lucide-react';
 
 const VerticalTabs = () => {
   const [activeTab, setActiveTab] = useState(0);
+  const [openAccordion, setOpenAccordion] = useState(0);
 
   const tabs = [
     {
@@ -132,6 +133,93 @@ const VerticalTabs = () => {
           }
         ]
       }
+    },
+    {
+      id: 4,
+      title: "Collaborations and Partnerships",
+      content: {
+        mainDescription: "Collaboration lies at the heart of SANPEC's mission to advance grid infrastructure and accelerate the energy transition. By fostering strategic partnerships with industry leaders, academic institutions, research organizations, and community stakeholders, SANPEC expands its capabilities, drives innovation, and creates impactful solutions that address global energy challenges.",
+        secondDescription: "These alliances enable SANPEC to stay at the forefront of cutting-edge technologies, influence policy frameworks, and promote sustainable development.",
+        accordions: [
+          {
+            id: 1,
+            title: "Engaging Communities For Co-Creation",
+            content: {
+              heading: "Engaging Communities for Co-Creation",
+              description: "SANPEC actively engages local communities to ensure shared ownership in energy projects.",
+              points: [
+                {
+                  title: "Collaboration and Co-Creation",
+                  text: "Partnering with local communities to develop energy projects that address specific regional needs while promoting equitable benefits."
+                },
+                {
+                  title: "Stakeholder Engagement",
+                  text: "Working with environmental groups, civil society organizations, and local governments to foster trust, build consensus, and ensure sustainability."
+                },
+                {
+                  title: "Capacity Building",
+                  text: "Organizing workshops and training programs for community members, empowering them to contribute meaningfully to project development and oversight."
+                }
+              ],
+              conclusion: "By integrating community voices into project planning and execution, SANPEC ensures that its solutions are not only technically robust but also socially responsible."
+            }
+          },
+          {
+            id: 2,
+            title: "Building Alliances for Grid Reliability, Resilience and Sustainability",
+            content: {
+              heading: "Building Alliances for Grid Reliability, Resilience and Sustainability",
+              description: "SANPEC understands the interconnected nature of today's global challenges and actively fosters cross-sector partnerships to drive grid reliability, resilience and sustainability.",
+              points: [
+                {
+                  title: "Collaborative Projects",
+                  text: "Engaging in joint initiatives with international organizations, non-profits, and industry leaders to address critical issues such as energy security, climate change, and disaster resilience."
+                },
+                {
+                  title: "Research Partnerships",
+                  text: "Partnering with research institutions to develop advanced testing methodologies, innovative grid designs, and cutting-edge technologies that future-proof energy systems."
+                },
+                {
+                  title: "Network Building",
+                  text: "Creating opportunities for professionals across sectors to collaborate, exchange ideas, and form joint ventures that advance grid innovation."
+                }
+              ],
+              conclusion: "These alliances pool resources, expertise, and influence to develop resilient infrastructure and sustainable energy systems that meet the evolving demands of the global energy transition."
+            }
+          },
+          {
+            id: 3,
+            title: "Strengthening Industry-Academia-Government Collaboration",
+            content: {
+              heading: "Strengthening Industry-Academia-Government Collaboration",
+              description: "SANPEC recognizes the transformative power of collaboration across industry, academia, and government to address complex energy challenges.",
+              points: [
+                {
+                  title: "Industry Collaborations",
+                  text: "Partnering with leading energy companies, utilities, and technology providers to share knowledge, co-develop solutions, and pioneer advancements in grid reliability and sustainability."
+                },
+                {
+                  title: "Academic Alliances",
+                  text: "Forming strategic alliances with universities and research institutions to bridge the gap between theoretical research and practical application, driving innovative approaches to grid technology and energy systems."
+                },
+                {
+                  title: "Policy Advocacy",
+                  text: "Collaborating with policymakers to advocate for regulatory frameworks that support grid resilience, renewable energy integration, and sustainable energy practices."
+                },
+                {
+                  title: "Collaborations with Educational Institutions",
+                  text: "Partnering with universities, technical schools, and training centers to develop programs that align with industry needs. These collaborations bridge the gap between academic research and practical application, ensuring a steady pipeline of skilled professionals."
+                },
+                {
+                  title: "On-the-Job Learning Opportunities",
+                  text: "Providing hands-on learning experiences through real-world projects, mentorship, and cross-functional teams. These opportunities help employees build practical expertise and foster a deeper understanding of the energy sector's evolving landscape."
+                }
+              ],
+              conclusion: "These collaborations not only foster technological innovation but also align industry goals with public policies and research agendas, ensuring impactful outcomes for the energy sector."
+            }
+          }
+        ]
+      }
     }
   ];
 
@@ -154,7 +242,7 @@ const VerticalTabs = () => {
           <aside className="w-full lg:w-96 bg-gradient-to-b from-white to-gray-50 border-2 border-gray-200 shadow-lg">
             <nav className="py-8 px-6 relative">
               {/* Central Tower Pole */}
-              <div className="absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-[#CD091B] via-gray-400 to-gray-300"></div>
+              <div className="absolute left-8 top-0 bottom-20 w-1 bg-gradient-to-b from-[#CD091B] via-gray-400 to-gray-300"></div>
               
               {tabs.map((tab, idx) => {
                 const isActive = activeTab === idx;
@@ -376,6 +464,109 @@ const VerticalTabs = () => {
                           </div>
                         </div>
                       ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Collaborations and Partnerships */}
+                {activeTab === 3 && (
+                  <div className="space-y-6">
+                    <div className="mb-6">
+                      <p className="text-gray-700 text-sm md:text-base leading-relaxed mb-3 text-justify">
+                        {tabs[activeTab].content.mainDescription}
+                      </p>
+                      <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify">
+                        {tabs[activeTab].content.secondDescription}
+                      </p>
+                    </div>
+
+                    {/* Accordions */}
+                    <div className="space-y-0 border-2 border-gray-200">
+                      {tabs[activeTab].content.accordions.map((accordion, idx) => {
+                        const isOpen = openAccordion === idx;
+                        
+                        return (
+                          <div
+                            key={accordion.id}
+                            className={`transition-all duration-500 ${
+                              isOpen 
+                                ? 'bg-gray-100' 
+                                : 'bg-white hover:bg-gray-50'
+                            } ${idx > 0 ? 'border-t-2 border-gray-200' : ''}`}
+                          >
+                            {/* Accordion Header */}
+                            <button
+                              onClick={() => setOpenAccordion(isOpen ? null : idx)}
+                              className="w-full p-4 md:p-5 text-left flex items-center justify-between group"
+                            >
+                              <div className="flex items-center gap-3 flex-1 min-w-0">
+                                <div className={`p-2 flex-shrink-0 transition-all duration-500 ${
+                                  isOpen ? 'bg-[#CD091B]' : 'bg-gray-200'
+                                }`}>
+                                  <div className="w-6 h-6 flex items-center justify-center">
+                                    <span className={`text-base font-bold ${isOpen ? 'text-white' : 'text-gray-800'}`}>{idx + 1}</span>
+                                  </div>
+                                </div>
+                                <h3 className={`font-bold text-sm md:text-base transition-colors ${
+                                  isOpen ? 'text-gray-900' : 'text-gray-800 group-hover:text-[#CD091B]'
+                                }`}>
+                                  {accordion.title}
+                                </h3>
+                              </div>
+                              <div className={`w-5 h-5 flex-shrink-0 ml-3 transition-all duration-500 ${
+                                isOpen ? 'rotate-180' : ''
+                              }`}>
+                                <svg className="w-full h-full" viewBox="0 0 24 24" fill="none">
+                                  <path d="M6 9L12 15L18 9" stroke={isOpen ? "#CD091B" : "#6B7280"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                              </div>
+                            </button>
+
+                            {/* Accordion Content */}
+                            <div className={`transition-all duration-500 overflow-hidden ${
+                              isOpen ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'
+                            }`}>
+                              <div className="px-4 md:px-5 pb-4 md:pb-5 bg-white">
+                                
+                                <h4 className="text-base md:text-lg font-bold text-gray-900 mb-2">
+                                  {accordion.content.heading}
+                                </h4>
+
+                                <p className="text-gray-700 text-sm md:text-base leading-relaxed mb-4 text-justify">
+                                  {accordion.content.description}
+                                </p>
+
+                                {/* Points */}
+                                <div className="border-l-4 border-[#CD091B] pl-3 md:pl-4 space-y-3 mb-4">
+                                  {accordion.content.points.map((point, pIdx) => (
+                                    <div key={pIdx} className="flex gap-2 md:gap-3 items-start">
+                                      <div className="w-6 h-6 md:w-7 md:h-7 bg-[#CD091B] flex items-center justify-center flex-shrink-0 mt-0.5">
+                                        <span className="text-white font-bold text-xs">{pIdx + 1}</span>
+                                      </div>
+                                      <div className="flex-1">
+                                        <h5 className="font-bold text-gray-900 text-sm md:text-base mb-1">
+                                          {point.title}
+                                        </h5>
+                                        <p className="text-gray-700 text-xs md:text-sm leading-relaxed text-justify">
+                                          {point.text}
+                                        </p>
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+
+                                {/* Conclusion */}
+                                <div className="bg-red-50 p-3 md:p-4">
+                                  <p className="text-gray-800 text-xs md:text-sm leading-relaxed italic text-justify">
+                                    {accordion.content.conclusion}
+                                  </p>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 )}

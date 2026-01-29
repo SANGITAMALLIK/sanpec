@@ -6,7 +6,7 @@ const tabsData = [
   {
     id: 'tab1',
     title: 'Rethinking Transmission Engineering',
-    image: 'https://sanpec-excellence.com/wp-content/uploads/2025/06/Colorful-3-Bullet-Point-Step-Process-Infographic-Graph-8.png',
+    image: '/images/why_sanpec/12.png',
     paragraphs: [
       'Traditional transmission engineering has long been constrained by rigid design methodologies, extended project timelines, and reactive maintenance approaches. SANPEC is challenging these limitations by adopting a data-driven, modular, and predictive approach, transforming transmission systems into intelligent, self-monitoring infrastructures that evolve with grid dynamics.',
       'A key focus of this transformation is structural optimization, ensuring that materials, configurations, and designs are not only efficient but also cost-effective, environmentally responsible, and resilient. By integrating advanced material science, optimized structure configurations, and lifecycle-based design principles, SANPEC reduces material waste, enhances installation efficiency, and minimizes long-term operational costs. This includes right-of-way (ROW) optimization, ensuring efficient land use while minimizing environmental impacts',
@@ -18,10 +18,10 @@ const tabsData = [
     id: 'tab2',
     title: 'Creating Climate-Resilient Infrastructure',
     images: [
-      'https://sanpec-excellence.com/wp-content/uploads/2025/06/TSDOS-2020-Tech.-Paper-Risk-Mitigation-Planning-for-a-Successful-EPC-Project.pdf-image-061-1.jpg',
-      'https://sanpec-excellence.com/wp-content/uploads/2025/06/TSDOS-2020-Tech.-Paper-Risk-Mitigation-Planning-for-a-Successful-EPC-Project.pdf-image-012-1.jpg'
+      '/images/why_sanpec/14.jpg',
+      '/images/why_sanpec/15.jpg'
     ],
-    headerImage: 'https://sanpec-excellence.com/wp-content/uploads/2025/06/Screenshot-Capture-2025-06-10-19-21-20.png',
+    headerImage: '/images/why_sanpec/13.png',
     introText: 'Modern transmission engineering must adapt to extreme weather conditions and evolving energy demands. SANPEC is at the forefront of grid hardening, integrating climate-resilient materials, adaptive grid expansion models, and dynamic load management solutions to enhance long-term system reliability and resilience.',
     listItems: [
       {
@@ -50,11 +50,11 @@ const tabsData = [
     id: 'tab3',
     title: 'Integrated Project Execution Ecosystems',
     images: [
-      'https://sanpec-excellence.com/wp-content/uploads/2025/06/Screenshot-2025-03-27-222839.png',
-      'https://sanpec-excellence.com/wp-content/uploads/2025/06/21.jpg',
-      'https://sanpec-excellence.com/wp-content/uploads/2025/06/inspection.png',
-      'https://sanpec-excellence.com/wp-content/uploads/2025/06/22png.png',
-      'https://sanpec-excellence.com/wp-content/uploads/2025/06/Screenshot-2025-03-27-222109.png'
+      '/images/why_sanpec/19.png',
+      '/images/why_sanpec/20.jpg',
+      '/images/why_sanpec/18.png',
+      '/images/why_sanpec/23.png',
+      '/images/why_sanpec/17.png'
     ],
     paragraphs: [
       'Transmission projects frequently encounter delays, budget overruns, and inefficiencies due to fragmented coordination between stakeholders. SANPEC is revolutionizing project execution by establishing integrated ecosystems that ensure seamless collaboration from design and procurement to construction, commissioning, and lifecycle management.',
@@ -66,8 +66,8 @@ const tabsData = [
     id: 'tab4',
     title: 'Empowering People & Transforming Culture',
     images: [
-      'https://sanpec-excellence.com/wp-content/uploads/2025/06/Educator-focused-eCM-Presentation.pptx.pdf-image-143-1.jpg',
-      'https://sanpec-excellence.com/wp-content/uploads/2025/06/Screenshot-2025-03-27-232556.png'
+      '/images/why_sanpec/30.jpg',
+      '/images/why_sanpec/33.png'
     ],
     introText: 'At SANPEC, innovation is not just about technology—it\'s about people. A forward-thinking workforce is the foundation of breakthrough engineering, operational excellence, and long-term industry leadership. SANPEC is investing in cutting-edge skill development, cross-disciplinary collaboration, and a culture of continuous learning to drive engineering excellence and adaptive innovation.',
     listItems: [

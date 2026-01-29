@@ -18,7 +18,7 @@ export default function SanpecTabs() {
   const tabsData = {
     'who-we-are': {
       title: 'WHO WE ARE',
-      image: 'https://sanpec-excellence.com/wp-content/uploads/2025/01/New-model-5.png',
+      image: '/images/about/sanpec-model.png',
       content: (
         <div>
           <div className="mb-6">
@@ -39,7 +39,7 @@ export default function SanpecTabs() {
     },
     'vision': {
       title: 'VISION',
-      image: 'https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture7.jpg',
+      image: '/images/about/Picture7.webp',
       content: (
         <div>
           <div className="mb-6">
@@ -67,7 +67,7 @@ export default function SanpecTabs() {
     },
     'mission': {
       title: 'MISSION',
-      image: 'https://sanpec-excellence.com/wp-content/uploads/2025/01/WhatsApp-Image-2025-01-28-at-21.49.26-1024x512.jpg',
+      image: '/images/about/mission.webp',
       content: (
         <div>
           <div className="mb-6">
@@ -178,7 +178,7 @@ export default function SanpecTabs() {
           <aside className="w-full lg:w-96 bg-gradient-to-b from-white to-gray-50 border-2 border-gray-200 shadow-lg lg:overflow-y-auto lg:h-full">
             <nav className="py-8 px-6 relative">
               {/* Central Tower Pole */}
-              <div className="absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-[#CD091B] via-gray-400 to-gray-300"></div>
+              <div className="absolute left-8 top-0 bottom-20 w-1 bg-gradient-to-b from-[#CD091B] via-gray-400 to-gray-300"></div>
               
               {tabKeys.map((tabKey, idx) => {
                 const isActive = activeTab === tabKey;

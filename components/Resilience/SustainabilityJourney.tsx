@@ -16,7 +16,7 @@ export default function PremiumTabsSection() {
   const tabContent = {
     'quality-of-life': {
       title: 'QUALITY OF LIFE',
-      image: 'https://sanpec-excellence.com/wp-content/uploads/2025/01/image-19-1024x791.webp',
+      image: '/images/sustainability/3.webp',
       items: [
         'Improve Community Quality of Life',
         'Enhance Public Health & Safety',
@@ -66,7 +66,7 @@ export default function PremiumTabsSection() {
     },
     'climate-and-resilience': {
       title: 'CLIMATE AND RESILIENCE',
-      image: 'https://sanpec-excellence.com/wp-content/uploads/2025/01/7004881064_3cf4c1b1af_k.png',
+      image: '/images/sustainability/5.png',
       items: [
         'Reduce Greenhouse Gas Emissions',
         'Reduce Air Pollutant Emissions',

@@ -148,7 +148,7 @@ export default function SocialImpactSection() {
                 <div className="absolute top-0 right-0 w-2 h-full bg-[#CD091B]"></div>
                 
                 <img 
-                  src="https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture7.png" 
+                  src="/images/sustainability/4.png" 
                   alt="Social Impact"
                   className="w-full h-full object-cover min-h-[300px]"
                 />

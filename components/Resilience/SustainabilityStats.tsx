@@ -9,19 +9,19 @@ export default function HolisticImpactSection() {
       id: 1,
       title: "Envision",
       color: "#101631",
-      image: "https://sanpec-excellence.com/wp-content/uploads/2024/08/Envision-241x300-2.png"
+      image: "/images/sustainability/1.png"
     },
     {
       id: 2,
       title: "Water Use & Management",
       color: "#CD091B",
-      image: "https://sanpec-excellence.com/wp-content/uploads/2024/08/editable-water-management-icon-concept-isolated-sustainable-office-thin-line-illustration-vector.jpg"
+      image: "/images/sustainability/2.jpg"
     },
     {
       id: 3,
       title: "Natural World",
       color: "#101631",
-      image: "https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture11-2.png"
+      image: "/images/sustainability/3.png"
     }
   ];
 

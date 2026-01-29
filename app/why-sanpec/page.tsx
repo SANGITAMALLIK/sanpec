@@ -3,7 +3,7 @@ import WhySanpec from "@/components/WhySanpec";
 import SanpecApproach from "@/components/WhySanpec/SanpecApproach";
 import DriversOfChange from "@/components/WhySanpec/DriversOfChange";
 import SanpecVerticalTabs from "@/components/WhySanpec/SanpecVerticalTabs";
-import Collobration from "@/components/WhySanpec/Collobration";
+// import Collobration from "@/components/WhySanpec/Collobration";
 
 import { Metadata } from "next";
 
@@ -20,7 +20,7 @@ export default function WhySanpecPage(){
         <SanpecApproach/>
         <DriversOfChange/>
         <SanpecVerticalTabs/>
-        <Collobration/>
+        {/* <Collobration/> */}
         </>
         
     );

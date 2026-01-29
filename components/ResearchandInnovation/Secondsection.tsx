@@ -11,7 +11,7 @@ const TechnicalPapersGallery = () => {
     {
       id: 1,
       title: 'Research paper on "Design and Analysis of Transmission Line Towers"',
-      image: 'https://sanpec-excellence.com/wp-content/uploads/2024/08/Layer-6.png',
+      image: 'images/home/header_submenu_images/2.png',
       category: 'transmission',
       year: '2018',
       link: 'https://sanpec-excellence.com/portfolio-item/research-paper-on-design-and-analysis-of-transmission-line-towers/'
@@ -19,7 +19,7 @@ const TechnicalPapersGallery = () => {
     {
       id: 2,
       title: 'H2S Entrapment and Corrosion on Direct Embedded Galvanized Steel Transmission Poles: ASCE/SEI-2009',
-      image: 'https://sanpec-excellence.com/wp-content/uploads/2024/08/home1-2.jpg',
+      image: 'images/home/header_submenu_images/3.png',
       category: 'transmission',
       year: '2009',
       link: 'https://sanpec-excellence.com/portfolio-item/h2s-entrapment-and-corrosion-on-direct-embedded-galvanized-steel-transmission-poles-asce-sei-2009/'
@@ -27,7 +27,7 @@ const TechnicalPapersGallery = () => {
     {
       id: 3,
       title: 'Challenges in Executing large and complex Transmission Projects, Platts transmission planning and development forum-2010',
-      image: 'https://sanpec-excellence.com/wp-content/uploads/2025/01/download-3.jpg',
+      image: 'images/home/header_submenu_images/4.png',
       category: 'transmission',
       year: '2010',
       link: 'https://sanpec-excellence.com/portfolio-item/challenges-in-executing-large-and-complex-transmission-projects-platts-transmission-planning-and-development-forum-2010/'
@@ -35,7 +35,7 @@ const TechnicalPapersGallery = () => {
     {
       id: 4,
       title: 'Why Source Inspection is Critical for Transmission Structures: TSDOS-2012, EDM-2014',
-      image: 'https://sanpec-excellence.com/wp-content/uploads/2025/01/inspection.png',
+      image: 'images/home/header_submenu_images/5.jpg',
       category: 'recent',
       year: '2014',
       link: 'https://sanpec-excellence.com/portfolio-item/why-source-inspection-is-critical-for-transmission-structures-tsdos-2012-edm-2014/'
@@ -43,7 +43,7 @@ const TechnicalPapersGallery = () => {
     {
       id: 5,
       title: 'Silicon Effect Color Transformation (SECT) on Lattice Steel Towers- IEEE-2012',
-      image: 'https://sanpec-excellence.com/wp-content/uploads/2024/08/home1-3.jpg',
+      image: 'images/home/header_submenu_images/10.jpg',
       category: 'transmission',
       year: '2012',
       link: 'https://sanpec-excellence.com/portfolio-item/silicon-effect-color-transformation-sect-on-lattice-steel-towers-ieee-2012/'
@@ -51,7 +51,7 @@ const TechnicalPapersGallery = () => {
     {
       id: 6,
       title: 'The Right Choice of Steel for Lattice Steel Towers: TSDOS-2010, EDM-2012',
-      image: 'https://sanpec-excellence.com/wp-content/uploads/2025/01/home2.png',
+      image: 'images/home/header_submenu_images/6.png',
       category: 'recent',
       year: '2012',
       link: 'https://sanpec-excellence.com/portfolio-item/the-right-choice-of-steel-for-lattice-steel-towers-tsdos-2010-edm-2012/'
@@ -59,7 +59,7 @@ const TechnicalPapersGallery = () => {
     {
       id: 7,
       title: 'A Need for Improvement in Arm Design: Consideration for New Design Approach: TSDOS- 2013',
-      image: 'https://sanpec-excellence.com/wp-content/uploads/2025/01/inspection.png',
+      image: 'images/home/header_submenu_images/12.jpg',
       category: 'recent',
       year: '2013',
       link: 'https://sanpec-excellence.com/portfolio-item/a-need-for-improvement-in-arm-design-consideration-for-new-design-approach-tsdos-2013/'
@@ -67,7 +67,7 @@ const TechnicalPapersGallery = () => {
     {
       id: 8,
       title: 'The Challenges for Successful EPC Transmission Projects- TSDOS-2020 Challenges in performing Structural Analysis of existing lattice towers- TSDOS-2019',
-      image: 'https://sanpec-excellence.com/wp-content/uploads/2025/01/Layer-2.png',
+      image: 'images/home/header_submenu_images/15.png',
       category: 'recent',
       year: '2020',
       link: 'https://sanpec-excellence.com/portfolio-item/the-challenges-for-successful-epc-transmission-projects-tsdos-2020-challenges-in-performing-structural-analysis-of-existing-lattice-towers-tsdos-2019/'
@@ -75,7 +75,7 @@ const TechnicalPapersGallery = () => {
     {
       id: 9,
       title: 'Sustainability Approach in Transmission Line Engineering: ASCE-International Conference on Sustainable Infrastructure- ICSI-2021',
-      image: 'https://sanpec-excellence.com/wp-content/uploads/2025/01/7004881064_3cf4c1b1af_k.png',
+      image: 'images/home/header_submenu_images/8.jpg',
       category: 'transmission',
       year: '2021',
       link: 'https://sanpec-excellence.com/portfolio-item/sustainability-approach-in-transmission-line-engineering-asce-international-conference-on-sustainable-infrastructure-icsi-2021/'
@@ -276,8 +276,8 @@ const TechnicalPapersGallery = () => {
                 <div className="absolute -bottom-2 -left-2 w-6 h-6 bg-gray-900/5 transform rotate-45 group-hover:rotate-90 transition-transform duration-500"></div>
 
                 <a
-                  href={paper.link}
-                  target="_blank"
+                  href="#"
+                
                   rel="noopener noreferrer"
                   className="relative block bg-white border border-gray-200 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
                   onMouseEnter={() => setHoveredCard(paper.id)}

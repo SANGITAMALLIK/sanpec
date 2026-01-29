@@ -22,7 +22,7 @@ export default function SanpecProfile() {
               <div className="text-center">
                 <div className="w-48 h-48 md:w-56 md:h-56 mx-auto mb-6 rounded-full bg-white p-1 shadow-sm border border-gray-200">
                   <img 
-                    src="https://sanpec-excellence.com/wp-content/uploads/2025/01/Picture41.png" 
+                    src="/images/about/ajay_mallik.png" 
                     alt="CEO Ajay Mallik" 
                     className="w-full h-full rounded-full object-cover"
                   />

@@ -8,56 +8,56 @@ const EngineeringPublications = () => {
       category: "Transmission & Substation Design & Operation Symposium",
       title: "WHY SOURCE INSPECTION IS CRITICAL FOR TRANSMISSION STRUCTURES",
       authors: "Ajay Mallik, PE | Clinton Char, PE",
-      image: "https://sanpec-excellence.com/wp-content/uploads/2025/01/7004881064_3cf4c1b1af_k.png"
+      image: "/images/r&d/1.png"
     },
     {
       id: 2,
       category: "Transmission & Substation Design & Operation Symposium",
       title: "SILICON EFFECT COLOR TRANSFORMATION ON GALV. STEEL LATTICE TOWERS",
       authors: "Ajay Mallik, PE | Clinton Char, PE",
-      image: "https://sanpec-excellence.com/wp-content/uploads/2025/01/image.webp"
+      image: "/images/r&d/2.webp"
     },
     {
       id: 3,
       category: "Transmission & Substation Design & Operation Symposium",
       title: "CONSIDERATION OF SOCIO-ECONOMIC VALUES IN TRANSMISSION LINE ENGINEERING",
       authors: "Ajay Mallik, PE | Clinton Char, PE",
-      image: "https://sanpec-excellence.com/wp-content/uploads/2025/01/2.webp"
+      image: "/images/r&d/3.webp"
     },
     {
       id: 4,
       category: "Transmission & Substation Design & Operation Symposium",
       title: "RISK MITIGATION PLANNING IN SUCCESSFUL EPC PROJECT",
       authors: "Ajay Mallik, PE | Clinton Char, PE",
-      image: "https://sanpec-excellence.com/wp-content/uploads/2025/01/image-1.webp"
+      image: "/images/r&d/4.webp"
     },
     {
       id: 5,
       category: "American Society of Civil Engineers",
       title: "SUSTAINABILITY APPROACH WITH RESILIENCY PLANNING IN TRANSMISSION LINE ENGINEERING",
       authors: "Ajay Mallik, PE | Sangita Mallik, ENV SP",
-      image: "https://sanpec-excellence.com/wp-content/uploads/2025/01/image-2.webp"
+      image: "/images/r&d/8.webp"
     },
     {
       id: 6,
       category: "EDM",
       title: "SUSTAINABILITY APPROACH IN TRANSMISSION LINE ENGINEERING",
       authors: "Ajay Mallik, PE | Clinton Char, PE",
-      image: "https://sanpec-excellence.com/wp-content/uploads/2025/01/image-3.webp"
+      image: "/images/r&d/5.webp"
     },
     {
       id: 7,
       category: "EDM",
       title: "LESSON LEARNED ON THE CHOICE OF MATERIAL FOR LATTICE STEEL TRANSMISSION TOWER STRUCTURES",
       authors: "Ajay Mallik, PE | Clinton Char, PE",
-      image: "https://sanpec-excellence.com/wp-content/uploads/2025/01/image-4.webp"
+      image: "/images/r&d/9.webp"
     },
     {
       id: 8,
       category: "IEEE",
       title: "SILICON EFFECT COLOR TRANSFORMATION ON GALVANIZED STEEL LATTICE TOWERS",
       authors: "Ajay Mallik, PE | Clinton Char, PE",
-      image: "https://sanpec-excellence.com/wp-content/uploads/2025/01/image-5.webp"
+      image: "/images/r&d/10.webp"
     }
   ];
 
@@ -200,7 +200,7 @@ const EngineeringPublications = () => {
                   <div className="p-6">
                     <div className="mb-4">
                       <span className="inline-block px-3 py-1 bg-gray-50 text-[#0F152F] text-xs font-bold rounded border border-gray-200">
-                        {pub.category.split(' ')[0]}
+                        {pub.category}
                       </span>
                     </div>
                     

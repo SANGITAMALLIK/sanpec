@@ -299,7 +299,7 @@ export default function ElectricPowerLayout({
           <aside className="hidden lg:block w-80 bg-gradient-to-b from-gray-50 to-white lg:sticky lg:top-0 h-full lg:min-h-screen border-r border-gray-200">
             <nav className="py-8 px-6 relative">
               {/* Central Tower Pole */}
-              <div className="absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-gray-300 via-gray-400 to-gray-300"></div>
+              <div className="absolute left-8 top-0 bottom-12 w-1 bg-gradient-to-b from-gray-300 via-gray-400 to-gray-300"></div>
               
               {menuData.map((parent, idx) => {
                 const isExpanded = expandedParent === parent.id;
@@ -414,9 +414,9 @@ export default function ElectricPowerLayout({
                 );
               })}
 
-              {/* Tower Base Foundation */}
-              {/* <div className="absolute left-4 bottom-8 w-9 h-12 bg-gradient-to-b from-gray-400 to-gray-500 opacity-30" 
-                   style={{clipPath: 'polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%)'}}></div> */}
+              {/* Tower Base Foundation (Lamp) */}
+              <div className="absolute left-4 bottom-0 w-9 h-12 bg-gradient-to-b from-gray-400 to-gray-500 opacity-30" 
+                   style={{clipPath: 'polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%)'}}></div>
             </nav>
           </aside>
 
