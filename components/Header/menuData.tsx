@@ -163,7 +163,7 @@ export const menuData = {
                 title: 'Distribution Line Hardening',
                 desc: 'Fire Prevention and Detection',
                 image: '/images/home/header_submenu_images/15.png',
-                link: '/electric-power/resiliency/distribution-line-hardening'
+                link: '/electric-power/resiliency/distribution-hardening'
               }
             ]
           }
