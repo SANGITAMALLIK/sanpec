@@ -202,7 +202,7 @@ export default function ElectricPowerLayout({
               </button>
               
               {isTransmissionOpen && (
-                <div className="mt-2 pl-4 space-y-1 max-h-64 overflow-y-auto">
+                <div className="mt-2 pl-4 space-y-1 max-h-64 overflow-y-auto custom-scrollbar">
                   {loading ? (
                     <div className="px-4 py-2 text-xs text-gray-500">Loading...</div>
                   ) : (
@@ -320,7 +320,7 @@ export default function ElectricPowerLayout({
 
                 {/* Dropdown List */}
                 {isTransmissionOpen && (
-                  <div className="ml-11 mt-2 space-y-1 max-h-96 overflow-y-auto">
+                  <div className="ml-11 mt-2 space-y-1 max-h-96 overflow-y-auto custom-scrollbar">
                     {loading ? (
                       <div className="px-4 py-2 text-xs text-gray-500">Loading Project...</div>
                     ) : (
@@ -366,6 +366,33 @@ export default function ElectricPowerLayout({
           </main>
         </div>
       </div>
+
+      <style jsx global>{`
+        /* Custom Scrollbar Styling */
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: #f1f1f1;
+          border-radius: 10px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: #888;
+          border-radius: 10px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: #555;
+        }
+
+        /* Firefox */
+        .custom-scrollbar {
+          scrollbar-width: thin;
+          scrollbar-color: #888 #f1f1f1;
+        }
+      `}</style>
     </div>
   );
 }
