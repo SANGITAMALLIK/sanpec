@@ -157,22 +157,22 @@ const EngineeringTabsSlider = () => {
   const currentData = activeTab === "projects" ? projects : activeTab === "research" ? research : whySanpecData;
 
   return (
-    <div className="w-full py-8 md:py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-[1600px] mx-auto">
-        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
+    <div className="w-full py-8 md:py-12 px-4 sm:px-6 lg:px-8" style={{backgroundColor: 'transparent'}}>
+      <div className="max-w-[1600px] mx-auto" style={{backgroundColor: 'transparent'}}>
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8" style={{backgroundColor: 'transparent'}}>
           
           {/* VERTICAL TABS - LEFT SIDE */}
-          <div className="w-full lg:w-80 flex-shrink-0">
-            <div className="lg:sticky lg:top-8">
+          <div className="w-full lg:w-80 flex-shrink-0" style={{backgroundColor: 'transparent'}}>
+            <div className="lg:sticky lg:top-8" style={{backgroundColor: 'transparent'}}>
               
               {/* Tabs with Vertical Line */}
-              <div className="relative space-y-4 md:space-y-6 pb-12 md:pb-16">
+              <div className="relative space-y-4 md:space-y-6 pb-12 md:pb-16" style={{backgroundColor: 'transparent'}}>
                 
                 {/* Vertical Line - Hidden on mobile */}
                 <div className="hidden md:block absolute left-6 top-0 bottom-12 w-1 bg-gradient-to-b from-gray-300 via-gray-400 to-gray-300"></div>
 
                 {/* Projects Tab */}
-                <div className="relative md:pl-16">
+                <div className="relative md:pl-16" style={{backgroundColor: 'transparent'}}>
                   {/* Connector - Hidden on mobile */}
                   <div className="hidden md:block absolute left-4 top-8 w-4 h-4 bg-white border-2 border-gray-400 rounded-full"></div>
                   <div className={`hidden md:block absolute left-7 top-9 h-0.5 w-9 ${activeTab === "projects" ? 'bg-[#CD091B]' : 'bg-gray-400'}`}></div>
@@ -197,7 +197,7 @@ const EngineeringTabsSlider = () => {
                 </div>
 
                 {/* Research Tab */}
-                <div className="relative md:pl-16">
+                <div className="relative md:pl-16" style={{backgroundColor: 'transparent'}}>
                   {/* Connector - Hidden on mobile */}
                   <div className="hidden md:block absolute left-4 top-8 w-4 h-4 bg-white border-2 border-gray-400 rounded-full"></div>
                   <div className={`hidden md:block absolute left-7 top-9 h-0.5 w-9 ${activeTab === "research" ? 'bg-[#CD091B]' : 'bg-gray-400'}`}></div>
@@ -222,7 +222,7 @@ const EngineeringTabsSlider = () => {
                 </div>
 
                 {/* WHY SANPEC Tab */}
-                <div className="relative md:pl-16">
+                <div className="relative md:pl-16" style={{backgroundColor: 'transparent'}}>
                   {/* Connector - Hidden on mobile */}
                   <div className="hidden md:block absolute left-4 top-8 w-4 h-4 bg-white border-2 border-gray-400 rounded-full"></div>
                   <div className={`hidden md:block absolute left-7 top-9 h-0.5 w-9 ${activeTab === "whysanpec" ? 'bg-[#CD091B]' : 'bg-gray-400'}`}></div>
@@ -236,9 +236,7 @@ const EngineeringTabsSlider = () => {
                     }`}
                   >
                     <h3 className="text-xl md:text-2xl font-black text-gray-900">Why SANPEC</h3>
-                    <p className="text-xs md:text-sm text-gray-600 mt-1 md:mt-2">Building the Grid of
-
-the Future</p>
+                    <p className="text-xs md:text-sm text-gray-600 mt-1 md:mt-2">Building the Grid of the Future</p>
                     
                     {activeTab === "whysanpec" && (
                       <div className="absolute right-3 md:right-4 top-1/2 -translate-y-1/2">
@@ -256,11 +254,11 @@ the Future</p>
           </div>
 
           {/* GRID CONTENT - RIGHT SIDE */}
-          <div className="flex-1">
-            <div className="relative">
+          <div className="flex-1" style={{backgroundColor: 'transparent'}}>
+            <div className="relative" style={{backgroundColor: 'transparent'}}>
 
               {loading ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" style={{backgroundColor: 'transparent'}}>
                   {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
                     <div key={i} className="h-64 md:h-80 bg-gray-200 animate-pulse rounded-xl"></div>
                   ))}
@@ -270,7 +268,7 @@ the Future</p>
                   activeTab === "whysanpec" 
                     ? 'grid-cols-1 lg:grid-cols-2' 
                     : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
-                }`}>
+                }`} style={{backgroundColor: 'transparent'}}>
                   {activeTab === "whysanpec" ? (
                     // WHY SANPEC - NEW CREATIVE DESIGN
                     currentData.map((item, index) => (
@@ -297,7 +295,7 @@ the Future</p>
                           </div>
 
                           {/* Content Section - Bottom */}
-                          <div className="p-6 md:p-8 space-y-4">
+                          <div className="p-6 md:p-8 space-y-4 bg-white">
                             
                             {/* Title */}
                             <h3 
