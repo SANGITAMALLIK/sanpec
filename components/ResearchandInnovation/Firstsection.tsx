@@ -82,33 +82,17 @@ const PowerStructureResearch = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 via-white to-gray-200 relative overflow-hidden">
-      {/* Background Grid Pattern */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none overflow-hidden">
-        {/* Grid Pattern */}
+    <div className="min-h-screen bg-white relative overflow-hidden">
+      {/* Background Grid Pattern - Optional, can be removed if you want completely clean */}
+      <div className="absolute inset-0 opacity-[0.02] pointer-events-none overflow-hidden">
         <div className="absolute inset-0" style={{
           backgroundImage: `linear-gradient(#0B1931 1px, transparent 1px), linear-gradient(90deg, #0B1931 1px, transparent 1px)`,
           backgroundSize: '100px 100px',
-          opacity: 0.03
+          opacity: 0.02
         }}></div>
       </div>
 
-      <div className="container mx-auto px-4 py-8 md:py-20 relative z-10">
-        {/* Main Hero Section */}
-        <div className="text-center mb-12 md:mb-16">
-          <div className="inline-block">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <div className="w-12 h-1 bg-gradient-to-r from-transparent via-red-600 to-red-600 rounded-full"></div>
-              <Zap className="w-8 h-8 text-red-600 animate-pulse" />
-              <div className="w-12 h-1 bg-gradient-to-l from-transparent via-red-600 to-red-600 rounded-full"></div>
-            </div>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent mb-2 tracking-tight">
-              RESEARCH & <span className="text-red-600">INNOVATION</span>
-            </h1>
-            <div className="h-1.5 bg-gradient-to-r from-red-600 via-gray-900 to-red-600 rounded-full mt-4"></div>
-          </div>
-        </div>
-
+      <div className="container mx-auto px-4 py-8 md:py-12 relative z-10">
         <div className="grid lg:grid-cols-3 gap-8 items-start">
           {/* Left Sidebar - Image & Title */}
           <div className="lg:col-span-1 space-y-6">
@@ -159,7 +143,7 @@ const PowerStructureResearch = () => {
                     <div className={`absolute -inset-0.5 bg-gradient-to-r from-red-600 to-gray-900 rounded-xl blur opacity-0 group-hover:opacity-30 transition duration-500 ${openAccordion === index ? 'opacity-20' : ''}`}></div>
                     
                     {/* Main Card */}
-                    <div className={`relative bg-gradient-to-r from-white via-gray-50 to-white rounded-xl shadow-lg overflow-hidden border-2 transition-all duration-500 ${
+                    <div className={`relative bg-white rounded-xl shadow-lg overflow-hidden border-2 transition-all duration-500 ${
                       openAccordion === index 
                         ? 'border-red-600 shadow-2xl' 
                         : 'border-gray-200 hover:border-gray-400'
@@ -202,7 +186,7 @@ const PowerStructureResearch = () => {
                       }`}>
                         <div className="px-4 md:px-5 pb-5 pt-2">
                           <div className="border-t-2 border-gray-200 pt-4">
-                            <div className="bg-gradient-to-br from-gray-50 to-white rounded-lg p-4 md:p-5 text-gray-700 leading-relaxed text-sm md:text-base">
+                            <div className="bg-gray-50 rounded-lg p-4 md:p-5 text-gray-700 leading-relaxed text-sm md:text-base">
                               {item.content}
                             </div>
                           </div>

@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, ArrowLeft } from 'lucide-react';
+import Link from 'next/link';
 
 const tabsData = [
   {
@@ -95,7 +96,21 @@ export default function InnovationTabs() {
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="lg:hidden bg-white border-b border-gray-200 sticky top-0 z-20 shadow-sm">
+      {/* Back Button - Visible on all screens */}
+      <div className="bg-white border-b border-gray-200 sticky top-0 z-30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <Link 
+            href="/why-sanpec"
+            className="inline-flex items-center gap-2 text-red-600 hover:text-red-700 font-semibold transition-colors duration-200 group"
+          >
+            <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-200" />
+            <span>Back to WHY SANPEC</span>
+          </Link>
+        </div>
+      </div>
+
+      {/* Mobile Tabs */}
+      <div className="lg:hidden bg-white border-b border-gray-200 sticky top-[57px] z-20 shadow-sm">
         <div className="container mx-auto px-4">
           <div className="flex gap-2 overflow-x-auto py-3">
             {tabsData.map((tab) => {
@@ -116,7 +131,7 @@ export default function InnovationTabs() {
 
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row">
-          <aside className="hidden lg:block w-80 bg-gray-50 lg:sticky lg:top-0 h-full lg:min-h-screen border-r border-gray-200">
+          <aside className="hidden lg:block w-80 bg-gray-50 lg:sticky lg:top-[57px] h-full lg:min-h-screen border-r border-gray-200">
             <nav className="py-8 px-6 relative">
               <div className="absolute left-8 top-0 bottom-0 w-1 bg-gray-400"></div>
               {tabsData.map((tab) => {

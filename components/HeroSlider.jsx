@@ -10,7 +10,7 @@ const slides = [
     id: 1,
     type: "video",
     videoUrl: "https://vimeo.com/1054591267?fl=pl&fe=sh",
-    preTitle: "VISIT US AT BOOTH NO-900",
+    preTitle: "",
     title:"INNOVATING SOLUTIONS",
     desc: "",
     image: "images/slider/4.png",
@@ -25,7 +25,7 @@ const slides = [
     image: "images/slider/1.png",
     bgColor: "#cd091b",
     buttonText: "Explore Now",
-    buttonLink: "/blog"
+    buttonLink: "/blog/electrical-transmission-substation-structures-conference-ets"
   },
   {
     id: 3,
@@ -76,7 +76,7 @@ const slides = [
     image: "images/slider/7.png",
     bgColor: "#cd091b",
     buttonText: "Explore Now",
-    buttonLink: "#"
+    buttonLink: "/sanpec-six-pillars/systems-and-structures"
   },
 ];
 

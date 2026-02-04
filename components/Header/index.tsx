@@ -41,31 +41,15 @@ export default function SanpecHeader() {
     return pathname === path;
   };
 
-  // ✅ CORRECTED LOGO LOGIC WITH PRELOADING
-  // Show OLD logo ONLY when: Homepage + First Slide + Not Scrolled
-  // Show NEW logo in ALL other cases (other slides, scrolled, or other pages)
   const isHomePage = pathname === '/';
   const isFirstSlide = currentSlide === 0;
   const isAtTop = !isScrolled;
 
   const shouldShowOldLogo = isHomePage && isFirstSlide && isAtTop;
   const logoSrc = shouldShowOldLogo
-    ? "/images/logo/sanpec-logo.png"      // OLD logo - ONLY homepage first slide without scroll
-    : "/images/logo/sanpec-logo.webp";    // NEW logo - Everything else
+    ? "/images/logo/SANPEC-TRANSPARENT.png"
+    : "/images/logo/SANPEC-TRANSPARENT.png";
 
-  // Debug logging (comment out for production)
-  useEffect(() => {
-    // console.log('📊 Logo State:', {
-    //   currentSlide,
-    //   isHomePage,
-    //   isFirstSlide,
-    //   isAtTop,
-    //   shouldShowOldLogo,
-    //   logoSrc
-    // });
-  }, [currentSlide, isHomePage, isFirstSlide, isAtTop, shouldShowOldLogo, logoSrc]);
-
-  // Preload both logos to prevent flickering
   useEffect(() => {
     const preloadLogos = () => {
       const oldLogo = new Image();
@@ -100,7 +84,6 @@ export default function SanpecHeader() {
               zIndex: 1
             }} />
             
-            {/* Red Glow */}
             <div style={{
               position: 'absolute',
               top: '20%',
@@ -113,7 +96,6 @@ export default function SanpecHeader() {
               zIndex: 0
             }} />
             
-            {/* Dark Blue Glow */}
             <div style={{
               position: 'absolute',
               top: '20%',
@@ -130,14 +112,12 @@ export default function SanpecHeader() {
 
         <div className="text-white" style={{ position: 'relative', zIndex: 2 }}>
           <div className="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-[50px]">
-            {/* Mobile Top Bar - Always Visible on Mobile */}
+            {/* Mobile Top Bar */}
             <div className="lg:hidden flex items-center justify-between py-2 border-b border-white/10">
-              {/* Mobile Tagline */}
               <div className="text-[10px] font-medium opacity-90 uppercase truncate pr-2">
                 Bringing Engineering Excellence
               </div>
               
-              {/* Mobile Top Menu Toggle */}
               <button 
                 onClick={() => setShowTopMenu(!showTopMenu)}
                 className="flex items-center gap-1 text-[10px] font-medium px-2 py-1 bg-white/10 rounded hover:bg-white/20 transition-all"
@@ -198,11 +178,11 @@ export default function SanpecHeader() {
             )}
 
             <div className="flex">
-              {/* Logo - Left Side - CORRECTED DYNAMIC LOGO */}
+              {/* Logo */}
               <div className="flex items-stretch py-2 pr-4 md:pr-6">
                 <Link href="/" onClick={() => resetSlide()}>
                   <img 
-                    key={`${logoSrc}-${currentSlide}`} // Force re-render when logo OR slide changes
+                    key={`${logoSrc}-${currentSlide}`}
                     src={logoSrc}
                     alt="Sanpec Logo" 
                     className={`w-auto transition-all duration-300 ${
@@ -216,16 +196,14 @@ export default function SanpecHeader() {
 
               {/* Right Side Content */}
               <div className="flex-1 flex flex-col">
-                {/* Desktop Top Bar - Hidden on Mobile */}
+                {/* Desktop Top Bar */}
                 <div className={`hidden lg:flex items-center justify-between transition-all duration-300 px-2 md:px-6 ${
                   isScrolled ? 'py-1.5 md:py-2' : 'py-2 md:py-3'
                 }`}>
-                  {/* Left - Tagline */}
                   <div className="text-[12px] font-medium opacity-90 uppercase">
                     Bringing Engineering Excellence. Improving Power Grid Reliability
                   </div>
 
-                  {/* Right - Top Menu Items */}
                   <div className="flex items-center gap-2 md:gap-4 ml-auto">
                     <div className="flex items-center gap-3 lg:gap-4 uppercase">
                       {menuData.topMenuItems.map((item, idx) => (
@@ -243,7 +221,6 @@ export default function SanpecHeader() {
                               <ChevronDown size={14} className={`transition-transform ${openDropdown === `top-${idx}` ? 'rotate-180' : ''}`} />
                             </button>
                             
-                            {/* Resources Dropdown */}
                             {openDropdown === `top-${idx}` && (
                               <div 
                                 className="absolute top-full right-0 mt-1 bg-white shadow-xl rounded-lg overflow-hidden min-w-[220px] z-50"
@@ -312,12 +289,12 @@ export default function SanpecHeader() {
                                 <ChevronDown size={16} className={`transition-transform duration-300 ${openDropdown === 'electric' ? 'rotate-180' : ''}`} />
                               </button>
                             </div>
-                          ) : (
-                            // SunZia Project - Simple Dropdown
+                          ) : item.submenu ? (
+                            // Why SANPEC - Simple Cards Dropdown
                             <div 
                               key={idx}
                               className="relative"
-                              onMouseEnter={() => setOpenDropdown('sunzia')}
+                              onMouseEnter={() => setOpenDropdown(`simple-${idx}`)}
                               onMouseLeave={() => setOpenDropdown(null)}
                             >
                               <button 
@@ -327,10 +304,10 @@ export default function SanpecHeader() {
                                 }`}
                               >
                                 <span>{item.title}</span>
-                                <ChevronDown size={16} className={`transition-transform duration-300 ${openDropdown === 'sunzia' ? 'rotate-180' : ''}`} />
+                                <ChevronDown size={16} className={`transition-transform duration-300 ${openDropdown === `simple-${idx}` ? 'rotate-180' : ''}`} />
                               </button>
                             </div>
-                          )
+                          ) : null
                         ) : (
                           item.newTab ? (
                             <a key={idx} href={item.path} target="_blank" className={`px-3 xl:px-4 py-4 hover:bg-white/10 transition-all text-[13px] xl:text-[14px] font-medium whitespace-nowrap ${
@@ -397,7 +374,6 @@ export default function SanpecHeader() {
             }} />
             
             <nav className="flex flex-col" style={{ position: 'relative', zIndex: 1 }}>
-              {/* Mobile Menu Header */}
               <div className="p-4 border-b border-white/10">
                 <div className="text-sm font-medium text-white/80 mb-2">Main Navigation</div>
               </div>
@@ -419,7 +395,6 @@ export default function SanpecHeader() {
 
                       {openDropdown === 'electric' && (
                         <div className="bg-white/5">
-                          {/* Tab Buttons for Mobile */}
                           <div className="flex overflow-x-auto border-b border-white/10">
                             {item.megaMenu.tabs.map((tab) => (
                               <button
@@ -436,7 +411,6 @@ export default function SanpecHeader() {
                             ))}
                           </div>
 
-                          {/* Tab Content */}
                           {item.megaMenu.tabs.map((tab) => (
                             activeTab === tab.id && (
                               <div key={tab.id} className="p-4">
@@ -469,20 +443,64 @@ export default function SanpecHeader() {
                         </div>
                       )}
                     </div>
-                  ) : (
-                    // SunZia Project Mobile Menu - Simple Dropdown
+                  ) : item.submenu ? (
+                    // Why SANPEC Mobile Menu - FIXED VERSION
                     <div key={idx} className="border-b border-white/10 last:border-0">
                       <button 
-                        onClick={() => setOpenDropdown(openDropdown === 'sunzia' ? null : 'sunzia')}
+                        onClick={() => setOpenDropdown(openDropdown === `mobile-simple-${idx}` ? null : `mobile-simple-${idx}`)}
                         className={`flex items-center justify-between w-full px-6 py-4 hover:bg-white/10 transition-all ${
                           isActiveLink(item.path) ? 'text-[#CD091B]' : 'text-white'
                         }`}
                       >
                         <span className="font-medium">{item.title}</span>
-                        <ChevronDown size={20} className={`transition-transform duration-300 ${openDropdown === 'sunzia' ? 'rotate-180' : ''}`} />
+                        <ChevronDown size={20} className={`transition-transform duration-300 ${openDropdown === `mobile-simple-${idx}` ? 'rotate-180' : ''}`} />
                       </button>
+
+                      {openDropdown === `mobile-simple-${idx}` && item.submenu && (
+                        <div className="bg-white/5 p-4">
+                          <div className="mb-4">
+                            <h3 className="text-lg font-bold text-white mb-2">WHY SANPEC</h3>
+                            <div className="h-1 w-16 bg-[#CD091B] rounded-full"></div>
+                          </div>
+                          
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            {item.submenu.map((subItem, subIdx) => (
+                              <Link
+                                key={subIdx}
+                                href={subItem.path}
+                                className="block bg-white/5 rounded-lg overflow-hidden hover:bg-white/10 transition-all border-2 border-transparent hover:border-[#CD091B]"
+                                onClick={() => setMobileMenuOpen(false)}
+                              >
+                                <div className="relative">
+                                  <img 
+                                    src={subItem.image}
+                                    alt={subItem.title}
+                                    className="w-full h-32 sm:h-40 object-cover"
+                                  />
+                                  {/* Number Badge */}
+                                  <div className="absolute top-2 right-2 w-8 h-8 bg-[#CD091B] text-white rounded-full flex items-center justify-center font-bold text-sm shadow-lg">
+                                    {subIdx + 1}
+                                  </div>
+                                </div>
+                                <div className="p-3">
+                                  <div className={`font-bold text-base mb-2 ${
+                                    isActiveLink(subItem.path) ? 'text-[#CD091B]' : 'text-white'
+                                  }`}>{subItem.title}</div>
+                                  <div className="text-sm text-white/70 line-clamp-2">{subItem.desc}</div>
+                                  
+                                  {/* Read More Arrow */}
+                                  <div className="mt-2 flex items-center gap-1 text-[#CD091B] font-semibold text-xs">
+                                    <span>Learn More</span>
+                                    <ChevronRight size={14} />
+                                  </div>
+                                </div>
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
-                  )
+                  ) : null
                 ) : (
                   item.newTab ? (
                     <a 
@@ -677,6 +695,81 @@ export default function SanpecHeader() {
                       </div>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Why SANPEC Dropdown - Desktop Only - FIXED VERSION */}
+        {openDropdown && openDropdown.startsWith('simple-') && (
+          <div 
+            className="hidden lg:block absolute top-full left-0 w-full shadow-2xl z-50"
+            onMouseEnter={() => {
+              // Keep the dropdown open when mouse enters
+              const idx = openDropdown.split('-')[1];
+              setOpenDropdown(`simple-${idx}`);
+            }}
+            onMouseLeave={() => setOpenDropdown(null)}
+          >
+            <div className="max-w-[1400px] mx-auto">
+              <div className="bg-white px-[50px] py-8">
+                <div className="mb-6">
+                  <h3 className="text-2xl font-bold text-[#0D132D] mb-2">WHY SANPEC</h3>
+                  <div className="h-1 w-24 bg-[#CD091B] rounded-full"></div>
+                </div>
+                
+                <div className="grid grid-cols-4 gap-6">
+                  {menuData.navigationItems
+                    .find(item => item.id === 5)
+                    ?.submenu?.map((subItem, idx) => (
+                      <Link
+                        key={idx}
+                        href={subItem.path}
+                        onClick={closeDropdown}
+                        className={`group bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2 border-2 ${
+                          isActiveLink(subItem.path) ? 'border-[#CD091B]' : 'border-gray-200 hover:border-[#CD091B]'
+                        }`}
+                      >
+                        <div className="relative overflow-hidden h-48">
+                          <img 
+                            src={subItem.image}
+                            alt={subItem.title}
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                          />
+                          <div 
+                            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                            style={{
+                              background: 'linear-gradient(to top, rgba(205, 9, 27, 0.4), transparent)'
+                            }}
+                          ></div>
+                          
+                          {/* Number Badge */}
+                          <div className="absolute top-4 right-4 w-10 h-10 bg-[#CD091B] text-white rounded-full flex items-center justify-center font-bold text-lg shadow-lg">
+                            {idx + 1}
+                          </div>
+                        </div>
+                        
+                        <div className="p-6">
+                          <h4 
+                            className={`font-bold text-xl mb-3 transition-colors ${
+                              isActiveLink(subItem.path) ? 'text-[#CD091B]' : 'text-[#0D132D] group-hover:text-[#CD091B]'
+                            }`}
+                          >
+                            {subItem.title}
+                          </h4>
+                          <p className="text-sm text-gray-600 leading-relaxed line-clamp-3">
+                            {subItem.desc}
+                          </p>
+                          
+                          {/* Read More Arrow */}
+                          <div className="mt-4 flex items-center gap-2 text-[#CD091B] font-semibold text-sm group-hover:gap-3 transition-all">
+                            <span>Learn More</span>
+                            <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
                 </div>
               </div>
             </div>

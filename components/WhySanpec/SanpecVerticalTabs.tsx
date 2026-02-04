@@ -1,7 +1,8 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 
+ 
 const VerticalTabs = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [openAccordion, setOpenAccordion] = useState(0);
@@ -222,9 +223,22 @@ const VerticalTabs = () => {
       }
     }
   ];
-
+ useEffect(() => {
+    const hash = window.location.hash;
+    if (hash === '#strategic-positioning') {
+      setTimeout(() => {
+        const element = document.getElementById('strategic-positioning');
+        if (element) {
+          element.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start' 
+          });
+        }
+      }, 100);
+    }
+  }, []);
   return (
-    <div className="min-h-screen bg-gray-50 relative overflow-hidden">
+    <div id ="strategic-positioning" className="min-h-screen bg-gray-50 relative overflow-hidden">
       
       {/* Grid Pattern */}
       <div className="absolute inset-0 opacity-[0.03]">

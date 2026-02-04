@@ -1,10 +1,26 @@
 'use client';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ExternalLink, Zap, Award, TrendingUp, ChevronRight, Home } from 'lucide-react';
 
 export default function StrategicInnovation() {
   const [isPlaying, setIsPlaying] = useState(false);
+
+  // Smooth scroll to section on page load if hash is present
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      setTimeout(() => {
+        const element = document.querySelector(hash);
+        if (element) {
+          element.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start' 
+          });
+        }
+      }, 100);  
+    }
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-500">
@@ -73,8 +89,8 @@ export default function StrategicInnovation() {
             </div>
           </div>
 
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-white">
+      {/* Hero Section - STRATEGIC THINKING & INNOVATION */}
+      <section id="strategic-thinking" className="relative overflow-hidden bg-white scroll-mt-20">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-[#101631] opacity-[0.02] transform skew-x-12 origin-top-right"></div>
         <div className="absolute bottom-0 left-0 w-1/3 h-2/3 bg-[#CD091B] opacity-[0.02] transform -skew-x-12 origin-bottom-left"></div>
         
@@ -156,7 +172,7 @@ export default function StrategicInnovation() {
       </section>
 
       {/* SunZia Project Section */}
-      <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50">
+      <section id="sunzia-story" className="py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50 scroll-mt-20">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="text-center mb-10 sm:mb-12 lg:mb-16">
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-3 sm:mb-4">

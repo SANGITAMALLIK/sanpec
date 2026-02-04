@@ -1,7 +1,7 @@
 
 import About from "@/components/About";
 import AboutFirstTabs from "@/components/About/AboutFirstTabs";
-import PresidentAndCeo from "@/components/About/PresidentAndCeo";
+// import PresidentAndCeo from "@/components/About/PresidentAndCeo";
 import OurCommitments from "@/components/About/OurCommitments";
 import SanpecKeys from "@/components/About/SanpecKeys";
 
@@ -18,7 +18,7 @@ const AboutPage = () => {
    <>
     <About/>
     <AboutFirstTabs/>
-    <PresidentAndCeo/>
+    {/* <PresidentAndCeo/> */}
     <OurCommitments/>
     <SanpecKeys/>
       </>

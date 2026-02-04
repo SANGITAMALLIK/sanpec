@@ -1,7 +1,7 @@
-import ResearchandInnovation from "@/components/ResearchandInnovation";
+// import ResearchandInnovation from "@/components/ResearchandInnovation";
 import FirstSection from "@/components/ResearchandInnovation/Firstsection";
-import SecondSection from "@/components/ResearchandInnovation/Secondsection";
-import ThirdSection from "@/components/ResearchandInnovation/Thirdsection";
+// import SecondSection from "@/components/ResearchandInnovation/Secondsection";
+// import ThirdSection from "@/components/ResearchandInnovation/Thirdsection";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -12,10 +12,10 @@ export const metadata: Metadata = {
 export default function ResearchandInnovationPage(){
     return(
         <>
-        <ResearchandInnovation/>
+        {/* <ResearchandInnovation/> */}
         <FirstSection/>
-        <SecondSection/>
-        <ThirdSection/>
+        {/* <SecondSection/> */}
+        {/* <ThirdSection/> */}
          </>
     );
 }   

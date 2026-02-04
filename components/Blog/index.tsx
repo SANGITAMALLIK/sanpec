@@ -18,16 +18,6 @@ const BlogCarousel = () => {
     return html;
   };
 
-  // URL-friendly slug banane ka function
-  const createSlug = (title: string): string => {
-    return title
-      .toLowerCase()
-      .replace(/[^\w\s-]/g, '')
-      .replace(/\s+/g, '-')
-      .replace(/--+/g, '-')
-      .trim();
-  };
-
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
@@ -45,7 +35,7 @@ const BlogCarousel = () => {
 
         // API se fetch karo
         const response = await fetch(
-          'https://sanpec-excellence.com/wp-json/wp/v2/posts?per_page=10&_embed'
+          'https://news.sanpec-excellence.com/wp-json/wp/v2/posts?categories=1,25,43,46&per_page=50&orderby=date&order=desc&_embed'
         );
         const data = await response.json();
         
@@ -53,10 +43,12 @@ const BlogCarousel = () => {
           // Title ko decode karo
           const decodedTitle = decodeHTML(post.title.rendered);
           
+          console.log(`BlogCarousel - Post: ${decodedTitle}, WordPress Slug: ${post.slug}`); // Debug
+          
           return {
             id: post.id,
             title: decodedTitle,
-            slug: createSlug(decodedTitle),
+            slug: post.slug, // ✅ WordPress ka actual slug use karo
             excerpt: post.excerpt.rendered.replace(/<[^>]*>/g, '').substring(0, 120) + '...',
             image: post._embedded?.['wp:featuredmedia']?.[0]?.source_url || 
                    'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e',
@@ -225,7 +217,7 @@ const BlogCarousel = () => {
                         {blog.excerpt}
                       </p>
 
-                      {/* Link component use kiya slug ke saath */}
+                      {/* WordPress slug use ho raha hai ✅ */}
                       <Link
                         href={`/blog/${blog.slug}`}
                         className="inline-flex items-center gap-2 bg-gradient-to-r from-[#CD091B] to-[#CD091B] hover:from-[#171530] hover:to-[#171530] text-white px-5 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 group-hover:gap-3 group-hover:translate-y-[-2px] hover:shadow-lg"

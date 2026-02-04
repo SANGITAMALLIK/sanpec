@@ -182,7 +182,7 @@ export default function SanpecEdgeProducts() {
           
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-6">
             <span className="text-[#101631]">SANPEC</span>
-            <span className="text-[#CD091B] ml-4">EDGE & PRODUCTS</span>
+            <span className="text-[#CD091B] ml-4">EDGE</span>
           </h1>
           
          
@@ -238,76 +238,8 @@ export default function SanpecEdgeProducts() {
             ))}
           </div>
 
-          {/* Edge Highlights */}
        
         </div>
-
-        {/* SANPEC Products Section */}
-        <div className="mb-20">
-          <div className="flex items-center gap-4 mb-8">
-            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#CD091B] to-transparent opacity-20"></div>
-            <h2 className="text-2xl md:text-3xl font-bold text-[#101631] flex items-center gap-3">
-              SANPEC PRODUCTS
-              <Zap className="w-6 h-6 text-[#CD091B]" />
-            </h2>
-            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#CD091B] to-transparent opacity-20"></div>
-          </div>
-
-          {/* Products Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            {productCategories.map((category, catIndex) => (
-              <div 
-                key={catIndex}
-                className="group"
-                onMouseEnter={() => setHoveredItem(`product-${catIndex}`)}
-                onMouseLeave={() => setHoveredItem(null)}
-              >
-                <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 h-full">
-                  {/* Category Header */}
-                
-                  {/* Products List */}
-                  <div className="p-4">
-                    <ul className="space-y-3">
-                      {category.items.map((item, itemIndex) => (
-                        <li 
-                          key={itemIndex}
-                          className="group/item"
-                        >
-                          <div className="flex items-start gap-2 p-2 rounded-lg hover:bg-gray-50 transition-colors duration-300">
-                            <div className="flex-shrink-0 mt-1">
-                              <CheckCircle className={`w-4 h-4 ${catIndex % 2 === 0 ? 'text-[#101631]' : 'text-[#CD091B]'}`} />
-                            </div>
-                            <span className="text-sm text-gray-700 group-hover/item:text-[#101631] transition-colors duration-300">
-                              {item}
-                            </span>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Category Tag */}
-                  <div className="px-4 pb-4">
-                    <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold ${
-                      catIndex % 2 === 0 
-                        ? 'bg-[#101631]/10 text-[#101631]' 
-                        : 'bg-[#CD091B]/10 text-[#CD091B]'
-                    }`}>
-                      <div className={`w-2 h-2 rounded-full ${catIndex % 2 === 0 ? 'bg-[#101631]' : 'bg-[#CD091B]'}`}></div>
-                      {category.items.length} Products
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Products Feature Highlights */}
-        
-        </div>
-
-        {/* Combined Excellence Footer */}
-     
       </div>
     </div>
   );

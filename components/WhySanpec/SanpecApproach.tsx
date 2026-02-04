@@ -1,9 +1,25 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronUp, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const TabGallery = () => {
   const [activeTab, setActiveTab] = useState(0);
+
+  // Smooth scroll to section on page load if hash is present
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash === '#365-approach') {
+      setTimeout(() => {
+        const element = document.getElementById('365-approach');
+        if (element) {
+          element.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start' 
+          });
+        }
+      }, 100);
+    }
+  }, []);
 
   const tabs = [
     {
@@ -42,7 +58,7 @@ const TabGallery = () => {
   const prevTab = () => setActiveTab((prev) => (prev - 1 + tabs.length) % tabs.length);
 
   return (
-    <div className="min-h-screen bg-white p-2 sm:p-4 md:p-8">
+    <div id="Our-approach" className="min-h-screen bg-white p-2 sm:p-4 md:p-8 scroll-mt-20">
       <div className="flex flex-col lg:flex-row gap-4 md:gap-8 max-w-7xl mx-auto">
         {/* Desktop: Left Vertical Tabs | Mobile: Top Horizontal Tabs */}
         <div className="lg:w-28 w-full flex lg:flex-col flex-row items-center lg:py-8 py-4 lg:space-y-6 space-x-3 lg:space-x-0 overflow-x-auto lg:overflow-visible">

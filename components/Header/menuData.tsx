@@ -171,8 +171,44 @@ export const menuData = {
       }
     },
     { id: 3, title: "Research and Innovation", path: "/research-and-innovation", newTab: false },
-    { id: 4, title: "Projects", path: "https://news.sanpec-excellence.com/td-projects/", newTab: true },
-    { id: 5, title: "Why SANPEC", path: "/why-sanpec", newTab: false },
+    { id: 4, title: "Projects", path: "/Projects", newTab: false },
+    { 
+      id: 5, 
+      title: "Why SANPEC", 
+      path: "/why-sanpec",
+      newTab: false,
+      hasDropdown: true,
+      submenu: [
+        {
+          id: 1,
+          title: "Strategic Thinking & Innovation",
+          desc: "As global energy infrastructure faces increasing complexity, innovation in transmission..",
+          image: "/images/why_sanpec/80.png",
+          path: "/why-sanpec#strategic-thinking"
+        },
+        {
+          id: 2,
+          title: "The SunZia Story",
+          desc: "Ajay Mallik, P.E. President and CEO of SANPEC Engineering, shares his team's critical role...",
+          image: "/images/why_sanpec/83.png",
+          path: "/why-sanpec#sunzia-story"
+        },
+        {
+          id: 3,
+          title: "365 Approach",
+          desc: "At SANPEC, we embrace a '365' approach, three strategic directions, six..",
+          image: "/images/why_sanpec/82.png",
+          path: "/why-sanpec#Our-approach"
+        },
+        {
+          id: 4,
+          title: "Strategic Positioning",
+          desc: "As a leading transmission and distribution & engineering company, SANPEC is committed to engineering excellence",
+          image: "/images/why_sanpec/81.png",
+          path: "/why-sanpec#strategic-positioning"
+        }
+      ]
+    },
     { id: 6, title: "Resilience and Sustainability", path: "/resilience-and-sustainabilty", newTab: false },
     { id: 8, title: "Blog", path: "/blog", newTab: false }
   ]

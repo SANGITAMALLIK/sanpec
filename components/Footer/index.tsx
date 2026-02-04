@@ -1,13 +1,14 @@
 "use client";
 import React from "react";
+import Link from "next/link"; // ✅ Next.js Link import
 
 const PremiumFooter = () => {
   const links = [
     { name: "Home", href: "/", icon: "🏠" },
-    { name: "Electric Power", href: "/electric-power", icon: "⚡" },
-    { name: "Projects", href: "/projects", icon: "📊" },
+    { name: "Electric Power", href: "/electric-power/transmisson/design-and-engineering", icon: "⚡" },
+    { name: "Projects", href: "/Projects", icon: "📊" },
     { name: "Why SANPEC", href: "/why-sanpec", icon: "🎯" },
-    { name: "Research", href: "/research", icon: "🔬" }
+    { name: "Research", href: "/research-and-innovation", icon: "🔬" }
   ];
 
   return (
@@ -54,7 +55,7 @@ const PremiumFooter = () => {
                   {/* Logo */}
                   <div className="mb-4 flex justify-center">
                     <img 
-                      src="https://sanpec-excellence.com/wp-content/uploads/2025/03/image-1-1536x1152-1.webp" 
+                      src="/images/logo/SANPEC-TRANSPARENT.png" 
                       alt="SANPEC Logo"
                       className="h-20 w-auto object-contain brightness-110 contrast-110 group-hover:scale-105 transition-transform duration-500"
                     />
@@ -160,7 +161,7 @@ const PremiumFooter = () => {
 
             <div className="space-y-1.5">
               {links.map((link, index) => (
-                <a 
+                <Link 
                   key={index}
                   href={link.href}
                   className="group relative block overflow-hidden rounded-lg"
@@ -184,7 +185,7 @@ const PremiumFooter = () => {
                       </svg>
                     </div>
                   </div>
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -204,13 +205,13 @@ const PremiumFooter = () => {
               <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#CC2222]" />
             </div>
           </div>
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
+          <div className="flex flex-col md:flex-row justify-center items-center gap-4 text-xs">
             <p className="text-gray-400 flex items-center gap-2">
               <span className="text-[#CC2222]">©</span>
               2026 SANPEC EXCELLENCE. All Rights Reserved
             </p>
             
-            <div className="flex items-center gap-4">
+            {/* <div className="flex items-center gap-4">
               {['Privacy Policy', 'Terms of Service', 'Cookie Policy'].map((item, idx) => (
                 <a 
                   key={idx}
@@ -221,7 +222,7 @@ const PremiumFooter = () => {
                   <span className="absolute bottom-0 left-0 w-0 h-px bg-[#CC2222] group-hover/link:w-full transition-all duration-300" />
                 </a>
               ))}
-            </div>
+            </div> */}
 
             {/* <div className="flex items-center gap-1.5 text-gray-500 italic">
               <span className="w-1.5 h-1.5 rounded-full bg-[#CC2222] animate-pulse" />

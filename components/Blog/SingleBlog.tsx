@@ -22,8 +22,6 @@ interface Blog {
   category: string;
 }
 
-const createSlug = (title: string) => title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/--+/g, '-').trim();
-
 const decodeHTML = (text: string) => {
   if (typeof window === 'undefined') {
     return text.replace(/&#8217;/g, "'").replace(/&#8216;/g, "'").replace(/&#8220;/g, '"').replace(/&#8221;/g, '"')
@@ -46,14 +44,20 @@ const SingleBlog = ({ slug }: { slug: string }) => {
     const fetchBlog = async () => {
       try {
         setLoading(true);
+        console.log('Searching for slug:', slug); // Debug
+        
         const cachedData = localStorage.getItem('blogData');
         
         if (cachedData) {
           const allBlogs = JSON.parse(cachedData);
+          console.log('Cached blogs:', allBlogs); // Debug
+          
+          // WordPress ka slug use karo for matching
           const found = allBlogs.find((b: any) => b.slug === slug);
+          console.log('Found blog in cache:', found); // Debug
           
           if (found) {
-            const res = await fetch(`https://sanpec-excellence.com/wp-json/wp/v2/posts/${found.id}?_embed`);
+            const res = await fetch(`https://news.sanpec-excellence.com/wp-json/wp/v2/posts/${found.id}?_embed`);
             const data = await res.json();
             
             setBlog({
@@ -64,10 +68,14 @@ const SingleBlog = ({ slug }: { slug: string }) => {
               category: data._embedded?.['wp:term']?.[0]?.[0]?.name || 'Uncategorized',
               date: new Date(data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
               author: data._embedded?.author?.[0]?.name || 'Admin',
-              slug: createSlug(data.title.rendered)
+              slug: data.slug // WordPress ka slug use karo
             });
             
-            setPopularPosts(allBlogs.slice(0, 5).map((b: Blog) => ({ ...b, title: decodeHTML(b.title) })));
+            setPopularPosts(allBlogs.slice(0, 5).map((b: Blog) => ({ 
+              ...b, 
+              title: decodeHTML(b.title),
+              slug: b.slug // WordPress ka slug already hai
+            })));
             
             // Uncategorized ko filter out karo
             const allCategories = allBlogs.map((b: Blog) => b.category);
@@ -80,9 +88,15 @@ const SingleBlog = ({ slug }: { slug: string }) => {
           }
         }
         
-        const res = await fetch('https://sanpec-excellence.com/wp-json/wp/v2/posts?_embed&per_page=100');
+        // Agar cache mein nahi mila, to API se fetch karo
+        console.log('Not found in cache, fetching from API...'); // Debug
+        const res = await fetch('https://news.sanpec-excellence.com/wp-json/wp/v2/posts?categories=1,25,43,46&per_page=100&_embed');
         const allPosts = await res.json();
-        const matched = allPosts.find((post: any) => createSlug(post.title.rendered) === slug);
+        console.log('API posts:', allPosts); // Debug
+        
+        // WordPress slug se match karo
+        const matched = allPosts.find((post: any) => post.slug === slug);
+        console.log('Matched post:', matched); // Debug
         
         if (matched) {
           setBlog({
@@ -93,13 +107,13 @@ const SingleBlog = ({ slug }: { slug: string }) => {
             category: matched._embedded?.['wp:term']?.[0]?.[0]?.name || 'Uncategorized',
             date: new Date(matched.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
             author: matched._embedded?.author?.[0]?.name || 'Admin',
-            slug: createSlug(matched.title.rendered)
+            slug: matched.slug // WordPress ka slug
           });
           
           setPopularPosts(allPosts.slice(0, 5).map((p: any) => ({
             id: p.id,
             title: decodeHTML(p.title.rendered),
-            slug: createSlug(p.title.rendered),
+            slug: p.slug, // WordPress ka slug
             image: p._embedded?.['wp:featuredmedia']?.[0]?.source_url || '',
             category: p._embedded?.['wp:term']?.[0]?.[0]?.name || 'Uncategorized'
           })));
@@ -110,10 +124,12 @@ const SingleBlog = ({ slug }: { slug: string }) => {
           const uniqueCategories: string[] = Array.from(new Set(filteredCategories));
           setCategories(['All', ...uniqueCategories]);
         } else {
+          console.error('Blog not found with slug:', slug); // Debug
           setError(true);
         }
         setLoading(false);
       } catch (err) {
+        console.error('Error fetching blog:', err); // Debug
         setError(true);
         setLoading(false);
       }
@@ -157,7 +173,7 @@ const SingleBlog = ({ slug }: { slug: string }) => {
     <div className="min-h-screen bg-gray-50">
       {/* Hero */}
       <div className="relative h-64 overflow-hidden">
-        <img src={blog.image} alt={blog.title} className="w-full h-full object-cover" />
+        <img src="/images/23.jpg" alt={blog.title} className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40"></div>
         
         <div className="absolute bottom-0 left-0 right-0 container mx-auto px-4 sm:px-6 lg:px-12 pb-6">
@@ -182,8 +198,6 @@ const SingleBlog = ({ slug }: { slug: string }) => {
           <div className="lg:col-span-3">
             <article className="bg-white shadow-lg rounded-lg overflow-hidden">
               <div className="p-6 md:p-10">
-
-
                 {blog.image && (
                   <div className="mb-6 rounded-lg overflow-hidden">
                     <img src={blog.image} alt={blog.title} className="w-full h-auto" loading="lazy" />
@@ -228,10 +242,11 @@ const SingleBlog = ({ slug }: { slug: string }) => {
                   .article-content th { background: #F9FAFB; font-weight: 600; }
                 `}</style>
 
-                 <div className="flex items-center gap-1.5">
-                    <Calendar className="w-4 h-4 text-[#DC2626]" />
-                    <span>{blog.date}</span>
-                  </div>
+                <div className="flex items-center gap-1.5 mb-4">
+                  <Calendar className="w-4 h-4 text-[#DC2626]" />
+                  <span className="text-sm text-gray-600">{blog.date}</span>
+                </div>
+                
                 <h1 className="text-2xl md:text-3xl font-bold text-[#0B1931] mb-5 leading-snug">{blog.title}</h1>
 
                 <div className="article-content" dangerouslySetInnerHTML={{ __html: blog.content }} />
@@ -275,7 +290,7 @@ const SingleBlog = ({ slug }: { slug: string }) => {
                   ))}
                 </div>
               </div>
-
+{/* 
               <div className="bg-white p-5 shadow-sm border border-gray-200 rounded-lg">
                 <div className="flex items-center gap-2.5 mb-4">
                   <Tag className="w-5 h-5 text-[#DC2626]" />
@@ -289,9 +304,9 @@ const SingleBlog = ({ slug }: { slug: string }) => {
                     </Link>
                   ))}
                 </div>
-              </div>
+              </div> */}
 
-              <div className="bg-white p-5 shadow-sm border border-gray-200 rounded-lg">
+              {/* <div className="bg-white p-5 shadow-sm border border-gray-200 rounded-lg">
                 <div className="flex items-center gap-2.5 mb-3">
                   <Mail className="w-5 h-5 text-[#DC2626]" />
                   <h3 className="text-base font-semibold text-[#0B1931]">Newsletter</h3>
@@ -302,7 +317,7 @@ const SingleBlog = ({ slug }: { slug: string }) => {
                 <button className="w-full bg-[#DC2626] hover:bg-red-700 text-white text-sm font-medium py-2 transition-colors rounded">
                   Subscribe
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

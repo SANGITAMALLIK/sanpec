@@ -1,10 +1,12 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { Zap, CheckCircle } from 'lucide-react';
 
 export default function SanpecTabs() {
   const [activeTab, setActiveTab] = useState('who-we-are');
   const [isMobile, setIsMobile] = useState(false);
+  const [hoveredItem, setHoveredItem] = useState(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -14,6 +16,22 @@ export default function SanpecTabs() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  const productItems = [
+    'Transmission Lattice Towers for 345kV, 400kV, 500kV, 765kV, 800kV Transmission Line, Self-Supported Lattice Structures, Guyed Lattice Structures',
+    'Road Crossing Lattice Towers, River Crossing Lattice Towers',
+    'Custom Engineered Lattice Structures',
+    'Transmission Pole Structures for up to 500kV Transmission Line',
+    'Single Pole Structure, 2 Poles Structure, 3 Poles Structure, Guyed Pole Structure, H-Frame Structure Riser & Switch Structure, Custom Engineered Steel Poles',
+    'Distribution Pole Structures, H Series Pole, C Series Pole, Poles for lower voltage lines such as 32.5kV, 69kV',
+    'Substation Structures',
+    'A-Frames Structure',
+    'H-Frame Structure',
+    'Equipment Support Structure',
+    'Custom Engineered Structures and Foundations',
+    'Hybrid Structures (Steel, Concrete, Composite)',
+    'Caisson Design (Embedded Pole)'
+  ];
 
   const tabsData = {
     'who-we-are': {
@@ -27,7 +45,7 @@ export default function SanpecTabs() {
             </h2>
             <div className="w-20 h-1.5 bg-[#CD091B] rounded-full"></div>
           </div>
-          <div className="space-y-4 text-base md:text-lg leading-relaxed text-gray-700">
+          <div className="space-y-4 leading-relaxed text-gray-700" style={{ fontSize: '16px' }}>
             <p className="pl-4 py-3 border-l-4 border-[#CD091B] bg-gray-50 rounded-r-lg">
               SANPEC is an innovation-driven, purpose-led company specializing in design, engineering, testing, inspection, quality, and complete lifecycle asset management services for the electric power and infrastructure industries.
             </p>
@@ -48,7 +66,7 @@ export default function SanpecTabs() {
             </h2>
             <div className="w-20 h-1.5 bg-[#CD091B] rounded-full"></div>
           </div>
-          <div className="space-y-4 text-base md:text-lg leading-relaxed text-gray-700">
+          <div className="space-y-4 leading-relaxed text-gray-700" style={{ fontSize: '16px' }}>
             <p className="pl-4 py-3 border-l-4 border-[#CD091B] bg-gray-50 rounded-r-lg">
               To be the trusted and innovative leader in designing and building electric transmission and distribution (T&D) lines. We aim to revolutionize the U.S. energy sector by achieving excellence, driving innovation, enhancing resilience, and improving the quality of life for the American people.
             </p>
@@ -76,7 +94,7 @@ export default function SanpecTabs() {
             </h2>
             <div className="w-20 h-1.5 bg-[#CD091B] rounded-full"></div>
           </div>
-          <div className="space-y-4 text-base md:text-lg leading-relaxed text-gray-700">
+          <div className="space-y-4 leading-relaxed text-gray-700" style={{ fontSize: '16px' }}>
             <p className="pl-4 py-3 border-l-4 border-[#CD091B] bg-gray-50 rounded-r-lg">
               We design, modernize, and manage electric power transmission and distribution grids with a strong commitment to innovation, excellence, and sustainability. At SANPEC, we aim to provide quality transmission and distribution (T&D) materials, innovative solutions, and exceptional services for a safe, robust, reliable, and resilient power grid.
             </p>
@@ -97,7 +115,7 @@ export default function SanpecTabs() {
             </h2>
             <div className="w-20 h-1.5 bg-[#CD091B] rounded-full"></div>
           </div>
-          <div className="space-y-4 text-base md:text-lg leading-relaxed text-gray-700">
+          <div className="space-y-4 leading-relaxed text-gray-700" style={{ fontSize: '16px' }}>
             <div className="bg-white p-4 rounded-lg border-l-4 border-[#CD091B] shadow-sm">
               <p><strong className="text-xl block mb-2" style={{ color: '#CD091B' }}>Innovation and Resilience:</strong> We focus on enhancing innovation performance and building foresight capacity to manage uncertainty. This approach aims to increase the value realized in our products, services, and processes. We design and advocate for resilient power grids that withstand and adapt to changing conditions and unforeseen disruptions.</p>
             </div>
@@ -145,6 +163,164 @@ export default function SanpecTabs() {
           </div>
         </div>
       )
+    },
+    'the-company': {
+      title: 'THE COMPANY',
+      image: null,
+      content: (
+        <div>
+          {/* Hero Section with CEO Image */}
+          <div className="bg-white rounded-2xl shadow-sm overflow-hidden mb-8 border border-gray-200">
+            <div className="grid md:grid-cols-5 gap-0">
+              {/* CEO Image Section - Light Gray Background */}
+              <div className="md:col-span-2 bg-gray-100 p-8 flex items-center justify-center">
+                <div className="text-center">
+                  <div className="w-48 h-48 md:w-56 md:h-56 mx-auto mb-6 rounded-full bg-white p-1 shadow-sm border border-gray-200">
+                    <img 
+                      src="/images/about/ajay_mallik.png" 
+                      alt="CEO Ajay Mallik" 
+                      className="w-full h-full rounded-full object-cover"
+                    />
+                  </div>
+                  <div className="bg-white rounded-lg p-4 border border-gray-200">
+                    <p className="text-gray-600 font-semibold text-sm uppercase tracking-wide mb-1">President & CEO</p>
+                    <h2 className="text-gray-900 text-2xl md:text-3xl font-bold">Ajay Mallik, P.E.</h2>
+                    <p className="text-gray-600 text-sm mt-2">SANPEC, Inc.</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Company Info */}
+              <div className="md:col-span-3 p-8 md:p-10 flex flex-col justify-center">
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="flex-1">
+                    <h3 className="text-4xl font-bold text-gray-900 mb-1">The Company</h3>
+                    <div className="h-1 w-24 bg-gray-300 rounded-full"></div>
+                  </div>
+                  <span className="text-base font-semibold text-gray-700 bg-gray-100 px-4 py-2 rounded-full border border-gray-200">Since 2009</span>
+                </div>
+                <div className="space-y-6">
+                  <div className="flex gap-4 items-start p-4 rounded-lg bg-gray-50 border border-gray-200">
+                    <div className="w-2 h-2 rounded-full bg-gray-400 mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-xl font-bold text-gray-900 mb-1">Baldrige Leadership Excellence Award 2023</p>
+                      <p className="text-gray-600 text-sm">(Quality/Resiliency/Sustainability)</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-4 items-start p-4 rounded-lg bg-gray-50 border border-gray-200">
+                    <div className="w-2 h-2 rounded-full bg-gray-400 mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-xl font-bold text-gray-900 mb-1">Registered Engineering Firm in Texas</p>
+                      <p className="text-gray-600 text-sm">(F# 11048)</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Experience Section */}
+          <div className="bg-white rounded-lg shadow-sm p-8 mb-6 border border-gray-200">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-0.5 bg-gray-300 rounded-full"></div>
+              <h3 className="text-2xl font-bold text-gray-900">Experience in T&D Line Engineering, Testing and Inspections (QA/QC)</h3>
+            </div>
+            <div className="flex gap-3 items-start">
+              <div className="w-2 h-2 rounded-full bg-gray-400 mt-2 flex-shrink-0"></div>
+              <p className="text-gray-700 leading-relaxed" style={{ fontSize: '16px' }}>
+                Over 160 years of combined worldwide experiences in Design, Engineering analysis and Audit/Source Inspection services for Steel Poles, Lattice Towers, Insulators & Hardware, Conductor, OPGW, Guys Wires and Shield Wire (HVAC and HVDC)
+              </p>
+            </div>
+          </div>
+
+          {/* Project Management Section */}
+          <div className="bg-white rounded-lg shadow-sm p-8 mb-6 border border-gray-200">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-0.5 bg-gray-300 rounded-full"></div>
+              <h3 className="text-2xl font-bold text-gray-900">Project Management Team</h3>
+            </div>
+            <div className="flex gap-3 items-start">
+              <div className="w-2 h-2 rounded-full bg-gray-400 mt-2 flex-shrink-0"></div>
+              <p className="text-gray-700 leading-relaxed" style={{ fontSize: '16px' }}>
+                Experienced and award-winning professionals with extensive and innovative engineering experience in managing large transmission projects successfully
+              </p>
+            </div>
+          </div>
+
+          {/* Professional Membership Section */}
+          <div className="bg-white rounded-lg shadow-sm p-8 mb-6 border border-gray-200">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-0.5 bg-gray-300 rounded-full"></div>
+              <h3 className="text-2xl font-bold text-gray-900">Professional Membership</h3>
+            </div>
+            <div className="space-y-3">
+              <div className="flex gap-3 items-start">
+                <div className="w-2 h-2 rounded-full bg-gray-400 mt-2 flex-shrink-0"></div>
+                <p className="text-gray-700 leading-relaxed" style={{ fontSize: '16px' }}>
+                  Active Committee member (ASCE/SEI): ASCE-10, ASCE-48, MOP-74, ASCE-Concrete Poles, ASCE-AFL Poles, Aesthetic Report, IEEE, NSPE
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Academic Affiliation Section */}
+          <div className="bg-gray-800 rounded-lg shadow-sm p-8 text-white">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-0.5 bg-gray-400 rounded-full"></div>
+              <h3 className="text-2xl font-bold">Academic Affiliation</h3>
+            </div>
+            <div className="space-y-3">
+              <div className="flex gap-3 items-start">
+                <div className="w-2 h-2 rounded-full bg-gray-400 mt-2 flex-shrink-0"></div>
+                <p className="leading-relaxed" style={{ fontSize: '16px' }}>Gonzaga University</p>
+              </div>
+              <div className="flex gap-3 items-start">
+                <div className="w-2 h-2 rounded-full bg-gray-400 mt-2 flex-shrink-0"></div>
+                <p className="leading-relaxed" style={{ fontSize: '16px' }}>
+                  Founding Member - Advanced Course in Transmission Line Structures for Master Degree Program
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    'sanpec-products': {
+      title: 'SANPEC PRODUCTS',
+      image: null,
+      content: (
+        <div>
+          <div className="mb-8">
+            <div className="flex items-center gap-4 mb-8">
+              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#CD091B] to-transparent opacity-20"></div>
+              <h2 className="text-2xl md:text-3xl font-bold text-[#101631] flex items-center gap-3">
+                SANPEC PRODUCTS
+                <Zap className="w-6 h-6 text-[#CD091B]" />
+              </h2>
+              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#CD091B] to-transparent opacity-20"></div>
+            </div>
+
+            {/* Single Combined Products List */}
+            <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden p-6">
+              <ul className="space-y-2">
+                {productItems.map((item, itemIndex) => (
+                  <li 
+                    key={itemIndex}
+                    className="flex items-start gap-3 p-1 rounded-lg hover:bg-gray-50 transition-colors duration-300"
+                  >
+                    <div className="flex-shrink-0 mt-1">
+                      <CheckCircle className="w-5 h-5 text-[#CD091B]" />
+                    </div>
+                    <span className="leading-relaxed text-gray-700" style={{ fontSize: '16px' }}>
+                      {item}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      )
     }
   };
 
@@ -172,11 +348,11 @@ export default function SanpecTabs() {
 
       {/* Main Content */}
       <div className="w-full max-w-[1800px] px-3 md:px-6 lg:px-8 py-6 md:py-10 relative z-10 mx-auto">
-        <div className="flex flex-col lg:flex-row gap-4 md:gap-6 lg:h-[calc(100vh-8rem)]">
+        <div className="flex flex-col lg:flex-row gap-4 md:gap-6">
           
-          {/* Sidebar - Fixed, No Scroll */}
-          <aside className="w-full lg:w-96 bg-gradient-to-b from-white to-gray-50 border-2 border-gray-200 shadow-lg lg:overflow-y-auto lg:h-full">
-            <nav className="py-8 px-6 relative">
+          {/* Sidebar - Sticky on desktop */}
+          <aside className="w-full lg:w-96 lg:sticky lg:top-6 lg:self-start bg-gradient-to-b from-white to-gray-50 border-2 border-gray-200 shadow-lg">
+            <nav className="py-8 px-6 relative max-h-[calc(100vh-3rem)] overflow-y-auto">
               {/* Central Tower Pole */}
               <div className="absolute left-8 top-0 bottom-20 w-1 bg-gradient-to-b from-[#CD091B] via-gray-400 to-gray-300"></div>
               
@@ -253,8 +429,8 @@ export default function SanpecTabs() {
             </nav>
           </aside>
 
-          {/* Content Area - Scrollable Only */}
-          <main className="flex-1 lg:overflow-y-auto lg:h-full">
+          {/* Content Area - Scrollable */}
+          <main className="flex-1">
             <div className="bg-white shadow-lg border-2 border-gray-200">
               
               <div className="p-4 md:p-6 lg:p-8">
