@@ -100,8 +100,8 @@ const PremiumFooter = () => {
                     </div>
                     <div className="flex-1">
                       <p className="text-[#CC2222] text-xs font-bold uppercase tracking-wider mb-1">Address</p>
-                      <p className="text-white font-semibold text-sm">SANPEC, Houston 11819</p>
-                      <p className="text-gray-300 text-xs">Skydale Drive Tomball Texas</p>
+                      <p className="text-white font-semibold text-sm">SANPEC, Inc</p>
+                      <p className="text-gray-300 text-xs">11819 Skydale Drive Tomball Texas</p>
                     </div>
                   </div>
                 </div>

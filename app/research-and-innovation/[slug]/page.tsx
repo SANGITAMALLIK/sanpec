@@ -40,6 +40,7 @@ export default function TransmissionPostPage() {
   const [allPosts, setAllPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [processedContent, setProcessedContent] = useState<string>('');
 
   useEffect(() => {
     if (!slug) {
@@ -77,6 +78,46 @@ export default function TransmissionPostPage() {
 
     fetchPost();
   }, [slug]);
+
+  // PDF ko detect aur embed karne ke liye
+  useEffect(() => {
+    if (post?.content?.rendered) {
+      const content = post.content.rendered;
+      
+      // PDF links ko detect karo
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(content, 'text/html');
+      
+      // Sare PDF links dhundo
+      const pdfLinks = doc.querySelectorAll('a[href*=".pdf"]');
+      
+      pdfLinks.forEach((link) => {
+        const pdfUrl = link.getAttribute('href');
+        if (pdfUrl) {
+          // PDF viewer container banao
+          const pdfContainer = doc.createElement('div');
+          pdfContainer.className = 'pdf-viewer-container my-8';
+          pdfContainer.innerHTML = `
+            <div class="border-2 border-gray-300 rounded-lg overflow-hidden shadow-lg">
+             
+              <iframe 
+                src="${pdfUrl}#toolbar=1&navpanes=1&scrollbar=1" 
+                width="100%" 
+                height="600px"
+                style="border: none; display: block;"
+                title="PDF Viewer"
+              ></iframe>
+            </div>
+          `;
+          
+          // Original link ko replace karo
+          link.parentNode?.replaceChild(pdfContainer, link);
+        }
+      });
+      
+      setProcessedContent(doc.body.innerHTML);
+    }
+  }, [post]);
 
   useEffect(() => {
     const fetchAllPosts = async () => {
@@ -159,12 +200,7 @@ export default function TransmissionPostPage() {
             <h3 className="text-[#101631] font-semibold">Error</h3>
           </div>
           <p className="text-gray-700">{error || 'Post not found'}</p>
-          <button
-            onClick={() => handleNavigation('/Projects')}
-            className="mt-4 px-4 py-2 bg-[#CD091B] text-white rounded-lg hover:bg-[#a00716] transition-colors"
-          >
-            Back to Projects
-          </button>
+         
         </div>
       </div>
     );
@@ -182,6 +218,14 @@ export default function TransmissionPostPage() {
             -webkit-box-orient: vertical;
             overflow: hidden;
           }
+          
+          .pdf-viewer-container {
+            margin: 2rem 0;
+          }
+          
+          .pdf-viewer-container iframe {
+            background: #f5f5f5;
+          }
         `
       }} />
       
@@ -192,22 +236,14 @@ export default function TransmissionPostPage() {
             
             {/* LEFT SIDE */}
             <div className="relative z-10 flex flex-col justify-between p-6 lg:p-10 bg-[#0f1729] text-white">
-              <div className="mb-4">
-                <button
-                  onClick={() => handleNavigation('/Projects')}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-transparent text-white font-medium text-sm rounded-lg hover:bg-white/10 transition-all duration-300 border-2 border-white/30"
-                >
-                  <ArrowLeft className="w-4 h-4" />
-                  Back to Projects
-                </button>
-              </div>
+             
 
               <div className="mb-4">
                 <p className="text-white/70 text-sm">
                   {formatDate(post.date)}
                 </p>
               </div>
-
+{/* amit devrani */}
               <div className="flex-1 flex items-center">
                 <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight">
                   {stripHtml(post.title.rendered)}
@@ -252,7 +288,7 @@ export default function TransmissionPostPage() {
                 prose-img:rounded-xl prose-img:shadow-lg
                 prose-blockquote:border-l-4 prose-blockquote:border-[#CD091B] prose-blockquote:pl-6
               "
-              dangerouslySetInnerHTML={{ __html: post.content.rendered }}
+              dangerouslySetInnerHTML={{ __html: processedContent || post.content.rendered }}
             />
 
             {/* RELATED PROJECTS */}
@@ -313,8 +349,6 @@ export default function TransmissionPostPage() {
                               </span>
                             </div>
                           </div>
-                          
-                         
                           
                           <div className="absolute inset-0 flex flex-col items-center justify-center p-8">
                             <div className="text-center max-w-md space-y-3">

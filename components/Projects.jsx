@@ -158,6 +158,19 @@ const EngineeringTabsSlider = () => {
 
   return (
     <div className="w-full py-8 md:py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
+      {/* TOP DECORATIVE LINE - Similar to your image */}
+      <div className="max-w-[1600px] mx-auto mb-8 md:mb-12">
+        <div className="flex items-center justify-center gap-3">
+          <div className="h-[2px] w-20 sm:w-32 md:w-48 bg-gradient-to-r from-transparent to-[#CD091B]"></div>
+          <div className="relative">
+            <svg className="w-8 h-8 md:w-10 md:h-10 text-[#CD091B]" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/>
+            </svg>
+          </div>
+          <div className="h-[2px] w-20 sm:w-32 md:w-48 bg-gradient-to-l from-transparent to-[#CD091B]"></div>
+        </div>
+      </div>
+
       <div className="max-w-[1600px] mx-auto">
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
           

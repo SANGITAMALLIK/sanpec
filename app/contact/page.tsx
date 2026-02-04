@@ -252,11 +252,9 @@ export default function ContactPage() {
                 <div className="flex items-start gap-4 mb-4">
                   <MapPin className="mt-1 flex-shrink-0" style={{ color: '#CD091B' }} size={24} />
                   <div>
-                    <p className="font-bold text-xl mb-2" style={{ color: '#101631' }}>SANPEC.</p>
+                    <p className="font-bold text-xl mb-2" style={{ color: '#101631' }}>SANPEC, Inc</p>
                     <p className="text-gray-700 leading-relaxed">
-                      Houston11819<br />
-                      Skydale<br />
-                      DriveTomball Texas
+                     11819 Skydale Drive Tomball Texas
                     </p>
                   </div>
                 </div>
