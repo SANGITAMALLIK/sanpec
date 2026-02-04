@@ -157,31 +157,31 @@ const EngineeringTabsSlider = () => {
   const currentData = activeTab === "projects" ? projects : activeTab === "research" ? research : whySanpecData;
 
   return (
-    <div className="w-full py-8 md:py-12 px-4 sm:px-6 lg:px-8" style={{backgroundColor: 'transparent'}}>
-      <div className="max-w-[1600px] mx-auto" style={{backgroundColor: 'transparent'}}>
-        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8" style={{backgroundColor: 'transparent'}}>
+    <div className="w-full py-8 md:py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
+      <div className="max-w-[1600px] mx-auto">
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
           
           {/* VERTICAL TABS - LEFT SIDE */}
-          <div className="w-full lg:w-80 flex-shrink-0" style={{backgroundColor: 'transparent'}}>
-            <div className="lg:sticky lg:top-8" style={{backgroundColor: 'transparent'}}>
+          <div className="w-full lg:w-80 flex-shrink-0">
+            <div className="lg:sticky lg:top-8">
               
               {/* Tabs with Vertical Line */}
-              <div className="relative space-y-4 md:space-y-6 pb-12 md:pb-16" style={{backgroundColor: 'transparent'}}>
+              <div className="relative space-y-4 md:space-y-6 pb-12 md:pb-16">
                 
                 {/* Vertical Line - Hidden on mobile */}
                 <div className="hidden md:block absolute left-6 top-0 bottom-12 w-1 bg-gradient-to-b from-gray-300 via-gray-400 to-gray-300"></div>
 
                 {/* Projects Tab */}
-                <div className="relative md:pl-16" style={{backgroundColor: 'transparent'}}>
+                <div className="relative md:pl-16">
                   {/* Connector - Hidden on mobile */}
-                  <div className="hidden md:block absolute left-4 top-8 w-4 h-4 bg-white border-2 border-gray-400 rounded-full"></div>
+                  <div className="hidden md:block absolute left-4 top-8 w-4 h-4 bg-gray-50 border-2 border-gray-400 rounded-full"></div>
                   <div className={`hidden md:block absolute left-7 top-9 h-0.5 w-9 ${activeTab === "projects" ? 'bg-[#CD091B]' : 'bg-gray-400'}`}></div>
 
                   <button
                     onClick={() => setActiveTab("projects")}
                     className={`w-full text-left p-4 md:p-6 rounded-xl border-2 transition-all ${
                       activeTab === "projects"
-                        ? 'border-[#CD091B] bg-gray-100 shadow-lg scale-105' 
+                        ? 'border-[#CD091B] bg-white shadow-lg scale-105' 
                         : 'border-gray-300 bg-white hover:border-gray-400'
                     }`}
                   >
@@ -197,16 +197,16 @@ const EngineeringTabsSlider = () => {
                 </div>
 
                 {/* Research Tab */}
-                <div className="relative md:pl-16" style={{backgroundColor: 'transparent'}}>
+                <div className="relative md:pl-16">
                   {/* Connector - Hidden on mobile */}
-                  <div className="hidden md:block absolute left-4 top-8 w-4 h-4 bg-white border-2 border-gray-400 rounded-full"></div>
+                  <div className="hidden md:block absolute left-4 top-8 w-4 h-4 bg-gray-50 border-2 border-gray-400 rounded-full"></div>
                   <div className={`hidden md:block absolute left-7 top-9 h-0.5 w-9 ${activeTab === "research" ? 'bg-[#CD091B]' : 'bg-gray-400'}`}></div>
 
                   <button
                     onClick={() => setActiveTab("research")}
                     className={`w-full text-left p-4 md:p-6 rounded-xl border-2 transition-all ${
                       activeTab === "research"
-                        ? 'border-[#CD091B] bg-gray-100 shadow-lg scale-105' 
+                        ? 'border-[#CD091B] bg-white shadow-lg scale-105' 
                         : 'border-gray-300 bg-white hover:border-gray-400'
                     }`}
                   >
@@ -222,16 +222,16 @@ const EngineeringTabsSlider = () => {
                 </div>
 
                 {/* WHY SANPEC Tab */}
-                <div className="relative md:pl-16" style={{backgroundColor: 'transparent'}}>
+                <div className="relative md:pl-16">
                   {/* Connector - Hidden on mobile */}
-                  <div className="hidden md:block absolute left-4 top-8 w-4 h-4 bg-white border-2 border-gray-400 rounded-full"></div>
+                  <div className="hidden md:block absolute left-4 top-8 w-4 h-4 bg-gray-50 border-2 border-gray-400 rounded-full"></div>
                   <div className={`hidden md:block absolute left-7 top-9 h-0.5 w-9 ${activeTab === "whysanpec" ? 'bg-[#CD091B]' : 'bg-gray-400'}`}></div>
 
                   <button
                     onClick={() => setActiveTab("whysanpec")}
                     className={`w-full text-left p-4 md:p-6 rounded-xl border-2 transition-all ${
                       activeTab === "whysanpec"
-                        ? 'border-[#CD091B] bg-gray-100 shadow-lg scale-105' 
+                        ? 'border-[#CD091B] bg-white shadow-lg scale-105' 
                         : 'border-gray-300 bg-white hover:border-gray-400'
                     }`}
                   >
@@ -254,11 +254,11 @@ const EngineeringTabsSlider = () => {
           </div>
 
           {/* GRID CONTENT - RIGHT SIDE */}
-          <div className="flex-1" style={{backgroundColor: 'transparent'}}>
-            <div className="relative" style={{backgroundColor: 'transparent'}}>
+          <div className="flex-1">
+            <div className="relative">
 
               {loading ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" style={{backgroundColor: 'transparent'}}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                   {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
                     <div key={i} className="h-64 md:h-80 bg-gray-200 animate-pulse rounded-xl"></div>
                   ))}
@@ -268,7 +268,7 @@ const EngineeringTabsSlider = () => {
                   activeTab === "whysanpec" 
                     ? 'grid-cols-1 lg:grid-cols-2' 
                     : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
-                }`} style={{backgroundColor: 'transparent'}}>
+                }`}>
                   {activeTab === "whysanpec" ? (
                     // WHY SANPEC - NEW CREATIVE DESIGN
                     currentData.map((item, index) => (
