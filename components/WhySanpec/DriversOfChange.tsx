@@ -154,11 +154,17 @@ const TabGallery = () => {
 
       {/* Hero Section */}
       <div className="relative z-10 text-center py-12 md:py-16 px-4">
-        <div className="inline-flex items-center gap-2 md:gap-3 bg-white border-2 border-gray-200 px-4 md:px-8 py-2 md:py-3 rounded-full mb-4 md:mb-6 shadow-lg">
-          <span className="w-2 h-2 md:w-2.5 md:h-2.5 bg-[#D62B2B] rounded-full animate-pulse flex-shrink-0"></span>
-          <span className="text-[#0F152F] font-bold text-xs md:text-sm tracking-wide uppercase">Transforming Energy Infrastructure</span>
-          <span className="w-2 h-2 md:w-2.5 md:h-2.5 bg-[#D62B2B] rounded-full flex-shrink-0"></span>
+        <div className="max-w-[1600px] mx-auto mb-8 md:mb-12">
+        <div className="flex items-center justify-center gap-3">
+          <div className="h-[2px] w-20 sm:w-32 md:w-48 bg-gradient-to-r from-transparent to-[#CD091B]"></div>
+          <div className="relative">
+            <svg className="w-8 h-8 md:w-10 md:h-10 text-[#CD091B]" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/>
+            </svg>
+          </div>
+          <div className="h-[2px] w-20 sm:w-32 md:w-48 bg-gradient-to-l from-transparent to-[#CD091B]"></div>
         </div>
+      </div>
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-[#0F152F] mb-3 md:mb-4 tracking-tight">
           Drivers Of <span className="text-[#D62B2B]">Change</span>
         </h1>

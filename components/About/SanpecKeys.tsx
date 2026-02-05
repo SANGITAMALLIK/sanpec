@@ -114,7 +114,7 @@ export default function SanpecEdgeProducts() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 relative py-16 md:py-14 overflow-hidden">
+   <div className="bg-gray-50 relative py-8 md:py-12 overflow-hidden">
       {/* Engineering Grid Background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 opacity-[0.03]">

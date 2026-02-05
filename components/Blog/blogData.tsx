@@ -298,10 +298,17 @@ const BlogData = () => {
 
               {/* Latest Articles Grid */}
               <div>
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="w-16 h-1.5 bg-[#DC2626]"></div>
-                  <h2 className="text-3xl md:text-4xl font-bold text-[#0B1931]">Latest Insights</h2>
-                </div>
+                 <div className="max-w-[1600px] mx-auto mb-8 md:mb-12">
+        <div className="flex items-center justify-center gap-3">
+          <div className="h-[2px] w-20 sm:w-32 md:w-48 bg-gradient-to-r from-transparent to-[#CD091B]"></div>
+          <div className="relative">
+            <svg className="w-8 h-8 md:w-10 md:h-10 text-[#CD091B]" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/>
+            </svg>
+          </div>
+          <div className="h-[2px] w-20 sm:w-32 md:w-48 bg-gradient-to-l from-transparent to-[#CD091B]"></div>
+        </div>
+      </div>
                 {currentBlogs.length === 0 ? (
                   <div className="text-center py-24 bg-white border rounded-lg">
                     <p className="text-gray-500 text-xl">No articles found matching your criteria</p>

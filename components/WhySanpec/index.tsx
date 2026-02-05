@@ -172,8 +172,22 @@ export default function StrategicInnovation() {
       </section>
 
       {/* SunZia Project Section */}
-      <section id="sunzia-story" className="py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50 scroll-mt-20">
+      <section id="sunzia-story" className="py-12 sm:py-16 md:py-20 lg:py-10 bg-gray-50 scroll-mt-20">
         <div className="container mx-auto px-4 sm:px-6">
+
+          {/* Decorative Divider */}
+          <div className="max-w-[1600px] mx-auto mb-8 md:mb-12">
+            <div className="flex items-center justify-center gap-3">
+              <div className="h-[2px] w-20 sm:w-32 md:w-48 bg-gradient-to-r from-transparent to-[#CD091B]"></div>
+              <div className="relative">
+                <svg className="w-8 h-8 md:w-10 md:h-10 text-[#CD091B]" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/>
+                </svg>
+              </div>
+              <div className="h-[2px] w-20 sm:w-32 md:w-48 bg-gradient-to-l from-transparent to-[#CD091B]"></div>
+            </div>
+          </div>
+
           <div className="text-center mb-10 sm:mb-12 lg:mb-16">
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-3 sm:mb-4">
               The <span className="text-[#101631]">SunZia</span> Story

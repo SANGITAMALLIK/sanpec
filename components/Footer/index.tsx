@@ -64,7 +64,7 @@ const PremiumFooter = () => {
                   <div className="space-y-3">
                     <h3 className="text-2xl font-black text-white uppercase tracking-wider flex items-center gap-2">
                       <span className="w-1.5 h-6 bg-gradient-to-b from-[#CC2222] to-[#e63939] rounded-full" />
-                      SANPEC INC
+                      SANPEC EXCELLENCE
                     </h3>
                     
                     <p className="text-gray-300 leading-relaxed text-base">
@@ -100,7 +100,7 @@ const PremiumFooter = () => {
                     </div>
                     <div className="flex-1">
                       <p className="text-[#CC2222] text-xs font-bold uppercase tracking-wider mb-1">Address</p>
-                      <p className="text-white font-semibold text-sm">SANPEC, Inc</p>
+                      <p className="text-white font-semibold text-sm">SANPEC EXCELLENCE</p>
                       <p className="text-gray-300 text-xs">11819 Skydale Drive Tomball Texas</p>
                     </div>
                   </div>

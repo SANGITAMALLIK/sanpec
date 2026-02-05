@@ -1,7 +1,7 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { ChevronLeft, ChevronRight, ArrowRight, Pause } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight, Pause, X } from 'lucide-react';
 import { useSlider } from '@/app/context/SliderContext';
 
 // Sample data - VIDEO SLIDES HAVE NO BUTTONS, IMAGE SLIDES HAVE SEPARATE BUTTONS
@@ -78,6 +78,15 @@ const slides = [
     buttonText: "Explore Now",
     buttonLink: "/sanpec-six-pillars/systems-and-structures"
   },
+  {
+    id: 8,
+    preTitle: "",
+    title: "",
+    desc: "",
+    image: "images/slider/final-version.jpg",bgColor: "#cd091b",
+   // buttonText: "Explore Now",
+   // buttonLink: "/research-and-innovation/technical-papers"
+      },
 ];
 
 export default function HeroSlider() {
@@ -87,6 +96,7 @@ export default function HeroSlider() {
   const [touchEnd, setTouchEnd] = useState(null);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [showPlayOverlay, setShowPlayOverlay] = useState(true);
+  const [showMobileVideoModal, setShowMobileVideoModal] = useState(false);
   const containerRef = useRef(null);
   const videoIframeRef = useRef(null);
   const tabsContainerRef = useRef(null);
@@ -177,13 +187,24 @@ export default function HeroSlider() {
   };
 
   const handlePlayVideo = () => {
-    setIsVideoPlaying(true);
-    setShowPlayOverlay(false);
+    // Check if mobile device
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+      setShowMobileVideoModal(true);
+      document.body.style.overflow = 'hidden'; // Prevent background scroll
+    } else {
+      setIsVideoPlaying(true);
+      setShowPlayOverlay(false);
+    }
   };
 
   const handlePauseVideo = () => {
     setIsVideoPlaying(false);
     setShowPlayOverlay(true);
+  };
+
+  const handleCloseMobileModal = () => {
+    setShowMobileVideoModal(false);
+    document.body.style.overflow = ''; // Restore scroll
   };
 
   const handleButtonClick = (link) => {
@@ -259,7 +280,7 @@ export default function HeroSlider() {
       
       <section 
         ref={containerRef}
-        className="relative w-full h-screen overflow-hidden bg-gray-900"
+        className="relative w-full h-[70vh] md:h-[85vh] lg:h-screen overflow-hidden bg-gray-900"
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
@@ -537,6 +558,44 @@ export default function HeroSlider() {
           scroll-behavior: smooth;
         }
       `}</style>
+
+      {/* Mobile Video Modal */}
+      {showMobileVideoModal && (
+        <div 
+          className="fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center"
+          onClick={handleCloseMobileModal}
+        >
+          {/* Close Button */}
+          <button
+            onClick={handleCloseMobileModal}
+            className="absolute top-4 right-4 z-[10000] w-10 h-10 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-full border-2 border-white/30 hover:bg-[#cd091b] hover:border-[#cd091b] transition-all duration-300"
+          >
+            <X className="w-6 h-6 text-white" />
+          </button>
+
+          {/* Video Container */}
+          <div 
+            className="relative w-full max-w-4xl mx-4"
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              aspectRatio: '16/9'
+            }}
+          >
+            <iframe
+              src={`https://player.vimeo.com/video/${getVimeoVideoId(slides[0].videoUrl)}?autoplay=1&muted=0&title=0&byline=0&portrait=0&controls=1`}
+              className="absolute inset-0 w-full h-full rounded-lg"
+              frameBorder="0"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
+
+          {/* Instruction Text */}
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/70 text-sm">
+            Tap outside to close
+          </div>
+        </div>
+      )}
     </section>
     </>
   );

@@ -100,7 +100,7 @@ const sections = [
   {
     tabTitle: "Process Excellence",
     contentTitle: "Process Excellence",
-    image: "images/home/six-pillars/1.png",
+    image: "images/home/six-pillars/4.png",
     position: { top: '70%', right: '25%' },
     content: [
       {
@@ -280,16 +280,20 @@ export default function InteractivePieWheel() {
 
       <div className="text-center py-8 lg:py-12 relative px-4 fade-in-up">
         {!isMobile && (
-          <div className="absolute top-0 left-0 w-full flex justify-center">
-            <div className="flex items-center gap-3">
-              <div className="w-20 h-1 bg-gradient-to-r from-transparent via-gray-300 to-transparent rounded-full"></div>
-              <div className="w-3 h-3 rounded-full animate-pulse" style={{ backgroundColor: secondaryColor }}></div>
-              <div className="w-20 h-1 bg-gradient-to-l from-transparent via-gray-300 to-transparent rounded-full"></div>
-            </div>
+           <div className="max-w-[1600px] mx-auto mb-8 md:mb-12">
+        <div className="flex items-center justify-center gap-3">
+          <div className="h-[2px] w-20 sm:w-32 md:w-48 bg-gradient-to-r from-transparent to-[#CD091B]"></div>
+          <div className="relative">
+            <svg className="w-8 h-8 md:w-10 md:h-10 text-[#CD091B]" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/>
+            </svg>
           </div>
+          <div className="h-[2px] w-20 sm:w-32 md:w-48 bg-gradient-to-l from-transparent to-[#CD091B]"></div>
+        </div>
+      </div>
         )}
         
-        <div className="relative inline-block mt-6 lg:mt-10 mb-4 lg:mb-6">
+        <div className="relative inline-block mt-0 lg:mt-0 mb-4 lg:mb-6">
           <h1 className="relative text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mb-2 lg:mb-4 tracking-tight">
             <span style={{ color: primaryColor }} className="inline-block hover:scale-105 transition-transform duration-300">SANPEC'S</span>{' '}
             <span style={{ color: secondaryColor }} className="inline-block hover:scale-105 transition-transform duration-300">SIX PILLARS</span>
@@ -350,41 +354,44 @@ export default function InteractivePieWheel() {
           ))}
         </div>
 
-        <div className="w-full lg:w-1/2 px-4 lg:px-0 lg:pr-[70px] lg:-ml-1">
-          <div className="content-card bg-white rounded-xl lg:rounded-2xl shadow-lg lg:shadow-xl border border-gray-200 h-auto lg:h-[600px] hover:shadow-2xl transition-shadow duration-500" style={{ overflow: 'hidden' }}>
-            <div className="flex flex-col md:flex-row h-full">
-              <div className="md:w-2/5 h-48 md:h-auto relative overflow-hidden">
-                <img
-                  src={currentSection.image}
-                  alt={currentSection.contentTitle}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-                  onError={(e) => {
-                    e.target.src = "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9";
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-              </div>
-              
-              <div className="md:w-3/5 h-full relative" style={{ maxHeight: isMobile ? '500px' : '600px' }}>
-                <div className="scrollable-content custom-scrollbar h-full p-4 lg:p-8">
-                  <div className="mb-4 lg:mb-6 pb-3 lg:pb-4 border-b relative" style={{ borderColor: `${primaryColor}20` }}>
-                    <h2 className={`${isMobile ? 'text-xl' : 'text-2xl md:text-3xl'} font-bold relative`} style={{ color: primaryColor }}>
-                      {currentSection.contentTitle}
-                    </h2>
-                    {/* <div className={`${isMobile ? 'w-16 h-1' : 'w-24 h-1.5'} rounded-full mt-2`} style={{ backgroundColor: secondaryColor }}></div> */}
+        <div className="w-full lg:w-1/2 px-4 lg:px-0 lg:pr-[70px] lg:-ml-1 mt-0 lg:mt-0">
+          <div className="content-card bg-white rounded-xl lg:rounded-2xl shadow-lg lg:shadow-xl border border-gray-200 h-auto lg:h-[600px] hover:shadow-2xl transition-shadow duration-500 overflow-hidden">
+            <div className="flex flex-col h-full">
+              {/* Mobile: Image left, Title right, Content below */}
+              <div className="md:hidden w-full">
+                {/* Top section: Image and Title side by side */}
+                <div className="flex gap-3 p-4 border-b" style={{ borderColor: `${primaryColor}20` }}>
+                  {/* Image on left */}
+                  <div className="w-32 h-32 flex-shrink-0 bg-white rounded-lg overflow-hidden">
+                    <img
+                      src={currentSection.image}
+                      alt={currentSection.contentTitle}
+                      className="w-full h-full object-contain"
+                      onError={(e) => {
+                        e.target.src = "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9";
+                      }}
+                    />
                   </div>
                   
-                  <div className="space-y-4 mb-6 pr-2">
+                  {/* Title on right */}
+                  <div className="flex-1 flex items-center">
+                    <h2 className="text-lg font-bold leading-tight" style={{ color: primaryColor }}>
+                      {currentSection.contentTitle}
+                    </h2>
+                  </div>
+                </div>
+                
+                {/* Content below */}
+                <div className="p-4">
+                  <div className="space-y-3 mb-4 max-h-[400px] overflow-y-auto custom-scrollbar">
                     {currentSection.content.map((item, idx) => (
-                      <div key={idx} className="content-item group p-3 rounded-lg border border-transparent hover:border-gray-200 relative">
-                        <div className="absolute left-0 top-0 bottom-0 w-1 rounded-r-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundColor: secondaryColor }}></div>
+                      <div key={idx} className="p-2">
                         {item.subtitle && (
-                          <h3 className={`font-bold ${isMobile ? 'text-base' : 'text-lg'} mb-2 flex items-center gap-2`} style={{ color: primaryColor }}>
-                            <div className="w-2 h-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:animate-pulse" style={{ backgroundColor: secondaryColor }}></div>
-                            <span className="group-hover:translate-x-1 transition-transform duration-300">{item.subtitle}</span>
+                          <h3 className="font-bold text-base mb-1" style={{ color: primaryColor }}>
+                            {item.subtitle}
                           </h3>
                         )}
-                        <p className={`text-gray-700 leading-relaxed ${isMobile ? 'text-sm' : 'text-sm md:text-base'} pl-4`}>
+                        <p className="text-gray-700 leading-relaxed text-sm">
                           {item.text}
                         </p>
                       </div>
@@ -393,7 +400,7 @@ export default function InteractivePieWheel() {
                   
                   <Link 
                     href={currentSection.link}
-                    className="inline-flex items-center gap-3 px-4 lg:px-6 py-2 lg:py-3 rounded-lg lg:rounded-xl font-bold transition-all duration-300 hover:gap-5 hover:shadow-2xl group text-sm lg:text-base mb-4"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-bold transition-all duration-300 text-sm w-full justify-center"
                     style={{ 
                       backgroundColor: secondaryColor,
                       color: 'white',
@@ -401,10 +408,67 @@ export default function InteractivePieWheel() {
                     }}
                   >
                     <span>Read More</span>
-                    <svg className="w-4 h-4 lg:w-5 lg:h-5 transition-all duration-300 group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>
                   </Link>
+                </div>
+              </div>
+
+              {/* Desktop: Side by side layout */}
+              <div className="hidden md:flex flex-row h-full">
+                <div className="md:w-2/5 h-auto relative overflow-hidden">
+                  <img
+                    src={currentSection.image}
+                    alt={currentSection.contentTitle}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                    onError={(e) => {
+                      e.target.src = "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9";
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                </div>
+                
+                <div className="md:w-3/5 h-full relative">
+                  <div className="scrollable-content custom-scrollbar h-full p-4 lg:p-8">
+                    <div className="mb-4 lg:mb-6 pb-3 lg:pb-4 border-b relative" style={{ borderColor: `${primaryColor}20` }}>
+                      <h2 className="text-2xl md:text-3xl font-bold relative" style={{ color: primaryColor }}>
+                        {currentSection.contentTitle}
+                      </h2>
+                    </div>
+                    
+                    <div className="space-y-4 mb-6 pr-2">
+                      {currentSection.content.map((item, idx) => (
+                        <div key={idx} className="content-item group p-3 rounded-lg border border-transparent hover:border-gray-200 relative">
+                          <div className="absolute left-0 top-0 bottom-0 w-1 rounded-r-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundColor: secondaryColor }}></div>
+                          {item.subtitle && (
+                            <h3 className="font-bold text-lg mb-2 flex items-center gap-2" style={{ color: primaryColor }}>
+                              <div className="w-2 h-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:animate-pulse" style={{ backgroundColor: secondaryColor }}></div>
+                              <span className="group-hover:translate-x-1 transition-transform duration-300">{item.subtitle}</span>
+                            </h3>
+                          )}
+                          <p className="text-gray-700 leading-relaxed text-sm md:text-base pl-4">
+                            {item.text}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                    
+                    <Link 
+                      href={currentSection.link}
+                      className="inline-flex items-center gap-3 px-4 lg:px-6 py-2 lg:py-3 rounded-lg lg:rounded-xl font-bold transition-all duration-300 hover:gap-5 hover:shadow-2xl group text-sm lg:text-base mb-4"
+                      style={{ 
+                        backgroundColor: secondaryColor,
+                        color: 'white',
+                        boxShadow: '0 4px 15px rgba(205, 9, 27, 0.3)'
+                      }}
+                    >
+                      <span>Read More</span>
+                      <svg className="w-4 h-4 lg:w-5 lg:h-5 transition-all duration-300 group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>

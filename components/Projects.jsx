@@ -11,6 +11,10 @@ const EngineeringTabsSlider = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  
+  // Pagination states for mobile
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 4;
 
   // WHY SANPEC Static Data
   const whySanpecData = [
@@ -120,6 +124,11 @@ const EngineeringTabsSlider = () => {
     fetchData();
   }, []);
 
+  // Reset to page 1 when tab changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeTab]);
+
   const checkScrollButtons = () => {
     const container = scrollRef.current;
     if (!container) return;
@@ -156,9 +165,15 @@ const EngineeringTabsSlider = () => {
 
   const currentData = activeTab === "projects" ? projects : activeTab === "research" ? research : whySanpecData;
 
+  // Calculate pagination
+  const totalPages = Math.ceil(currentData.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedData = currentData.slice(startIndex, endIndex);
+
   return (
     <div className="w-full py-8 md:py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
-      {/* TOP DECORATIVE LINE - Similar to your image */}
+      {/* amit TOP DECORATIVE LINE - Similar to your image */}
       <div className="max-w-[1600px] mx-auto mb-8 md:mb-12">
         <div className="flex items-center justify-center gap-3">
           <div className="h-[2px] w-20 sm:w-32 md:w-48 bg-gradient-to-r from-transparent to-[#CD091B]"></div>
@@ -199,7 +214,7 @@ const EngineeringTabsSlider = () => {
                     }`}
                   >
                     <h3 className="text-xl md:text-2xl font-black text-gray-900">Our Projects</h3>
-                    <p className="text-xs md:text-sm text-gray-600 mt-1 md:mt-2">Explore our Projects</p>
+                    <p className="text-xs md:text-sm text-gray-600 mt-1 md:mt-2">Transmission and Distribution</p>
                     
                     {activeTab === "projects" && (
                       <div className="absolute right-3 md:right-4 top-1/2 -translate-y-1/2">
@@ -224,7 +239,7 @@ const EngineeringTabsSlider = () => {
                     }`}
                   >
                     <h3 className="text-xl md:text-2xl font-black text-gray-900">Research & Innovation</h3>
-                    <p className="text-xs md:text-sm text-gray-600 mt-1 md:mt-2">Explore Our Research & Innovation</p>
+                    <p className="text-xs md:text-sm text-gray-600 mt-1 md:mt-2">Technical Papers</p>
                     
                     {activeTab === "research" && (
                       <div className="absolute right-3 md:right-4 top-1/2 -translate-y-1/2">
@@ -277,176 +292,331 @@ const EngineeringTabsSlider = () => {
                   ))}
                 </div>
               ) : (
-                <div className={`grid gap-4 md:gap-6 ${
-                  activeTab === "whysanpec" 
-                    ? 'grid-cols-1 lg:grid-cols-2' 
-                    : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
-                }`}>
-                  {activeTab === "whysanpec" ? (
-                    // WHY SANPEC - NEW CREATIVE DESIGN
-                    currentData.map((item, index) => (
-                      <Link
-                        key={item.id}
-                        href={item.url}
-                        className="group block"
-                        onMouseEnter={() => setHoveredIndex(index)}
-                        onMouseLeave={() => setHoveredIndex(null)}
-                      >
-                        <div className="relative overflow-hidden rounded-2xl bg-white shadow-lg border border-gray-200 group-hover:shadow-2xl transition-all duration-500 h-full">
-                          
-                          {/* Image Section - Top */}
-                          <div className="relative h-48 md:h-56 overflow-hidden bg-gray-100">
-                            <img
-                              src={item.img}
-                              alt={item.title}
-                              loading="lazy"
-                              className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700"
-                            />
+                <>
+                  <div className={`grid gap-4 md:gap-6 ${
+                    activeTab === "whysanpec" 
+                      ? 'grid-cols-1 lg:grid-cols-2' 
+                      : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
+                  }`}>
+                    {activeTab === "whysanpec" ? (
+                      // WHY SANPEC - NEW CREATIVE DESIGN (No pagination - show all)
+                      currentData.map((item, index) => (
+                        <Link
+                          key={item.id}
+                          href={item.url}
+                          className="group block"
+                          onMouseEnter={() => setHoveredIndex(index)}
+                          onMouseLeave={() => setHoveredIndex(null)}
+                        >
+                          <div className="relative overflow-hidden rounded-2xl bg-white shadow-lg border border-gray-200 group-hover:shadow-2xl transition-all duration-500 h-full">
                             
-                            {/* Gradient Overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/5 to-black/10"></div>
-                          </div>
-
-                          {/* Content Section - Bottom */}
-                          <div className="p-6 md:p-8 space-y-4 bg-white">
-                            
-                            {/* Title */}
-                            <h3 
-                              className="text-gray-900 font-black text-xl md:text-2xl leading-tight group-hover:text-[#CD091B] transition-colors duration-300"
-                              dangerouslySetInnerHTML={{ __html: item.title }}
-                            />
-                            
-                            {/* Decorative Divider */}
-                            <div className="flex items-center gap-3">
-                              <div className="h-1 w-12 bg-gradient-to-r from-[#CD091B] to-transparent rounded-full"></div>
-                              <div className="w-2 h-2 bg-[#CD091B] rounded-full"></div>
-                            </div>
-                            
-                            {/* Excerpt */}
-                            <div 
-                              className="text-gray-600 text-sm md:text-base leading-relaxed line-clamp-3"
-                              dangerouslySetInnerHTML={{ __html: item.excerpt }}
-                            />
-                            
-                            {/* Read More Link */}
-                            <div className="pt-4 flex items-center gap-2 text-[#CD091B] font-bold text-sm group-hover:gap-4 transition-all duration-300">
-                              <span>Explore More</span>
-                              <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                              </svg>
-                            </div>
-                          </div>
-
-                          {/* Decorative Corner Element */}
-                          <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-[#CD091B]/10 to-transparent rounded-bl-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                          
-                          {/* Bottom Border Animation */}
-                          <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#CD091B] to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
-                        </div>
-                      </Link>
-                    ))
-                  ) : (
-                    // PROJECTS & RESEARCH - ORIGINAL DESIGN
-                    currentData.map((item, index) => (
-                      <Link
-                        key={item.id}
-                        href={item.url}
-                        className="relative h-[300px] md:h-[350px] group block"
-                        onMouseEnter={() => setHoveredIndex(index)}
-                        onMouseLeave={() => setHoveredIndex(null)}
-                      >
-                        <div className="relative h-full overflow-hidden rounded-xl shadow-lg border-2 border-white/50 group-hover:scale-105 group-hover:shadow-2xl transition-all duration-500">
-                          
-                          {/* Background Image */}
-                          <img
-                            src={item.img}
-                            alt={item.title}
-                            loading="lazy"
-                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                          />
-                          
-                          {/* Overlay */}
-                          <div className="absolute inset-0 bg-black/40"></div>
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
-                          
-                          {/* Category Badge - Top Left */}
-                          <div className="absolute top-3 md:top-4 left-3 md:left-4 z-10">
-                            <div className="px-3 md:px-4 py-1 md:py-1.5 bg-[#CD091B] rounded-lg shadow-lg">
-                              <span className="text-white text-xs font-bold uppercase tracking-wide">{item.category}</span>
-                            </div>
-                          </div>
-                          
-                          {/* Content - CENTER */}
-                          <div className="absolute inset-0 flex flex-col items-center justify-center p-4 md:p-6">
-                            <div className="text-center max-w-md space-y-3 md:space-y-4">
+                            {/* Image Section - Top */}
+                            <div className="relative h-48 md:h-56 overflow-hidden bg-gray-100">
+                              <img
+                                src={item.img}
+                                alt={item.title}
+                                loading="lazy"
+                                className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700"
+                              />
                               
-                              {activeTab === "projects" ? (
-                                <>
-                                  {/* Decorative Element */}
-                                  <div className="flex items-center justify-center gap-2 mb-2 md:mb-3">
-                                    <div className="h-px w-8 md:w-12 bg-[#CD091B]"></div>
-                                    <div className="w-1.5 md:w-2 h-1.5 md:h-2 bg-[#CD091B] rounded-full"></div>
-                                    <div className="h-px w-8 md:w-12 bg-[#CD091B]"></div>
+                              {/* Gradient Overlay */}
+                              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/5 to-black/10"></div>
+                            </div>
+
+                            {/* Content Section - Bottom */}
+                            <div className="p-6 md:p-8 space-y-4 bg-white">
+                              
+                              {/* Title */}
+                              <h3 
+                                className="text-gray-900 font-black text-xl md:text-2xl leading-tight group-hover:text-[#CD091B] transition-colors duration-300"
+                                dangerouslySetInnerHTML={{ __html: item.title }}
+                              />
+                              
+                              {/* Decorative Divider */}
+                              <div className="flex items-center gap-3">
+                                <div className="h-1 w-12 bg-gradient-to-r from-[#CD091B] to-transparent rounded-full"></div>
+                                <div className="w-2 h-2 bg-[#CD091B] rounded-full"></div>
+                              </div>
+                              
+                              {/* Excerpt */}
+                              <div 
+                                className="text-gray-600 text-sm md:text-base leading-relaxed line-clamp-3"
+                                dangerouslySetInnerHTML={{ __html: item.excerpt }}
+                              />
+                              
+                              {/* Read More Link */}
+                              <div className="pt-4 flex items-center gap-2 text-[#CD091B] font-bold text-sm group-hover:gap-4 transition-all duration-300">
+                                <span>Explore More</span>
+                                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
+                              </div>
+                            </div>
+
+                            {/* Decorative Corner Element */}
+                            <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-[#CD091B]/10 to-transparent rounded-bl-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            
+                            {/* Bottom Border Animation */}
+                            <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#CD091B] to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+                          </div>
+                        </Link>
+                      ))
+                    ) : (
+                      // PROJECTS & RESEARCH - Use paginated data on mobile, full data on desktop
+                      <>
+                        {/* Desktop: Show all data */}
+                        <div className="hidden md:contents">
+                          {currentData.map((item, index) => (
+                            <Link
+                              key={item.id}
+                              href={item.url}
+                              className="relative h-[300px] md:h-[350px] group block"
+                              onMouseEnter={() => setHoveredIndex(index)}
+                              onMouseLeave={() => setHoveredIndex(null)}
+                            >
+                              <div className="relative h-full overflow-hidden rounded-xl shadow-lg border-2 border-white/50 group-hover:scale-105 group-hover:shadow-2xl transition-all duration-500">
+                                
+                                {/* Background Image */}
+                                <img
+                                  src={item.img}
+                                  alt={item.title}
+                                  loading="lazy"
+                                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                />
+                                
+                                {/* Overlay */}
+                                <div className="absolute inset-0 bg-black/40"></div>
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+                                
+                                {/* Category Badge - Top Left */}
+                                <div className="absolute top-3 md:top-4 left-3 md:left-4 z-10">
+                                  <div className="px-3 md:px-4 py-1 md:py-1.5 bg-[#CD091B] rounded-lg shadow-lg">
+                                    <span className="text-white text-xs font-bold uppercase tracking-wide">{item.category}</span>
                                   </div>
-                                  
-                                  {/* Title */}
-                                  <h3 
-                                    className="text-white font-extrabold text-lg md:text-xl leading-tight tracking-tight px-2"
-                                    style={{ textShadow: '0 4px 30px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.9)' }}
-                                    dangerouslySetInnerHTML={{ __html: item.title }}
-                                  />
-                                  
-                                  {/* Bottom Decorative Element */}
-                                  <div className="flex items-center justify-center gap-2 mt-2 md:mt-3">
-                                    <div className="h-px w-8 md:w-12 bg-[#CD091B]"></div>
-                                    <div className="w-1.5 md:w-2 h-1.5 md:h-2 bg-[#CD091B] rounded-full"></div>
-                                    <div className="h-px w-8 md:w-12 bg-[#CD091B]"></div>
-                                  </div>
-                                </>
-                              ) : (
-                                <div className="space-y-3 md:space-y-4">
-                                  {/* Title for Research */}
-                                  <h3 
-                                    className="text-white font-extrabold text-base md:text-lg leading-tight tracking-tight px-2"
-                                    style={{ textShadow: '0 4px 30px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.9)' }}
-                                    dangerouslySetInnerHTML={{ __html: item.title }}
-                                  />
-                                  
-                                  {/* Divider */}
-                                  {item.excerpt && (
-                                    <>
-                                      <div className="flex items-center justify-center gap-2">
-                                        <div className="h-px w-8 md:w-10 bg-white/50"></div>
-                                        <div className="w-1 md:w-1.5 h-1 md:h-1.5 bg-white/50 rounded-full"></div>
-                                        <div className="h-px w-8 md:w-10 bg-white/50"></div>
-                                      </div>
-                                      
-                                      {/* Excerpt */}
-                                      <div 
-                                        className="text-white/95 font-medium text-xs md:text-sm leading-relaxed line-clamp-3 px-2"
-                                        style={{ textShadow: '0 2px 20px rgba(0,0,0,0.9)' }}
-                                        dangerouslySetInnerHTML={{ __html: item.excerpt }}
-                                      />
-                                    </>
-                                  )}
                                 </div>
-                              )}
-                            </div>
-                          </div>
-                          
-                          {/* Hover Arrow - Bottom Right */}
-                          <div className="absolute bottom-4 md:bottom-5 right-4 md:right-5 opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-500">
-                            <div className="bg-white p-2 md:p-3 rounded-full shadow-2xl group-hover:bg-[#CD091B] transition-colors">
-                              <svg className="w-4 md:w-5 h-4 md:h-5 text-[#CD091B] group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                              </svg>
-                            </div>
-                          </div>
+                                
+                                {/* Content - CENTER */}
+                                <div className="absolute inset-0 flex flex-col items-center justify-center p-4 md:p-6">
+                                  <div className="text-center max-w-md space-y-3 md:space-y-4">
+                                    
+                                    {activeTab === "projects" ? (
+                                      <>
+                                        {/* Decorative Element */}
+                                        
+                                        
+                                        {/* Title */}
+                                        <h3 
+                                          className="text-white font-extrabold text-lg md:text-xl leading-tight tracking-tight px-2"
+                                          style={{ textShadow: '0 4px 30px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.9)' }}
+                                          dangerouslySetInnerHTML={{ __html: item.title }}
+                                        />
+                                        
+                                        {/* Bottom Decorative Element */}
+                                        <div className="flex items-center justify-center gap-2 mt-2 md:mt-3">
+                                          <div className="h-px w-8 md:w-12 bg-[#CD091B]"></div>
+                                          <div className="w-1.5 md:w-2 h-1.5 md:h-2 bg-[#CD091B] rounded-full"></div>
+                                          <div className="h-px w-8 md:w-12 bg-[#CD091B]"></div>
+                                        </div>
+                                      </>
+                                    ) : (
+                                      <div className="space-y-3 md:space-y-4">
+                                        {/* Title for Research */}
+                                        <h3 
+                                          className="text-white font-extrabold text-base md:text-lg leading-tight tracking-tight px-2"
+                                          style={{ textShadow: '0 4px 30px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.9)' }}
+                                          dangerouslySetInnerHTML={{ __html: item.title }}
+                                        />
+                                        
+                                        {/* Divider */}
+                                        {item.excerpt && (
+                                          <>
+                                            <div className="flex items-center justify-center gap-2">
+                                              <div className="h-px w-8 md:w-10 bg-white/50"></div>
+                                              <div className="w-1 md:w-1.5 h-1 md:h-1.5 bg-white/50 rounded-full"></div>
+                                              <div className="h-px w-8 md:w-10 bg-white/50"></div>
+                                            </div>
+                                            
+                                            {/* Excerpt */}
+                                            <div 
+                                              className="text-white/95 font-medium text-xs md:text-sm leading-relaxed line-clamp-3 px-2"
+                                              style={{ textShadow: '0 2px 20px rgba(0,0,0,0.9)' }}
+                                              dangerouslySetInnerHTML={{ __html: item.excerpt }}
+                                            />
+                                          </>
+                                        )}
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                                
+                                {/* Hover Arrow - Bottom Right */}
+                                <div className="absolute bottom-4 md:bottom-5 right-4 md:right-5 opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-500">
+                                  <div className="bg-white p-2 md:p-3 rounded-full shadow-2xl group-hover:bg-[#CD091B] transition-colors">
+                                    <svg className="w-4 md:w-5 h-4 md:h-5 text-[#CD091B] group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                    </svg>
+                                  </div>
+                                </div>
+                              </div>
+                            </Link>
+                          ))}
                         </div>
-                      </Link>
-                    ))
-                  )}
-                </div>
+
+                        {/* Mobile: Show paginated data */}
+                        <div className="md:hidden contents">
+                          {paginatedData.map((item, index) => (
+                            <Link
+                              key={item.id}
+                              href={item.url}
+                              className="relative h-[300px] md:h-[350px] group block"
+                              onMouseEnter={() => setHoveredIndex(index)}
+                              onMouseLeave={() => setHoveredIndex(null)}
+                            >
+                              <div className="relative h-full overflow-hidden rounded-xl shadow-lg border-2 border-white/50 group-hover:scale-105 group-hover:shadow-2xl transition-all duration-500">
+                                
+                                {/* Background Image */}
+                                <img
+                                  src={item.img}
+                                  alt={item.title}
+                                  loading="lazy"
+                                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                />
+                                
+                                {/* Overlay */}
+                                <div className="absolute inset-0 bg-black/40"></div>
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+                                
+                                {/* Category Badge - Top Left */}
+                                <div className="absolute top-3 md:top-4 left-3 md:left-4 z-10">
+                                  <div className="px-3 md:px-4 py-1 md:py-1.5 bg-[#CD091B] rounded-lg shadow-lg">
+                                    <span className="text-white text-xs font-bold uppercase tracking-wide">{item.category}</span>
+                                  </div>
+                                </div>
+                                
+                                {/* Content - CENTER */}
+                                <div className="absolute inset-0 flex flex-col items-center justify-center p-4 md:p-6">
+                                  <div className="text-center max-w-md space-y-3 md:space-y-4">
+                                    
+                                    {activeTab === "projects" ? (
+                                      <>
+                                        {/* Decorative Element */}
+                                        <div className="flex items-center justify-center gap-2 mb-2 md:mb-3">
+                                          <div className="h-px w-8 md:w-12 bg-[#CD091B]"></div>
+                                          <div className="w-1.5 md:w-2 h-1.5 md:h-2 bg-[#CD091B] rounded-full"></div>
+                                          <div className="h-px w-8 md:w-12 bg-[#CD091B]"></div>
+                                        </div>
+                                        
+                                        {/* Title */}
+                                        <h3 
+                                          className="text-white font-extrabold text-lg md:text-xl leading-tight tracking-tight px-2"
+                                          style={{ textShadow: '0 4px 30px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.9)' }}
+                                          dangerouslySetInnerHTML={{ __html: item.title }}
+                                        />
+                                        
+                                        {/* Bottom Decorative Element */}
+                                        <div className="flex items-center justify-center gap-2 mt-2 md:mt-3">
+                                          <div className="h-px w-8 md:w-12 bg-[#CD091B]"></div>
+                                          <div className="w-1.5 md:w-2 h-1.5 md:h-2 bg-[#CD091B] rounded-full"></div>
+                                          <div className="h-px w-8 md:w-12 bg-[#CD091B]"></div>
+                                        </div>
+                                      </>
+                                    ) : (
+                                      <div className="space-y-3 md:space-y-4">
+                                        {/* Title for Research */}
+                                        <h3 
+                                          className="text-white font-extrabold text-base md:text-lg leading-tight tracking-tight px-2"
+                                          style={{ textShadow: '0 4px 30px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.9)' }}
+                                          dangerouslySetInnerHTML={{ __html: item.title }}
+                                        />
+                                        
+                                        {/* Divider */}
+                                        {item.excerpt && (
+                                          <>
+                                            <div className="flex items-center justify-center gap-2">
+                                              <div className="h-px w-8 md:w-10 bg-white/50"></div>
+                                              <div className="w-1 md:w-1.5 h-1 md:h-1.5 bg-white/50 rounded-full"></div>
+                                              <div className="h-px w-8 md:w-10 bg-white/50"></div>
+                                            </div>
+                                            
+                                            {/* Excerpt */}
+                                            <div 
+                                              className="text-white/95 font-medium text-xs md:text-sm leading-relaxed line-clamp-3 px-2"
+                                              style={{ textShadow: '0 2px 20px rgba(0,0,0,0.9)' }}
+                                              dangerouslySetInnerHTML={{ __html: item.excerpt }}
+                                            />
+                                          </>
+                                        )}
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                                
+                                {/* Hover Arrow - Bottom Right */}
+                                <div className="absolute bottom-4 md:bottom-5 right-4 md:right-5 opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-500">
+                                  <div className="bg-white p-2 md:p-3 rounded-full shadow-2xl group-hover:bg-[#CD091B] transition-colors">
+                                    <svg className="w-4 md:w-5 h-4 md:h-5 text-[#CD091B] group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                    </svg>
+                                  </div>
+                                </div>
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
+                      </>
+                    )}
+                  </div>
+
+                {/* Pagination - Only for Projects & Research, Only on Mobile */}
+{activeTab !== "whysanpec" && totalPages > 1 && (
+  <div className="md:hidden mt-8 flex items-center justify-center gap-3">
+    {/* Previous Arrow */}
+    <button
+      onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+      disabled={currentPage === 1}
+      className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${
+        currentPage === 1
+          ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+          : 'bg-[#CD091B] text-white hover:bg-[#a00716] shadow-lg'
+      }`}
+    >
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+      </svg>
+    </button>
+
+    {/* Dots */}
+    <div className="flex gap-2">
+      {[...Array(totalPages)].map((_, idx) => (
+        <button
+          key={idx}
+          onClick={() => setCurrentPage(idx + 1)}
+          className={`transition-all rounded-full ${
+            currentPage === idx + 1
+              ? 'w-8 h-3 bg-[#CD091B]'
+              : 'w-3 h-3 bg-gray-300 hover:bg-gray-400'
+          }`}
+        />
+      ))}
+    </div>
+
+    {/* Next Arrow */}
+    <button
+      onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+      disabled={currentPage === totalPages}
+      className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${
+        currentPage === totalPages
+          ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+          : 'bg-[#CD091B] text-white hover:bg-[#a00716] shadow-lg'
+      }`}
+    >
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
+  </div>
+)}
+                </>
               )}
             </div>
           </div>

@@ -5,27 +5,6 @@ export const menuData = {
   topMenuItems: [
     { id: 1, title: "About", path: "/about", newTab: false },
     { id: 2, title: "Engineering Excellence", path: "/engineering-excellence", newTab: false },
-    { 
-      id: 3, 
-      title: "RESOURCES", 
-      path: "https://news.sanpec-excellence.com/",
-      newTab: false,
-      hasDropdown: true,
-      submenu: [
-        {
-          id: 1,
-          title: "SunZia PROJECT",
-          path: "/sunzia-project",
-          newTab: false
-        },
-        {
-          id: 2,
-          title: "SunZia PROJECT GALLERY",
-          path: "/project-gallery",
-          newTab: false
-        }
-      ]
-    },
     { id: 4, title: "Contact", path: "/contact", newTab: false },
   ],
 

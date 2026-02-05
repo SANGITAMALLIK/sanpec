@@ -13,11 +13,11 @@ interface Post {
 }
 
 const staticMenuData = [
-  {
-    id: 'recent',
-    title: 'Recent',
-    url: '/electric-power/recent'
-  }
+  // {
+  //   id: 'recent',
+  //   title: 'Recent',
+  //   url: '/electric-power/recent'
+  // }
 ];
 
 export default function ElectricPowerLayout({

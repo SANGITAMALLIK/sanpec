@@ -102,8 +102,18 @@ export default function PremiumTabsSection() {
   const currentTab = tabs.find(t => t.id === activeTab);
 
   return (
-    <div className="py-12 md:py-20 px-4 relative overflow-hidden bg-gray-50">
-      
+    <div className="py-12 md:py-10 px-4 relative overflow-hidden bg-gray-50">
+       <div className="max-w-[1600px] mx-auto mb-8 md:mb-12">
+        <div className="flex items-center justify-center gap-3">
+          <div className="h-[2px] w-20 sm:w-32 md:w-48 bg-gradient-to-r from-transparent to-[#CD091B]"></div>
+          <div className="relative">
+            <svg className="w-8 h-8 md:w-10 md:h-10 text-[#CD091B]" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/>
+            </svg>
+          </div>
+          <div className="h-[2px] w-20 sm:w-32 md:w-48 bg-gradient-to-l from-transparent to-[#CD091B]"></div>
+        </div>
+      </div>
       {/* Clean Grid Background */}
       <div 
         className="absolute inset-0 opacity-[0.03]"

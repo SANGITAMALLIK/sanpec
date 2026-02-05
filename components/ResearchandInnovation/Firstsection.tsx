@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Plus, Minus, Zap, Radio, Cpu, Hexagon } from 'lucide-react';
 
 const PowerStructureResearch = () => {
-  const [openAccordion, setOpenAccordion] = useState(0);
+  const [openAccordion, setOpenAccordion] = useState(null);
 
   const toggleAccordion = (index) => {
     setOpenAccordion(openAccordion === index ? null : index);
@@ -83,6 +83,7 @@ const PowerStructureResearch = () => {
 
   return (
     <div className="min-h-screen bg-white relative overflow-hidden">
+      
       {/* Background Grid Pattern - Optional, can be removed if you want completely clean */}
       <div className="absolute inset-0 opacity-[0.02] pointer-events-none overflow-hidden">
         <div className="absolute inset-0" style={{
