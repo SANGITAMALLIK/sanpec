@@ -66,7 +66,7 @@ const PremiumFooter = () => {
                       SANPEC INC
                     </h3>
                     <p className="text-gray-300 leading-relaxed text-base">
-                      SANPEC was founded to improve the resilience and reliability of power grid systems and has been privately owned and operated since 2009. We design, modernize, and manage electric power transmission and distribution Transmission.
+                      SANPEC was founded to improve the resilience and reliability of power grid systems and has been privately owned and operated since 2009. We design, modernize, and manage electric power transmission and distribution Infrastructure.
                     </p>
                   </div>
                 </div>
