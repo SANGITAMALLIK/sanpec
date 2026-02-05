@@ -30,7 +30,7 @@ const sections = [
     tabTitle: "Agility",
     contentTitle: "Agility and Strategic Planning",
     image: "images/home/six-pillars/2.png",
-    position: { top: '25%', left: '50%', transform: 'translateX(-50%)' },
+    position: { top: '25%', left: '30%', transform: 'translateX(-50%)' },
     content: [
       {
         subtitle: "Adaptation and Flexibility in Operations:",
@@ -79,7 +79,7 @@ const sections = [
     tabTitle: "Process Excellence",
     contentTitle: "Process Excellence",
     image: "images/home/six-pillars/4.png",
-    position: { top: '55%', right: '25%' },
+    position: { top: '55%', right: '35%' },
     content: [
       {
         subtitle: "Continuous Improvement in Business Processes:",
@@ -105,31 +105,10 @@ const sections = [
     link: "/sanpec-six-pillars/process-excellence"
   },
   {
-    tabTitle: "Collaboration & Co-Creation",
-    contentTitle: "Collaborative Efforts for Shared Value",
-    image: "images/home/six-pillars/6.png",
-    position: { top: '70%', left: '8%' },
-    content: [
-      {
-        subtitle: "Collaborative Efforts for Shared Value:",
-        text: "SANPEC's commitment to co-creation goes beyond business interests, reflecting a deep sense of responsibility and a desire to contribute positively to society."
-      },
-      {
-        subtitle: "Community Engagement:",
-        text: "SANPEC actively engages with the communities in which it operates, understanding their needs and working collaboratively to address them."
-      },
-      {
-        subtitle: "Co-Creation with Stakeholders:",
-        text: "The company believes in co-creating value with stakeholders, including customers, local education institutions, sports organizations, and industry partners. This approach leads to solutions that are more aligned with stakeholders' needs and expectations."
-      }
-    ],
-    link: "/sanpec-six-pillars/collaboration-&-co-creation"
-  },
-  {
     tabTitle: "Ecosystem Innovation",
     contentTitle: "Innovation within the Business Ecosystem",
     image: "images/home/six-pillars/5.png",
-    position: { top: '85%', left: '50%', transform: 'translateX(-50%)' },
+    position: { top: '70%', left: '8%' },
     content: [
       {
         subtitle: "Innovation within the Business Ecosystem:",
@@ -149,6 +128,27 @@ const sections = [
       }
     ],
     link: "/sanpec-six-pillars/ecosystem-innovation"
+  },
+  {
+    tabTitle: "Collaboration & Co-Creation",
+    contentTitle: "Collaborative Efforts for Shared Value",
+    image: "images/home/six-pillars/6.png",
+    position: { top: '85%', left: '50%', transform: 'translateX(-50%)' },
+    content: [
+      {
+        subtitle: "Collaborative Efforts for Shared Value:",
+        text: "SANPEC's commitment to co-creation goes beyond business interests, reflecting a deep sense of responsibility and a desire to contribute positively to society."
+      },
+      {
+        subtitle: "Community Engagement:",
+        text: "SANPEC actively engages with the communities in which it operates, understanding their needs and working collaboratively to address them."
+      },
+      {
+        subtitle: "Co-Creation with Stakeholders:",
+        text: "The company believes in co-creating value with stakeholders, including customers, local education institutions, sports organizations, and industry partners. This approach leads to solutions that are more aligned with stakeholders' needs and expectations."
+      }
+    ],
+    link: "/sanpec-six-pillars/collaboration-&-co-creation"
   }
 ];
 
