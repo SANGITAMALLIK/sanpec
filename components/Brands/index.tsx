@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 const ClientsSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [itemsPerView, setItemsPerView] = useState(5);
 
   const clients = [
     { name: "Pattern Energy", url: "https://patternenergy.com/", logo: "/images/home/logos/1.png" },
@@ -27,6 +28,22 @@ const ClientsSection = () => {
   ];
 
   const allClients = [...clients, ...clients, ...clients];
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setItemsPerView(2); // Mobile: 2 items
+      } else if (window.innerWidth < 1024) {
+        setItemsPerView(3); // Tablet: 3 items
+      } else {
+        setItemsPerView(5); // Desktop: 5 items
+      }
+    };
+    
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     if (!isPaused) {
@@ -77,30 +94,28 @@ const ClientsSection = () => {
             <div className="relative overflow-hidden">
               <div 
                 className="flex transition-transform duration-700 ease-in-out"
-                style={{ transform: `translateX(-${(currentIndex % clients.length) * (100 / 5)}%)` }}
+                style={{ transform: `translateX(-${(currentIndex % clients.length) * (100 / itemsPerView)}%)` }}
               >
-                {allClients.map((client, index) => {
-                  return (
-                    <div
-                      key={`client-${index}`}
-                      className="flex-shrink-0 px-3"
-                      style={{ width: `${100 / 5}%` }}
+                {allClients.map((client, index) => (
+                  <div
+                    key={`client-${index}`}
+                    className="flex-shrink-0 px-3"
+                    style={{ width: `${100 / itemsPerView}%` }}
+                  >
+                    <a 
+                      href={client.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group block bg-white rounded-xl p-6 h-32 flex items-center justify-center transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border border-gray-100 hover:border-[#CD091B]"
                     >
-                      <a
-                        href={client.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group block bg-white rounded-xl p-6 h-32 flex items-center justify-center transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border border-gray-100 hover:border-[#CD091B]"
-                      >
-                        <img
-                          src={client.logo}
-                          alt={client.name}
-                          className="max-h-20 w-auto object-contain transition-all duration-300 transform group-hover:scale-105"
-                        />
-                      </a>
-                    </div>
-                  );
-                })}
+                      <img
+                        src={client.logo}
+                        alt={client.name}
+                        className="max-h-20 w-auto object-contain transition-all duration-300 transform group-hover:scale-105"
+                      />
+                    </a>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -125,20 +140,18 @@ const ClientsSection = () => {
           </div>
 
           <div className="flex justify-center gap-2 mt-6">
-            {clients.map((_, index) => {
-              return (
-                <button
-                  key={`dot-${index}`}
-                  onClick={() => setCurrentIndex(index)}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    index === currentIndex % clients.length
-                      ? 'w-8 bg-[#CD091B]' 
-                      : 'w-2 bg-gray-300 hover:bg-[#3C3B6E]'
-                  }`}
-                  aria-label={`Go to slide ${index + 1}`}
-                />
-              );
-            })}
+            {clients.map((_, index) => (
+              <button
+                key={`dot-${index}`}
+                onClick={() => setCurrentIndex(index)}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  index === currentIndex % clients.length
+                    ? 'w-8 bg-[#CD091B]' 
+                    : 'w-2 bg-gray-300 hover:bg-[#3C3B6E]'
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
           </div>
         </div>
       </div>
