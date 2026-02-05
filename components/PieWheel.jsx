@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const sections = [
   {
-    tabTitle: "Systems & Approach",
+    tabTitle: "Systems & Structures",
     contentTitle: "Systems Approach and Foresight",
     image: "images/home/six-pillars/1.png",
     position: { top: '10%', left: '50%', transform: 'translateX(-50%)' },
