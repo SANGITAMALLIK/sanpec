@@ -78,15 +78,7 @@ const slides = [
     buttonText: "Explore Now",
     buttonLink: "/sanpec-six-pillars/systems-and-structures"
   },
-  {
-    id: 8,
-    preTitle: "",
-    title: "",
-    desc: "",
-    image: "images/slider/final-version.jpg",bgColor: "#cd091b",
-   // buttonText: "Explore Now",
-   // buttonLink: "/research-and-innovation/technical-papers"
-      },
+  
 ];
 
 export default function HeroSlider() {

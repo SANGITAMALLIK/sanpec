@@ -337,10 +337,10 @@ const VerticalTabs = () => {
                 {/* Strategic Positioning */}
                 {activeTab === 0 && (
                   <div className="space-y-6">
-                    <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify">
+                    <p className="text-gray-700 text-sm md:text-base leading-relaxed text-left">
                       {tabs[activeTab].content.description}
                     </p>
-                    <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify">
+                    <p className="text-gray-700 text-sm md:text-base leading-relaxed text-left">
                       {tabs[activeTab].content.secondParagraph}
                     </p>
                     
@@ -372,7 +372,7 @@ const VerticalTabs = () => {
                               <td className="bg-gray-200 p-4 border-2 border-gray-300 align-top">
                                 <ul className="space-y-2">
                                   {row.effectiveApproaches.map((item, i) => (
-                                    <li key={i} className="text-gray-800 text-xs md:text-sm leading-relaxed text-justify">
+                                    <li key={i} className="text-gray-800 text-xs md:text-sm leading-relaxed text-left">
                                       - {item}
                                     </li>
                                   ))}
@@ -381,7 +381,7 @@ const VerticalTabs = () => {
                               <td className="bg-white p-4 border-2 border-gray-300 align-top">
                                 <ul className="space-y-2">
                                   {row.clientEngagement.map((item, i) => (
-                                    <li key={i} className="text-gray-800 text-xs md:text-sm leading-relaxed text-justify">
+                                    <li key={i} className="text-gray-800 text-xs md:text-sm leading-relaxed text-left">
                                       - {item}
                                     </li>
                                   ))}
@@ -390,7 +390,7 @@ const VerticalTabs = () => {
                               <td className="bg-red-50 p-4 border-2 border-gray-300 align-top">
                                 <ul className="space-y-2">
                                   {row.innovativePractices.map((item, i) => (
-                                    <li key={i} className="text-gray-800 text-xs md:text-sm leading-relaxed text-justify">
+                                    <li key={i} className="text-gray-800 text-xs md:text-sm leading-relaxed text-left">
                                       - {item}
                                     </li>
                                   ))}
@@ -415,7 +415,7 @@ const VerticalTabs = () => {
                         
                         <div className="mb-4">
                           <h4 className="text-base font-semibold text-gray-800 mb-2">Project Overview</h4>
-                          <p className="text-gray-700 leading-relaxed text-sm md:text-base text-justify">{project.overview}</p>
+                          <p className="text-gray-700 leading-relaxed text-sm md:text-base text-left">{project.overview}</p>
                         </div>
 
                         <div className="mb-4">
@@ -426,7 +426,7 @@ const VerticalTabs = () => {
                                 <div className="w-5 h-5 flex items-center justify-center flex-shrink-0 mt-1">
                                   <div className="w-3 h-3 bg-[#CD091B] transform rotate-45"></div>
                                 </div>
-                                <p className="text-gray-700 leading-relaxed text-sm md:text-base text-justify">
+                                <p className="text-gray-700 leading-relaxed text-sm md:text-base text-left">
                                   {contribution}
                                 </p>
                               </div>
@@ -436,7 +436,7 @@ const VerticalTabs = () => {
 
                         <div className="mt-4 p-4 bg-gray-50 border-l-4 border-[#CD091B]">
                           <h4 className="text-base font-semibold text-[#101631] mb-2">Recognition:</h4>
-                          <p className="text-gray-700 leading-relaxed text-sm md:text-base text-justify">
+                          <p className="text-gray-700 leading-relaxed text-sm md:text-base text-left">
                             {project.recognition}
                           </p>
                         </div>
@@ -452,7 +452,7 @@ const VerticalTabs = () => {
                 {/* Building Talent */}
                 {activeTab === 2 && (
                   <div className="space-y-6">
-                    <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify">
+                    <p className="text-gray-700 text-sm md:text-base leading-relaxed text-left">
                       {tabs[activeTab].content.description}
                     </p>
                     
@@ -471,7 +471,7 @@ const VerticalTabs = () => {
                               <h4 className="text-sm md:text-base font-semibold text-gray-800 mb-2">
                                 {strategy.title}
                               </h4>
-                              <p className="text-gray-700 leading-relaxed text-sm md:text-base text-justify">
+                              <p className="text-gray-700 leading-relaxed text-sm md:text-base text-left">
                                 {strategy.content}
                               </p>
                             </div>
@@ -486,10 +486,10 @@ const VerticalTabs = () => {
                 {activeTab === 3 && (
                   <div className="space-y-6">
                     <div className="mb-6">
-                      <p className="text-gray-700 text-sm md:text-base leading-relaxed mb-3 text-justify">
+                      <p className="text-gray-700 text-sm md:text-base leading-relaxed mb-3 text-left">
                         {tabs[activeTab].content.mainDescription}
                       </p>
-                      <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify">
+                      <p className="text-gray-700 text-sm md:text-base leading-relaxed text-left">
                         {tabs[activeTab].content.secondDescription}
                       </p>
                     </div>
@@ -546,7 +546,7 @@ const VerticalTabs = () => {
                                   {accordion.content.heading}
                                 </h4>
 
-                                <p className="text-gray-700 text-sm md:text-base leading-relaxed mb-4 text-justify">
+                                <p className="text-gray-700 text-sm md:text-base leading-relaxed mb-4 text-left">
                                   {accordion.content.description}
                                 </p>
 
@@ -561,7 +561,7 @@ const VerticalTabs = () => {
                                         <h5 className="font-bold text-gray-900 text-sm md:text-base mb-1">
                                           {point.title}
                                         </h5>
-                                        <p className="text-gray-700 text-xs md:text-sm leading-relaxed text-justify">
+                                        <p className="text-gray-700 text-xs md:text-sm leading-relaxed text-left">
                                           {point.text}
                                         </p>
                                       </div>
@@ -571,7 +571,7 @@ const VerticalTabs = () => {
 
                                 {/* Conclusion */}
                                 <div className="bg-red-50 p-3 md:p-4">
-                                  <p className="text-gray-800 text-xs md:text-sm leading-relaxed italic text-justify">
+                                  <p className="text-gray-800 text-xs md:text-sm leading-relaxed italic text-left">
                                     {accordion.content.conclusion}
                                   </p>
                                 </div>

@@ -170,7 +170,7 @@ const TabGallery = () => {
         </h1>
         <div className="w-24   md:w-32 h-1 bg-[#D62B2B] mx-auto mb-4 md:mb-6 rounded-full"></div>
         <p className="text-gray-700 text-base md:text-xl max-w-4xl mx-auto font-medium leading-relaxed px-4">
-          Leading the transformation in transmission & distribution through innovation, excellence, and strategic vision
+         Bringing Engineering Excellence. Improving Power Grid Reliability
         </p>
       </div>
 
@@ -227,7 +227,7 @@ const TabGallery = () => {
                 {/* Left Column */}
                 <div className="space-y-5 md:space-y-6">
                   <div className="bg-gray-50 p-5 md:p-7 rounded-xl md:rounded-2xl border-2 border-gray-200 shadow-sm">
-                    <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify">
+                    <p className="text-gray-700 text-sm md:text-base leading-relaxed text-left">
                       {tabs[activeTab].content.description}
                     </p>
                   </div>
@@ -264,7 +264,7 @@ const TabGallery = () => {
                 {/* Left Column */}
                 <div className="space-y-5 md:space-y-6">
                   <div className="bg-gray-50 p-5 md:p-7 rounded-xl md:rounded-2xl border-2 border-gray-200 shadow-sm">
-                    <p className="text-gray-700 text-sm md:text-base leading-relaxed text-justify">
+                    <p className="text-gray-700 text-sm md:text-base leading-relaxed text-left">
                       {tabs[activeTab].content.description}
                     </p>
                   </div>

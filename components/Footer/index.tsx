@@ -60,15 +60,13 @@ const PremiumFooter = () => {
                       className="h-20 w-auto object-contain brightness-110 contrast-110 group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
-
                   <div className="space-y-3">
                     <h3 className="text-2xl font-black text-white uppercase tracking-wider flex items-center gap-2">
                       <span className="w-1.5 h-6 bg-gradient-to-b from-[#CC2222] to-[#e63939] rounded-full" />
-                      SANPEC EXCELLENCE
+                      SANPEC INC
                     </h3>
-                    
                     <p className="text-gray-300 leading-relaxed text-base">
-                      SANPEC was founded to improve the resilience and reliability of power grid systems and has been privately owned and operated since 2009. We design, modernize, and manage electric power transmission and distribution grids.
+                      SANPEC was founded to improve the resilience and reliability of power grid systems and has been privately owned and operated since 2009. We design, modernize, and manage electric power transmission and distribution Transmission.
                     </p>
                   </div>
                 </div>
@@ -100,7 +98,7 @@ const PremiumFooter = () => {
                     </div>
                     <div className="flex-1">
                       <p className="text-[#CC2222] text-xs font-bold uppercase tracking-wider mb-1">Address</p>
-                      <p className="text-white font-semibold text-sm">SANPEC EXCELLENCE</p>
+                      <p className="text-white font-semibold text-sm">SANPEC INC</p>
                       <p className="text-gray-300 text-xs">11819 Skydale Drive Tomball Texas</p>
                     </div>
                   </div>
@@ -208,7 +206,7 @@ const PremiumFooter = () => {
           <div className="flex flex-col md:flex-row justify-center items-center gap-4 text-xs">
             <p className="text-gray-400 flex items-center gap-2">
               <span className="text-[#CC2222]">©</span>
-              2026 SANPEC EXCELLENCE. All Rights Reserved
+              2026 SANPEC INC. All Rights Reserved
             </p>
             
             {/* <div className="flex items-center gap-4">

@@ -358,7 +358,7 @@ export default function ElectricPowerLayout({
           <main className="flex-1 pl-4 pt-4 pb-4 sm:pl-6 sm:pt-6 sm:pb-6 lg:pl-8 lg:pt-8 lg:pb-8 bg-white min-h-screen">
             <div className="bg-white rounded-2xl shadow-sm border overflow-hidden">
               <div className="h-0.5 bg-gray-300" />
-              <div className="pl-4 pt-4 pb-4 sm:pl-6 sm:pt-6 sm:pb-6 lg:pl-8 lg:pt-8 lg:pb-8">
+              <div className="pl-4 pt-4 pb-4 sm:pl-6 sm:pt-0 sm:pb-6 lg:pl-8 lg:pt-0 lg:pb-8">
                 {children}
               </div>
               <div className="h-2 bg-gray-100" />

@@ -55,7 +55,7 @@ export default function SanpecEngineeringSection() {
         />
       </div>
 
-      <div className="max-w-7xl mx-auto relative z-10 min-h-[600px] lg:h-[700px] flex items-center">
+      <div className="max-w-7xl mx-auto relative z-10 min-h-[00px] lg:h-[500px] flex items-center">
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 w-full">
           

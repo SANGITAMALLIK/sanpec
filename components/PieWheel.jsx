@@ -3,59 +3,34 @@ import Link from 'next/link';
 
 const sections = [
   {
-    tabTitle: "Ecosystem Innovation",
-    contentTitle: "Innovation within the Business Ecosystem",
-    image: "images/home/six-pillars/5.png",
+    tabTitle: "Systems & Approach",
+    contentTitle: "Systems Approach and Foresight",
+    image: "images/home/six-pillars/1.png",
     position: { top: '10%', left: '50%', transform: 'translateX(-50%)' },
     content: [
       {
-        subtitle: "Innovation within the Business Ecosystem:",
-        text: "We Build strong partnerships across sectors and stakeholders to foster impactful, collective solutions."
+        subtitle: "Visionary Leadership:",
+        text: "SANPEC adopts a holistic perspective to integrate components, ensuring efficiency, reliability, and synergy across operations."
       },
       {
-        subtitle: "Collaborative Ecosystem:",
-        text: "SANPEC fosters a collaborative ecosystem comprising suppliers, partners, and customers. This ecosystem approach leads to shared Innovation and value creation."
+        text: "We view the business as a cohesive whole rather than a collection of independent parts. This approach ensures that decisions and strategies are made with consideration of their impact across all departments and functions."
       },
       {
-        subtitle: "Open Innovation Model:",
-        text: "The company embraces an open innovation model, where external ideas and technologies are integrated with entire value-chain to drive Innovation."
+        subtitle: "Strategic Synergy:",
+        text: "By integrating various business functions—from research and engineering to manufacturing—SANPEC ensures that all efforts align with the company's strategic goals, leading to more efficient and effective outcomes."
       },
       {
-        subtitle: "Sustainable Supply Chain:",
-        text: "SANPEC strives to ensure that its supply chain is efficient and sustainable, aligning with its commitment to ethical standards."
+        subtitle: "Feedback Loops and Adaptation:",
+        text: "Regular feedback mechanisms are embedded within the system, allowing for continuous monitoring and adaptation of strategies based on real-time data and market trends."
       }
     ],
-    link: "/sanpec-six-pillars/ecosystem-innovation"
-  },
-  {
-    tabTitle: "New Innovation",
-    contentTitle: "New Solutions and Innovation Management",
-    image: "images/home/six-pillars/3.png",
-    position: { top: '25%', right: '15%' },
-    content: [
-      {
-        subtitle: "Cutting-Edge Research and Development:",
-        text: "SANPEC is committed to staying at the forefront of technological advancements. The company invests significantly in R&D, developing new solutions that address current and future industry challenges."
-      },
-      {
-        text: "We continuously improve develop innovative solutions to redefine the future of energy landscape."
-      },
-      {
-        subtitle: "Collaboration with Innovators:",
-        text: "Partnerships with leading innovators and academic institutions are key to SANPEC's strategy, ensuring access to the latest technologies and thought leadership."
-      },
-      {
-        subtitle: "Innovation Management:",
-        text: "Emphasis is placed on developing solutions that are aligned with ISO-Innovation management practices."
-      }
-    ],
-    link: "/sanpec-six-pillars/new-innovation"
+    link: "/sanpec-six-pillars/systems-and-structures"
   },
   {
     tabTitle: "Agility",
     contentTitle: "Agility and Strategic Planning",
     image: "images/home/six-pillars/2.png",
-    position: { top: '40%', left: '50%', transform: 'translateX(-50%)' },
+    position: { top: '25%', left: '50%', transform: 'translateX(-50%)' },
     content: [
       {
         subtitle: "Adaptation and Flexibility in Operations:",
@@ -77,31 +52,34 @@ const sections = [
     link: "/sanpec-six-pillars/agility"
   },
   {
-    tabTitle: "Collaboration & Co-Creation",
-    contentTitle: "Collaborative Efforts for Shared Value",
-    image: "images/home/six-pillars/6.png",
-    position: { top: '55%', left: '8%' },
+    tabTitle: "New Innovation",
+    contentTitle: "New Solutions and Innovation Management",
+    image: "images/home/six-pillars/3.png",
+    position: { top: '40%', right: '15%' },
     content: [
       {
-        subtitle: "Collaborative Efforts for Shared Value:",
-        text: "SANPEC's commitment to co-creation goes beyond business interests, reflecting a deep sense of responsibility and a desire to contribute positively to society."
+        subtitle: "Cutting-Edge Research and Development:",
+        text: "SANPEC is committed to staying at the forefront of technological advancements. The company invests significantly in R&D, developing new solutions that address current and future industry challenges."
       },
       {
-        subtitle: "Community Engagement:",
-        text: "SANPEC actively engages with the communities in which it operates, understanding their needs and working collaboratively to address them."
+        text: "We continuously improve develop innovative solutions to redefine the future of energy landscape."
       },
       {
-        subtitle: "Co-Creation with Stakeholders:",
-        text: "The company believes in co-creating value with stakeholders, including customers, local education institutions, sports organizations, and industry partners. This approach leads to solutions that are more aligned with stakeholders' needs and expectations."
+        subtitle: "Collaboration with Innovators:",
+        text: "Partnerships with leading innovators and academic institutions are key to SANPEC's strategy, ensuring access to the latest technologies and thought leadership."
+      },
+      {
+        subtitle: "Innovation Management:",
+        text: "Emphasis is placed on developing solutions that are aligned with ISO-Innovation management practices."
       }
     ],
-    link: "/sanpec-six-pillars/collaboration-&-co-creation"
+    link: "/sanpec-six-pillars/new-innovation"
   },
   {
     tabTitle: "Process Excellence",
     contentTitle: "Process Excellence",
     image: "images/home/six-pillars/4.png",
-    position: { top: '70%', right: '25%' },
+    position: { top: '55%', right: '25%' },
     content: [
       {
         subtitle: "Continuous Improvement in Business Processes:",
@@ -127,33 +105,55 @@ const sections = [
     link: "/sanpec-six-pillars/process-excellence"
   },
   {
-    tabTitle: "Systems & Approach",
-    contentTitle: "Systems Approach and Foresight",
-    image: "images/home/six-pillars/1.png",
+    tabTitle: "Collaboration & Co-Creation",
+    contentTitle: "Collaborative Efforts for Shared Value",
+    image: "images/home/six-pillars/6.png",
+    position: { top: '70%', left: '8%' },
+    content: [
+      {
+        subtitle: "Collaborative Efforts for Shared Value:",
+        text: "SANPEC's commitment to co-creation goes beyond business interests, reflecting a deep sense of responsibility and a desire to contribute positively to society."
+      },
+      {
+        subtitle: "Community Engagement:",
+        text: "SANPEC actively engages with the communities in which it operates, understanding their needs and working collaboratively to address them."
+      },
+      {
+        subtitle: "Co-Creation with Stakeholders:",
+        text: "The company believes in co-creating value with stakeholders, including customers, local education institutions, sports organizations, and industry partners. This approach leads to solutions that are more aligned with stakeholders' needs and expectations."
+      }
+    ],
+    link: "/sanpec-six-pillars/collaboration-&-co-creation"
+  },
+  {
+    tabTitle: "Ecosystem Innovation",
+    contentTitle: "Innovation within the Business Ecosystem",
+    image: "images/home/six-pillars/5.png",
     position: { top: '85%', left: '50%', transform: 'translateX(-50%)' },
     content: [
       {
-        subtitle: "Visionary Leadership:",
-        text: "SANPEC adopts a holistic perspective to integrate components, ensuring efficiency, reliability, and synergy across operations."
+        subtitle: "Innovation within the Business Ecosystem:",
+        text: "We Build strong partnerships across sectors and stakeholders to foster impactful, collective solutions."
       },
       {
-        text: "We view the business as a cohesive whole rather than a collection of independent parts. This approach ensures that decisions and strategies are made with consideration of their impact across all departments and functions."
+        subtitle: "Collaborative Ecosystem:",
+        text: "SANPEC fosters a collaborative ecosystem comprising suppliers, partners, and customers. This ecosystem approach leads to shared Innovation and value creation."
       },
       {
-        subtitle: "Strategic Synergy:",
-        text: "By integrating various business functions—from research and engineering to manufacturing—SANPEC ensures that all efforts align with the company's strategic goals, leading to more efficient and effective outcomes."
+        subtitle: "Open Innovation Model:",
+        text: "The company embraces an open innovation model, where external ideas and technologies are integrated with entire value-chain to drive Innovation."
       },
       {
-        subtitle: "Feedback Loops and Adaptation:",
-        text: "Regular feedback mechanisms are embedded within the system, allowing for continuous monitoring and adaptation of strategies based on real-time data and market trends."
+        subtitle: "Sustainable Supply Chain:",
+        text: "SANPEC strives to ensure that its supply chain is efficient and sustainable, aligning with its commitment to ethical standards."
       }
     ],
-    link: "/sanpec-six-pillars/systems-and-structures"
+    link: "/sanpec-six-pillars/ecosystem-innovation"
   }
 ];
 
 export default function InteractivePieWheel() {
-  const [currentActiveIndex, setCurrentActiveIndex] = useState(5);
+  const [currentActiveIndex, setCurrentActiveIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -177,7 +177,7 @@ export default function InteractivePieWheel() {
     setTimeout(() => setIsAnimating(false), 600);
   };
 
-  const currentSection = sections[currentActiveIndex] || sections[5];
+  const currentSection = sections[currentActiveIndex] || sections[0];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
@@ -270,11 +270,6 @@ export default function InteractivePieWheel() {
 
       {!isMobile && (
         <div className="absolute inset-0 z-0 opacity-10 pointer-events-none">
-          {/* <svg className="absolute top-10 left-20 w-40 h-40 animate-pulse" viewBox="0 0 100 100">
-            <path d="M50 10 L55 40 L45 40 Z" fill={primaryColor} />
-            <rect x="48" y="40" width="4" height="50" fill={primaryColor} />
-            <path d="M30 90 L70 90 L65 80 L35 80 Z" fill={primaryColor} />
-          </svg> */}
         </div>
       )}
 

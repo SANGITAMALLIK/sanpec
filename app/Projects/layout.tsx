@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { Home, ChevronRight, ChevronDown, ChevronUp } from 'lucide-react';
+import { Home, ChevronRight, Menu, X } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 
 interface Post {
@@ -30,6 +30,7 @@ export default function ElectricPowerLayout({
   const [transmissionPosts, setTransmissionPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [isTransmissionOpen, setIsTransmissionOpen] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const fetchTransmissionPosts = async () => {
@@ -58,15 +59,12 @@ export default function ElectricPowerLayout({
     return html.replace(/<[^>]*>/g, '');
   };
 
-  // Check if current page is a transmission post
   const isTransmissionActive = pathname.includes('/electric-power/transmission');
   const isRecentActive = pathname.includes('/electric-power/recent');
   
-  // Find active post if on single page
   const activePostSlug = pathname.split('/').pop();
   const activePost = transmissionPosts.find(post => post.slug === activePostSlug);
 
-  // Get breadcrumb title
   const getBreadcrumbTitle = () => {
     if (isRecentActive) {
       return 'Recent';
@@ -75,6 +73,11 @@ export default function ElectricPowerLayout({
       return stripHtml(activePost.title.rendered);
     }
     return 'Project';
+  };
+
+  const handleNavigation = (url: string) => {
+    router.push(url);
+    setIsMobileMenuOpen(false);
   };
 
   return (
@@ -119,7 +122,7 @@ export default function ElectricPowerLayout({
             <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/50" />
             <span className="text-white/70 font-medium">Project</span>
             <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/50" />
-            <span className="text-[#cd091b] font-semibold">{getBreadcrumbTitle()}</span>
+            <span className="text-[#cd091b] font-semibold line-clamp-1">{getBreadcrumbTitle()}</span>
           </nav>
         </div>
 
@@ -128,67 +131,106 @@ export default function ElectricPowerLayout({
         </div>
       </div>
 
-      {/* MOBILE TAB MENU */}
-      <div className="lg:hidden bg-white border-b border-gray-200 sticky top-0 z-20 shadow-sm">
-        <div className="container mx-auto px-4">
-          <div className="py-3 space-y-2">
-            {/* Transmission Dropdown */}
+      {/* MOBILE MENU BUTTON */}
+      <div className="lg:hidden sticky top-0 z-30 bg-white border-b border-gray-200 shadow-sm">
+        <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+          <h3 className="text-sm font-bold text-gray-900">Projects Menu</h3>
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+          >
+            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
+      </div>
+
+      {/* MOBILE SIDEBAR OVERLAY */}
+      {isMobileMenuOpen && (
+        <div 
+          className="lg:hidden fixed inset-0 bg-black/50 z-40"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+
+      {/* MOBILE SIDEBAR */}
+      <div className={`
+        lg:hidden fixed top-0 left-0 h-full w-80 bg-white z-50 shadow-2xl
+        transform transition-transform duration-300 ease-in-out
+        ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
+      `}>
+        <div className="h-full overflow-y-auto">
+          {/* Header */}
+          <div className="sticky top-0 bg-[#cd091b] text-white p-4 flex items-center justify-between">
+            <h3 className="text-lg font-bold">Projects</h3>
+            <button 
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="p-1 hover:bg-white/20 rounded-lg transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+
+          {/* Menu Items */}
+          <div className="p-4 space-y-2">
+            {/* Transmission Section */}
             <div>
-              <button
-                onClick={() => setIsTransmissionOpen(!isTransmissionOpen)}
-                className={`
-                  w-full flex items-center justify-between px-4 py-2 rounded-lg text-xs font-semibold
-                  transition-all duration-300
-                  ${isTransmissionActive
-                    ? 'bg-[#cd091b] text-white shadow-md' 
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                  }
-                `}
-              >
-                <span>Transmission</span>
-                {isTransmissionOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-              </button>
-              
-              {isTransmissionOpen && (
-                <div className="mt-2 pl-4 space-y-1 max-h-64 overflow-y-auto custom-scrollbar">
-                  {loading ? (
-                    <div className="px-4 py-2 text-xs text-gray-500">Loading...</div>
-                  ) : (
-                    transmissionPosts.map((post) => (
+              <div className="mb-2">
+                <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider px-2">Transmission</h4>
+              </div>
+              <div className="space-y-1">
+                {loading ? (
+                  <div className="px-4 py-3 text-sm text-gray-500">Loading...</div>
+                ) : (
+                  transmissionPosts.map((post) => {
+                    const isActive = pathname.includes(post.slug);
+                    return (
                       <button
                         key={post.id}
-                        onClick={() => router.push(`/Projects/transmission/${post.slug}`)}
+                        onClick={() => handleNavigation(`/Projects/transmission/${post.slug}`)}
                         className={`
-                          w-full text-left px-4 py-2 rounded-md text-xs
+                          w-full text-left px-4 py-3 rounded-lg text-sm font-medium
                           transition-all duration-200
-                          ${pathname.includes(post.slug)
-                            ? 'bg-[#cd091b]/10 text-[#cd091b] font-semibold'
-                            : 'text-gray-600 hover:bg-gray-100'
+                          ${isActive
+                            ? 'bg-[#cd091b] text-white shadow-md'
+                            : 'text-gray-700 hover:bg-gray-100'
                           }
                         `}
                       >
                         {stripHtml(post.title.rendered)}
                       </button>
-                    ))
-                  )}
-                </div>
-              )}
+                    );
+                  })
+                )}
+              </div>
             </div>
 
-            {/* Recent Button */}
-            <button
-              onClick={() => router.push('/electric-power/recent')}
-              className={`
-                w-full px-4 py-2 rounded-lg text-xs font-semibold
-                transition-all duration-300
-                ${isRecentActive
-                  ? 'bg-[#cd091b] text-white shadow-md' 
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }
-              `}
-            >
-              Recent
-            </button>
+            {/* Recent Section */}
+            {staticMenuData.length > 0 && (
+              <div className="pt-4 border-t border-gray-200">
+                <div className="mb-2">
+                  <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider px-2">Other</h4>
+                </div>
+                {staticMenuData.map((item) => {
+                  const isActive = isRecentActive;
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => handleNavigation(item.url)}
+                      className={`
+                        w-full text-left px-4 py-3 rounded-lg text-sm font-medium
+                        transition-all duration-200
+                        ${isActive
+                          ? 'bg-[#cd091b] text-white shadow-md'
+                          : 'text-gray-700 hover:bg-gray-100'
+                        }
+                      `}
+                    >
+                      {item.title}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -212,9 +254,8 @@ export default function ElectricPowerLayout({
 
                 {/* Transmission Menu Item */}
                 <div 
-                  onClick={() => setIsTransmissionOpen(!isTransmissionOpen)}
                   className={`
-                    relative ml-11 group flex items-center justify-between px-4 py-3.5 cursor-pointer
+                    relative ml-11 group px-4 py-3.5
                     transition-all duration-300 ease-out rounded-lg border-2
                     ${isTransmissionActive
                       ? 'border-gray-300 text-gray-900 shadow-xl' 
@@ -223,24 +264,20 @@ export default function ElectricPowerLayout({
                   `}
                   style={isTransmissionActive ? {backgroundColor: '#F3F3F3'} : {}}
                 >
-                  <span className="text-sm font-semibold flex-1">Transmission</span>
-                  
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-sm font-semibold flex-1">Transmission</span>
                     {isTransmissionActive && (
-                      <>
+                      <div className="flex items-center gap-2">
                         <div className="w-2 h-2 bg-gray-800 rounded-full animate-pulse"></div>
                         <div className="w-2 h-2 bg-gray-600 rounded-full animate-ping absolute"></div>
-                      </>
+                      </div>
                     )}
-                    {isTransmissionOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                   </div>
-                </div>
 
-                {/* Dropdown List */}
-                {isTransmissionOpen && (
-                  <div className="ml-11 mt-2 space-y-1 max-h-96 overflow-y-auto custom-scrollbar">
+                  {/* Dropdown List */}
+                  <div className="space-y-1 max-h-96 overflow-y-auto custom-scrollbar">
                     {loading ? (
-                      <div className="px-4 py-2 text-xs text-gray-500">Loading Project...</div>
+                      <div className="px-2 py-2 text-xs text-gray-500">Loading Project...</div>
                     ) : (
                       transmissionPosts.map((post) => {
                         const isActivePost = pathname.includes(post.slug);
@@ -249,7 +286,7 @@ export default function ElectricPowerLayout({
                             key={post.id}
                             onClick={() => router.push(`/Projects/transmission/${post.slug}`)}
                             className={`
-                              px-4 py-2.5 rounded-md cursor-pointer text-sm
+                              px-3 py-2 rounded-md cursor-pointer text-xs
                               transition-all duration-200
                               ${isActivePost
                                 ? 'bg-[#cd091b]/10 text-[#cd091b] font-semibold border-l-2 border-[#cd091b]'
@@ -263,7 +300,7 @@ export default function ElectricPowerLayout({
                       })
                     )}
                   </div>
-                )}
+                </div>
               </div>
 
               {/* Recent Menu Item */}
@@ -317,11 +354,11 @@ export default function ElectricPowerLayout({
             </nav>
           </aside>
 
-          {/* Content Area - ONLY RIGHT PADDING REMOVED */}
-          <main className="flex-1 pl-4 pt-4 pb-4 sm:pl-6 sm:pt-6 sm:pb-6 lg:pl-8 lg:pt-8 lg:pb-8 bg-white min-h-screen">
+          {/* Content Area */}
+          <main className="flex-1 px-4 pt-4 pb-4 sm:px-6 sm:pt-6 sm:pb-6 lg:pl-8 lg:pt-8 lg:pb-8 bg-white min-h-screen">
             <div className="bg-white rounded-2xl shadow-sm border overflow-hidden">
               <div className="h-0.5 bg-gray-300" />
-              <div className="pl-4 pt-4 pb-4 sm:pl-6 sm:pt-6 sm:pb-6 lg:pl-8 lg:pt-8 lg:pb-8">
+              <div className="p-0 sm:p-0 lg:p-0">
                 {children}
               </div>
               <div className="h-2 bg-gray-100" />
@@ -331,7 +368,6 @@ export default function ElectricPowerLayout({
       </div>
 
       <style jsx global>{`
-        /* Custom Scrollbar Styling */
         .custom-scrollbar::-webkit-scrollbar {
           width: 6px;
         }
@@ -350,7 +386,6 @@ export default function ElectricPowerLayout({
           background: #555;
         }
 
-        /* Firefox */
         .custom-scrollbar {
           scrollbar-width: thin;
           scrollbar-color: #888 #f1f1f1;

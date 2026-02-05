@@ -24,7 +24,10 @@ const ClientsSection = () => {
     { name: "PSEG", url: "#", logo: "/images/home/logos/15.jpg" },
     { name: "Clean Line Energy", url: "#", logo: "/images/home/logos/16.png" },
     { name: "PowerTel", url: "#", logo: "/images/home/logos/17.png" },
-    { name: "Client 18", url: "#", logo: "/images/home/logos/18.png" }
+    { name: "SunZia", url: "#", logo: "/images/home/logos/18.png" },
+    { name: "AltaLink", url: "#", logo: "/images/home/logos/19.jpg" },
+    { name: "Idaho Power", url: "#", logo: "/images/home/logos/20.png" },
+    { name: "AEP", url: "#", logo: "/images/home/logos/21.png" }
   ];
 
   const allClients = [...clients, ...clients, ...clients];
