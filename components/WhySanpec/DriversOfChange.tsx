@@ -12,20 +12,20 @@ const TabGallery = () => {
       title: "Engineering Excellence",
       content: {
         heading: "Engineering Excellence",
-        description: "At SANPEC, engineering excellence is achieved through a comprehensive, multi-dimensional approach that integrates advanced technology, continuous improvement, and an unwavering commitment to quality. By embedding these principles into every facet of its operations, SANPEC consistently delivers projects that surpass industry benchmarks.",
-        subtitle: "Management Standards:",
+        description: "At SANPEC, engineering excellence is achieved through a comprehensive, multi-dimensional approach that integrates advanced technology, continuous improvement, and an unwavering commitment to quality. By embedding these principles into every facet of its operations, SANPEC consistently delivers projects that surpass industry benchmarks. A culture of continuous improvement is central to SANPEC's operational philosophy—feedback is actively solicited at all levels, and lessons learned from both successes and setbacks are meticulously integrated into future projects.",
+        subtitle: "SANPEC's dedication to engineering excellence is further reinforced through adherence to internationally recognized management standards:",
         accordions: [
           {
             title: "Total Quality Management System",
-            content: "SANPEC employs a robust quality management system guided by TQM principles—customer focus, employee involvement, a process-oriented approach, integrated systems, strategic planning, continual improvement, fact-based decision-making, and effective communication."
+            content: "SANPEC employs a robust quality management system guided by TQM principles—customer focus, employee involvement, a process-oriented approach, integrated systems, strategic planning, continual improvement, fact-based decision-making, and effective communication. In building transmission and distribution infrastructure, SANPEC rigorously applies quality standards across every stage—from R&D and design to manufacturing, operations, supply chain management, and material sourcing—ensuring that each component and process meets the highest levels of reliability and performance. This steadfast commitment not only exceeds customer expectations but also cultivates an environment where every employee is empowered to drive ongoing quality enhancements."
           },
           {
             title: "Innovation Management",
-            content: "Aligned with the ISO 56000 series—specifically ISO 56001:2024—SANPEC systematically manages innovation through a structured approach that drives sustainable growth and secures a competitive edge by continuously exploring and implementing cutting-edge solutions."
+            content: "Aligned with the ISO 56000 series—specifically ISO 56001:2024—SANPEC systematically manages innovation through a structured approach that drives sustainable growth and secures a competitive edge by continuously exploring and implementing cutting-edge solutions in transmission and distribution. By fostering innovation in its R&D, design, and operational processes, SANPEC maximizes value creation by unlocking increased value from new products, services, processes, and methods, thereby delivering tangible benefits for both the organization and its stakeholders. This approach not only boosts immediate performance but also steadily builds long-term innovation capabilities, even amid uncertainty."
           },
           {
             title: "Change Management",
-            content: "SANPEC adeptly manages organizational change to ensure smooth transitions and enhanced adaptability during strategic shifts across all its functions—from R&D and design to manufacturing, operations, supply chain management, and material sourcing."
+            content: "SANPEC adeptly manages organizational change to ensure smooth transitions and enhanced adaptability during strategic shifts across all its functions—from R&D and design to manufacturing, operations, supply chain management, and material sourcing. By adopting changes faster, more completely, and proficiently, SANPEC remains fully engaged during disruptive periods, understanding the rationale behind each change. This comprehensive approach, which provides the necessary time, tools, and support for everyone involved, minimizes the risks and costs associated with mismanaged change while maximizing returns on project investments through the effective application of change management principles before, during, and after each project. Apart from this recognized management standards, we keep risk management at the core of everything we do. From engineering and manufacturing to new technology adoption and organizational change, we proactively identify, assess, and mitigate risks to maintain reliability and efficiency."
           }
         ],
         readMoreLink: "/engineering-excellence/"
@@ -33,10 +33,10 @@ const TabGallery = () => {
     },
     {
       id: 2,
-      title: "Research & Development",
+      title: "Research and Development",
       content: {
         heading: "Research and Development",
-        description: "At SANPEC, research and development (R&D) form the backbone of innovation, driving the modernization of transmission and distribution infrastructure. SANPEC's dedicated R&D teams go beyond conventional innovation labs, relentlessly exploring breakthrough technologies.",
+        description: "At SANPEC, research and development (R&D) form the backbone of innovation, driving the modernization of transmission and distribution infrastructure. SANPEC's dedicated R&D teams go beyond conventional innovation labs, relentlessly exploring breakthrough technologies and methodologies that enhance grid resilience, efficiency, and sustainability. Through strategic collaborations with leading global research institutions, SANPEC ensures that every advancement is grounded in rigorous scientific research and industry's best practices. The company's R&D initiatives span multiple critical areas, including:",
         accordions: [
           {
             title: "Advanced Materials Development",
@@ -44,7 +44,7 @@ const TabGallery = () => {
           },
           {
             title: "Smart Grid Technologies",
-            content: "Integrating IoT, artificial intelligence, and big data analytics for real-time monitoring, predictive maintenance, and operational optimization."
+            content: "Integrating IoT, artificial intelligence, and big data analytics for real- time monitoring, predictive maintenance, and operational optimization."
           },
           {
             title: "Structural Innovations",
@@ -66,66 +66,112 @@ const TabGallery = () => {
       title: "Digital Transformation",
       content: {
         heading: "Digital Transformation",
-        description: "Digital transformation is a cornerstone of SANPEC's strategy for modernizing its transmission and distribution grid infrastructure. By integrating advanced digital technologies, SANPEC enhances efficiency, reliability, and operational intelligence.",
+        description: "Digital transformation is a cornerstone of SANPEC's strategy for modernizing its transmission and distribution grid infrastructure. By integrating advanced digital technologies, SANPEC enhances efficiency, reliability, and operational intelligence, ensuring a future-proof energy grid. Key initiatives include:",
         accordions: [
           {
-            title: "Communication, Monitoring and Control",
-            content: "SANPEC employs state-of-the-art digital communication systems integrated with IoT devices across its transmission and distribution networks providing real-time data on grid conditions."
+            title: "Communication, monitoring and Control",
+            content: "SANPEC employs state-of-the-art digital communication systems integrated with IoT devices across its transmission and distribution networks. These sensors provide real-time data on grid conditions, enabling the company to monitor voltage levels, detect faults, and adjust power flows instantly, thereby enhancing overall grid reliability and operational efficiency."
           },
           {
-            title: "Data Analytics and AI",
-            content: "Leveraging big data analytics and AI, SANPEC processes vast amounts of operational data to optimize grid performance with advanced algorithms for predictive maintenance."
+            title: "Data Analytics and Artificial Intelligence",
+            content: "Leveraging big data analytics and AI, SANPEC processes vast amounts of operational data to optimize grid performance. Advanced algorithms predict maintenance requirements, identify potential inefficiencies, and forecast energy demand patterns, which allows for proactive adjustments and minimizes downtime, ensuring that the grid remains robust and responsive to dynamic conditions."
           },
           {
             title: "Enhanced Cybersecurity",
-            content: "Robust cybersecurity measures specifically designed for transmission and distribution systems including real-time threat monitoring and advanced encryption protocols."
+            content: "Recognizing the critical importance of securing its grid infrastructure, SANPEC has implemented robust cybersecurity measures specifically designed for transmission and distribution systems. These measures include real-time threat monitoring, advanced encryption protocols, and regular vulnerability assessments. This comprehensive approach ensures the integrity and resilience of grid operations, safeguarding against cyber threats and maintaining secure, uninterrupted service."
           },
           {
-            title: "Customer Engagement Platforms",
-            content: "Digital platforms that empower customers by providing real-time insights into their energy consumption with personalized energy-saving recommendations."
+            title: "Advanced Customer Engagement Platforms",
+            content: "SANPEC has also developed digital platforms that empower customers by providing real-time insights into their energy consumption. These platforms enable users to monitor usage, manage their accounts, and receive personalized energy-saving recommendations. By fostering a transparent and interactive relationship, SANPEC not only enhances customer satisfaction but also promotes energy efficiency across its network."
           }
         ]
       }
     },
     {
       id: 4,
-      title: "Workforce Development",
+      title: "Workforce development",
       content: {
-        heading: "Workforce Development",
-        description: "At SANPEC, workforce development is a strategic priority, ensuring a pipeline of skilled, motivated workforce prepared for the evolving energy landscape. SANPEC invests in comprehensive training, leadership development, and knowledge-sharing initiatives.",
+        heading: "Workforce development",
+        description: "At SANPEC, workforce development is a strategic priority, ensuring that a pipeline of the workforce is created that are skilled, motivated, and prepared for the evolving energy landscape. Recognizing that the future of energy depends on a workforce that is both technically proficient and adaptable to innovation, SANPEC invests in comprehensive training, leadership development, and knowledge-sharing initiatives that drive excellence within the organization and across the broader industry as well as strong academic collaboration and with policymakers. The pace of change in the energy sector demands not just skilled workers, but a workforce that is agile and innovation-driven. SANPEC is committed to redefining workforce education by:",
         bullets: [
-          "Promoting interdisciplinary learning integrating policy, technology, and systems thinking",
-          "Advancing global best practices through knowledge-sharing platforms",
-          "Ecosystem-based workforce planning for sustainability challenges"
+          "Promoting interdisciplinary learning that integrates policy, technology, and systems thinking.",
+          "Advancing global best practices through active participation in knowledge-sharing platforms.",
+          "Developing an ecosystem-based approach to workforce planning, ensuring energy professionals are prepared to address sustainability challenges at both local and global scales."
         ],
         subtitle: "Skill Building and Knowledge Transfer",
+        subDescription: "To remain at the forefront of innovation, SANPEC emphasizes continuous learning and knowledge dissemination, bridging gaps between academia, industry, government, and communities. The company fosters a culture of collaboration and adaptability by providing cutting-edge skill development and sharing industry insights across its ecosystem.",
         skills: [
-          "Advanced Skill Development Programs",
-          "Leadership Development",
-          "Internal Training Programs",
-          "Community Education & Outreach",
-          "Industry Knowledge Exchange"
+          "Advanced Skill Development Programs: Training initiatives to stay ahead of industry advancements.",
+          "Leadership Development: Cultivating emerging leaders for energy and infrastructure roles.",
+          "Internal Training Programs: In-house workshops and technical modules to keep employees aligned with industry trends.",
+          "Community Education & Outreach: Engaging schools, universities, and communities to promote energy awareness and sustainability.",
+          "Industry Knowledge Exchange: Collaborating with academia, policymakers, and industry leaders through regular seminars, workshops, and partnerships."
         ]
       }
     },
     {
       id: 5,
-      title: "Leadership & Governance",
+      title: "Leadership and Governance Strategy",
       content: {
-        heading: "Leadership and Governance",
-        description: "SANPEC views leadership and governance as fundamental enablers of its long-term impact on society and the economy. By operating with a systems perspective, the organization ensures every decision is aligned across all functions.",
+        heading: "Leadership and Governance Strategy",
+        description: "SANPEC views leadership and governance as fundamental enablers of its long-term impact on society and the economy. By operating with a systems perspective, the organization ensures that every decision and strategy is aligned across all functions, reinforcing efficiency, accountability, and sustainability while adapting to an evolving industry landscape.",
         accordions: [
           {
             title: "Three-Tier Governance Structure",
-            content: "To drive strategic execution, oversight, and innovation, SANPEC operates through a structured three-tier governance framework with Executive Leadership Team, Board of Directors, and Advisory Committees."
+            content: {
+              intro: "To drive strategic execution, oversight, and innovation, SANPEC operates through a structured three-tier governance framework:",
+              bullets: [
+                {
+                  title: "Executive Leadership Team:",
+                  text: "Comprising leaders from Engineering, Operations, Finance, Human Resources, and Sustainability, this team drives company-wide strategy, orchestrates the organization's response to market dynamics, and ensures the seamless flow of critical business information to optimize decision-making at all levels."
+                },
+                {
+                  title: "Board of Directors:",
+                  text: "Made up of industry experts, community leaders, and academic professionals, the board provides strategic oversight while upholding SANPEC's mission, values, and corporate governance principles."
+                },
+                {
+                  title: "Advisory Committees:",
+                  text: "Specialized bodies such as the Sustainability Advisory Board and the Innovation Council offer expert insights to shape first-to-market innovation strategies, sustainability initiatives, and industry-leading solutions while ensuring SANPEC remains adaptive to emerging risks and opportunities."
+                }
+              ]
+            }
           },
           {
-            title: "Governance Mechanisms",
-            content: "Robust governance framework that fosters accountability, adaptability, and agility through strategic reviews, board oversight, ethics compliance, stakeholder engagement, and risk management."
+            title: "Governance Mechanisms for Accountability and Growth",
+            content: {
+              intro: "To ensure leadership decisions remain aligned with SANPEC's mission and industry's best practices, the organization follows a robust governance framework that fosters accountability, adaptability, and agility:",
+              bullets: [
+                {
+                  title: "Strategic Reviews:",
+                  text: "Quarterly assessments ensure that SANPEC's initiatives remain aligned with both immediate market demands and long-term strategic goals."
+                },
+                {
+                  title: "Board Oversight:",
+                  text: "A dedicated Ethics Officer oversees legal and ethical compliance, ensuring transparent, responsible decision-making in a rapidly evolving regulatory landscape."
+                },
+                {
+                  title: "Ethics and Compliance:",
+                  text: "A dedicated Ethics Officer oversees legal and ethical compliance, ensuring integrity in all business operations."
+                },
+                {
+                  title: "Stakeholder Engagement:",
+                  text: "Continuous dialogue with customers, employees, policymakers, and community partners fosters inclusive decision-making, strengthens industry collaborations, and ensures that business intelligence is effectively integrated into governance processes."
+                },
+                {
+                  title: "Risk Management Framework:",
+                  text: "A Risk Management Committee proactively identifies, assesses, and mitigates strategic and operational risks, enabling SANPEC to anticipate industry shifts and maintain operational excellence amid uncertainty."
+                }
+              ]
+            }
           },
           {
-            title: "Innovation & Impact",
-            content: "SANPEC's leadership model balances strategic vision and operational efficiency, positioning the company as a leader in grid infrastructure solutions through proactive leadership and structured change management."
+            title: "Driving Innovation, Sustainability, and Impact",
+            content: {
+              paragraphs: [
+                "SANPEC's leadership and governance model strikes a balance between strategic vision and operational efficiency, positioning the company as a leader in grid infrastructure solutions. By fostering proactive leadership, decentralized decision-making, and a structured approach to managing change across short-, medium-, and long-term challenges, SANPEC ensures organizational resilience and market leadership.",
+                "Through a combination of dynamic information systems, real-time business intelligence, and governance mechanisms that prioritize first-to-market innovation, SANPEC continues to drive industry-leading advancements, sustainability, and long-term impact across the energy sector."
+              ]
+            }
           }
         ]
       }
@@ -155,22 +201,22 @@ const TabGallery = () => {
       {/* Hero Section */}
       <div className="relative z-10 text-center py-12 md:py-16 px-4">
         <div className="max-w-[1600px] mx-auto mb-8 md:mb-12">
-        <div className="flex items-center justify-center gap-3">
-          <div className="h-[2px] w-20 sm:w-32 md:w-48 bg-gradient-to-r from-transparent to-[#CD091B]"></div>
-          <div className="relative">
-            <svg className="w-8 h-8 md:w-10 md:h-10 text-[#CD091B]" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/>
-            </svg>
+          <div className="flex items-center justify-center gap-3">
+            <div className="h-[2px] w-20 sm:w-32 md:w-48 bg-gradient-to-r from-transparent to-[#CD091B]"></div>
+            <div className="relative">
+              <svg className="w-8 h-8 md:w-10 md:h-10 text-[#CD091B]" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/>
+              </svg>
+            </div>
+            <div className="h-[2px] w-20 sm:w-32 md:w-48 bg-gradient-to-l from-transparent to-[#CD091B]"></div>
           </div>
-          <div className="h-[2px] w-20 sm:w-32 md:w-48 bg-gradient-to-l from-transparent to-[#CD091B]"></div>
         </div>
-      </div>
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-[#0F152F] mb-3 md:mb-4 tracking-tight">
           Drivers Of <span className="text-[#D62B2B]">Change</span>
         </h1>
-        <div className="w-24   md:w-32 h-1 bg-[#D62B2B] mx-auto mb-4 md:mb-6 rounded-full"></div>
+        <div className="w-24 md:w-32 h-1 bg-[#D62B2B] mx-auto mb-4 md:mb-6 rounded-full"></div>
         <p className="text-gray-700 text-base md:text-xl max-w-4xl mx-auto font-medium leading-relaxed px-4">
-         Bringing Engineering Excellence. Improving Power Grid Reliability
+          Bringing Engineering Excellence. Improving Power Grid Reliability
         </p>
       </div>
 
@@ -247,13 +293,18 @@ const TabGallery = () => {
                   <h3 className="text-2xl md:text-3xl font-black text-[#0F152F]">
                     {tabs[activeTab].content.subtitle}
                   </h3>
+                  <div className="bg-gray-50 p-5 md:p-7 rounded-xl md:rounded-2xl border-2 border-gray-200 shadow-sm mb-4">
+                    <p className="text-gray-700 text-sm md:text-base leading-relaxed text-left">
+                      {tabs[activeTab].content.subDescription}
+                    </p>
+                  </div>
                   <div className="grid grid-cols-1 gap-2.5 md:gap-3">
                     {tabs[activeTab].content.skills.map((skill, idx) => (
-                      <div key={idx} className="flex gap-3 md:gap-4 items-center bg-white p-3 md:p-4 rounded-lg md:rounded-xl border-2 border-gray-200 hover:border-[#D62B2B] transition-all group shadow-sm">
+                      <div key={idx} className="flex gap-3 md:gap-4 items-start bg-white p-3 md:p-4 rounded-lg md:rounded-xl border-2 border-gray-200 hover:border-[#D62B2B] transition-all group shadow-sm">
                         <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-[#D62B2B] flex items-center justify-center text-white text-sm md:text-base font-bold flex-shrink-0">
                           {idx + 1}
                         </div>
-                        <span className="text-gray-700 text-sm md:text-base font-medium">{skill}</span>
+                        <span className="text-gray-700 text-sm md:text-base font-medium text-left">{skill}</span>
                       </div>
                     ))}
                   </div>
@@ -268,30 +319,18 @@ const TabGallery = () => {
                       {tabs[activeTab].content.description}
                     </p>
                   </div>
-                  
-                  {tabs[activeTab].content.subtitle && (
-                    <div className="space-y-4 md:space-y-5">
-                      <h3 className="text-2xl md:text-3xl font-black text-[#0F152F]">
-                        {tabs[activeTab].content.subtitle}
-                      </h3>
-                      {tabs[activeTab].content.skills && (
-                        <div className="grid grid-cols-1 gap-2.5 md:gap-3">
-                          {tabs[activeTab].content.skills.map((skill, idx) => (
-                            <div key={idx} className="flex gap-3 md:gap-4 items-center bg-white p-3 md:p-4 rounded-lg md:rounded-xl border-2 border-gray-200 hover:border-[#D62B2B] transition-all group shadow-sm">
-                              <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-[#D62B2B] flex items-center justify-center text-white text-sm md:text-base font-bold flex-shrink-0">
-                                {idx + 1}
-                              </div>
-                              <span className="text-gray-700 text-sm md:text-base font-medium">{skill}</span>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  )}
                 </div>
 
                 {/* Right Column - Accordions */}
                 <div className="space-y-3 md:space-y-4">
+                  {/* Subtitle above accordions */}
+                  {tabs[activeTab].content.subtitle && (
+                    <div className="bg-gray-50 p-5 md:p-7 rounded-xl md:rounded-2xl border-2 border-gray-200 shadow-sm mb-4">
+                      <h3 className="text-xl md:text-2xl font-black text-[#0F152F] text-left leading-tight">
+                        {tabs[activeTab].content.subtitle}
+                      </h3>
+                    </div>
+                  )}
                   {tabs[activeTab].content.accordions && tabs[activeTab].content.accordions.map((accordion, idx) => {
                     const isOpen = openAccordion === idx;
                     return (
@@ -309,7 +348,7 @@ const TabGallery = () => {
                             <span className="w-8 h-8 md:w-9 md:h-9 rounded-lg bg-[#D62B2B] flex items-center justify-center text-white text-xs md:text-sm font-black flex-shrink-0">
                               {idx + 1}
                             </span>
-                            <span className="text-sm md:text-base">{accordion.title}</span>
+                            <span className="text-sm md:text-base text-left">{accordion.title}</span>
                           </span>
                           <div className="flex-shrink-0">
                             {isOpen ? (
@@ -319,9 +358,47 @@ const TabGallery = () => {
                             )}
                           </div>
                         </button>
-                        <div className={`transition-all duration-300 ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
+                        <div className={`transition-all duration-300 ${isOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
                           <div className="p-4 md:p-6 bg-gray-50 border-t-2 border-gray-200">
-                            <p className="text-gray-700 text-sm md:text-base leading-relaxed">{accordion.content}</p>
+                            {/* Check if content has structured data (bullets/paragraphs) or simple string */}
+                            {typeof accordion.content === 'string' ? (
+                              <p className="text-gray-700 text-sm md:text-base leading-relaxed text-left">{accordion.content}</p>
+                            ) : (
+                              <div className="space-y-4">
+                                {/* Intro text if exists */}
+                                {accordion.content.intro && (
+                                  <p className="text-gray-700 text-sm md:text-base leading-relaxed text-left mb-4">
+                                    {accordion.content.intro}
+                                  </p>
+                                )}
+                                
+                                {/* Bullet points if exists */}
+                                {accordion.content.bullets && (
+                                  <div className="space-y-4">
+                                    {accordion.content.bullets.map((bullet, bulletIdx) => (
+                                      <div key={bulletIdx} className="flex gap-3 items-start">
+                                        <div className="w-2 h-2 rounded-full bg-[#D62B2B] mt-2 flex-shrink-0"></div>
+                                        <div>
+                                          <span className="font-bold text-gray-900">{bullet.title}</span>
+                                          <span className="text-gray-700"> {bullet.text}</span>
+                                        </div>
+                                      </div>
+                                    ))}
+                                  </div>
+                                )}
+                                
+                                {/* Multiple paragraphs if exists */}
+                                {accordion.content.paragraphs && (
+                                  <div className="space-y-4">
+                                    {accordion.content.paragraphs.map((para, paraIdx) => (
+                                      <p key={paraIdx} className="text-gray-700 text-sm md:text-base leading-relaxed text-left">
+                                        {para}
+                                      </p>
+                                    ))}
+                                  </div>
+                                )}
+                              </div>
+                            )}
                           </div>
                         </div>
                       </div>

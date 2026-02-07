@@ -31,8 +31,8 @@ const TabsComponent = () => {
       description: ['Determine compatibility of existing and proposed transmission line'],
       points: [
         "Ensure that the customer receives quality product",
-        "Minimize liability for product failures and construction delays",
         "Minimize liability for product failures and construction delays"
+        
       ],
       images: [
         '/images/electric_power/9.png',

@@ -6,8 +6,8 @@ export default function TowerTesting() {
 
   const towerTestingSubTabs = [
     { id: 0, title: 'T Line Structures Testing' },
-    { id: 1, title: 'Source Inspections' },
-    { id: 2, title: 'Drone Field Inspections' }
+    { id: 1, title: 'Source Inspections At Manufacturing facilities' },
+    { id: 2, title: 'Field Inspections Using Drones' }
   ];
 
   const towerTestingContent = [

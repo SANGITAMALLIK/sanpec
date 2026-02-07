@@ -55,24 +55,21 @@ export default function NewInnovationPage() {
               {/* Card 1 - Cutting-Edge Research */}
               <div className="group relative">
                 <div className="bg-white rounded-xl p-4 border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300">
-    
+     <h2 className="text-xl font-bold text-gray-900 mb-3">Cutting-Edge Research and Development:</h2>
                   <p className=" leading-relaxed">
-                    SANPEC is committed to staying at the forefront of technological advancements. The company invests significantly in R&D, developing new solutions that address current and future industry challenges.
+                  SANPEC is committed to staying at the forefront of technological advancements. The company invests significantly in R&D, developing new solutions that address current and future industry challenges.<br></br>
+                  We continuously improve develop innovative solutions to redefine the future of energy landscape.
                   </p>
                 </div>
               </div>
 
               {/* Card 2 - Continuous Improvement */}
-              <div className="bg-gray-50 rounded-xl p-4 border border-gray-200">
-                <p className=" leading-relaxed">
-                  We continuously improve develop innovative solutions to redefine the future of energy landscape.
-                </p>
-              </div>
+             
 
               {/* Card 3 - Collaboration with Innovators */}
               <div className="group relative">
                 <div className="bg-white rounded-xl p-4 border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300">
-            
+     <h2 className="text-xl font-bold text-gray-900 mb-3">Collaboration with Innovators:</h2>
                   <p className=" leading-relaxed">
                     Partnerships with leading innovators and academic institutions are key to SANPEC's strategy, ensuring access to the latest technologies and thought leadership.
                   </p>
@@ -82,7 +79,7 @@ export default function NewInnovationPage() {
               {/* Card 4 - Innovation Management */}
               <div className="group relative">
                 <div className=" bg-white rounded-xl p-4 border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300">
-                 
+     <h2 className="text-xl font-bold text-gray-900 mb-3">Innovation Management:</h2>
                   <p className="leading-relaxed">
                     Emphasis is placed on developing solutions that are aligned with ISO-Innovation management practices.
                   </p>

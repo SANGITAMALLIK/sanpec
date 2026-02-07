@@ -28,7 +28,7 @@ export default function ManagementSystems() {
     },
     {
       title: 'Change Management',
-      description: 'Leveraging in house software and tools, SANPEC adeptly manages organizational change to ensure smooth transitions and enhanced adaptability during strategic shifts across all its functions—from R&D and design to manufacturing, operations, supply chain management, and material sourcing. By adopting changes faster, more completely, and proficiently, SANPEC remains fully engaged during disruptive periods, understanding the rationale behind each change. This comprehensive approach, which provides the necessary time, tools, and support for everyone involved, minimizes the risks and costs associated with mismanaged change while maximizing returns on project investments through the effective application of change management principles before, during, and after each project.',
+      description: 'leveraging in house souftware and tools, SANPEC adeptly manages organizational change to ensure smooth transitions and enhanced adaptability during strategic shifts across all its functions—from R&D and design to manufacturing, operations, supply chain management, and material sourcing. By adopting changes faster, more completely, and proficiently, SANPEC remains fully engaged during disruptive periods, understanding the rationale behind each change. This comprehensive approach, which provides the necessary time, tools, and support for everyone involved, minimizes the risks and costs associated with mismanaged change while maximizing returns on project investments through the effective application of change management principles before, during, and after each project.',
       images: [
         '/images/electric_power/Picture24.jpg',
       ]

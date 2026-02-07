@@ -8,29 +8,30 @@ const EngineeringExcellence = () => {
     {
       id: 0,
       title: "Innovation Management",
-      content: "Aligned with the ISO 56000 series—specifically ISO. 56001:2024—SANPEC systematically manages innovation through a structured approach that drives sustainable growth and secures a competitive edge by continuously exploring and implementing cutting-edge solutions in transmission and distribution. By fostering innovation in its R&D, design, and operational processes, SANPEC maximizes value creation by unlocking increased value from new products, services, processes, and methods, thereby delivering tangible benefits for both the organization and its stakeholders. This approach not only boosts immediate performance but also steadily builds long-term innovation capabilities, even amid uncertainty."
+      content: "Aligned with the ISO 56000 series—specifically ISO 56001:2024—SANPEC systematically manages innovation through a structured approach that drives sustainable growth and secures a competitive edge by continuously exploring and implementing cutting-edge solutions in transmission and distribution. By fostering innovation in its R&D, design, and operational processes, SANPEC maximizes value creation by unlocking increased value from new products, services, processes, and methods, thereby delivering tangible benefits for both the organization and its stakeholders. This approach not only boosts immediate performance but also steadily builds long-term innovation capabilities, even amid uncertainty."
     },
     {
       id: 1,
       title: "Change Management",
-      content: "Leveraging industry-leading practices, SANPEC adeptly manages organizational change to ensure smooth transitions and enhanced adaptability during strategic shifts across all its functions—from R&D and design to manufacturing, operations, supply chain management, and material sourcing."
+      content: "Leveraging industry-leading practices, SANPEC adeptly manages organizational change to ensure smooth transitions and enhanced adaptability during strategic shifts across all its functions—from R&D and design to manufacturing, operations, supply chain management, and material sourcing. By adopting changes faster, more completely, and proficiently, SANPEC remains fully engaged during disruptive periods, understanding the rationale behind each change. This comprehensive approach, which provides the necessary time, tools, and support for everyone involved, minimizes the risks and costs associated with mismanaged change while maximizing returns on project investments through the effective application of change management principles before, during, and after each project."
     },
     {
       id: 2,
       title: "Engineering Excellence at the core",
-      content: "At SANPEC, engineering excellence transcends technical proficiency—it embodies a commitment to creating socio-economic and environmental value that benefits local communities, economies, education, youth, and the planet while addressing America's energy challenges.",
+      content: "At SANPEC, engineering excellence transcends technical proficiency—it embodies a commitment to creating socio-economic and environmental value that benefits local communities, economies, education, youth, and the planet. This approach integrates innovation, people-centric practices, ensuring that every project contributes meaningfully to society while addressing America's energy challenges.",
+      subtitle: "Key Strategies",
       features: [
-        { title: "Innovative Design", desc: "State-of-the-art technologies maximizing efficiency" },
-        { title: "Community Engagement", desc: "Collaborating with local communities" },
-        { title: "Economic Empowerment", desc: "Driving local economic growth" },
-        { title: "Environmental Stewardship", desc: "Sustainable construction practices" },
-        { title: "Grid Resilience", desc: "Infrastructure withstanding disasters" }
+        { title: "Innovative Design and Construction:", desc: "Leveraging state-of-the-art technologies and advanced engineering methodologies to maximize efficiency, enhance reliability, and ensure the longevity of transmission infrastructure. Designs prioritize resilience to withstand both operational demands and environmental" },
+        { title: "Community Engagement:", desc: "Actively collaborating with local communities throughout the project lifecycle to address specific regional needs, foster inclusivity, and secure broad support. This engagement ensures projects deliver tangible benefits while respecting local cultures and priorities." },
+        { title: "Economic Empowerment:", desc: "Driving local economic growth by creating jobs, stimulating industries, and sourcing materials and labor locally whenever possible. SANPEC's projects contribute to building capacity and enhancing livelihoods in the regions they serve." },
+        { title: "Environmental Stewardship:", desc: "Embedding sustainability at every stage of project execution. From using eco-friendly materials to implementing sustainable construction practices, SANPEC minimizes the environmental footprint of its projects while contributing to broader climate goals." },
+        { title: "Enhancing Grid Resilience:", desc: "Developing transmission infrastructure capable of withstanding natural disasters and the impacts of climate change. By improving grid resilience, SANPEC reduces the risk of economic disruptions and ensures energy security and reliability for communities." }
       ]
     },
     {
       id: 3,
-      title: "Faster Inovation, System-wide Change",
-      content: "SANPEC's model represents a groundbreaking shift in how businesses approach innovation. By embracing a decentralized, automated, and connected enterprise structure, SANPEC offers real-time insights into project performance, resource allocation, and integrated project management."
+      title: "Faster Innovation, System-Wide Change",
+      content: "SANPEC's model represents a groundbreaking shift in how businesses approach innovation. By embracing a decentralized, automated, and connected enterprise structure, SANPEC model offers real-time insights into project performance, resource allocation, and integrated project management, enhancing decision-making at every level. In this VUCA environment, SANPEC's model accelerates innovation delivery. The approach combines decentralized decision-making with flexible work schedules, streamlining time-to-market and optimizing resources through automation, AI, and data analytics. This allows businesses to adapt quickly to market changes, improve supplier quality, and foster customer loyalty."
     }
   ];
 
@@ -99,13 +100,11 @@ const EngineeringExcellence = () => {
           
           {/* Left Side - Content & Images */}
           <div className="space-y-6">
-            {/* Badge */}
-           
             {/* Heading */}
             <div>
               <h2 className="text-4xl lg:text-5xl font-black text-[#101631] leading-[1.1] mb-4">
-              Engineering
-                <span className="block text-[#CD091B] mt-1">Excellence</span>
+                Engineering
+                <span className="block text-[#CD091B] mt-1">excellence</span>
               </h2>
               <div className="flex items-center gap-2">
                 <div className="h-1 w-20 bg-[#CD091B] rounded-full"></div>
@@ -116,10 +115,7 @@ const EngineeringExcellence = () => {
 
             {/* Description */}
             <p className="text-gray-600 text-base leading-relaxed">
-            
-At SANPEC, engineering excellence is achieved through a comprehensive, multi-dimensional approach that integrates advanced technology, continuous improvement, and an unwavering commitment to quality. By embedding these principles into every facet of its operations, SANPEC consistently delivers
-projects that surpass industry benchmarks. A culture of continuous improvement is central to SANPEC’s operational philosophy—feedback is actively solicited at all levels, and lessons learned from both
-successes and setbacks are meticulously integrated into future projects.
+              At SANPEC, engineering excellence is achieved through a comprehensive, multi-dimensional approach that integrates advanced technology, continuous improvement, and an unwavering commitment to quality. By embedding these principles into every facet of its operations, SANPEC consistently delivers projects that surpass industry benchmarks. A culture of continuous improvement is central to SANPEC's operational philosophy—feedback is actively solicited at all levels, and lessons learned from both successes and setbacks are meticulously integrated into future projects.
             </p>
 
             {/* Images Grid */}
@@ -148,12 +144,17 @@ successes and setbacks are meticulously integrated into future projects.
                 </div>
               </div>
             </div>
-
-          
           </div>
 
           {/* Right Side - Tabs */}
           <div className="space-y-4">
+            {/* Section Heading */}
+            <div className="mb-6">
+              <h3 className="text-2xl font-bold text-[#101631] leading-tight">
+                SANPEC's dedication to engineering excellence is further reinforced through adherence to internationally recognized management standards:
+              </h3>
+            </div>
+
             {/* Tabs Header */}
             <div className="bg-white/90 backdrop-blur-sm rounded-xl p-2 shadow-lg border border-gray-200">
               <div className="grid grid-cols-4 gap-2">
@@ -197,30 +198,33 @@ successes and setbacks are meticulously integrated into future projects.
 
                 {/* Features for Excellence Tab */}
                 {tabs[activeTab].features && (
-                  <div className="mt-5 pt-5 border-t border-gray-100 grid grid-cols-2 gap-3">
-                    {tabs[activeTab].features.map((feature, idx) => (
-                      <div key={idx} className="group flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-all cursor-pointer">
-                        <div className="w-8 h-8 rounded-lg bg-[#CD091B]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[#CD091B]/20 transition-colors">
-                          <svg 
-                            className="w-4 h-4 text-[#CD091B]" 
-                            fill="none" 
-                            viewBox="0 0 24 24" 
-                            stroke="currentColor" 
-                            strokeWidth="3"
-                          >
-                            <path 
-                              strokeLinecap="round" 
-                              strokeLinejoin="round" 
-                              d="M5 13l4 4L19 7" 
-                            />
-                          </svg>
+                  <div className="mt-5 pt-5 border-t border-gray-100">
+                    <h4 className="text-base font-bold text-[#101631] mb-4">{tabs[activeTab].subtitle}</h4>
+                    <div className="space-y-3">
+                      {tabs[activeTab].features.map((feature, idx) => (
+                        <div key={idx} className="group flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-all cursor-pointer">
+                          <div className="w-8 h-8 rounded-lg bg-[#CD091B]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[#CD091B]/20 transition-colors">
+                            <svg 
+                              className="w-4 h-4 text-[#CD091B]" 
+                              fill="none" 
+                              viewBox="0 0 24 24" 
+                              stroke="currentColor" 
+                              strokeWidth="3"
+                            >
+                              <path 
+                                strokeLinecap="round" 
+                                strokeLinejoin="round" 
+                                d="M5 13l4 4L19 7" 
+                              />
+                            </svg>
+                          </div>
+                          <div>
+                            <div className="text-sm font-bold text-[#101631]">{feature.title}</div>
+                            <div className="text-xs text-gray-500 mt-0.5 leading-relaxed">{feature.desc}</div>
+                          </div>
                         </div>
-                        <div>
-                          <div className="text-sm font-bold text-[#101631]">{feature.title}</div>
-                          <div className="text-xs text-gray-500 mt-0.5">{feature.desc}</div>
-                        </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>
@@ -237,28 +241,6 @@ successes and setbacks are meticulously integrated into future projects.
                 ))}
               </div>
             </div>
-
-            {/* Feature Cards */}
-            {/* <div className="grid grid-cols-2 gap-3">
-              <div className="group bg-white/80 backdrop-blur-sm rounded-lg p-4 border border-gray-200 hover:border-[#CD091B]/30 hover:shadow-lg transition-all duration-300 cursor-pointer">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#CD091B]/10 to-[#CD091B]/5 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                  <svg className="w-5 h-5 text-[#CD091B]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                  </svg>
-                </div>
-                <div className="text-sm font-bold text-[#101631]">Advanced Technology</div>
-                <div className="text-xs text-gray-500 mt-1">Innovation driven solutions</div>
-              </div>
-              <div className="group bg-white/80 backdrop-blur-sm rounded-lg p-4 border border-gray-200 hover:border-[#101631]/30 hover:shadow-lg transition-all duration-300 cursor-pointer">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#101631]/10 to-[#101631]/5 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                  <svg className="w-5 h-5 text-[#101631]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                  </svg>
-                </div>
-                <div className="text-sm font-bold text-[#101631]">Quality Assurance</div>
-                <div className="text-xs text-gray-500 mt-1">ISO certified standards</div>
-              </div>
-            </div> */}
           </div>
 
         </div>

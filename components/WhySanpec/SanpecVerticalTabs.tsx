@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 
- 
 const VerticalTabs = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [openAccordion, setOpenAccordion] = useState(0);
@@ -71,6 +70,7 @@ const VerticalTabs = () => {
           {
             title: "West Fort McMurray (WFMAC) 500kV Project – Alberta, Canada",
             overview: "SANPEC demonstrated engineering excellence and strategic leadership in the West Fort McMurray 500kV project, serving as a key partner to the owners in the design and engineering of a cutting-edge eight-tower lattice family and steel poles. This transformative project was instrumental in strengthening Alberta's power infrastructure to meet growing energy demands with efficiency and reliability.",
+            contributionsTitle: "Key Contributions:",
             contributions: [
               "Comprehensive Design and Engineering Expertise: Conducted in-depth design reviews and engineering assessments, ensuring the project met and exceeded the industry's highest standards.",
               "Full-Scale Tower Testing Leadership: Witnessed and validated rigorous full-scale tower testing, guaranteeing compliance with stringent quality and safety requirements.",
@@ -82,6 +82,7 @@ const VerticalTabs = () => {
           {
             title: "SunZia 500kV HVAC Project – New Mexico and Arizona, USA",
             overview: "SANPEC played a vital role in the transformative SunZia 500kV HVAC project, managing the design and engineering of an advanced seven-tower lattice family and steel poles spanning the states of New Mexico and Arizona. This project is a cornerstone in enhancing grid reliability and renewable energy integration across the region.",
+            contributionsTitle: "key Contributions:",
             contributions: [
               "Design and Engineering Leadership: Conducted detailed design reviews and rigorous engineering validation to ensure project alignment with top-tier industry standards.",
               "Structural Integrity Assurance: Oversaw comprehensive full-scale tower testing, guaranteeing structural integrity and optimal performance under diverse operational conditions.",
@@ -94,6 +95,7 @@ const VerticalTabs = () => {
           {
             title: "EV 2020 Transmission Line: 345kV Project – Wyoming, USA",
             overview: "SANPEC provided critical support to the EV 2020 Transmission Line project, representing the owners in the design and engineering of steel poles for a 345kV transmission line. This project highlights SANPEC's expertise in delivering cost-efficient and reliable infrastructure solutions in challenging environments.",
+            contributionsTitle: "key Achievements:",
             contributions: [
               "Design and Engineering Expertise: Led the design and prototype assembly of H-Frame steel poles, ensuring optimal functionality and adherence to industry standards.",
               "Strategic Vendor Collaboration: Assisted in selecting vendors and negotiating pricing, achieving cost savings without compromising quality.",
@@ -108,29 +110,30 @@ const VerticalTabs = () => {
     },
     {
       id: 3,
-      title: "Building Talent as the Foundation of Progress",
+      title: "Building talent as the foundation of progress",
       content: {
         description: "SANPEC recognizes that a skilled and empowered workforce is the cornerstone of driving innovation, ensuring operational excellence, and achieving sustainable growth in the energy sector. By prioritizing workforce development, SANPEC fosters a culture of continuous learning and professional advancement, equipping individuals with the expertise needed to navigate the complexities of modern energy systems.",
+        subtitle: "Key Strategies",
         strategies: [
           {
-            title: "Comprehensive Training Programs",
+            title: "Comprehensive Training Programs:",
             content: "Offering specialized training in grid management, renewable energy integration, and advanced technologies such as IoT and AI. These programs enhance technical skills, ensuring employees are well-prepared to address emerging challenges and opportunities in the energy sector."
           },
           {
-            title: "Leadership Development Initiatives",
+            title: "Leadership Development Initiatives:",
             content: "Identifying and nurturing future leaders through tailored leadership programs that focus on strategic decision-making, resilience, and innovation. SANPEC empowers its workforce to drive transformative change at all organizational levels."
           },
           {
-            title: "Impact-focused Approach",
+            title: "Impact-focused Approach:",
             content: "Committing to building a 21st century workforce that reflects the communities SANPEC serves. By fostering an environment where diverse perspectives thrive, the company enhances creativity, innovation, and collaboration."
           },
           {
-            title: "Collaborations with Educational Institutions",
-            content: "Partnering with universities, technical schools, and training centers to develop programs that align with industry needs. These collaborations bridge the gap between academic research and practical application, ensuring a steady pipeline of skilled professionals."
+            title: "Collaborations with Educational Institutions:",
+            content: "Partnering with universities, technical schools, and training centers to develop programs that align with industry needs. These collaborations bridge the gap between academic research and practical application, ensuring a steady pipeline of skilled"
           },
           {
-            title: "On-the-Job Learning Opportunities",
-            content: "Providing hands-on learning experiences through real-world projects, mentorship, and cross-functional teams. These opportunities help employees build practical expertise and foster a deeper understanding of the energy sector's evolving landscape."
+            title: "On-the-Job Learning Opportunities:",
+            content: "Providing hands-on learning experiences through real-world projects, mentorship, and cross-functional team These opportunities help employees build practical expertise and foster a deeper understanding of the energy sector's evolving landscape."
           }
         ]
       }
@@ -150,15 +153,15 @@ const VerticalTabs = () => {
               description: "SANPEC actively engages local communities to ensure shared ownership in energy projects.",
               points: [
                 {
-                  title: "Collaboration and Co-Creation",
+                  title: "Collaboration and Co-Creation:",
                   text: "Partnering with local communities to develop energy projects that address specific regional needs while promoting equitable benefits."
                 },
                 {
-                  title: "Stakeholder Engagement",
+                  title: "Stakeholder Engagement:",
                   text: "Working with environmental groups, civil society organizations, and local governments to foster trust, build consensus, and ensure sustainability."
                 },
                 {
-                  title: "Capacity Building",
+                  title: "Capacity Building:",
                   text: "Organizing workshops and training programs for community members, empowering them to contribute meaningfully to project development and oversight."
                 }
               ],
@@ -173,15 +176,15 @@ const VerticalTabs = () => {
               description: "SANPEC understands the interconnected nature of today's global challenges and actively fosters cross-sector partnerships to drive grid reliability, resilience and sustainability.",
               points: [
                 {
-                  title: "Collaborative Projects",
+                  title: "Collaborative Projects:",
                   text: "Engaging in joint initiatives with international organizations, non-profits, and industry leaders to address critical issues such as energy security, climate change, and disaster resilience."
                 },
                 {
-                  title: "Research Partnerships",
+                  title: "Research Partnerships:",
                   text: "Partnering with research institutions to develop advanced testing methodologies, innovative grid designs, and cutting-edge technologies that future-proof energy systems."
                 },
                 {
-                  title: "Network Building",
+                  title: "Network Building:",
                   text: "Creating opportunities for professionals across sectors to collaborate, exchange ideas, and form joint ventures that advance grid innovation."
                 }
               ],
@@ -196,23 +199,23 @@ const VerticalTabs = () => {
               description: "SANPEC recognizes the transformative power of collaboration across industry, academia, and government to address complex energy challenges.",
               points: [
                 {
-                  title: "Industry Collaborations",
+                  title: "Industry Collaborations:",
                   text: "Partnering with leading energy companies, utilities, and technology providers to share knowledge, co-develop solutions, and pioneer advancements in grid reliability and sustainability."
                 },
                 {
-                  title: "Academic Alliances",
+                  title: "Academic Alliances:",
                   text: "Forming strategic alliances with universities and research institutions to bridge the gap between theoretical research and practical application, driving innovative approaches to grid technology and energy systems."
                 },
                 {
-                  title: "Policy Advocacy",
+                  title: "Policy Advocacy:",
                   text: "Collaborating with policymakers to advocate for regulatory frameworks that support grid resilience, renewable energy integration, and sustainable energy practices."
                 },
                 {
-                  title: "Collaborations with Educational Institutions",
+                  title: "Collaborations with Educational Institutions:",
                   text: "Partnering with universities, technical schools, and training centers to develop programs that align with industry needs. These collaborations bridge the gap between academic research and practical application, ensuring a steady pipeline of skilled professionals."
                 },
                 {
-                  title: "On-the-Job Learning Opportunities",
+                  title: "On-the-Job Learning Opportunities:",
                   text: "Providing hands-on learning experiences through real-world projects, mentorship, and cross-functional teams. These opportunities help employees build practical expertise and foster a deeper understanding of the energy sector's evolving landscape."
                 }
               ],
@@ -223,7 +226,8 @@ const VerticalTabs = () => {
       }
     }
   ];
- useEffect(() => {
+
+  useEffect(() => {
     const hash = window.location.hash;
     if (hash === '#strategic-positioning') {
       setTimeout(() => {
@@ -237,8 +241,9 @@ const VerticalTabs = () => {
       }, 100);
     }
   }, []);
+
   return (
-    <div id ="strategic-positioning" className="min-h-screen bg-gray-50 relative overflow-hidden">
+    <div id="strategic-positioning" className="min-h-screen bg-gray-50 relative overflow-hidden">
       
       {/* Grid Pattern */}
       <div className="absolute inset-0 opacity-[0.03]">
@@ -419,7 +424,7 @@ const VerticalTabs = () => {
                         </div>
 
                         <div className="mb-4">
-                          <h4 className="text-base font-semibold text-gray-800 mb-3">Key Contributions:</h4>
+                          <h4 className="text-base font-semibold text-gray-800 mb-3">{project.contributionsTitle}</h4>
                           <div className="space-y-2.5">
                             {project.contributions.map((contribution, cIdx) => (
                               <div key={cIdx} className="flex gap-2.5 items-start">
@@ -427,7 +432,7 @@ const VerticalTabs = () => {
                                   <div className="w-3 h-3 bg-[#CD091B] transform rotate-45"></div>
                                 </div>
                                 <p className="text-gray-700 leading-relaxed text-sm md:text-base text-left">
-                                  {contribution}
+                                  <strong>{contribution.split(':')[0]}:</strong>{contribution.substring(contribution.indexOf(':') + 1)}
                                 </p>
                               </div>
                             ))}
@@ -457,7 +462,7 @@ const VerticalTabs = () => {
                     </p>
                     
                     <h3 className="text-lg md:text-xl font-bold mt-6 mb-4 text-[#101631]">
-                      Key Strategies
+                      {tabs[activeTab].content.subtitle}
                     </h3>
 
                     <div className="space-y-4">

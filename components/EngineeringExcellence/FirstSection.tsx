@@ -98,12 +98,12 @@ const EngineeringExcellencePage = () => {
           <div className="space-y-6 lg:space-y-8">
             {/* Main Heading */}
             <div className="relative">
-              <div className="flex items-center gap-3 mb-4">
+              {/* <div className="flex items-center gap-3 mb-4">
                 <div className="w-8 sm:w-12 h-1 bg-[#CD091B]"></div>
                 <span className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#CD091B]">
                   SANPEC Expertise
                 </span>
-              </div>
+              </div> */}
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                 <span className="block sm:inline text-[#101631]">Engineering</span>{' '}
                 <span className="block sm:inline text-[#CD091B]">Excellence</span>

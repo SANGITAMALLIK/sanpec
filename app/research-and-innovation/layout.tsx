@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { Home, ChevronRight, ChevronDown, ChevronUp } from 'lucide-react';
+import { Home, ChevronRight, ChevronDown, ChevronUp, Menu, X, Download } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 
 interface Post {
@@ -18,11 +18,6 @@ const staticMenuData = [
     title: 'Education and Training',
     url: '/research-and-innovation'
   },
-//   {
-//     id: 'recent',
-//     title: 'Recent',
-//     url: '/electric-power/recent'
-//   }
 ];
 
 export default function ElectricPowerLayout({
@@ -35,6 +30,8 @@ export default function ElectricPowerLayout({
   const [transmissionPosts, setTransmissionPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [isTransmissionOpen, setIsTransmissionOpen] = useState(true);
+  const [isPdfModalOpen, setIsPdfModalOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const fetchTransmissionPosts = async () => {
@@ -68,9 +65,9 @@ export default function ElectricPowerLayout({
   const activePost = transmissionPosts.find(post => post.slug === activePostSlug);
 
   // Check active states - Only one can be active at a time
-  const isTransmissionActive = activePost !== undefined; // Active if we found a post
+  const isTransmissionActive = activePost !== undefined;
   const isRecentActive = pathname.includes('/electric-power/recent');
-  const isEducationActive = !isTransmissionActive && !isRecentActive; // Active only if others are not active
+  const isEducationActive = !isTransmissionActive && !isRecentActive;
 
   // Get breadcrumb title
   const getBreadcrumbTitle = () => {
@@ -80,151 +77,177 @@ export default function ElectricPowerLayout({
     if (activePost) {
       return stripHtml(activePost.title.rendered);
     }
-    return 'Education and Training'; // Default to first tab
+    return 'Education and Training';
+  };
+
+  const handleNavigation = (url: string) => {
+    router.push(url);
+    setIsMobileMenuOpen(false);
   };
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section */}
+      {/* Hero Section with Download Button */}
       <div className="relative overflow-hidden h-64 sm:h-72 md:h-80 lg:h-[300px]">
-           {/* Background Image */}
-           <div className="absolute inset-0">
-             <img 
-               src="/images/research_bg.png" 
-               alt="About Background"
-               className="w-full h-full object-cover"
-             />
-             {/* Enhanced Gradient Overlay */}
-             <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/50"></div>
-             
-             {/* Subtle Pattern Overlay for depth */}
-             <div 
-               className="absolute inset-0 opacity-[0.03]"
-               style={{
-                 backgroundImage: `
-                   repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,.1) 10px, rgba(255,255,255,.1) 20px)
-                 `
-               }}
-             ></div>
-           </div>
-     
-           {/* Content Area */}
-           <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12 h-full flex flex-col justify-end pb-6 sm:pb-8 pt-20 sm:pt-0">
-             {/* Page Title */}
-             <div className="mb-4 sm:mb-5">
-               <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2 sm:mb-3 tracking-tight drop-shadow-lg">
-                 RESEARCH AND INNOVATION
-               </h1>
-               {/* Elegant Underline */}
-               <div className="flex items-center gap-2">
-                 <div className="h-[3px] w-12 sm:w-16 bg-[#DC2626] rounded-full"></div>
-                 <div className="h-[2px] w-6 sm:w-8 bg-[#DC2626]/60 rounded-full"></div>
-                 <div className="h-[2px] w-3 sm:w-4 bg-[#DC2626]/40 rounded-full"></div>
-               </div>
-             </div>
-             
-             {/* Simple Breadcrumb Navigation */}
-             <nav className="flex items-center flex-wrap gap-1.5 sm:gap-2 text-xs sm:text-sm">
-               {/* Home Link with Icon */}
-               <a 
-                 href="/" 
-                 className="group flex items-center gap-1 sm:gap-1.5 text-white/70 hover:text-white transition-colors duration-300"
-               >
-                 <Home className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                 <span className="font-medium">Home</span>
-               </a>
-     
-               {/* Separator */}
-               <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/50" />
-     
-               {/* Current Page (Active) */}
-               <span className="text-[#DC2626] font-semibold">
-                 {getBreadcrumbTitle()}
-               </span>
-             </nav>
-           </div>
-     
-           {/* Bottom Accent Line */}
-           <div className="absolute bottom-0 left-0 w-full h-[2px]">
-             <div className="h-full w-full bg-gradient-to-r from-transparent via-[#DC2626]/80 to-transparent"></div>
-           </div>
-         </div>
+        <div className="absolute inset-0">
+          <img 
+            src="/images/research_bg.png" 
+            alt="About Background"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/50"></div>
+          <div 
+            className="absolute inset-0 opacity-[0.03]"
+            style={{
+              backgroundImage: `
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,.1) 10px, rgba(255,255,255,.1) 20px)
+              `
+            }}
+          ></div>
+        </div>
 
-      {/* MOBILE TAB MENU */}
-      <div className="lg:hidden bg-white border-b border-gray-200 sticky top-0 z-20 shadow-sm">
-        <div className="container mx-auto px-4">
-          <div className="py-3 space-y-2">
-            {/* Education and Training Button */}
-            <button
-              onClick={() => router.push('/research-and-innovation')}
-              className={`
-                w-full px-4 py-2 rounded-lg text-xs font-semibold
-                transition-all duration-300
-                ${isEducationActive
-                  ? 'bg-[#cd091b] text-white shadow-md' 
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }
-              `}
+        {/* Download Button - Bottom Right of Hero */}
+        <div className="absolute bottom-6 right-3 sm:bottom-10 sm:right-6 lg:bottom-12 lg:right-12 z-20">
+          <button
+            onClick={() => setIsPdfModalOpen(true)}
+            className="group flex items-center gap-1 px-2 py-1 sm:gap-2.5 sm:px-6 sm:py-3 bg-white/95 backdrop-blur-sm border border-white/20 sm:border-2 text-gray-900 font-normal sm:font-semibold sm:text-base rounded sm:rounded-lg hover:bg-[#cd091b] hover:text-white hover:border-[#cd091b] transition-all duration-300 shadow-sm sm:shadow-xl hover:shadow-md sm:hover:shadow-2xl"
+            style={{ fontSize: '12px' }}
+          >
+            <Download className="w-3 h-3 sm:w-5 sm:h-5" />
+           <span className="text-[12px] sm:text-base">Download Brochure</span>
+
+          </button>
+        </div>
+  
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12 h-full flex flex-col justify-end pb-6 sm:pb-8 pt-20 sm:pt-0">
+          <div className="mb-4 sm:mb-5">
+            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2 sm:mb-3 tracking-tight drop-shadow-lg">
+              RESEARCH AND INNOVATION
+            </h1>
+            <div className="flex items-center gap-2">
+              <div className="h-[3px] w-12 sm:w-16 bg-[#DC2626] rounded-full"></div>
+              <div className="h-[2px] w-6 sm:w-8 bg-[#DC2626]/60 rounded-full"></div>
+              <div className="h-[2px] w-3 sm:w-4 bg-[#DC2626]/40 rounded-full"></div>
+            </div>
+          </div>
+          
+          <nav className="flex items-center flex-wrap gap-1.5 sm:gap-2 text-xs sm:text-sm">
+            <a 
+              href="/" 
+              className="group flex items-center gap-1 sm:gap-1.5 text-white/70 hover:text-white transition-colors duration-300"
             >
-              Education and Training
-            </button>
+              <Home className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <span className="font-medium">Home</span>
+            </a>
+            <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/50" />
+            <span className="text-[#DC2626] font-semibold">
+              {getBreadcrumbTitle()}
+            </span>
+          </nav>
+        </div>
+  
+        <div className="absolute bottom-0 left-0 w-full h-[2px]">
+          <div className="h-full w-full bg-gradient-to-r from-transparent via-[#DC2626]/80 to-transparent"></div>
+        </div>
+      </div>
 
-            {/* Recent Button */}
-            <button
-              onClick={() => router.push('/electric-power/recent')}
-              className={`
-                w-full px-4 py-2 rounded-lg text-xs font-semibold
-                transition-all duration-300
-                ${isRecentActive
-                  ? 'bg-[#cd091b] text-white shadow-md' 
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }
-              `}
+      {/* MOBILE MENU BUTTON */}
+      <div className="lg:hidden sticky top-0 z-30 bg-white border-b border-gray-200 shadow-sm">
+        <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+          <h3 className="text-sm font-bold text-gray-900">Research Menu</h3>
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+          >
+            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
+      </div>
+
+      {/* MOBILE SIDEBAR OVERLAY */}
+      {isMobileMenuOpen && (
+        <div 
+          className="lg:hidden fixed inset-0 bg-black/50 z-40"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+
+      {/* MOBILE SIDEBAR */}
+      <div className={`
+        lg:hidden fixed top-0 left-0 h-full w-80 bg-white z-50 shadow-2xl
+        transform transition-transform duration-300 ease-in-out
+        ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
+      `}>
+        <div className="h-full overflow-y-auto">
+          {/* Header */}
+          <div className="sticky top-0 bg-[#cd091b] text-white p-4 flex items-center justify-between">
+            <h3 className="text-lg font-bold">Research & Innovation</h3>
+            <button 
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="p-1 hover:bg-white/20 rounded-lg transition-colors"
             >
-              Recent
+              <X className="w-5 h-5" />
             </button>
+          </div>
 
-            {/* Transmission Dropdown */}
+          {/* Menu Items */}
+          <div className="p-4 space-y-2">
+            {/* Education and Training */}
             <div>
-              <button
-                onClick={() => setIsTransmissionOpen(!isTransmissionOpen)}
-                className={`
-                  w-full flex items-center justify-between px-4 py-2 rounded-lg text-xs font-semibold
-                  transition-all duration-300
-                  ${isTransmissionActive
-                    ? 'bg-[#cd091b] text-white shadow-md' 
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                  }
-                `}
-              >
-                <span>Research & Development</span>
-                {isTransmissionOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-              </button>
-              
-              {isTransmissionOpen && (
-                <div className="mt-2 pl-4 space-y-1 max-h-64 overflow-y-auto custom-scrollbar">
-                  {loading ? (
-                    <div className="px-4 py-2 text-xs text-gray-500">Loading...</div>
-                  ) : (
-                    transmissionPosts.map((post) => (
+              <div className="mb-2">
+                <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider px-2">Main</h4>
+              </div>
+              {staticMenuData.map((item) => {
+                const isActive = item.id === 'education' ? isEducationActive : isRecentActive;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => handleNavigation(item.url)}
+                    className={`
+                      w-full text-left px-4 py-3 rounded-lg text-sm font-medium
+                      transition-all duration-200
+                      ${isActive
+                        ? 'bg-[#cd091b] text-white shadow-md'
+                        : 'text-gray-700 hover:bg-gray-100'
+                      }
+                    `}
+                  >
+                    {item.title}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Research & Development Section */}
+            <div className="pt-4 border-t border-gray-200">
+              <div className="mb-2">
+                <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider px-2">Research & Development</h4>
+              </div>
+              <div className="space-y-1">
+                {loading ? (
+                  <div className="px-4 py-3 text-sm text-gray-500">Loading...</div>
+                ) : (
+                  transmissionPosts.map((post) => {
+                    const isActive = pathname.includes(post.slug);
+                    return (
                       <button
                         key={post.id}
-                        onClick={() => router.push(`/research-and-innovation/${post.slug}`)}
+                        onClick={() => handleNavigation(`/research-and-innovation/${post.slug}`)}
                         className={`
-                          w-full text-left px-4 py-2 rounded-md text-xs
+                          w-full text-left px-4 py-3 rounded-lg text-sm font-medium
                           transition-all duration-200
-                          ${pathname.includes(post.slug)
-                            ? 'bg-[#cd091b]/10 text-[#cd091b] font-semibold'
-                            : 'text-gray-600 hover:bg-gray-100'
+                          ${isActive
+                            ? 'bg-[#cd091b] text-white shadow-md'
+                            : 'text-gray-700 hover:bg-gray-100'
                           }
                         `}
                       >
                         {stripHtml(post.title.rendered)}
                       </button>
-                    ))
-                  )}
-                </div>
-              )}
+                    );
+                  })
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -236,22 +259,17 @@ export default function ElectricPowerLayout({
           {/* DESKTOP SIDEBAR - Tower Design */}
           <aside className="hidden lg:block w-80 bg-gradient-to-b from-gray-50 to-white lg:sticky lg:top-0 h-full lg:min-h-screen border-r border-gray-200">
             <nav className="py-8 px-6 relative">
-              {/* Central Tower Pole */}
               <div className="absolute left-8 top-0 bottom-12 w-1 bg-gradient-to-b from-gray-300 via-gray-400 to-gray-300"></div>
               
-              {/* Static Menu Items (Education and Training) */}
+              {/* Static Menu Items */}
               {staticMenuData.map((item) => {
                 const isActive = item.id === 'education' ? isEducationActive : isRecentActive;
                 
                 return (
                   <div key={item.id} className="mb-6 relative">
-                    {/* Connection Point on Tower */}
                     <div className="absolute left-2 top-5 w-3 h-3 bg-white border-2 border-gray-400 rounded-full shadow-md z-20"></div>
-                    
-                    {/* Horizontal Beam */}
                     <div className={`absolute left-5 top-6 w-6 h-0.5 transition-all duration-300 ${isActive ? 'bg-gray-600' : 'bg-gray-400'}`}></div>
 
-                    {/* Menu Item */}
                     <div 
                       onClick={() => router.push(item.url)}
                       className={`
@@ -286,13 +304,9 @@ export default function ElectricPowerLayout({
 
               {/* Transmission Section with Dropdown */}
               <div className="mb-6 relative">
-                {/* Connection Point on Tower */}
                 <div className="absolute left-2 top-5 w-3 h-3 bg-white border-2 border-gray-400 rounded-full shadow-md z-20"></div>
-                
-                {/* Horizontal Beam */}
                 <div className={`absolute left-5 top-6 w-6 h-0.5 transition-all duration-300 ${isTransmissionActive ? 'bg-gray-600' : 'bg-gray-400'}`}></div>
 
-                {/* Transmission Menu Item */}
                 <div 
                   onClick={() => setIsTransmissionOpen(!isTransmissionOpen)}
                   className={`
@@ -318,7 +332,6 @@ export default function ElectricPowerLayout({
                   </div>
                 </div>
 
-                {/* Dropdown List */}
                 {isTransmissionOpen && (
                   <div className="ml-11 mt-2 space-y-1 max-h-96 overflow-y-auto custom-scrollbar">
                     {loading ? (
@@ -348,7 +361,6 @@ export default function ElectricPowerLayout({
                 )}
               </div>
 
-              {/* Tower Base Foundation */}
               <div className="absolute left-4 bottom-0 w-9 h-12 bg-gradient-to-b from-gray-400 to-gray-500 opacity-30" 
                    style={{clipPath: 'polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%)'}}></div>
             </nav>
@@ -366,6 +378,52 @@ export default function ElectricPowerLayout({
           </main>
         </div>
       </div>
+
+      {/* OPTIMIZED PDF Modal Viewer - Instant Load */}
+      {isPdfModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-600/80 backdrop-blur-sm p-4">
+          <div className="relative w-full max-w-7xl h-[95vh] bg-white rounded-xl shadow-2xl overflow-hidden flex flex-col">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between px-6 py-4 bg-gradient-to-r from-[#cd091b] to-red-700 text-white">
+              <div className="flex items-center gap-3">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <h3 className="text-lg font-bold">Research and Innovation</h3>
+              </div>
+              <div className="flex items-center gap-2">
+                <a
+                  href="/images/pdf/Research and Innovation.pdf"
+                  download
+                  className="px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg text-sm font-medium transition-colors duration-200 flex items-center gap-2"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  Download Pdf
+                </a>
+                <button
+                  onClick={() => setIsPdfModalOpen(false)}
+                  className="w-10 h-10 flex items-center justify-center bg-white/20 hover:bg-white/30 rounded-lg transition-colors duration-200"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            {/* OPTIMIZED PDF Viewer */}
+            <div className="flex-1 overflow-auto bg-gray-100">
+              <iframe
+                src="/images/pdf/Research and Innovation.pdf"
+                className="w-full h-full"
+                title="Research and Innovation PDF"
+              />
+            </div>
+          </div>
+        </div>
+      )}
 
       <style jsx global>{`
         /* Custom Scrollbar Styling */

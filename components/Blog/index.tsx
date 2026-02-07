@@ -131,7 +131,7 @@ const BlogCarousel = () => {
                   </div>
 
                   <p className="text-white/90 text-lg md:text-xl leading-relaxed max-w-md">
-                    Discover insights on transmission & distribution excellence, infrastructure innovation, and industry developments.
+                    As America takes meaningful action to rebuild critical infrastructure, SANPEC stands resolute in its unwavering commitment to designing and delivering innovative, resilient, high-quality transmission and distribution (T&D) solutions during crises and change.
                   </p>
                 </div>
               </div>
