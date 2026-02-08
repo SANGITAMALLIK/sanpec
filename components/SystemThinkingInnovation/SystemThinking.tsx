@@ -98,7 +98,7 @@ export default function InnovationTabs() {
     <div className="min-h-screen bg-white">
       {/* Back Button - Visible on all screens */}
       <div className="bg-white border-b border-gray-200 sticky top-0 z-30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="max-w-7_5xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <Link 
             href="/why-sanpec"
             className="inline-flex items-center gap-2 text-red-600 hover:text-red-700 font-semibold transition-colors duration-200 group"
@@ -129,160 +129,190 @@ export default function InnovationTabs() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7_5xl mx-auto">
         <div className="flex flex-col lg:flex-row">
-          <aside className="hidden lg:block w-80 bg-gray-50 lg:sticky lg:top-[57px] h-full lg:min-h-screen border-r border-gray-200">
+          {/* DESKTOP SIDEBAR - Tower Design matching first code */}
+          <aside className="hidden lg:block w-80 bg-gradient-to-b from-gray-50 to-white lg:sticky lg:top-[57px] h-full lg:min-h-screen border-r border-gray-200">
             <nav className="py-8 px-6 relative">
-              <div className="absolute left-8 top-0 bottom-0 w-1 bg-gray-400"></div>
+              {/* Central Tower Pole */}
+              <div className="absolute left-8 top-0 bottom-12 w-1 bg-gradient-to-b from-gray-300 via-gray-400 to-gray-300"></div>
+              
               {tabsData.map((tab) => {
                 const isExpanded = expandedTab === tab.id;
                 return (
                   <div key={tab.id} className="mb-6 relative">
+                    {/* Connection Point on Tower */}
                     <div className="absolute left-2 top-5 w-3 h-3 bg-white border-2 border-gray-400 rounded-full shadow-md z-20"></div>
+                    
+                    {/* Horizontal Beam */}
                     <div className={`absolute left-5 top-6 w-6 h-0.5 transition-all duration-300 ${isExpanded ? 'bg-gray-600' : 'bg-gray-400'}`}></div>
+
+                    {/* Menu Item */}
                     <div 
                       onClick={() => setExpandedTab(tab.id)}
-                      className={`relative ml-11 flex items-center justify-between px-4 py-3.5 cursor-pointer transition-all duration-300 rounded-lg border-2 ${isExpanded ? 'border-gray-300 text-gray-900 shadow-xl bg-gray-100' : 'bg-white border-gray-300 text-gray-700 hover:border-gray-400 hover:shadow-lg'}`}
+                      className={`
+                        relative ml-11 group flex items-center justify-between px-4 py-3.5 cursor-pointer
+                        transition-all duration-300 ease-out rounded-lg border-2
+                        ${isExpanded
+                          ? 'border-gray-300 text-gray-900 shadow-xl' 
+                          : 'bg-white border-gray-300 text-gray-700 hover:border-gray-400 hover:shadow-lg'
+                        }
+                      `}
+                      style={isExpanded ? {backgroundColor: '#F3F3F3'} : {}}
                     >
                       <span className="text-sm font-semibold flex-1 leading-tight">{tab.title}</span>
-                      <span className={`transition-all duration-300 flex-shrink-0 ml-2 ${isExpanded ? 'text-gray-900' : 'text-gray-400'}`}>
-                        <ChevronDown size={18} className={`transition-transform duration-300 ${isExpanded ? '' : '-rotate-90'}`} />
-                      </span>
+                      
+                      {isExpanded && (
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 bg-gray-800 rounded-full animate-pulse"></div>
+                          <div className="w-2 h-2 bg-gray-600 rounded-full animate-ping absolute"></div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 );
               })}
+
+              {/* Tower Base Foundation */}
+              <div className="absolute left-4 bottom-0 w-9 h-12 bg-gradient-to-b from-gray-400 to-gray-500 opacity-30" 
+                   style={{clipPath: 'polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%)'}}></div>
             </nav>
           </aside>
 
-          <main className="flex-1 bg-white min-h-screen">
-            <div className="p-6 sm:p-8 lg:p-12">
-              {activeTabData && (
-                <div className="opacity-0 animate-fadeIn">
-                  {/* Tab 1: Single Image First, Then Content */}
-                  {expandedTab === 'tab1' && (
-                    <div className="space-y-8 md:space-y-12">
-                      <div className="rounded-xl md:rounded-2xl overflow-hidden">
-                        <img src={activeTabData.image} alt="Transmission Engineering" className="w-full h-auto" />
-                      </div>
-                      <div className="bg-gray-50 border-l-4 border-red-600 p-6 md:p-8 rounded-r-xl">
-                        <p className="text-black text-base md:text-lg leading-relaxed">{activeTabData.paragraphs[0]}</p>
-                      </div>
-                      <div className="space-y-6">
-                        {activeTabData.paragraphs.slice(1).map((para, idx) => (
-                          <div key={idx} className="relative bg-white rounded-xl p-5 md:p-6 shadow-lg border border-gray-200">
-                            <div className="absolute -left-3 md:-left-4 top-5 md:top-6 w-8 h-8 md:w-10 md:h-10 bg-red-600 rounded-xl flex items-center justify-center shadow-lg">
-                              <span className="text-white font-bold text-base md:text-lg">{idx + 1}</span>
-                            </div>
-                            <div className="ml-6 md:ml-8">
-                              <p className="text-black leading-relaxed text-sm md:text-base">{para}</p>
-                            </div>
+          <main className="flex-1 px-4 pt-4 pb-4 sm:px-6 sm:pt-6 sm:pb-6 lg:pl-8 lg:pt-8 lg:pb-8 bg-white min-h-screen">
+            <div className="bg-white rounded-2xl shadow-sm border overflow-hidden">
+              <div className="h-0.5 bg-gray-300" />
+              <div className="p-0 sm:p-0 lg:p-0">
+                <div className="p-6 sm:p-8 lg:p-12">
+                  {activeTabData && (
+                    <div className="opacity-0 animate-fadeIn">
+                      {/* Tab 1: Single Image First, Then Content */}
+                      {expandedTab === 'tab1' && (
+                        <div className="space-y-8 md:space-y-12">
+                          <div className="rounded-xl md:rounded-2xl overflow-hidden">
+                            <img src={activeTabData.image} alt="Transmission Engineering" className="w-full h-auto" />
                           </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Tab 2: Keep Exactly As Is - Perfect! */}
-                  {expandedTab === 'tab2' && (
-                    <div className="space-y-8 md:space-y-12">
-                      <div className="rounded-xl md:rounded-2xl overflow-hidden">
-                        <img src={activeTabData.headerImage} alt="Header" className="w-full h-auto" />
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-                        {activeTabData.images?.map((img, idx) => (
-                          <div key={idx} className="rounded-lg md:rounded-xl overflow-hidden shadow-lg md:shadow-xl">
-                            <img src={img} alt={`Climate ${idx + 1}`} className="w-full h-auto" />
+                          <div className="bg-gray-50 border-l-4 border-red-600 p-6 md:p-8 rounded-r-xl">
+                            <p className="text-black text-base md:text-lg leading-relaxed">{activeTabData.paragraphs[0]}</p>
                           </div>
-                        ))}
-                      </div>
-                      <div className="bg-gray-50 border-l-4 border-red-600 p-6 md:p-8 rounded-r-xl shadow-lg">
-                        <p className="text-black text-base md:text-lg leading-relaxed">{activeTabData.introText}</p>
-                      </div>
-                      <div className="space-y-5 md:space-y-6">
-                        {activeTabData.listItems?.map((item, idx) => (
-                          <div key={idx} className="relative bg-white rounded-xl p-5 md:p-6 shadow-lg border border-gray-200">
-                            <div className="absolute -left-3 md:-left-4 top-5 md:top-6 w-8 h-8 md:w-10 md:h-10 bg-red-600 rounded-xl flex items-center justify-center shadow-lg">
-                              <span className="text-white font-bold text-base md:text-lg">{idx + 1}</span>
-                            </div>
-                            <div className="ml-6 md:ml-8">
-                              <h3 className="text-lg md:text-xl font-bold text-black mb-2 md:mb-3">{item.title}</h3>
-                              <p className="text-black leading-relaxed text-sm md:text-base">{item.description}</p>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Tab 3: 5 Images Grid First, Then Full Width Content */}
-                  {expandedTab === 'tab3' && (
-                    <div className="space-y-8 md:space-y-12">
-                      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-                        {activeTabData.images?.map((img, idx) => (
-                          <div 
-                            key={idx} 
-                            className={`rounded-lg md:rounded-xl overflow-hidden ${idx === 4 ? 'col-span-2 md:col-span-1' : ''}`}
-                          >
-                            <img src={img} alt={`Project ${idx + 1}`} className="w-full h-full object-cover" />
-                          </div>
-                        ))}
-                      </div>
-                      <div className="bg-gray-50 border-l-4 border-red-600 p-6 md:p-8 rounded-r-xl shadow-lg">
-                        <p className="text-black text-base md:text-lg leading-relaxed">{activeTabData.paragraphs[0]}</p>
-                      </div>
-                      <div className="space-y-6">
-                        {activeTabData.paragraphs.slice(1).map((para, idx) => (
-                          <div key={idx} className="relative bg-white rounded-xl p-5 md:p-6 shadow-lg border border-gray-200">
-                            <div className="absolute -left-3 md:-left-4 top-5 md:top-6 w-8 h-8 md:w-10 md:h-10 bg-red-600 rounded-xl flex items-center justify-center shadow-lg">
-                              <span className="text-white font-bold text-base md:text-lg">{idx + 1}</span>
-                            </div>
-                            <div className="ml-6 md:ml-8">
-                              <p className="text-black leading-relaxed text-sm md:text-base">{para}</p>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Tab 4: 2 Images Grid First, Then Full Width Content */}
-                  {expandedTab === 'tab4' && (
-                    <div className="space-y-8 md:space-y-12">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-                        {activeTabData.images?.map((img, idx) => (
-                          <div key={idx} className="rounded-xl md:rounded-2xl overflow-hidden">
-                            <img src={img} alt={`People ${idx + 1}`} className="w-full h-auto" />
-                          </div>
-                        ))}
-                      </div>
-                      <div className="bg-red-50 border-l-4 border-red-600 p-6 md:p-8 rounded-r-xl shadow-lg">
-                        <p className="text-black text-base md:text-lg leading-relaxed">{activeTabData.introText}</p>
-                      </div>
-                      <div className="space-y-5 md:space-y-6">
-                        {activeTabData.listItems?.map((item, idx) => (
-                          <div key={idx} className="bg-white rounded-xl p-5 md:p-6 shadow-lg border border-gray-200">
-                            <div className="flex items-start gap-3 md:gap-4">
-                              <div className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 bg-red-600 rounded-lg flex items-center justify-center shadow-lg">
-                                <span className="text-white font-bold text-lg md:text-xl">→</span>
+                          <div className="space-y-6">
+                            {activeTabData.paragraphs.slice(1).map((para, idx) => (
+                              <div key={idx} className="relative bg-white rounded-xl p-5 md:p-6 shadow-lg border border-gray-200">
+                                <div className="absolute -left-3 md:-left-4 top-5 md:top-6 w-8 h-8 md:w-10 md:h-10 bg-red-600 rounded-xl flex items-center justify-center shadow-lg">
+                                  <span className="text-white font-bold text-base md:text-lg">{idx + 1}</span>
+                                </div>
+                                <div className="ml-6 md:ml-8">
+                                  <p className="text-black leading-relaxed text-sm md:text-base">{para}</p>
+                                </div>
                               </div>
-                              <div className="flex-1">
-                                <h3 className="text-base md:text-lg font-bold text-black mb-2">{item.title}</h3>
-                                <p className="text-black leading-relaxed text-sm md:text-base">{item.description}</p>
-                              </div>
-                            </div>
+                            ))}
                           </div>
-                        ))}
-                      </div>
-                      {activeTabData.footer && (
-                        <div className="p-6 md:p-8 bg-gray-900 rounded-xl md:rounded-2xl shadow-2xl">
-                          <p className="text-white text-sm md:text-base leading-relaxed">{activeTabData.footer}</p>
+                        </div>
+                      )}
+
+                      {/* Tab 2: Keep Exactly As Is - Perfect! */}
+                      {expandedTab === 'tab2' && (
+                        <div className="space-y-8 md:space-y-12">
+                          <div className="rounded-xl md:rounded-2xl overflow-hidden">
+                            <img src={activeTabData.headerImage} alt="Header" className="w-full h-auto" />
+                          </div>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                            {activeTabData.images?.map((img, idx) => (
+                              <div key={idx} className="rounded-lg md:rounded-xl overflow-hidden shadow-lg md:shadow-xl">
+                                <img src={img} alt={`Climate ${idx + 1}`} className="w-full h-auto" />
+                              </div>
+                            ))}
+                          </div>
+                          <div className="bg-gray-50 border-l-4 border-red-600 p-6 md:p-8 rounded-r-xl shadow-lg">
+                            <p className="text-black text-base md:text-lg leading-relaxed">{activeTabData.introText}</p>
+                          </div>
+                          <div className="space-y-5 md:space-y-6">
+                            {activeTabData.listItems?.map((item, idx) => (
+                              <div key={idx} className="relative bg-white rounded-xl p-5 md:p-6 shadow-lg border border-gray-200">
+                                <div className="absolute -left-3 md:-left-4 top-5 md:top-6 w-8 h-8 md:w-10 md:h-10 bg-red-600 rounded-xl flex items-center justify-center shadow-lg">
+                                  <span className="text-white font-bold text-base md:text-lg">{idx + 1}</span>
+                                </div>
+                                <div className="ml-6 md:ml-8">
+                                  <h3 className="text-lg md:text-xl font-bold text-black mb-2 md:mb-3">{item.title}</h3>
+                                  <p className="text-black leading-relaxed text-sm md:text-base">{item.description}</p>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Tab 3: 5 Images Grid First, Then Full Width Content */}
+                      {expandedTab === 'tab3' && (
+                        <div className="space-y-8 md:space-y-12">
+                          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+                            {activeTabData.images?.map((img, idx) => (
+                              <div 
+                                key={idx} 
+                                className={`rounded-lg md:rounded-xl overflow-hidden ${idx === 4 ? 'col-span-2 md:col-span-1' : ''}`}
+                              >
+                                <img src={img} alt={`Project ${idx + 1}`} className="w-full h-full object-cover" />
+                              </div>
+                            ))}
+                          </div>
+                          <div className="bg-gray-50 border-l-4 border-red-600 p-6 md:p-8 rounded-r-xl shadow-lg">
+                            <p className="text-black text-base md:text-lg leading-relaxed">{activeTabData.paragraphs[0]}</p>
+                          </div>
+                          <div className="space-y-6">
+                            {activeTabData.paragraphs.slice(1).map((para, idx) => (
+                              <div key={idx} className="relative bg-white rounded-xl p-5 md:p-6 shadow-lg border border-gray-200">
+                                <div className="absolute -left-3 md:-left-4 top-5 md:top-6 w-8 h-8 md:w-10 md:h-10 bg-red-600 rounded-xl flex items-center justify-center shadow-lg">
+                                  <span className="text-white font-bold text-base md:text-lg">{idx + 1}</span>
+                                </div>
+                                <div className="ml-6 md:ml-8">
+                                  <p className="text-black leading-relaxed text-sm md:text-base">{para}</p>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Tab 4: 2 Images Grid First, Then Full Width Content */}
+                      {expandedTab === 'tab4' && (
+                        <div className="space-y-8 md:space-y-12">
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                            {activeTabData.images?.map((img, idx) => (
+                              <div key={idx} className="rounded-xl md:rounded-2xl overflow-hidden">
+                                <img src={img} alt={`People ${idx + 1}`} className="w-full h-auto" />
+                              </div>
+                            ))}
+                          </div>
+                          <div className="bg-red-50 border-l-4 border-red-600 p-6 md:p-8 rounded-r-xl shadow-lg">
+                            <p className="text-black text-base md:text-lg leading-relaxed">{activeTabData.introText}</p>
+                          </div>
+                          <div className="space-y-5 md:space-y-6">
+                            {activeTabData.listItems?.map((item, idx) => (
+                              <div key={idx} className="bg-white rounded-xl p-5 md:p-6 shadow-lg border border-gray-200">
+                                <div className="flex items-start gap-3 md:gap-4">
+                                  <div className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 bg-red-600 rounded-lg flex items-center justify-center shadow-lg">
+                                    <span className="text-white font-bold text-lg md:text-xl">→</span>
+                                  </div>
+                                  <div className="flex-1">
+                                    <h3 className="text-base md:text-lg font-bold text-black mb-2">{item.title}</h3>
+                                    <p className="text-black leading-relaxed text-sm md:text-base">{item.description}</p>
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                          {activeTabData.footer && (
+                            <div className="p-6 md:p-8 bg-gray-900 rounded-xl md:rounded-2xl shadow-2xl">
+                              <p className="text-white text-sm md:text-base leading-relaxed">{activeTabData.footer}</p>
+                            </div>
+                          )}
                         </div>
                       )}
                     </div>
                   )}
                 </div>
-              )}
+              </div>
+              <div className="h-2 bg-gray-100" />
             </div>
           </main>
         </div>

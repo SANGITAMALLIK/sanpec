@@ -1,10 +1,10 @@
 'use client';
 import React, { useState } from 'react';
-import { ChevronDown, Plus, Minus } from 'lucide-react';
+import { ChevronDown, Plus, Minus, ExternalLink } from 'lucide-react';
 
 const TabGallery = () => {
   const [activeTab, setActiveTab] = useState(0);
-  const [openAccordion, setOpenAccordion] = useState(null);
+  const [openAccordion, setOpenAccordion] = useState(0);
 
   const tabs = [
     {
@@ -13,6 +13,7 @@ const TabGallery = () => {
       content: {
         heading: "Engineering Excellence",
         description: "At SANPEC, engineering excellence is achieved through a comprehensive, multi-dimensional approach that integrates advanced technology, continuous improvement, and an unwavering commitment to quality. By embedding these principles into every facet of its operations, SANPEC consistently delivers projects that surpass industry benchmarks. A culture of continuous improvement is central to SANPEC's operational philosophy—feedback is actively solicited at all levels, and lessons learned from both successes and setbacks are meticulously integrated into future projects.",
+        image: "https://sanpec-excellence.com/wp-content/uploads/2025/06/Change-Management.png",
         subtitle: "SANPEC's dedication to engineering excellence is further reinforced through adherence to internationally recognized management standards:",
         accordions: [
           {
@@ -25,7 +26,7 @@ const TabGallery = () => {
           },
           {
             title: "Change Management",
-            content: "SANPEC adeptly manages organizational change to ensure smooth transitions and enhanced adaptability during strategic shifts across all its functions—from R&D and design to manufacturing, operations, supply chain management, and material sourcing. By adopting changes faster, more completely, and proficiently, SANPEC remains fully engaged during disruptive periods, understanding the rationale behind each change. This comprehensive approach, which provides the necessary time, tools, and support for everyone involved, minimizes the risks and costs associated with mismanaged change while maximizing returns on project investments through the effective application of change management principles before, during, and after each project. Apart from this recognized management standards, we keep risk management at the core of everything we do. From engineering and manufacturing to new technology adoption and organizational change, we proactively identify, assess, and mitigate risks to maintain reliability and efficiency."
+            content: "SANPEC adeptly manages organizational change to ensure smooth transitions and enhanced adaptability during strategic shifts across all its functions—from R&D and design to manufacturing, operations, supply chain management, and material sourcing. By adopting changes faster, more completely, and proficiently, SANPEC remains fully engaged during disruptive periods, understanding the rationale behind each change. This comprehensive approach, which provides the necessary time, tools, and support for everyone involved, minimizes the risks and costs associated with mismanaged change while maximizing returns on project investments through the effective application of change management principles before, during, and after each project.\n\nApart from this recognized management standards, we keep risk management at the core of everything we do. From engineering and manufacturing to new technology adoption and organizational change, we proactively identify, assess, and mitigate risks to maintain reliability and efficiency."
           }
         ],
         readMoreLink: "/engineering-excellence/"
@@ -36,7 +37,7 @@ const TabGallery = () => {
       title: "Research and Development",
       content: {
         heading: "Research and Development",
-        description: "At SANPEC, research and development (R&D) form the backbone of innovation, driving the modernization of transmission and distribution infrastructure. SANPEC's dedicated R&D teams go beyond conventional innovation labs, relentlessly exploring breakthrough technologies and methodologies that enhance grid resilience, efficiency, and sustainability. Through strategic collaborations with leading global research institutions, SANPEC ensures that every advancement is grounded in rigorous scientific research and industry's best practices. The company's R&D initiatives span multiple critical areas, including:",
+        description: "At SANPEC, research and development (R&D) form the backbone of innovation, driving the modernization of transmission and distribution infrastructure. SANPEC's dedicated R&D teams go beyond conventional innovation labs, relentlessly exploring breakthrough technologies and methodologies that enhance grid resilience, efficiency, and sustainability.\n\nThrough strategic collaborations with leading global research institutions, SANPEC ensures that every advancement is grounded in rigorous scientific research and industry's best practices. The company's R&D initiatives span multiple critical areas, including:",
         accordions: [
           {
             title: "Advanced Materials Development",
@@ -67,6 +68,7 @@ const TabGallery = () => {
       content: {
         heading: "Digital Transformation",
         description: "Digital transformation is a cornerstone of SANPEC's strategy for modernizing its transmission and distribution grid infrastructure. By integrating advanced digital technologies, SANPEC enhances efficiency, reliability, and operational intelligence, ensuring a future-proof energy grid. Key initiatives include:",
+        image: "https://sanpec-excellence.com/wp-content/uploads/2025/02/energy-system-150x150.png",
         accordions: [
           {
             title: "Communication, monitoring and Control",
@@ -98,6 +100,8 @@ const TabGallery = () => {
           "Advancing global best practices through active participation in knowledge-sharing platforms.",
           "Developing an ecosystem-based approach to workforce planning, ensuring energy professionals are prepared to address sustainability challenges at both local and global scales."
         ],
+        image: "https://sanpec-excellence.com/wp-content/uploads/2025/02/team-1-150x150.png",
+        rightImage: "https://sanpec-excellence.com/wp-content/uploads/elementor/thumbs/top-view-business-people-sitting-table-discussing-something-while-working-office-business-meeting-working-table-top-view-no-visible-faces-ai-generated-scaled-r1qg01hytj4pqttaef3iyd6mlpnvy0cetpoj1g0zvw.jpg",
         subtitle: "Skill Building and Knowledge Transfer",
         subDescription: "To remain at the forefront of innovation, SANPEC emphasizes continuous learning and knowledge dissemination, bridging gaps between academia, industry, government, and communities. The company fosters a culture of collaboration and adaptability by providing cutting-edge skill development and sharing industry insights across its ecosystem.",
         skills: [
@@ -115,6 +119,7 @@ const TabGallery = () => {
       content: {
         heading: "Leadership and Governance Strategy",
         description: "SANPEC views leadership and governance as fundamental enablers of its long-term impact on society and the economy. By operating with a systems perspective, the organization ensures that every decision and strategy is aligned across all functions, reinforcing efficiency, accountability, and sustainability while adapting to an evolving industry landscape.",
+        image: "https://sanpec-excellence.com/wp-content/uploads/2025/03/sanpec-governance.png",
         accordions: [
           {
             title: "Three-Tier Governance Structure",
@@ -229,7 +234,7 @@ const TabGallery = () => {
                 key={tab.id}
                 onClick={() => {
                   setActiveTab(index);
-                  setOpenAccordion(null);
+                  setOpenAccordion(0);
                 }}
                 className={`group relative flex items-center gap-2 md:gap-3 px-4 md:px-6 py-3 md:py-3.5 rounded-xl font-bold whitespace-nowrap transition-all duration-300 border-2 ${
                   activeTab === index
@@ -282,29 +287,49 @@ const TabGallery = () => {
                     {tabs[activeTab].content.bullets.map((bullet, idx) => (
                       <div key={idx} className="flex gap-3 md:gap-4 items-start">
                         <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-[#D62B2B] mt-1.5 md:mt-2 flex-shrink-0"></div>
-                        <span className="text-gray-700 text-sm md:text-base leading-relaxed">{bullet}</span>
+                        <span className="text-gray-700 text-sm md:text-base leading-relaxed"><strong>{bullet.split(':')[0]}:</strong> {bullet.split(':').slice(1).join(':')}</span>
                       </div>
                     ))}
                   </div>
+
+                  {tabs[activeTab].content.image && (
+                    <div className="flex justify-center">
+                      <img 
+                        src={tabs[activeTab].content.image} 
+                        alt="Workforce Development"
+                        className="w-[150px] h-[150px] object-contain"
+                      />
+                    </div>
+                  )}
                 </div>
 
                 {/* Right Column */}
                 <div className="space-y-5 md:space-y-6">
+                  {tabs[activeTab].content.rightImage && (
+                    <div className="rounded-xl md:rounded-2xl overflow-hidden">
+                      <img 
+                        src={tabs[activeTab].content.rightImage} 
+                        alt="Workforce Development Team"
+                        className="w-full h-auto"
+                      />
+                    </div>
+                  )}
+                  
                   <h3 className="text-2xl md:text-3xl font-black text-[#0F152F]">
                     {tabs[activeTab].content.subtitle}
                   </h3>
-                  <div className="bg-gray-50 p-5 md:p-7 rounded-xl md:rounded-2xl border-2 border-gray-200 shadow-sm mb-4">
+                  
+                  <div className="bg-gray-50 p-5 md:p-7 rounded-xl md:rounded-2xl border-2 border-gray-200 shadow-sm">
                     <p className="text-gray-700 text-sm md:text-base leading-relaxed text-left">
                       {tabs[activeTab].content.subDescription}
                     </p>
                   </div>
+                  
                   <div className="grid grid-cols-1 gap-2.5 md:gap-3">
                     {tabs[activeTab].content.skills.map((skill, idx) => (
                       <div key={idx} className="flex gap-3 md:gap-4 items-start bg-white p-3 md:p-4 rounded-lg md:rounded-xl border-2 border-gray-200 hover:border-[#D62B2B] transition-all group shadow-sm">
-                        <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-[#D62B2B] flex items-center justify-center text-white text-sm md:text-base font-bold flex-shrink-0">
-                          {idx + 1}
-                        </div>
-                        <span className="text-gray-700 text-sm md:text-base font-medium text-left">{skill}</span>
+                        <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-[#D62B2B] mt-1.5 md:mt-2 flex-shrink-0"></div>
+                        <span className="text-gray-700 text-sm md:text-base text-left">{skill}</span>
                       </div>
                     ))}
                   </div>
@@ -315,10 +340,20 @@ const TabGallery = () => {
                 {/* Left Column */}
                 <div className="space-y-5 md:space-y-6">
                   <div className="bg-gray-50 p-5 md:p-7 rounded-xl md:rounded-2xl border-2 border-gray-200 shadow-sm">
-                    <p className="text-gray-700 text-sm md:text-base leading-relaxed text-left">
+                    <p className="text-gray-700 text-sm md:text-base leading-relaxed text-left whitespace-pre-line">
                       {tabs[activeTab].content.description}
                     </p>
                   </div>
+
+                  {tabs[activeTab].content.image && (
+                    <div className="flex justify-center">
+                      <img 
+                        src={tabs[activeTab].content.image} 
+                        alt={tabs[activeTab].content.heading}
+                        className="w-auto h-auto max-w-full"
+                      />
+                    </div>
+                  )}
                 </div>
 
                 {/* Right Column - Accordions */}
@@ -326,7 +361,7 @@ const TabGallery = () => {
                   {/* Subtitle above accordions */}
                   {tabs[activeTab].content.subtitle && (
                     <div className="bg-gray-50 p-5 md:p-7 rounded-xl md:rounded-2xl border-2 border-gray-200 shadow-sm mb-4">
-                      <h3 className="text-xl md:text-2xl font-black text-[#0F152F] text-left leading-tight">
+                      <h3 className="text-base md:text-lg font-bold text-[#0F152F] text-left leading-tight">
                         {tabs[activeTab].content.subtitle}
                       </h3>
                     </div>
@@ -345,9 +380,6 @@ const TabGallery = () => {
                           className="w-full p-4 md:p-5 font-bold text-[#0F152F] text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
                         >
                           <span className="flex items-center gap-2.5 md:gap-3 flex-1 pr-3">
-                            <span className="w-8 h-8 md:w-9 md:h-9 rounded-lg bg-[#D62B2B] flex items-center justify-center text-white text-xs md:text-sm font-black flex-shrink-0">
-                              {idx + 1}
-                            </span>
                             <span className="text-sm md:text-base text-left">{accordion.title}</span>
                           </span>
                           <div className="flex-shrink-0">
@@ -358,11 +390,11 @@ const TabGallery = () => {
                             )}
                           </div>
                         </button>
-                        <div className={`transition-all duration-300 ${isOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
+                        <div className={`transition-all duration-300 ${isOpen ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
                           <div className="p-4 md:p-6 bg-gray-50 border-t-2 border-gray-200">
                             {/* Check if content has structured data (bullets/paragraphs) or simple string */}
                             {typeof accordion.content === 'string' ? (
-                              <p className="text-gray-700 text-sm md:text-base leading-relaxed text-left">{accordion.content}</p>
+                              <p className="text-gray-700 text-sm md:text-base leading-relaxed text-left whitespace-pre-line">{accordion.content}</p>
                             ) : (
                               <div className="space-y-4">
                                 {/* Intro text if exists */}
@@ -378,7 +410,7 @@ const TabGallery = () => {
                                     {accordion.content.bullets.map((bullet, bulletIdx) => (
                                       <div key={bulletIdx} className="flex gap-3 items-start">
                                         <div className="w-2 h-2 rounded-full bg-[#D62B2B] mt-2 flex-shrink-0"></div>
-                                        <div>
+                                        <div className="text-sm md:text-base text-left">
                                           <span className="font-bold text-gray-900">{bullet.title}</span>
                                           <span className="text-gray-700"> {bullet.text}</span>
                                         </div>
@@ -413,12 +445,10 @@ const TabGallery = () => {
               <div className="mt-8 md:mt-12 text-center">
                 <a
                   href={tabs[activeTab].content.readMoreLink}
-                  className="inline-flex items-center gap-3 md:gap-4 bg-[#D62B2B] text-white px-8 md:px-12 py-4 md:py-5 rounded-full font-bold text-base md:text-lg hover:bg-[#0F152F] shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                  className="inline-flex items-center gap-3 bg-[#D62B2B] text-white px-6 md:px-8 py-3 md:py-4 rounded-lg font-bold text-sm md:text-base hover:bg-[#0F152F] shadow-lg hover:shadow-xl transition-all duration-300"
                 >
-                  <span>Explore More</span>
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
+                  <ExternalLink className="w-4 h-4 md:w-5 md:h-5" />
+                  <span>Read More</span>
                 </a>
               </div>
             )}
