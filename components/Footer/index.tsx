@@ -5,7 +5,7 @@ import Link from "next/link"; // ✅ Next.js Link import
 const PremiumFooter = () => {
   const links = [
     { name: "Home", href: "/", icon: "🏠" },
-    { name: "Electric Power", href: "/electric-power/transmisson/design-and-engineering", icon: "⚡" },
+    { name: "Electric Power", href: "/electric-power/transmission-and-distribution/design-and-engineering", icon: "⚡" },
     { name: "Projects", href: "/Projects", icon: "📊" },
     { name: "Why SANPEC", href: "/why-sanpec", icon: "🎯" },
     { name: "Research", href: "/research", icon: "🔬" }

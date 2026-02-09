@@ -11,22 +11,22 @@ const menuData = [
       { 
         id: 'design-engineering', 
         title: 'Design and engineering',
-        url: '/electric-power/transmisson/design-and-engineering'
+        url: '/electric-power/transmission-and-distribution/design-and-engineering'
       },
       { 
         id: 'tower-testing', 
         title: 'Tower Testing',
-        url: '/electric-power/transmisson/tower-testing'
+        url: '/electric-power/transmission-and-distribution/tower-testing'
       },
       { 
         id: 'electrical-testing', 
         title: 'Electrical Testing',
-        url: '/electric-power/transmisson/electrical-testing'
+        url: '/electric-power/transmission-and-distribution/electrical-testing'
       },
       { 
         id: 'type-testing', 
         title: 'Type Testing',
-        url: '/electric-power/transmisson/type-testing'
+        url: '/electric-power/transmission-and-distribution/type-testing'
       }
     ]
   },
@@ -37,17 +37,17 @@ const menuData = [
       { 
         id: 'failure-analysis', 
         title: 'Failure/root cause analysis',
-        url: '/electric-power/manufacturing/failure-analysis'
+        url: '/electric-power/manufacturing-and-operations/failure-analysis'
       },
       { 
         id: 'quality-controls', 
         title: 'Quality Controls',
-        url: '/electric-power/manufacturing/quality-controls'
+        url: '/electric-power/manufacturing-and-operations/quality-controls'
       },
       { 
         id: 'operational-resilience', 
         title: 'Operational Resilience',
-        url: '/electric-power/manufacturing/operational-resilience'
+        url: '/electric-power/manufacturing-and-operations/operational-resilience'
       }
     ]
   },
@@ -58,17 +58,17 @@ const menuData = [
       { 
         id: 'material-sourcing', 
         title: 'Material Sourcing',
-        url: '/electric-power/strategic/material-sourcing'
+        url: '/electric-power/strategic-project-management/material-sourcing'
       },
       { 
         id: 'yard-management', 
         title: 'Yard Management',
-        url: '/electric-power/strategic/yard-management'
+        url: '/electric-power/strategic-project-management/yard-management'
       },
       { 
         id: 'inventory-reporting', 
         title: 'Inventory Reporting',
-        url: '/electric-power/strategic/inventory-reporting'
+        url: '/electric-power/strategic-project-management/inventory-reporting'
       }
     ]
   },
@@ -79,7 +79,7 @@ const menuData = [
       { 
         id: 'logistic-construction', 
         title: 'Logistic and Construction Support',
-        url: '/electric-power/constructability/logistic-construction'
+        url: '/electric-power/constructability-review/logistic-construction'
       }
     ]
   },
@@ -90,17 +90,17 @@ const menuData = [
       { 
         id: 'grid-hardening', 
         title: 'Grid Hardening',
-        url: '/electric-power/resiliency/grid-hardening'
+        url: '/electric-power/resiliency-planning/grid-hardening'
       },
       { 
         id: 'substation-hardening', 
         title: 'Substation Hardening',
-        url: '/electric-power/resiliency/substation-hardening'
+        url: '/electric-power/resiliency-planning/substation-hardening'
       },
       { 
         id: 'distribution-hardening', 
         title: 'Distribution Line Hardening',
-        url: '/electric-power/resiliency/distribution-hardening'
+        url: '/electric-power/resiliency-planning/distribution-hardening'
       }
     ]
   }

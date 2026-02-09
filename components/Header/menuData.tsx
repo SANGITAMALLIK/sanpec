@@ -14,7 +14,7 @@ export const menuData = {
     { 
       id: 2,
       title: "ELECTRIC POWER", 
-      path: "/electric-power/transmisson/design-and-engineering",
+      path: "/electric-power/transmission-and-distribution/design-and-engineering",
       newTab: false,
       hasDropdown: true,
       megaMenu: {
@@ -28,27 +28,27 @@ export const menuData = {
                 title: 'Design and engineering',
                 desc: 'Transmission, Engineering Excellence, Structure Optimization, Robust Transmission Line',
                 image: '/images/home/header_submenu_images/1.webp',
-                link: '/electric-power/transmisson/design-and-engineering'
+                link: '/electric-power/transmission-and-distribution/design-and-engineering'
               },  
               {
                 title: 'Tower Testing',
                 desc: 'T Line Structures Testing, Source Inspections At Manufacturing facilities',
                 image: '/images/home/header_submenu_images/2.png',
-                link: '/electric-power/transmisson/tower-testing'
+                link: '/electric-power/transmission-and-distribution/tower-testing'
              
               },
               {
                 title: 'Electrical Testing',
                 desc: 'Corona/RIV and others',
                 image: '/images/home/header_submenu_images/3.png',
-                link: '/electric-power/transmisson/electrical-testing'
+                link: '/electric-power/transmission-and-distribution/electrical-testing'
               
               },
               {
                 title: 'Type Testing',
                 desc: 'Conductor/OPGW/Hardware',
                 image: '/images/home/header_submenu_images/4.png',
-                link: '/electric-power/transmisson/type-testing'
+                link: '/electric-power/transmission-and-distribution/type-testing'
           
               }
             ]
@@ -62,20 +62,20 @@ export const menuData = {
                 title: 'Failure/root cause analysis',
                 desc: 'Plant Audit, Inspections (QA/QC), ITP',
                 image: '/images/home/header_submenu_images/5.jpg',
-                link: '/electric-power/manufacturing/failure-analysis'
+                link: '/electric-power/manufacturing-and-operations/failure-analysis'
               },
               {
                 title: 'Quality Controls',
                 desc: 'Testing, Source Inspections At Manufacturing facilities, Field Inspections Using Drones',
                 image: '/images/home/header_submenu_images/6.png',
-                link: '/electric-power/manufacturing/quality-controls'
+                link: '/electric-power/manufacturing-and-operations/quality-controls'
             
               },
               {
                 title: 'Operational Resilience',
                 desc: 'Quality Management System, Innovation Management, Change Management',
                 image: '/images/home/header_submenu_images/7.png',
-                link: '/electric-power/manufacturing/operational-resilience'
+                link: '/electric-power/manufacturing-and-operations/operational-resilience'
         
               }
             ]
@@ -90,20 +90,20 @@ export const menuData = {
                 title: 'Material Sourcing',
                 desc: 'Material and Project Management',
                 image: '/images/home/header_submenu_images/8.jpg',
-                link: '/electric-power/strategic/material-sourcing'
+                link: '/electric-power/strategic-project-management/material-sourcing'
                
               },
               {
                 title: 'Yard Management',
                 desc: 'Material & Yard Management',
                 image: '/images/home/header_submenu_images/9.png',
-                link: '/electric-power/strategic/yard-management'
+                link: '/electric-power/strategic-project-management/yard-management'
               },
               {
                 title: 'INVENTORY REPORTING',
                 desc: 'INVENTORY REPORTING AND MATERIAL DOCUMENTATION',
                 image: '/images/home/header_submenu_images/11.jpg',
-                link: '/electric-power/strategic/inventory-reporting'
+                link: '/electric-power/strategic-project-management/inventory-reporting'
               }
             ]
           },
@@ -116,7 +116,7 @@ export const menuData = {
                 title: 'Logistic and Construction Support',
                 desc: 'Follow up logistics planning from vendors',
                 image: '/images/home/header_submenu_images/12.jpg',
-                link: '/electric-power/constructability/logistic-construction'
+                link: '/electric-power/constructability-review/logistic-construction'
               }
             ]
           },
@@ -129,20 +129,20 @@ export const menuData = {
                 title: 'Grid Hardening',
                 desc: 'Reinforcing the T&D infrastructure to prevent or reduce the damage from extreme weather events',
                 image: '/images/home/header_submenu_images/21.jpg',
-                link: '/electric-power/resiliency/grid-hardening'
+                link: '/electric-power/resiliency-planning/grid-hardening'
          
               },
               {
                 title: 'Substation Hardening',
                 desc: 'Flooding can create tremendous issues for transmission substations',
                 image: '/images/home/header_submenu_images/11.jpg',
-                link: '/electric-power/resiliency/substation-hardening'
+                link: '/electric-power/resiliency-planning/substation-hardening'
               },
               {
                 title: 'Distribution Line Hardening',
                 desc: 'Fire Prevention and Detection',
                 image: '/images/home/header_submenu_images/15.png',
-                link: '/electric-power/resiliency/distribution-hardening'
+                link: '/electric-power/resiliency-planning/distribution-hardening'
               }
             ]
           }
