@@ -5,7 +5,7 @@ export const menuData = {
   topMenuItems: [
     { id: 1, title: "About", path: "/about", newTab: false },
     { id: 2, title: "Engineering Excellence", path: "/engineering-excellence", newTab: false },
-    { id: 4, title: "Contact", path: "/contact", newTab: false },
+    { id: 4, title: "Contact", path: "/contact-us", newTab: false },
   ],
 
   // Main navigation items
@@ -149,7 +149,7 @@ export const menuData = {
         ]
       }
     },
-    { id: 3, title: "Research and Innovation", path: "/research-and-innovation", newTab: false },
+    { id: 3, title: "Research and Innovation", path: "/research", newTab: false },
     { id: 4, title: "Projects", path: "/Projects", newTab: false },
     { 
       id: 5, 
@@ -188,7 +188,7 @@ export const menuData = {
         }
       ]
     },
-    { id: 6, title: "Resilience and Sustainability", path: "/resilience-and-sustainabilty", newTab: false },
+    { id: 6, title: "Resilience and Sustainability", path: "/sustainabilty", newTab: false },
     { id: 8, title: "Blog", path: "/blog", newTab: false }
   ]
 };

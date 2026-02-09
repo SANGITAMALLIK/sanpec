@@ -8,7 +8,7 @@ const PremiumFooter = () => {
     { name: "Electric Power", href: "/electric-power/transmisson/design-and-engineering", icon: "⚡" },
     { name: "Projects", href: "/Projects", icon: "📊" },
     { name: "Why SANPEC", href: "/why-sanpec", icon: "🎯" },
-    { name: "Research", href: "/research-and-innovation", icon: "🔬" }
+    { name: "Research", href: "/research", icon: "🔬" }
   ];
 
   return (
