@@ -16,7 +16,7 @@ const staticMenuData = [
   {
     id: 'education',
     title: 'Education and Training',
-    url: '/research-and-innovation'
+    url: '/research'
   },
 ];
 
@@ -232,7 +232,7 @@ export default function ElectricPowerLayout({
                     return (
                       <button
                         key={post.id}
-                        onClick={() => handleNavigation(`/research-and-innovation/${post.slug}`)}
+                        onClick={() => handleNavigation(`/research/${post.slug}`)}
                         className={`
                           w-full text-left px-4 py-3 rounded-lg text-sm font-medium
                           transition-all duration-200
@@ -342,7 +342,7 @@ export default function ElectricPowerLayout({
                         return (
                           <div
                             key={post.id}
-                            onClick={() => router.push(`/research-and-innovation/${post.slug}`)}
+                            onClick={() => router.push(`/research/${post.slug}`)}
                             className={`
                               px-4 py-2.5 rounded-md cursor-pointer text-sm
                               transition-all duration-200
