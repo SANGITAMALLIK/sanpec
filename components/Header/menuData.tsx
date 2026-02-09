@@ -188,7 +188,7 @@ export const menuData = {
         }
       ]
     },
-    { id: 6, title: "Resilience and Sustainability", path: "/sustainabilty", newTab: false },
+    { id: 6, title: "Resilience and Sustainability", path: "/sustainability", newTab: false },
     { id: 8, title: "Blog", path: "/blog", newTab: false }
   ]
 };
