@@ -69,8 +69,19 @@ export default function ElectricPowerLayout({
   const isRecentActive = pathname.includes('/electric-power/recent');
   const isEducationActive = !isTransmissionActive && !isRecentActive;
 
-  // Get breadcrumb title
+  // Get breadcrumb title - NO TRUNCATION, FULL TEXT
   const getBreadcrumbTitle = () => {
+    if (isRecentActive) {
+      return 'Recent';
+    }
+    if (activePost) {
+      return stripHtml(activePost.title.rendered);
+    }
+    return 'Education and Training';
+  };
+
+  // Get FULL breadcrumb title for hover
+  const getFullBreadcrumbTitle = () => {
     if (isRecentActive) {
       return 'Recent';
     }
@@ -99,9 +110,7 @@ export default function ElectricPowerLayout({
           <div 
             className="absolute inset-0 opacity-[0.03]"
             style={{
-              backgroundImage: `
-                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,.1) 10px, rgba(255,255,255,.1) 20px)
-              `
+              backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,.1) 10px, rgba(255,255,255,.1) 20px)`
             }}
           ></div>
         </div>
@@ -114,8 +123,7 @@ export default function ElectricPowerLayout({
             style={{ fontSize: '12px' }}
           >
             <Download className="w-3 h-3 sm:w-5 sm:h-5" />
-           <span className="text-[12px] sm:text-base">Download Brochure</span>
-
+            <span className="text-[12px] sm:text-base">Download Brochure</span>
           </button>
         </div>
   
@@ -131,16 +139,22 @@ export default function ElectricPowerLayout({
             </div>
           </div>
           
-          <nav className="flex items-center flex-wrap gap-1.5 sm:gap-2 text-xs sm:text-sm">
-            <a 
-              href="/" 
-              className="group flex items-center gap-1 sm:gap-1.5 text-white/70 hover:text-white transition-colors duration-300"
+          {/* BREADCRUMB - 8 WORDS PER LINE */}
+          <nav className="flex items-start gap-1.5 sm:gap-2 text-xs sm:text-sm">
+            <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
+              <a 
+                href="/" 
+                className="group flex items-center gap-1 sm:gap-1.5 text-white/70 hover:text-white transition-colors duration-300"
+              >
+                <Home className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <span className="font-medium">Home</span>
+              </a>
+              <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/50" />
+            </div>
+            <span 
+              className="text-[#DC2626] font-semibold break-words leading-relaxed max-w-[280px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px]"
+              title={getFullBreadcrumbTitle()}
             >
-              <Home className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              <span className="font-medium">Home</span>
-            </a>
-            <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/50" />
-            <span className="text-[#DC2626] font-semibold">
               {getBreadcrumbTitle()}
             </span>
           </nav>
@@ -173,11 +187,7 @@ export default function ElectricPowerLayout({
       )}
 
       {/* MOBILE SIDEBAR */}
-      <div className={`
-        lg:hidden fixed top-0 left-0 h-full w-80 bg-white z-50 shadow-2xl
-        transform transition-transform duration-300 ease-in-out
-        ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
-      `}>
+      <div className={`lg:hidden fixed top-0 left-0 h-full w-80 bg-white z-50 shadow-2xl transform transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="h-full overflow-y-auto">
           {/* Header */}
           <div className="sticky top-0 bg-[#cd091b] text-white p-4 flex items-center justify-between">
@@ -203,14 +213,7 @@ export default function ElectricPowerLayout({
                   <button
                     key={item.id}
                     onClick={() => handleNavigation(item.url)}
-                    className={`
-                      w-full text-left px-4 py-3 rounded-lg text-sm font-medium
-                      transition-all duration-200
-                      ${isActive
-                        ? 'bg-[#cd091b] text-white shadow-md'
-                        : 'text-gray-700 hover:bg-gray-100'
-                      }
-                    `}
+                    className={`w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${isActive ? 'bg-[#cd091b] text-white shadow-md' : 'text-gray-700 hover:bg-gray-100'}`}
                   >
                     {item.title}
                   </button>
@@ -233,14 +236,7 @@ export default function ElectricPowerLayout({
                       <button
                         key={post.id}
                         onClick={() => handleNavigation(`/research/${post.slug}`)}
-                        className={`
-                          w-full text-left px-4 py-3 rounded-lg text-sm font-medium
-                          transition-all duration-200
-                          ${isActive
-                            ? 'bg-[#cd091b] text-white shadow-md'
-                            : 'text-gray-700 hover:bg-gray-100'
-                          }
-                        `}
+                        className={`w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${isActive ? 'bg-[#cd091b] text-white shadow-md' : 'text-gray-700 hover:bg-gray-100'}`}
                       >
                         {stripHtml(post.title.rendered)}
                       </button>
@@ -272,14 +268,7 @@ export default function ElectricPowerLayout({
 
                     <div 
                       onClick={() => router.push(item.url)}
-                      className={`
-                        relative ml-11 group flex items-center justify-between px-4 py-3.5 cursor-pointer
-                        transition-all duration-300 ease-out rounded-lg border-2
-                        ${isActive
-                          ? 'border-gray-300 text-gray-900 shadow-xl' 
-                          : 'bg-white border-gray-300 text-gray-700 hover:border-gray-400 hover:shadow-lg'
-                        }
-                      `}
+                      className={`relative ml-11 group flex items-center justify-between px-4 py-3.5 cursor-pointer transition-all duration-300 ease-out rounded-lg border-2 ${isActive ? 'border-gray-300 text-gray-900 shadow-xl' : 'bg-white border-gray-300 text-gray-700 hover:border-gray-400 hover:shadow-lg'}`}
                       style={isActive ? {backgroundColor: '#F3F3F3'} : {}}
                     >
                       <span className="text-sm font-semibold flex-1">{item.title}</span>
@@ -309,14 +298,7 @@ export default function ElectricPowerLayout({
 
                 <div 
                   onClick={() => setIsTransmissionOpen(!isTransmissionOpen)}
-                  className={`
-                    relative ml-11 group flex items-center justify-between px-4 py-3.5 cursor-pointer
-                    transition-all duration-300 ease-out rounded-lg border-2
-                    ${isTransmissionActive
-                      ? 'border-gray-300 text-gray-900 shadow-xl' 
-                      : 'bg-white border-gray-300 text-gray-700 hover:border-gray-400 hover:shadow-lg'
-                    }
-                  `}
+                  className={`relative ml-11 group flex items-center justify-between px-4 py-3.5 cursor-pointer transition-all duration-300 ease-out rounded-lg border-2 ${isTransmissionActive ? 'border-gray-300 text-gray-900 shadow-xl' : 'bg-white border-gray-300 text-gray-700 hover:border-gray-400 hover:shadow-lg'}`}
                   style={isTransmissionActive ? {backgroundColor: '#F3F3F3'} : {}}
                 >
                   <span className="text-sm font-semibold flex-1">Research & Development</span>
@@ -343,14 +325,7 @@ export default function ElectricPowerLayout({
                           <div
                             key={post.id}
                             onClick={() => router.push(`/research/${post.slug}`)}
-                            className={`
-                              px-4 py-2.5 rounded-md cursor-pointer text-sm
-                              transition-all duration-200
-                              ${isActivePost
-                                ? 'bg-[#cd091b]/10 text-[#cd091b] font-semibold border-l-2 border-[#cd091b]'
-                                : 'text-gray-600 hover:bg-gray-100 border-l-2 border-transparent'
-                              }
-                            `}
+                            className={`px-4 py-2.5 rounded-md cursor-pointer text-sm transition-all duration-200 ${isActivePost ? 'bg-[#cd091b]/10 text-[#cd091b] font-semibold border-l-2 border-[#cd091b]' : 'text-gray-600 hover:bg-gray-100 border-l-2 border-transparent'}`}
                           >
                             {stripHtml(post.title.rendered)}
                           </div>

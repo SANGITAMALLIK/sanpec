@@ -191,30 +191,29 @@ export default function TransmissionPostPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 h-full">
             
             {/* LEFT SIDE */}
-            <div className="relative z-10 flex flex-col justify-between p-6 lg:p-10 bg-[#0f1729] text-white">
-              <div className="mb-4">
-                <button
-                  onClick={() => handleNavigation('/Projects')}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-transparent text-white font-medium text-sm rounded-lg hover:bg-white/10 transition-all duration-300 border-2 border-white/30"
-                >
-                  <ArrowLeft className="w-4 h-4" />
-                  Back to Projects
-                </button>
-              </div>
+        <div className="relative z-10 flex flex-col justify-between p-6 pl-[50px] lg:p-10 lg:pl-[50px] bg-[#0f1729] text-white">
+  <div className="mb-4">
+    <button
+      onClick={() => handleNavigation('/Projects')}
+      className="inline-flex items-center gap-2 text-white/80 hover:text-white text-sm transition-colors duration-300 border-b border-white/30 pb-1"
+    >
+      <ArrowLeft className="w-4 h-4" />
+      Back to Projects
+    </button>
+  </div>
 
-              <div className="mb-4">
-                <p className="text-white/70 text-sm">
-                  {formatDate(post.date)}
-                </p>
-              </div>
+  <div className="mb-4">
+    <p className="text-white/70 text-sm">
+      {formatDate(post.date)}
+    </p>
+  </div>
 
-              <div className="flex-1 flex items-center">
-                <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight">
-                  {stripHtml(post.title.rendered)}
-                </h1>
-              </div>
-            </div>
-
+  <div className="flex-1 flex items-center">
+    <h1 className="text-2xl md:text-3xl lg:text-3xl text-white leading-tight">
+      {stripHtml(post.title.rendered)}
+    </h1>
+  </div>
+</div>
             {/* RIGHT SIDE */}
             <div className="relative h-full">
               <img

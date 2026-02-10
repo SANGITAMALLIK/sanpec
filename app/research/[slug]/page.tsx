@@ -245,7 +245,7 @@ export default function TransmissionPostPage() {
               </div>
 {/* amit devrani */}
               <div className="flex-1 flex items-center">
-                <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight">
+                <h1 className="text-2xl md:text-3xl lg:text-3xl text-white leading-tight">
                   {stripHtml(post.title.rendered)}
                 </h1>
               </div>
