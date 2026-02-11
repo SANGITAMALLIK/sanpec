@@ -1,12 +1,32 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { Zap, CheckCircle } from 'lucide-react';
+
+interface WPPost {
+  id: number;
+  title: {
+    rendered: string;
+  };
+  content: {
+    rendered: string;
+  };
+  excerpt: {
+    rendered: string;
+  };
+  slug: string;
+  _embedded?: {
+    'wp:featuredmedia'?: Array<{
+      source_url: string;
+      alt_text: string;
+    }>;
+  };
+}
 
 export default function SanpecTabs() {
-  const [activeTab, setActiveTab] = useState('who-we-are');
+  const [activeTab, setActiveTab] = useState<number | null>(null);
+  const [posts, setPosts] = useState<WPPost[]>([]);
+  const [loading, setLoading] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
-  const [hoveredItem, setHoveredItem] = useState(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -17,315 +37,97 @@ export default function SanpecTabs() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const productItems = [
-    'Transmission Lattice Towers for 345kV, 400kV, 500kV, 765kV, 800kV Transmission Line, Self-Supported Lattice Structures, Guyed Lattice Structures',
-    'Road Crossing Lattice Towers, River Crossing Lattice Towers',
-    'Custom Engineered Lattice Structures',
-    'Transmission Pole Structures for up to 500kV Transmission Line',
-    'Single Pole Structure, 2 Poles Structure, 3 Poles Structure, Guyed Pole Structure, H-Frame Structure Riser & Switch Structure, Custom Engineered Steel Poles',
-    'Distribution Pole Structures, H Series Pole, C Series Pole, Poles for lower voltage lines such as 32.5kV, 69kV',
-    'Substation Structures',
-    'A-Frames Structure',
-    'H-Frame Structure',
-    'Equipment Support Structure',
-    'Custom Engineered Structures and Foundations',
-    'Hybrid Structures (Steel, Concrete, Composite)',
-    'Caisson Design (Embedded Pole)'
-  ];
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(
+          'https://news.sanpec-excellence.com/wp-json/wp/v2/posts?categories=53&_embed&per_page=100',
+        
+        );
 
-  const tabsData = {
-    'who-we-are': {
-      title: 'WHO WE ARE',
-      image: '/images/about/sanpec-model.png',
-      content: (
-        <div>
-          <div className="mb-6">
-            <h2 className="text-4xl md:text-5xl font-black mb-2" style={{ color: '#101631', letterSpacing: '-0.02em' }}>
-              WHO WE ARE
-            </h2>
-            <div className="w-20 h-1.5 bg-[#CD091B] rounded-full"></div>
-          </div>
-          <div className="space-y-4 leading-relaxed text-gray-700" style={{ fontSize: '16px' }}>
-            <p className="pl-4 py-3 border-l-4 border-[#CD091B] bg-gray-50 rounded-r-lg">
-              SANPEC is an innovation-driven, purpose-led company specializing in design, engineering, testing, inspection, quality, and complete lifecycle asset management services for the electric power and infrastructure industries.
-            </p>
-            <p>We discover, innovate, and disseminate best practices and new ideas that support evolution and create value for our stakeholders.</p>
-            <p>Drawing strength from our distinctive roots in STEM research, we believe in learning by doing, learning from others, leading with integrity, and challenging our assumptions to seek new knowledge and create practical impact in service of our stakeholders and humanity.</p>
-          </div>
+        if (!response.ok) {
+          throw new Error('Failed to fetch posts');
+        }
+
+        const data: WPPost[] = await response.json();
+        
+        // REVERSE THE ORDER - Oldest first, latest last
+        const reversedData = [...data].reverse();
+        setPosts(reversedData);
+        
+        // Set first post as active by default
+        if (reversedData.length > 0 && activeTab === null) {
+          setActiveTab(reversedData[0].id);
+        }
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
+  const activePost = posts.find(post => post.id === activeTab);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-100 via-gray-50 to-white"></div>
+        <div className="absolute inset-0">
+          <div 
+            className="absolute inset-0 opacity-[0.15]"
+            style={{
+              backgroundImage: 'repeating-linear-gradient(0deg, #d1d5db 0px, #d1d5db 1px, transparent 1px, transparent 40px), repeating-linear-gradient(90deg, #d1d5db 0px, #d1d5db 1px, transparent 1px, transparent 40px)',
+              backgroundSize: '40px 40px',
+              maskImage: 'linear-gradient(to top, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 50%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to top, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 50%, transparent 100%)'
+            }}
+          ></div>
         </div>
-      )
-    },
-    'vision': {
-      title: 'VISION',
-      image: '/images/about/Picture7.webp',
-      content: (
-        <div>
-          <div className="mb-6">
-            <h2 className="text-4xl md:text-5xl font-black mb-2" style={{ color: '#101631', letterSpacing: '-0.02em' }}>
-              VISION
-            </h2>
-            <div className="w-20 h-1.5 bg-[#CD091B] rounded-full"></div>
-          </div>
-          <div className="space-y-4 leading-relaxed text-gray-700" style={{ fontSize: '16px' }}>
-            <p className="pl-4 py-3 border-l-4 border-[#CD091B] bg-gray-50 rounded-r-lg">
-              To be the trusted and innovative leader in designing and building electric transmission and distribution (T&D) lines. We aim to revolutionize the U.S. energy sector by achieving excellence, driving innovation, enhancing resilience, and improving the quality of life for the American people.
-            </p>
-            <div className="bg-white p-4 rounded-lg border-l-4 border-[#101631] shadow-sm">
-              <p>Build a robust and reliable grid to power the American people.</p>
-            </div>
-            <div className="bg-white p-4 rounded-lg border-l-4 border-[#CD091B] shadow-sm">
-              <p>Enhance resilience to withstand disruptions and adapt to evolving demands.</p>
-            </div>
-            <div className="bg-white p-4 rounded-lg border-l-4 border-[#101631] shadow-sm">
-              <p>Drive innovation and champion responsible business practices for a cleaner future.</p>
+        <div className="w-full max-w-[1800px] px-3 md:px-6 lg:px-8 py-6 md:py-10 relative z-10 mx-auto">
+          <div className="flex items-center justify-center min-h-[60vh]">
+            <div className="text-center">
+              <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-gray-300 border-t-[#CD091B] mb-4"></div>
+              <p className="text-gray-600 text-lg">Loading content...</p>
             </div>
           </div>
         </div>
-      )
-    },
-    'mission': {
-      title: 'MISSION',
-      image: '/images/about/mission.webp',
-      content: (
-        <div>
-          <div className="mb-6">
-            <h2 className="text-4xl md:text-5xl font-black mb-2" style={{ color: '#101631', letterSpacing: '-0.02em' }}>
-              MISSION
-            </h2>
-            <div className="w-20 h-1.5 bg-[#CD091B] rounded-full"></div>
-          </div>
-          <div className="space-y-4 leading-relaxed text-gray-700" style={{ fontSize: '16px' }}>
-            <p className="pl-4 py-3 border-l-4 border-[#CD091B] bg-gray-50 rounded-r-lg">
-              We design, modernize, and manage electric power transmission and distribution grids with a strong commitment to innovation, excellence, and sustainability. At SANPEC, we aim to provide quality transmission and distribution (T&D) materials, innovative solutions, and exceptional services for a safe, robust, reliable, and resilient power grid.
-            </p>
-            <p>Our multidisciplinary, award-winning team utilizes expertise, wisdom, and entrepreneurial spirit to manage risks and create value that empowers individuals, enhances grid reliability, and strengthens the American economy.</p>
-            <p>We have uniquely designed and implemented the process of the Future Today. As the inventors of the world&apos;s first ecosystem-focused business model, our founders have laid the foundation for a 21st-century value-creating business. Our award-winning engineers know the importance of process excellence and deliver solutions that create long-term, mid-term, and short-term value.</p>
-          </div>
-        </div>
-      )
-    },
-    'values': {
-      title: 'VALUES',
-      image: null,
-      content: (
-        <div>
-          <div className="mb-6">
-            <h2 className="text-4xl md:text-5xl font-black mb-2" style={{ color: '#101631', letterSpacing: '-0.02em' }}>
-              VALUES
-            </h2>
-            <div className="w-20 h-1.5 bg-[#CD091B] rounded-full"></div>
-          </div>
-          <div className="space-y-4 leading-relaxed text-gray-700" style={{ fontSize: '16px' }}>
-            <div className="bg-white p-4 rounded-lg border-l-4 border-[#CD091B] shadow-sm">
-              <p><strong className="text-xl block mb-2" style={{ color: '#CD091B' }}>Innovation and Resilience:</strong> We focus on enhancing innovation performance and building foresight capacity to manage uncertainty. This approach aims to increase the value realized in our products, services, and processes. We design and advocate for resilient power grids that withstand and adapt to changing conditions and unforeseen disruptions.</p>
-            </div>
-            
-            <div className="bg-white p-4 rounded-lg border-l-4 border-[#101631] shadow-sm">
-              <p><strong className="text-xl block mb-2" style={{ color: '#101631' }}>Quality and Excellence:</strong> We are committed to upholding the highest quality standards in all our projects and services, ensuring structural integrity and customer-focused excellence.</p>
-            </div>
-            
-            <div className="ml-4 space-y-2">
-              <p className="pl-3 border-l-2 border-gray-300">Continuous Improvement: We foster a culture of continuous improvement and sustained innovation to solve complex challenges in the energy sector.</p>
-              <p className="pl-3 border-l-2 border-gray-300">High-performing teams: We focus on building high-performing teams and creating resilient energy systems.</p>
-              <p className="pl-3 border-l-2 border-gray-300">Proven management framework: Our proven management systems, award-winning engineers, and leading foresight experts guide our strategic planning processes that drive impactful results.</p>
-              <p className="pl-3 border-l-2 border-gray-300">Real-time, integrated quality management system: Our real-time quality management solutions enhance organizational visibility, optimize cross-functional workflows, and enable real-time data sharing. This unique system supports informed and faster decision-making, significantly contributing to positive business value and enhanced customer loyalty.</p>
-              <p className="pl-3 border-l-2 border-gray-300">Customer-focused excellence: Our unique process excellence system has helped us achieve customer-focused excellence and faster responses to market and business changes.</p>
-            </div>
-            
-            <div className="bg-white p-4 rounded-lg border-l-4 border-[#CD091B] shadow-sm">
-              <p><strong className="text-xl block mb-2" style={{ color: '#CD091B' }}>Visionary Leadership:</strong> We focus on creating long-term value for all stakeholders.</p>
-            </div>
-            
-            <div className="ml-4 space-y-2">
-              <p className="pl-3 border-l-2 border-gray-300">Responsible behavior: We advocate for and implement sustainable practices to minimize environmental impact in our operations and projects.</p>
-              <p className="pl-3 border-l-2 border-gray-300">Health and Safety: We ensure the health and safety of our workforce, clients, and the communities we serve is paramount in all our endeavors.</p>
-            </div>
-            
-            <div className="bg-white p-4 rounded-lg border-l-4 border-[#101631] shadow-sm">
-              <p><strong className="text-xl block mb-2" style={{ color: '#101631' }}>Integrity:</strong> Committed to being whole, we model integrity by wholeheartedly living our mission. We conduct our business with the utmost integrity, fostering trust with clients, partners, and communities. We lead with clarity, kindness and authenticity.</p>
-            </div>
-            
-            <div className="bg-white p-4 rounded-lg border-l-4 border-[#CD091B] shadow-sm">
-              <p><strong className="text-xl block mb-2" style={{ color: '#CD091B' }}>Trust:</strong> We strengthen trust through teamwork, open communication, and transparency.</p>
-            </div>
-            
-            <div className="bg-white p-4 rounded-lg border-l-4 border-[#101631] shadow-sm">
-              <p><strong className="text-xl block mb-2" style={{ color: '#101631' }}>Co-Creation:</strong> We believe in enhancing capabilities by collaborating with broader stakeholders to co-create solutions that advance the energy sector and create value for our stakeholders. We believe that our success is closely tied to the success of our value-chain partners.</p>
-            </div>
-            
-            <div className="bg-white p-4 rounded-lg border-l-4 border-[#CD091B] shadow-sm">
-              <p><strong className="text-xl block mb-2" style={{ color: '#CD091B' }}>Curiosity:</strong> We practice curiosity through active listening and being fully present with every person we encounter.</p>
-            </div>
-            
-            <div className="bg-white p-4 rounded-lg border-l-4 border-[#101631] shadow-sm">
-              <p><strong className="text-xl block mb-2" style={{ color: '#101631' }}>Humility:</strong> We embody humility while balancing it with a strong sense of self and purpose.</p>
+      </div>
+    );
+  }
+
+  if (posts.length === 0) {
+    return (
+      <div className="min-h-screen relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-100 via-gray-50 to-white"></div>
+        <div className="w-full max-w-[1800px] px-3 md:px-6 lg:px-8 py-6 md:py-10 relative z-10 mx-auto">
+          <div className="flex items-center justify-center min-h-[60vh]">
+            <div className="text-center">
+              <p className="text-gray-600 text-lg">No content available</p>
             </div>
           </div>
         </div>
-      )
-    },
-    'the-company': {
-      title: 'THE COMPANY',
-      image: null,
-      content: (
-        <div>
-          {/* Hero Section with CEO Image */}
-          <div className="bg-white rounded-2xl shadow-sm overflow-hidden mb-8 border border-gray-200">
-            <div className="grid md:grid-cols-5 gap-0">
-              {/* CEO Image Section - Light Gray Background */}
-              <div className="md:col-span-2 bg-gray-100 p-8 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-48 h-48 md:w-56 md:h-56 mx-auto mb-6 rounded-full bg-white p-1 shadow-sm border border-gray-200">
-                    <img 
-                      src="/images/about/ajay_mallik.png" 
-                      alt="CEO Ajay Mallik" 
-                      className="w-full h-full rounded-full object-cover"
-                    />
-                  </div>
-                  <div className="bg-white rounded-lg p-4 border border-gray-200">
-                    <p className="text-gray-600 font-semibold text-sm uppercase tracking-wide mb-1">President & CEO</p>
-                    <h2 className="text-gray-900 text-2xl md:text-3xl font-bold">Ajay Mallik, P.E.</h2>
-                    <p className="text-gray-600 text-sm mt-2">SANPEC, Inc.</p>
-                  </div>
-                </div>
-              </div>
+      </div>
+    );
+  }
 
-              {/* Company Info */}
-              <div className="md:col-span-3 p-8 md:p-10 flex flex-col justify-center">
-                <div className="flex items-center gap-3 mb-8">
-                  <div className="flex-1">
-                    <h3 className="text-4xl font-bold text-gray-900 mb-1">The Company</h3>
-                    <div className="h-1 w-24 bg-gray-300 rounded-full"></div>
-                  </div>
-                  <span className="text-base font-semibold text-gray-700 bg-gray-100 px-4 py-2 rounded-full border border-gray-200">Since 2009</span>
-                </div>
-                <div className="space-y-6">
-                  <div className="flex gap-4 items-start p-4 rounded-lg bg-gray-50 border border-gray-200">
-                    <div className="w-2 h-2 rounded-full bg-gray-400 mt-2 flex-shrink-0"></div>
-                    <div>
-                      <p className="text-xl font-bold text-gray-900 mb-1">Baldrige Leadership Excellence Award 2023</p>
-                      <p className="text-gray-600 text-sm">(Quality/Resiliency/Sustainability)</p>
-                    </div>
-                  </div>
-                  <div className="flex gap-4 items-start p-4 rounded-lg bg-gray-50 border border-gray-200">
-                    <div className="w-2 h-2 rounded-full bg-gray-400 mt-2 flex-shrink-0"></div>
-                    <div>
-                      <p className="text-xl font-bold text-gray-900 mb-1">Registered Engineering Firm in Texas</p>
-                      <p className="text-gray-600 text-sm">(F# 11048)</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Experience Section */}
-          <div className="bg-white rounded-lg shadow-sm p-8 mb-6 border border-gray-200">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-0.5 bg-gray-300 rounded-full"></div>
-              <h3 className="text-2xl font-bold text-gray-900">Experience in T&D Line Engineering, Testing and Inspections (QA/QC)</h3>
-            </div>
-            <div className="flex gap-3 items-start">
-              <div className="w-2 h-2 rounded-full bg-gray-400 mt-2 flex-shrink-0"></div>
-              <p className="text-gray-700 leading-relaxed" style={{ fontSize: '16px' }}>
-                Over 160 years of combined worldwide experiences in Design, Engineering analysis and Audit/Source Inspection services for Steel Poles, Lattice Towers, Insulators & Hardware, Conductor, OPGW, Guys Wires and Shield Wire (HVAC and HVDC)
-              </p>
-            </div>
-          </div>
-
-          {/* Project Management Section */}
-          <div className="bg-white rounded-lg shadow-sm p-8 mb-6 border border-gray-200">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-0.5 bg-gray-300 rounded-full"></div>
-              <h3 className="text-2xl font-bold text-gray-900">Project Management Team</h3>
-            </div>
-            <div className="flex gap-3 items-start">
-              <div className="w-2 h-2 rounded-full bg-gray-400 mt-2 flex-shrink-0"></div>
-              <p className="text-gray-700 leading-relaxed" style={{ fontSize: '16px' }}>
-                Experienced and award-winning professionals with extensive and innovative engineering experience in managing large transmission projects successfully
-              </p>
-            </div>
-          </div>
-
-          {/* Professional Membership Section */}
-          <div className="bg-white rounded-lg shadow-sm p-8 mb-6 border border-gray-200">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-0.5 bg-gray-300 rounded-full"></div>
-              <h3 className="text-2xl font-bold text-gray-900">Professional Membership</h3>
-            </div>
-            <div className="space-y-3">
-              <div className="flex gap-3 items-start">
-                <div className="w-2 h-2 rounded-full bg-gray-400 mt-2 flex-shrink-0"></div>
-                <p className="text-gray-700 leading-relaxed" style={{ fontSize: '16px' }}>
-                  Active Committee member (ASCE/SEI): ASCE-10, ASCE-48, MOP-74, ASCE-Concrete Poles, ASCE-AFL Poles, Aesthetic Report, IEEE, NSPE
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Academic Affiliation Section */}
-          <div className="bg-gray-800 rounded-lg shadow-sm p-8 text-white">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-0.5 bg-gray-400 rounded-full"></div>
-              <h3 className="text-2xl font-bold">Academic Affiliation</h3>
-            </div>
-            <div className="space-y-3">
-              <div className="flex gap-3 items-start">
-                <div className="w-2 h-2 rounded-full bg-gray-400 mt-2 flex-shrink-0"></div>
-                <p className="leading-relaxed" style={{ fontSize: '16px' }}>Gonzaga University</p>
-              </div>
-              <div className="flex gap-3 items-start">
-                <div className="w-2 h-2 rounded-full bg-gray-400 mt-2 flex-shrink-0"></div>
-                <p className="leading-relaxed" style={{ fontSize: '16px' }}>
-                  Founding Member - Advanced Course in Transmission Line Structures for Master Degree Program
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )
-    },
-    'sanpec-products': {
-      title: 'SANPEC PRODUCTS',
-      image: null,
-      content: (
-        <div>
-          <div className="mb-8">
-            <div className="flex items-center gap-4 mb-8">
-              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#CD091B] to-transparent opacity-20"></div>
-              <h2 className="text-2xl md:text-3xl font-bold text-[#101631] flex items-center gap-3">
-                SANPEC PRODUCTS
-                <Zap className="w-6 h-6 text-[#CD091B]" />
-              </h2>
-              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#CD091B] to-transparent opacity-20"></div>
-            </div>
-
-            {/* Single Combined Products List */}
-            <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden p-6">
-              <ul className="space-y-2">
-                {productItems.map((item, itemIndex) => (
-                  <li 
-                    key={itemIndex}
-                    className="flex items-start gap-3 p-1 rounded-lg hover:bg-gray-50 transition-colors duration-300"
-                  >
-                    <div className="flex-shrink-0 mt-1">
-                      <CheckCircle className="w-5 h-5 text-[#CD091B]" />
-                    </div>
-                    <span className="leading-relaxed text-gray-700" style={{ fontSize: '16px' }}>
-                      {item}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      )
-    }
+  // Extract CEO info from excerpt for "The Company" post
+  const extractCEOInfo = (excerptHtml: string) => {
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = excerptHtml;
+    const text = tempDiv.textContent || '';
+    
+    // Try to extract name and title
+    const lines = text.split('\n').filter(line => line.trim());
+    return {
+      name: lines[0]?.trim() || 'Ajay Mallik, P.E.',
+      title: lines[1]?.trim() || 'PRESIDENT & CEO',
+      company: lines[2]?.trim() || 'SANPEC, Inc.'
+    };
   };
-
-  const activeContent = tabsData[activeTab];
-  const tabKeys = Object.keys(tabsData);
 
   return (
     <div className="min-h-screen relative overflow-hidden">
@@ -356,12 +158,11 @@ export default function SanpecTabs() {
               {/* Central Tower Pole */}
               <div className="absolute left-8 top-0 bottom-12 w-1 bg-gradient-to-b from-gray-300 via-gray-400 to-gray-300"></div>
               
-              {tabKeys.map((tabKey, idx) => {
-                const isActive = activeTab === tabKey;
-                const tab = tabsData[tabKey];
+              {posts.map((post, idx) => {
+                const isActive = activeTab === post.id;
                 
                 return (
-                  <div key={tabKey} className="mb-6 relative">
+                  <div key={post.id} className="mb-6 relative">
                     {/* Connection Point on Tower (Insulator) */}
                     <div className="absolute left-2 top-5 w-3 h-3 bg-white border-2 border-gray-400 rounded-full shadow-md z-20"></div>
                     
@@ -370,8 +171,8 @@ export default function SanpecTabs() {
 
                     {/* Tab Item (Transformer Box) */}
                     <div 
-                      onClick={() => setActiveTab(tabKey)}
-                      aria-label={`View ${tab.title} content`}
+                      onClick={() => setActiveTab(post.id)}
+                      aria-label={`View ${post.title.rendered} content`}
                       aria-pressed={isActive}
                       className={`
                         relative ml-11 group flex items-center justify-between px-4 py-3.5 cursor-pointer
@@ -383,7 +184,10 @@ export default function SanpecTabs() {
                       `}
                       style={isActive ? {backgroundColor: '#F3F3F3'} : {}}
                     >
-                      <span className="text-sm font-semibold flex-1">{tab.title}</span>
+                      <span 
+                        className="text-sm font-semibold flex-1"
+                        dangerouslySetInnerHTML={{ __html: post.title.rendered }}
+                      />
                       
                       {/* Active Power Indicator */}
                       {isActive && (
@@ -413,49 +217,408 @@ export default function SanpecTabs() {
 
           {/* Content Area - Scrollable */}
           <main className="flex-1">
-            <div className="bg-white shadow-lg border-2 border-gray-200">
+            <div className="bg-white shadow-lg border-2 border-gray-200 rounded-lg overflow-hidden">
               
               <div className="p-4 md:p-6 lg:p-8">
-                <div className={`grid ${activeContent.image ? 'lg:grid-cols-2' : 'lg:grid-cols-1'} gap-6 md:gap-8 items-start`}>
-                  
-                  {/* Text Content */}
-                  <div className="space-y-4">
-                    {activeContent.content}
-                  </div>
-
-                  {/* Image */}
-                  {activeContent.image && (
-                    <div className="relative group">
-                      {/* Connection nodes at corners */}
-                      <div className="absolute -top-2 -left-2 w-2 h-2 bg-gray-400 ring-2 ring-gray-200 rounded-full"></div>
-                      <div className="absolute -top-2 -right-2 w-2 h-2 bg-gray-400 ring-2 ring-gray-200 rounded-full"></div>
-                      <div className="absolute -bottom-2 -left-2 w-2 h-2 bg-gray-400 ring-2 ring-gray-200 rounded-full"></div>
-                      <div className="absolute -bottom-2 -right-2 w-2 h-2 bg-gray-400 ring-2 ring-gray-200 rounded-full"></div>
-                      
-                      {/* Frame border */}
-                      <div className="absolute -inset-2 border-2 border-gray-300 rounded-xl"></div>
-                      
-                      <div className="relative rounded-xl overflow-hidden shadow-xl border-4 border-gray-200 transform group-hover:-translate-y-2 transition-all duration-500">
-                        <Image
-                          src={activeContent.image}
-                          alt={activeContent.title}
-                          width={800}
-                          height={600}
-                          className="w-full h-auto object-contain bg-white"
-                          quality={90}
-                          priority={activeTab === 'who-we-are'}
-                          sizes="(max-width: 1024px) 100vw, 50vw"
-                        />
-                      </div>
+                {activePost && (
+                  <div>
+                    {/* Title Section - Always Full Width */}
+                    <div className="mb-8">
+                      <h2 
+                        className="text-4xl md:text-5xl font-black mb-3" 
+                        style={{ color: '#101631', letterSpacing: '-0.02em' }}
+                        dangerouslySetInnerHTML={{ __html: activePost.title.rendered }}
+                      />
+                      <div className="w-24 h-1.5 bg-[#CD091B] rounded-full"></div>
                     </div>
-                  )}
-                </div>
+
+                    {/* ---------- THE COMPANY – REDESIGNED CEO CARD ---------- */}
+                    {activePost.slug === 'the-company' ? (
+                      <>
+                        {activePost._embedded?.['wp:featuredmedia']?.[0]?.source_url ? (
+                          /* Two-column layout: CEO card left, content right */
+                          <div className="grid md:grid-cols-3 gap-8">
+                            {/* LEFT COLUMN – CEO CARD (Redesigned like the image) */}
+                            <div className="md:col-span-1">
+                              <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl border-2 border-gray-200 overflow-hidden shadow-lg">
+                                {/* CEO Image - Circular with border */}
+                                <div className="relative bg-white pt-8 pb-6">
+                                  <div className="w-48 h-48 mx-auto rounded-full border-4 border-white shadow-xl overflow-hidden ring-4 ring-gray-100">
+                                    <Image
+                                      src={activePost._embedded['wp:featuredmedia'][0].source_url}
+                                      alt={activePost._embedded['wp:featuredmedia'][0].alt_text || 'CEO'}
+                                      width={200}
+                                      height={200}
+                                      className="w-full h-full object-cover"
+                                      quality={90}
+                                    />
+                                  </div>
+                                </div>
+
+                                {/* CEO Info Card - White background with clean typography */}
+                                <div className="bg-white mx-4 mb-4 rounded-xl border border-gray-200 p-6 text-center shadow-sm">
+                                  {(() => {
+                                    const ceoInfo = extractCEOInfo(activePost.excerpt.rendered);
+                                    return (
+                                      <>
+                                        <div className="text-xs font-semibold text-gray-500 tracking-wider uppercase mb-2">
+                                          {ceoInfo.title}
+                                        </div>
+                                        <h3 className="text-2xl font-bold text-gray-900 mb-1">
+                                          {ceoInfo.name}
+                                        </h3>
+                                        <div className="text-sm text-gray-600 font-medium">
+                                          {ceoInfo.company}
+                                        </div>
+                                      </>
+                                    );
+                                  })()}
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* RIGHT COLUMN – Company details */}
+                            <div className="md:col-span-2">
+                              <div
+                                className="the-company-content"
+                                dangerouslySetInnerHTML={{ __html: activePost.content.rendered }}
+                              />
+                            </div>
+                          </div>
+                        ) : (
+                          /* Fallback – no featured image */
+                          <div
+                            className="the-company-content"
+                            dangerouslySetInnerHTML={{ __html: activePost.content.rendered }}
+                          />
+                        )}
+                      </>
+                    ) : (
+                      /* ---------- NORMAL POST LAYOUT (unchanged) ---------- */
+                      <>
+                        {/* Content Grid - Image and Text Side by Side */}
+                        <div className={`grid ${activePost._embedded?.['wp:featuredmedia']?.[0]?.source_url ? 'lg:grid-cols-2' : 'lg:grid-cols-1'} gap-8 items-start`}>
+                          
+                          {/* Text Content */}
+                          <div className="space-y-4 order-2 lg:order-1">
+                            <div 
+                              className="wordpress-content"
+                              dangerouslySetInnerHTML={{ __html: activePost.content.rendered }}
+                            />
+                          </div>
+
+                          {/* Featured Image */}
+                          {activePost._embedded?.['wp:featuredmedia']?.[0]?.source_url && (
+                            <div className="relative group order-1 lg:order-2 lg:sticky lg:top-6">
+                              {/* Connection nodes at corners */}
+                              <div className="absolute -top-2 -left-2 w-2 h-2 bg-gray-400 ring-2 ring-gray-200 rounded-full z-10"></div>
+                              <div className="absolute -top-2 -right-2 w-2 h-2 bg-gray-400 ring-2 ring-gray-200 rounded-full z-10"></div>
+                              <div className="absolute -bottom-2 -left-2 w-2 h-2 bg-gray-400 ring-2 ring-gray-200 rounded-full z-10"></div>
+                              <div className="absolute -bottom-2 -right-2 w-2 h-2 bg-gray-400 ring-2 ring-gray-200 rounded-full z-10"></div>
+                              
+                              {/* Frame border */}
+                              <div className="absolute -inset-2 border-2 border-gray-300 rounded-xl"></div>
+                              
+                              <div className="relative rounded-xl overflow-hidden shadow-xl border-4 border-gray-200 transform group-hover:-translate-y-2 transition-all duration-500">
+                                <Image
+                                  src={activePost._embedded['wp:featuredmedia'][0].source_url}
+                                  alt={activePost._embedded['wp:featuredmedia'][0].alt_text || activePost.title.rendered}
+                                  width={800}
+                                  height={600}
+                                  className="w-full h-auto object-contain bg-white"
+                                  quality={90}
+                                  priority={activeTab === posts[0]?.id}
+                                  sizes="(max-width: 1024px) 100vw, 50vw"
+                                />
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           </main>
 
         </div>
       </div>
+
+      {/* ---------- GLOBAL STYLES + THE-COMPANY SPECIFIC OVERRIDES ---------- */}
+      <style jsx global>{`
+        .wordpress-content {
+          font-size: 16px;
+          line-height: 1.75;
+          color: #374151;
+        }
+
+        .wordpress-content p {
+          margin-bottom: 1.25rem;
+          line-height: 1.75;
+        }
+
+        .wordpress-content p:last-child {
+          margin-bottom: 0;
+        }
+
+        /* Headings with proper styling */
+        .wordpress-content h1,
+        .wordpress-content h2,
+        .wordpress-content h3,
+        .wordpress-content h4 {
+          font-weight: 700;
+          margin-top: 2rem;
+          margin-bottom: 1rem;
+          color: #101631;
+          line-height: 1.3;
+          clear: both;
+        }
+
+        .wordpress-content h1:first-child,
+        .wordpress-content h2:first-child,
+        .wordpress-content h3:first-child,
+        .wordpress-content h4:first-child {
+          margin-top: 0;
+        }
+
+        .wordpress-content h1 { 
+          font-size: 2rem;
+          border-bottom: 3px solid #CD091B;
+          padding-bottom: 0.5rem;
+        }
+        
+        .wordpress-content h2 { 
+          font-size: 1.75rem;
+          border-left: 4px solid #CD091B;
+          padding-left: 1rem;
+        }
+        
+        .wordpress-content h3 { 
+          font-size: 1.5rem;
+        }
+        
+        .wordpress-content h4 { 
+          font-size: 1.25rem;
+        }
+
+        /* Lists - SANPEC Product Style with Red Checkmarks */
+        .wordpress-content ul {
+          list-style: none;
+          margin: 1.5rem 0;
+          padding: 0.5rem;
+          background-color: white;
+          border-radius: 0.75rem;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+          border: 1px solid #e5e7eb;
+        }
+
+        .wordpress-content ul li {
+          position: relative;
+          padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+          margin-bottom: 0;
+          line-height: 1.7;
+          border-bottom: 1px solid #f3f4f6;
+          transition: background-color 0.2s;
+        }
+
+        .wordpress-content ul li:last-child {
+          border-bottom: none;
+        }
+
+        .wordpress-content ul li:hover {
+          background-color: #f9fafb;
+          border-radius: 0.5rem;
+        }
+
+        .wordpress-content ul li::before {
+          content: "✓";
+          position: absolute;
+          left: 0.75rem;
+          top: 0.75rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 20px;
+          height: 20px;
+          background-color: #CD091B;
+          color: white;
+          border-radius: 50%;
+          font-weight: bold;
+          font-size: 12px;
+        }
+
+        /* Ordered lists */
+        .wordpress-content ol {
+          margin: 1.5rem 0;
+          padding-left: 2rem;
+        }
+
+        .wordpress-content ol li {
+          margin-bottom: 0.75rem;
+          line-height: 1.75;
+          padding-left: 0.5rem;
+        }
+
+        /* Links */
+        .wordpress-content a {
+          color: #CD091B;
+          text-decoration: underline;
+          transition: color 0.2s;
+        }
+
+        .wordpress-content a:hover {
+          color: #101631;
+        }
+
+        /* Strong/Bold */
+        .wordpress-content strong,
+        .wordpress-content b {
+          font-weight: 700;
+          color: #101631;
+        }
+
+        /* Emphasis */
+        .wordpress-content em,
+        .wordpress-content i {
+          font-style: italic;
+        }
+
+        /* Blockquotes */
+        .wordpress-content blockquote {
+          border-left: 4px solid #CD091B;
+          padding: 1rem 1.5rem;
+          margin: 1.5rem 0;
+          background-color: #f9fafb;
+          border-radius: 0.5rem;
+          font-style: italic;
+        }
+
+        /* Images within content */
+        .wordpress-content img {
+          max-width: 100%;
+          height: auto;
+          border-radius: 0.5rem;
+          margin: 1.5rem 0;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Tables */
+        .wordpress-content table {
+          width: 100%;
+          border-collapse: collapse;
+          margin: 1.5rem 0;
+          font-size: 15px;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+          border-radius: 0.5rem;
+          overflow: hidden;
+        }
+
+        .wordpress-content table th,
+        .wordpress-content table td {
+          padding: 0.75rem 1rem;
+          border: 1px solid #e5e7eb;
+          text-align: left;
+        }
+
+        .wordpress-content table th {
+          background-color: #f3f4f6;
+          font-weight: 600;
+          color: #101631;
+        }
+
+        .wordpress-content table tr:nth-child(even) {
+          background-color: #f9fafb;
+        }
+
+        /* ---------- THE COMPANY – CLEAN, PROFESSIONAL STYLING ---------- */
+        .the-company-content {
+          font-size: 16px;
+          line-height: 1.7;
+          color: #1e293b;
+        }
+
+        /* Headings – clean, no red borders */
+        .the-company-content h2,
+        .the-company-content h3,
+        .the-company-content h4 {
+          font-weight: 700;
+          color: #0f172a;
+          margin-top: 2rem;
+          margin-bottom: 0.75rem;
+          letter-spacing: -0.01em;
+          border: none;
+          padding-left: 0;
+        }
+        .the-company-content h2 {
+          font-size: 1.75rem;
+          border-bottom: 2px solid #e2e8f0;
+          padding-bottom: 0.4rem;
+        }
+        .the-company-content h3 {
+          font-size: 1.5rem;
+        }
+        .the-company-content h4 {
+          font-size: 1.25rem;
+        }
+        .the-company-content h2:first-child,
+        .the-company-content h3:first-child {
+          margin-top: 0;
+        }
+
+        /* Bullet lists – simple disc, no red checkmarks */
+        .the-company-content ul {
+          list-style-type: disc;
+          list-style-position: outside;
+          padding-left: 1.75rem;
+          margin: 1.25rem 0;
+          background: transparent;
+          border: none;
+          box-shadow: none;
+        }
+        .the-company-content ul li {
+          padding: 0.3rem 0;
+          margin-bottom: 0.25rem;
+          border: none;
+          background: transparent;
+        }
+        .the-company-content ul li::before {
+          display: none; /* remove custom checkmark */
+        }
+        .the-company-content ul li:hover {
+          background: transparent;
+        }
+
+        /* Nested lists */
+        .the-company-content ul ul {
+          list-style-type: circle;
+          margin-top: 0.5rem;
+        }
+
+        /* Paragraph spacing */
+        .the-company-content p {
+          margin-bottom: 1.25rem;
+          line-height: 1.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+          .wordpress-content {
+            font-size: 15px;
+          }
+          .wordpress-content h1 { font-size: 1.75rem; }
+          .wordpress-content h2 { font-size: 1.5rem; }
+          .wordpress-content h3 { font-size: 1.25rem; }
+          .wordpress-content h4 { font-size: 1.125rem; }
+
+          .the-company-content {
+            font-size: 15px;
+          }
+          .the-company-content h2 {
+            font-size: 1.5rem;
+          }
+        }
+      `}</style>
     </div>
   );
 }

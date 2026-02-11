@@ -301,16 +301,37 @@ export default function InteractivePieWheel() {
           width: 100%;
         }
 
-        .tab-letter {
-          transition: all 0.3s ease;
+        .tab-image-container {
+          transition: all 0.4s ease;
+          position: relative;
+          overflow: hidden;
+          padding: 0;
+          margin: 0;
         }
 
-        .sanpec-tab:hover .tab-letter {
-          transform: scale(1.15);
+        .sanpec-tab:hover .tab-image-container {
+          transform: scale(1.08);
         }
 
-        .sanpec-tab.active .tab-letter {
-          transform: scale(1.1);
+        .sanpec-tab.active .tab-image-container {
+          transform: scale(1.05);
+        }
+
+        .tab-image-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(135deg, rgba(205, 9, 27, 0.1) 0%, rgba(16, 22, 49, 0.1) 100%);
+          opacity: 0;
+          transition: opacity 0.3s ease;
+        }
+
+        .sanpec-tab:hover .tab-image-overlay {
+          opacity: 1;
+        }
+
+        .sanpec-tab.active .tab-image-overlay {
+          opacity: 0.7;
+          background: linear-gradient(135deg, rgba(205, 9, 27, 0.2) 0%, rgba(16, 22, 49, 0.2) 100%);
         }
 
         @keyframes tabSlide {
@@ -327,6 +348,20 @@ export default function InteractivePieWheel() {
         .tab-animate {
           animation: tabSlide 0.4s ease-out;
         }
+
+        .tab-glow {
+          position: absolute;
+          inset: -2px;
+          border-radius: inherit;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+          pointer-events: none;
+        }
+
+        .sanpec-tab.active .tab-glow {
+          opacity: 1;
+          box-shadow: 0 0 20px rgba(205, 9, 27, 0.5), 0 0 40px rgba(205, 9, 27, 0.3);
+        }
       `}</style>
 
       {!isMobile && (
@@ -336,17 +371,17 @@ export default function InteractivePieWheel() {
 
       <div className="text-center py-8 lg:py-12 relative px-4 fade-in-up">
         {!isMobile && (
-           <div className="max-w-[1600px] mx-auto mb-8 md:mb-12">
-        <div className="flex items-center justify-center gap-3">
-          <div className="h-[2px] w-20 sm:w-32 md:w-48 bg-gradient-to-r from-transparent to-[#CD091B]"></div>
-          <div className="relative">
-            <svg className="w-8 h-8 md:w-10 md:h-10 text-[#CD091B]" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/>
-            </svg>
+          <div className="max-w-[1600px] mx-auto mb-8 md:mb-12">
+            <div className="flex items-center justify-center gap-3">
+              <div className="h-[2px] w-20 sm:w-32 md:w-48 bg-gradient-to-r from-transparent to-[#CD091B]"></div>
+              <div className="relative">
+                <svg className="w-8 h-8 md:w-10 md:h-10 text-[#CD091B]" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/>
+                </svg>
+              </div>
+              <div className="h-[2px] w-20 sm:w-32 md:w-48 bg-gradient-to-l from-transparent to-[#CD091B]"></div>
+            </div>
           </div>
-          <div className="h-[2px] w-20 sm:w-32 md:w-48 bg-gradient-to-l from-transparent to-[#CD091B]"></div>
-        </div>
-      </div>
         )}
         
         <div className="relative inline-block mt-0 lg:mt-0 mb-4 lg:mb-6">
@@ -411,25 +446,20 @@ export default function InteractivePieWheel() {
         </div>
 
         <div className="w-full lg:w-1/2 px-4 lg:px-0 lg:pr-[70px] lg:-ml-1 mt-0 lg:mt-0">
-          {/* SANPEC TABS */}
+          {/* SANPEC TABS WITH IMAGES ONLY */}
           <div className="mb-3 lg:mb-4">
-            <div className="flex justify-center items-center gap-1 sm:gap-2 md:gap-3 lg:gap-6">
+            <div className="flex justify-center items-center gap-1 sm:gap-2 md:gap-3 lg:gap-4">
               {sections.map((section, index) => (
                 <button
                   key={index}
                   onClick={() => selectSlice(index)}
                   onMouseEnter={() => setHoveredTabIndex(index)}
                   onMouseLeave={() => setHoveredTabIndex(null)}
-                  className={`sanpec-tab flex flex-col items-center justify-center p-1.5 sm:p-2 md:p-3 lg:p-4 pb-3 sm:pb-3 md:pb-4 lg:pb-5 rounded-lg transition-all duration-300 ${
+                  className={`sanpec-tab flex items-center justify-center p-0 rounded-xl transition-all duration-300 overflow-hidden ${
                     currentActiveIndex === index ? 'active' : ''
                   }`}
                   style={{
-                    backgroundColor: currentActiveIndex === index 
-                      ? secondaryColor 
-                      : hoveredTabIndex === index 
-                      ? '#f8f9fa' 
-                      : 'white',
-                    color: currentActiveIndex === index ? 'white' : primaryColor,
+                    backgroundColor: 'white',
                     border: `2px solid ${
                       currentActiveIndex === index 
                         ? secondaryColor 
@@ -438,62 +468,51 @@ export default function InteractivePieWheel() {
                         : '#e5e7eb'
                     }`,
                     boxShadow: currentActiveIndex === index 
-                      ? '0 8px 20px rgba(205, 9, 27, 0.3)' 
+                      ? '0 8px 20px rgba(205, 9, 27, 0.4)' 
                       : hoveredTabIndex === index
                       ? '0 4px 12px rgba(205, 9, 27, 0.2)'
                       : '0 2px 4px rgba(0,0,0,0.05)',
                     flex: '1',
                     minWidth: '0',
-                    height: '100px'
+                    height: '160px',
+                    aspectRatio: '1/1'
                   }}
                 >
-                  <span 
-                    className="tab-letter text-2xl sm:text-3xl md:text-4xl font-black mb-1"
-                    style={{
-                      color: currentActiveIndex === index ? 'white' : secondaryColor
-                    }}
-                  >
-                    {section.tabLetter}
-                  </span>
-                  <span className="text-[10px] sm:text-xs font-semibold text-center leading-tight">
-                    {section.tabTitle}
-                  </span>
+                  <div className="tab-glow"></div>
+                  
+                  {/* Image Only - No Padding */}
+                  <div className="tab-image-container w-full h-full flex items-center justify-center">
+                    <div className="tab-image-overlay"></div>
+                    <img
+                      src={section.image}
+                      alt={section.tabTitle}
+                      className="w-full h-full object-contain"
+                      style={{ padding: 0, margin: 0 }}
+                      onError={(e) => {
+                        e.target.src = "https://via.placeholder.com/150";
+                      }}
+                    />
+                  </div>
                 </button>
               ))}
             </div>
           </div>
 
-          <div className="content-card bg-white rounded-xl lg:rounded-2xl shadow-lg lg:shadow-xl h-auto lg:h-[600px] hover:shadow-2xl transition-shadow duration-500 overflow-hidden tab-animate" style={{
+          {/* CONTENT CARD - NO IMAGE, FULL WIDTH CONTENT */}
+          <div className="content-card bg-white shadow-lg lg:shadow-xl h-auto lg:h-[600px] hover:shadow-2xl transition-shadow duration-500 overflow-hidden tab-animate" style={{
             border: '1px solid #e5e7eb'
           }}>
             <div className="flex flex-col h-full">
-              {/* Mobile: Image left, Title right, Content below */}
+              {/* Mobile Layout */}
               <div className="md:hidden w-full">
-                {/* Top section: Image and Title side by side */}
-                <div className="flex gap-3 p-4 border-b" style={{ borderColor: `${primaryColor}20` }}>
-                  {/* Image on left */}
-                  <div className="w-32 h-32 flex-shrink-0 bg-white rounded-lg overflow-hidden">
-                    <img
-                      src={currentSection.image}
-                      alt={currentSection.contentTitle}
-                      className="w-full h-full object-contain"
-                      onError={(e) => {
-                        e.target.src = "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9";
-                      }}
-                    />
-                  </div>
-                  
-                  {/* Title on right */}
-                  <div className="flex-1 flex items-center">
-                    <h2 className="text-lg font-bold leading-tight" style={{ color: primaryColor }}>
-                      {currentSection.contentTitle}
-                    </h2>
-                  </div>
+                <div className="p-4 border-b" style={{ borderColor: `${primaryColor}20` }}>
+                  <h2 className="text-lg font-bold leading-tight" style={{ color: primaryColor }}>
+                    {currentSection.contentTitle}
+                  </h2>
                 </div>
                 
-                {/* Content below */}
                 <div className="p-4">
-                  <div className="space-y-3 mb-4 max-h-[400px] overflow-y-auto custom-scrollbar">
+                  <div className="space-y-2 mb-4 max-h-[400px] overflow-y-auto custom-scrollbar">
                     {currentSection.content.map((item, idx) => (
                       <div key={idx} className="p-2">
                         {item.subtitle && (
@@ -525,21 +544,9 @@ export default function InteractivePieWheel() {
                 </div>
               </div>
 
-              {/* Desktop: Side by side layout */}
-              <div className="hidden md:flex flex-row h-full">
-                <div className="md:w-2/5 h-auto relative overflow-hidden">
-                  <img
-                    src={currentSection.image}
-                    alt={currentSection.contentTitle}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-                    onError={(e) => {
-                      e.target.src = "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9";
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                </div>
-                
-                <div className="md:w-3/5 h-full relative">
+              {/* Desktop: Full Width Content */}
+              <div className="hidden md:flex flex-col h-full w-full">
+                <div className="h-full relative w-full">
                   <div className="scrollable-content custom-scrollbar h-full p-4 lg:p-8">
                     <div className="mb-4 lg:mb-6 pb-3 lg:pb-4 border-b relative" style={{ borderColor: `${primaryColor}20` }}>
                       <h2 className="text-2xl md:text-3xl font-bold relative" style={{ color: primaryColor }}>
@@ -547,12 +554,12 @@ export default function InteractivePieWheel() {
                       </h2>
                     </div>
                     
-                    <div className="space-y-4 mb-6 pr-2">
+                    <div className="space-y-1.5 mb-6 pr-2">
                       {currentSection.content.map((item, idx) => (
-                        <div key={idx} className="content-item group p-3 rounded-lg border border-transparent hover:border-gray-200 relative">
+                        <div key={idx} className="content-item group p-2 rounded-lg border border-transparent hover:border-gray-200 relative">
                           <div className="absolute left-0 top-0 bottom-0 w-1 rounded-r-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundColor: secondaryColor }}></div>
                           {item.subtitle && (
-                            <h3 className="font-bold text-lg mb-2 flex items-center gap-2" style={{ color: primaryColor }}>
+                            <h3 className="font-bold text-lg mb-1 flex items-center gap-2" style={{ color: primaryColor }}>
                               <div className="w-2 h-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:animate-pulse" style={{ backgroundColor: secondaryColor }}></div>
                               <span className="group-hover:translate-x-1 transition-transform duration-300">{item.subtitle}</span>
                             </h3>

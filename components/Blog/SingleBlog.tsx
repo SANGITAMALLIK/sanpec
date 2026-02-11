@@ -44,20 +44,25 @@ const SingleBlog = ({ slug }: { slug: string }) => {
     const fetchBlog = async () => {
       try {
         setLoading(true);
-        console.log('Searching for slug:', slug); // Debug
+        console.log('Searching for slug:', slug);
         
         const cachedData = localStorage.getItem('blogData');
         
         if (cachedData) {
           const allBlogs = JSON.parse(cachedData);
-          console.log('Cached blogs:', allBlogs); // Debug
+          console.log('Cached blogs:', allBlogs);
           
-          // WordPress ka slug use karo for matching
           const found = allBlogs.find((b: any) => b.slug === slug);
-          console.log('Found blog in cache:', found); // Debug
+          console.log('Found blog in cache:', found);
           
           if (found) {
-            const res = await fetch(`https://news.sanpec-excellence.com/wp-json/wp/v2/posts/${found.id}?_embed`);
+            const res = await fetch(
+              `https://news.sanpec-excellence.com/wp-json/wp/v2/posts/${found.id}?_embed`,
+              {
+                next: { revalidate: 300 }, // ✅ 5 minutes cache
+                cache: 'force-cache' // ✅ Force cache
+              }
+            );
             const data = await res.json();
             
             setBlog({
@@ -68,16 +73,15 @@ const SingleBlog = ({ slug }: { slug: string }) => {
               category: data._embedded?.['wp:term']?.[0]?.[0]?.name || 'Uncategorized',
               date: new Date(data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
               author: data._embedded?.author?.[0]?.name || 'Admin',
-              slug: data.slug // WordPress ka slug use karo
+              slug: data.slug
             });
             
             setPopularPosts(allBlogs.slice(0, 5).map((b: Blog) => ({ 
               ...b, 
               title: decodeHTML(b.title),
-              slug: b.slug // WordPress ka slug already hai
+              slug: b.slug
             })));
             
-            // Uncategorized ko filter out karo
             const allCategories = allBlogs.map((b: Blog) => b.category);
             const filteredCategories = allCategories.filter((cat: string) => cat !== 'Uncategorized');
             const uniqueCategories: string[] = Array.from(new Set(filteredCategories));
@@ -88,15 +92,19 @@ const SingleBlog = ({ slug }: { slug: string }) => {
           }
         }
         
-        // Agar cache mein nahi mila, to API se fetch karo
-        console.log('Not found in cache, fetching from API...'); // Debug
-        const res = await fetch('https://news.sanpec-excellence.com/wp-json/wp/v2/posts?categories=1,25,43,46&per_page=100&_embed');
+        console.log('Not found in cache, fetching from API...');
+        const res = await fetch(
+          'https://news.sanpec-excellence.com/wp-json/wp/v2/posts?categories=1,25,43,46&per_page=100&_embed',
+          {
+            next: { revalidate: 300 }, // ✅ 5 minutes cache
+            cache: 'force-cache' // ✅ Force cache
+          }
+        );
         const allPosts = await res.json();
-        console.log('API posts:', allPosts); // Debug
+        console.log('API posts:', allPosts);
         
-        // WordPress slug se match karo
         const matched = allPosts.find((post: any) => post.slug === slug);
-        console.log('Matched post:', matched); // Debug
+        console.log('Matched post:', matched);
         
         if (matched) {
           setBlog({
@@ -107,29 +115,28 @@ const SingleBlog = ({ slug }: { slug: string }) => {
             category: matched._embedded?.['wp:term']?.[0]?.[0]?.name || 'Uncategorized',
             date: new Date(matched.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
             author: matched._embedded?.author?.[0]?.name || 'Admin',
-            slug: matched.slug // WordPress ka slug
+            slug: matched.slug
           });
           
           setPopularPosts(allPosts.slice(0, 5).map((p: any) => ({
             id: p.id,
             title: decodeHTML(p.title.rendered),
-            slug: p.slug, // WordPress ka slug
+            slug: p.slug,
             image: p._embedded?.['wp:featuredmedia']?.[0]?.source_url || '',
             category: p._embedded?.['wp:term']?.[0]?.[0]?.name || 'Uncategorized'
           })));
           
-          // Uncategorized ko filter out karo
           const allCategories = allPosts.map((p: any) => p._embedded?.['wp:term']?.[0]?.[0]?.name || 'Uncategorized');
           const filteredCategories = allCategories.filter((cat: string) => cat !== 'Uncategorized');
           const uniqueCategories: string[] = Array.from(new Set(filteredCategories));
           setCategories(['All', ...uniqueCategories]);
         } else {
-          console.error('Blog not found with slug:', slug); // Debug
+          console.error('Blog not found with slug:', slug);
           setError(true);
         }
         setLoading(false);
       } catch (err) {
-        console.error('Error fetching blog:', err); // Debug
+        console.error('Error fetching blog:', err);
         setError(true);
         setLoading(false);
       }
@@ -290,34 +297,6 @@ const SingleBlog = ({ slug }: { slug: string }) => {
                   ))}
                 </div>
               </div>
-{/* 
-              <div className="bg-white p-5 shadow-sm border border-gray-200 rounded-lg">
-                <div className="flex items-center gap-2.5 mb-4">
-                  <Tag className="w-5 h-5 text-[#DC2626]" />
-                  <h3 className="text-base font-semibold text-[#0B1931]">Categories</h3>
-                </div>
-                <div className="space-y-2">
-                  {categories.filter(cat => cat !== 'All').slice(0, 6).map((cat) => (
-                    <Link key={cat} href="/blog" onClick={() => localStorage.setItem('selectedCategory', cat)}
-                      className="block px-3.5 py-2 text-sm font-medium transition-all border rounded bg-white text-gray-700 border-gray-200 hover:border-[#DC2626] hover:text-[#DC2626]">
-                      {cat}
-                    </Link>
-                  ))}
-                </div>
-              </div> */}
-
-              {/* <div className="bg-white p-5 shadow-sm border border-gray-200 rounded-lg">
-                <div className="flex items-center gap-2.5 mb-3">
-                  <Mail className="w-5 h-5 text-[#DC2626]" />
-                  <h3 className="text-base font-semibold text-[#0B1931]">Newsletter</h3>
-                </div>
-                <p className="text-gray-600 text-xs mb-3 leading-relaxed">Get latest insights delivered.</p>
-                <input type="email" placeholder="Your email" 
-                  className="w-full px-3 py-2 bg-gray-50 border border-gray-300 text-sm text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#DC2626] mb-2.5 rounded" />
-                <button className="w-full bg-[#DC2626] hover:bg-red-700 text-white text-sm font-medium py-2 transition-colors rounded">
-                  Subscribe
-                </button>
-              </div> */}
             </div>
           </div>
         </div>

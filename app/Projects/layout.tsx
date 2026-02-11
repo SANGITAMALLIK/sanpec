@@ -36,7 +36,11 @@ export default function ElectricPowerLayout({
     const fetchTransmissionPosts = async () => {
       try {
         const response = await fetch(
-          'https://news.sanpec-excellence.com/wp-json/wp/v2/posts?categories=42&_embed&per_page=100'
+          'https://news.sanpec-excellence.com/wp-json/wp/v2/posts?categories=42&_embed&per_page=100',
+            {
+            next: { revalidate: 300 }, // ✅ 5 minutes cache
+            cache: 'force-cache' // ✅ Force cache
+          }
         );
         const data = await response.json();
         setTransmissionPosts(data);

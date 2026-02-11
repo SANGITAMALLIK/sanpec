@@ -12,19 +12,11 @@ interface Post {
   link: string;
 }
 
-interface Category {
-  id: number;
-  name: string;
-  slug: string;
-  parent: number;
-}
-
 const staticMenuData = [
   {
     id: 'education',
     title: 'Education and Training',
-    url: '/research',
-    categoryId: 51
+    url: '/research'
   },
 ];
 
@@ -35,77 +27,29 @@ export default function ElectricPowerLayout({
 }) {
   const pathname = usePathname();
   const router = useRouter();
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [categoryPosts, setCategoryPosts] = useState<{[key: number]: Post[]}>({});
+  const [transmissionPosts, setTransmissionPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
-  const [openCategories, setOpenCategories] = useState<{[key: number]: boolean}>({});
+  const [isTransmissionOpen, setIsTransmissionOpen] = useState(true);
   const [isPdfModalOpen, setIsPdfModalOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Fetch subcategories of category ID 50 (EXCLUDING category 51)
   useEffect(() => {
-    const fetchSubcategories = async () => {
+    const fetchTransmissionPosts = async () => {
       try {
         const response = await fetch(
-          'https://news.sanpec-excellence.com/wp-json/wp/v2/categories?parent=50&per_page=100',
-          // {
-          //   next: { revalidate: 300 }, // ✅ 5 minutes cache
-          //   cache: 'force-cache' // ✅ Force cache
-          // }
+          'https://news.sanpec-excellence.com/wp-json/wp/v2/posts?categories=36&per_page=100&_embed'
         );
         const data = await response.json();
-        
-        // Filter out category ID 51 (Education and Training)
-        const filteredCategories = data.filter((cat: Category) => cat.id !== 51);
-        
-        setCategories(filteredCategories);
-        
-        // Initialize all categories as open
-        const initialOpenState: {[key: number]: boolean} = {};
-        filteredCategories.forEach((cat: Category) => {
-          initialOpenState[cat.id] = true;
-        });
-        setOpenCategories(initialOpenState);
-        
-        // Fetch posts for each subcategory
-        filteredCategories.forEach((cat: Category) => {
-          fetchCategoryPosts(cat.id);
-        });
+        setTransmissionPosts(data);
       } catch (error) {
-        console.error('Error fetching subcategories:', error);
+        console.error('Error fetching transmission posts:', error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchSubcategories();
+    fetchTransmissionPosts();
   }, []);
-
-  const fetchCategoryPosts = async (categoryId: number) => {
-    try {
-      const response = await fetch(
-        `https://news.sanpec-excellence.com/wp-json/wp/v2/posts?categories=${categoryId}&per_page=100&_embed`,
-        {
-          next: { revalidate: 300 }, // ✅ 5 minutes cache
-          cache: 'force-cache' // ✅ Force cache
-        }
-      );
-      const data = await response.json();
-      setCategoryPosts(prev => ({
-        ...prev,
-        [categoryId]: data
-      }));
-    } catch (error) {
-      console.error(`Error fetching posts for category ${categoryId}:`, error);
-    }
-  };
-
-  const toggleCategory = (categoryId: number) => {
-    setOpenCategories(prev => ({
-      ...prev,
-      [categoryId]: !prev[categoryId]
-    }));
-  };
 
   const stripHtml = (html: string) => {
     if (typeof document !== 'undefined') {
@@ -118,29 +62,29 @@ export default function ElectricPowerLayout({
 
   // Find active post if on single page
   const activePostSlug = pathname.split('/').pop();
-  let activePost: Post | undefined;
-  let activeCategoryId: number | undefined;
+  const activePost = transmissionPosts.find(post => post.slug === activePostSlug);
 
-  // Check which category contains the active post
-  Object.entries(categoryPosts).forEach(([catId, posts]) => {
-    const foundPost = posts.find(post => post.slug === activePostSlug);
-    if (foundPost) {
-      activePost = foundPost;
-      activeCategoryId = parseInt(catId);
-    }
-  });
+  // Check active states - Only one can be active at a time
+  const isTransmissionActive = activePost !== undefined;
+  const isRecentActive = pathname.includes('/electric-power/recent');
+  const isEducationActive = !isTransmissionActive && !isRecentActive;
 
-  // Check if Education and Training page is active (when no dynamic post is active)
-  const isEducationActive = pathname === '/research' || (!activePost && pathname.startsWith('/research'));
-
+  // Get breadcrumb title - NO TRUNCATION, FULL TEXT
   const getBreadcrumbTitle = () => {
+    if (isRecentActive) {
+      return 'Recent';
+    }
     if (activePost) {
       return stripHtml(activePost.title.rendered);
     }
     return 'Education and Training';
   };
 
+  // Get FULL breadcrumb title for hover
   const getFullBreadcrumbTitle = () => {
+    if (isRecentActive) {
+      return 'Recent';
+    }
     if (activePost) {
       return stripHtml(activePost.title.rendered);
     }
@@ -154,7 +98,7 @@ export default function ElectricPowerLayout({
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section */}
+      {/* Hero Section with Download Button */}
       <div className="relative overflow-hidden h-64 sm:h-72 md:h-80 lg:h-[300px]">
         <div className="absolute inset-0">
           <img 
@@ -170,6 +114,18 @@ export default function ElectricPowerLayout({
             }}
           ></div>
         </div>
+
+        {/* Download Button - Bottom Right of Hero */}
+        {/* <div className="absolute bottom-6 right-3 sm:bottom-10 sm:right-6 lg:bottom-12 lg:right-12 z-20">
+          <button
+            onClick={() => setIsPdfModalOpen(true)}
+            className="group flex items-center gap-1 px-2 py-1 sm:gap-2.5 sm:px-6 sm:py-3 bg-white/95 backdrop-blur-sm border border-white/20 sm:border-2 text-gray-900 font-normal sm:font-semibold sm:text-base rounded sm:rounded-lg hover:bg-[#cd091b] hover:text-white hover:border-[#cd091b] transition-all duration-300 shadow-sm sm:shadow-xl hover:shadow-md sm:hover:shadow-2xl"
+            style={{ fontSize: '12px' }}
+          >
+            <Download className="w-3 h-3 sm:w-5 sm:h-5" />
+            <span className="text-[12px] sm:text-base">Download Brochure</span>
+          </button>
+        </div> */}
   
         <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12 h-full flex flex-col justify-end pb-6 sm:pb-8 pt-20 sm:pt-0">
           <div className="mb-4 sm:mb-5">
@@ -183,6 +139,7 @@ export default function ElectricPowerLayout({
             </div>
           </div>
           
+          {/* BREADCRUMB - 8 WORDS PER LINE */}
           <nav className="flex items-start gap-1.5 sm:gap-2 text-xs sm:text-sm">
             <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
               <a 
@@ -232,6 +189,7 @@ export default function ElectricPowerLayout({
       {/* MOBILE SIDEBAR */}
       <div className={`lg:hidden fixed top-0 left-0 h-full w-80 bg-white z-50 shadow-2xl transform transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="h-full overflow-y-auto">
+          {/* Header */}
           <div className="sticky top-0 bg-[#cd091b] text-white p-4 flex items-center justify-between">
             <h3 className="text-lg font-bold">Research & Innovation</h3>
             <button 
@@ -242,14 +200,15 @@ export default function ElectricPowerLayout({
             </button>
           </div>
 
+          {/* Menu Items */}
           <div className="p-4 space-y-2">
-            {/* Education and Training - STATIC */}
+            {/* Education and Training */}
             <div>
               <div className="mb-2">
                 <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider px-2">Main</h4>
               </div>
               {staticMenuData.map((item) => {
-                const isActive = isEducationActive;
+                const isActive = item.id === 'education' ? isEducationActive : isRecentActive;
                 return (
                   <button
                     key={item.id}
@@ -262,14 +221,16 @@ export default function ElectricPowerLayout({
               })}
             </div>
 
-            {/* Dynamic Categories (EXCLUDING Category 51) */}
-            {categories.map((category) => (
-              <div key={category.id} className="pt-4 border-t border-gray-200">
-                <div className="mb-2">
-                  <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider px-2">{category.name}</h4>
-                </div>
-                <div className="space-y-1">
-                  {categoryPosts[category.id]?.map((post) => {
+            {/* Research & Development Section */}
+            <div className="pt-4 border-t border-gray-200">
+              <div className="mb-2">
+                <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider px-2">Research & Development</h4>
+              </div>
+              <div className="space-y-1">
+                {loading ? (
+                  <div className="px-4 py-3 text-sm text-gray-500">Loading...</div>
+                ) : (
+                  transmissionPosts.map((post) => {
                     const isActive = pathname.includes(post.slug);
                     return (
                       <button
@@ -280,10 +241,10 @@ export default function ElectricPowerLayout({
                         {stripHtml(post.title.rendered)}
                       </button>
                     );
-                  })}
-                </div>
+                  })
+                )}
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </div>
@@ -291,14 +252,14 @@ export default function ElectricPowerLayout({
       {/* Sidebar + Content */}
       <div className="max-w-7_5xl mx-auto">
         <div className="flex flex-col lg:flex-row">
-          {/* DESKTOP SIDEBAR */}
+          {/* DESKTOP SIDEBAR - Tower Design */}
           <aside className="hidden lg:block w-80 bg-gradient-to-b from-gray-50 to-white lg:sticky lg:top-0 h-full lg:min-h-screen border-r border-gray-200">
             <nav className="py-8 px-6 relative">
               <div className="absolute left-8 top-0 bottom-12 w-1 bg-gradient-to-b from-gray-300 via-gray-400 to-gray-300"></div>
               
-              {/* Static Menu - Education and Training */}
+              {/* Static Menu Items */}
               {staticMenuData.map((item) => {
-                const isActive = isEducationActive;
+                const isActive = item.id === 'education' ? isEducationActive : isRecentActive;
                 
                 return (
                   <div key={item.id} className="mb-6 relative">
@@ -330,57 +291,50 @@ export default function ElectricPowerLayout({
                 );
               })}
 
-              {/* Dynamic Categories with Dropdown (EXCLUDING Category 51) */}
-              {categories.map((category) => {
-                const isCategoryActive = activeCategoryId === category.id;
-                const posts = categoryPosts[category.id] || [];
-                
-                return (
-                  <div key={category.id} className="mb-6 relative">
-                    <div className="absolute left-2 top-5 w-3 h-3 bg-white border-2 border-gray-400 rounded-full shadow-md z-20"></div>
-                    <div className={`absolute left-5 top-6 w-6 h-0.5 transition-all duration-300 ${isCategoryActive ? 'bg-gray-600' : 'bg-gray-400'}`}></div>
+              {/* Transmission Section with Dropdown */}
+              <div className="mb-6 relative">
+                <div className="absolute left-2 top-5 w-3 h-3 bg-white border-2 border-gray-400 rounded-full shadow-md z-20"></div>
+                <div className={`absolute left-5 top-6 w-6 h-0.5 transition-all duration-300 ${isTransmissionActive ? 'bg-gray-600' : 'bg-gray-400'}`}></div>
 
-                    <div 
-                      onClick={() => toggleCategory(category.id)}
-                      className={`relative ml-11 group flex items-center justify-between px-4 py-3.5 cursor-pointer transition-all duration-300 ease-out rounded-lg border-2 ${isCategoryActive ? 'border-gray-300 text-gray-900 shadow-xl' : 'bg-white border-gray-300 text-gray-700 hover:border-gray-400 hover:shadow-lg'}`}
-                      style={isCategoryActive ? {backgroundColor: '#F3F3F3'} : {}}
-                    >
-                      <span className="text-sm font-semibold flex-1">{category.name}</span>
-                      
-                      <div className="flex items-center gap-2">
-                        {isCategoryActive && (
-                          <>
-                            <div className="w-2 h-2 bg-gray-800 rounded-full animate-pulse"></div>
-                            <div className="w-2 h-2 bg-gray-600 rounded-full animate-ping absolute"></div>
-                          </>
-                        )}
-                        {openCategories[category.id] ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-                      </div>
-                    </div>
+                <div 
+                  onClick={() => setIsTransmissionOpen(!isTransmissionOpen)}
+                  className={`relative ml-11 group flex items-center justify-between px-4 py-3.5 cursor-pointer transition-all duration-300 ease-out rounded-lg border-2 ${isTransmissionActive ? 'border-gray-300 text-gray-900 shadow-xl' : 'bg-white border-gray-300 text-gray-700 hover:border-gray-400 hover:shadow-lg'}`}
+                  style={isTransmissionActive ? {backgroundColor: '#F3F3F3'} : {}}
+                >
+                  <span className="text-sm font-semibold flex-1">Research & Development</span>
+                  
+                  <div className="flex items-center gap-2">
+                    {isTransmissionActive && (
+                      <>
+                        <div className="w-2 h-2 bg-gray-800 rounded-full animate-pulse"></div>
+                        <div className="w-2 h-2 bg-gray-600 rounded-full animate-ping absolute"></div>
+                      </>
+                    )}
+                    {isTransmissionOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                  </div>
+                </div>
 
-                    {openCategories[category.id] && (
-                      <div className="ml-11 mt-2 space-y-1 max-h-96 overflow-y-auto custom-scrollbar">
-                        {posts.length === 0 ? (
-                          <div className="px-4 py-2 text-xs text-gray-500">Loading...</div>
-                        ) : (
-                          posts.map((post) => {
-                            const isActivePost = pathname.includes(post.slug);
-                            return (
-                              <div
-                                key={post.id}
-                                onClick={() => router.push(`/research/${post.slug}`)}
-                                className={`px-4 py-2.5 rounded-md cursor-pointer text-sm transition-all duration-200 ${isActivePost ? 'bg-[#cd091b]/10 text-[#cd091b] font-semibold border-l-2 border-[#cd091b]' : 'text-gray-600 hover:bg-gray-100 border-l-2 border-transparent'}`}
-                              >
-                                {stripHtml(post.title.rendered)}
-                              </div>
-                            );
-                          })
-                        )}
-                      </div>
+                {isTransmissionOpen && (
+                  <div className="ml-11 mt-2 space-y-1 max-h-96 overflow-y-auto custom-scrollbar">
+                    {loading ? (
+                      <div className="px-4 py-2 text-xs text-gray-500">Loading Project...</div>
+                    ) : (
+                      transmissionPosts.map((post) => {
+                        const isActivePost = pathname.includes(post.slug);
+                        return (
+                          <div
+                            key={post.id}
+                            onClick={() => router.push(`/research/${post.slug}`)}
+                            className={`px-4 py-2.5 rounded-md cursor-pointer text-sm transition-all duration-200 ${isActivePost ? 'bg-[#cd091b]/10 text-[#cd091b] font-semibold border-l-2 border-[#cd091b]' : 'text-gray-600 hover:bg-gray-100 border-l-2 border-transparent'}`}
+                          >
+                            {stripHtml(post.title.rendered)}
+                          </div>
+                        );
+                      })
                     )}
                   </div>
-                );
-              })}
+                )}
+              </div>
 
               <div className="absolute left-4 bottom-0 w-9 h-12 bg-gradient-to-b from-gray-400 to-gray-500 opacity-30" 
                    style={{clipPath: 'polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%)'}}></div>
@@ -400,7 +354,54 @@ export default function ElectricPowerLayout({
         </div>
       </div>
 
+      {/* OPTIMIZED PDF Modal Viewer - Instant Load */}
+      {isPdfModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-600/80 backdrop-blur-sm p-4">
+          <div className="relative w-full max-w-7xl h-[95vh] bg-white rounded-xl shadow-2xl overflow-hidden flex flex-col">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between px-6 py-4 bg-gradient-to-r from-[#cd091b] to-red-700 text-white">
+              <div className="flex items-center gap-3">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <h3 className="text-lg font-bold">Research and Innovation</h3>
+              </div>
+              <div className="flex items-center gap-2">
+                <a
+                  href="#"
+                  download
+                  className="px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg text-sm font-medium transition-colors duration-200 flex items-center gap-2"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  Download Pdf
+                </a>
+                <button
+                  onClick={() => setIsPdfModalOpen(false)}
+                  className="w-10 h-10 flex items-center justify-center bg-white/20 hover:bg-white/30 rounded-lg transition-colors duration-200"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            {/* OPTIMIZED PDF Viewer */}
+            <div className="flex-1 overflow-auto bg-gray-100">
+              <iframe
+                src="/images/pdf/Research and Innovation.pdf"
+                className="w-full h-full"
+                title="Research and Innovation PDF"
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
       <style jsx global>{`
+        /* Custom Scrollbar Styling */
         .custom-scrollbar::-webkit-scrollbar {
           width: 6px;
         }
@@ -419,6 +420,7 @@ export default function ElectricPowerLayout({
           background: #555;
         }
 
+        /* Firefox */
         .custom-scrollbar {
           scrollbar-width: thin;
           scrollbar-color: #888 #f1f1f1;

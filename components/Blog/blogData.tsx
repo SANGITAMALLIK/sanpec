@@ -6,7 +6,7 @@ import { Search, Home, ChevronRight, Filter, TrendingUp, Zap, Mail, Tag, Chevron
 interface Blog {
   id: number;
   title: string;
-  slug: string;  // Yeh WordPress se aayega
+  slug: string;
   image: string;
   category: string;
   categoryId: number;
@@ -49,7 +49,9 @@ const BlogData = () => {
           {
             headers: {
               'Content-Type': 'application/json',
-            }
+            },
+            next: { revalidate: 300 }, // ✅ 5 minutes cache
+            cache: 'force-cache' // ✅ Force cache for faster loading
           }
         );
 
@@ -80,13 +82,12 @@ const BlogData = () => {
             ? post.excerpt.rendered.replace(/<[^>]*>/g, '').substring(0, 120) + '...'
             : '';
           
-          // IMPORTANT: WordPress se slug directly use karo
           console.log(`Post: ${decodedTitle}, WordPress Slug: ${post.slug}`);
           
           return {
             id: post.id,
             title: decodedTitle,
-            slug: post.slug,  // ✅ WordPress ka actual slug use karo
+            slug: post.slug,
             image: post._embedded?.['wp:featuredmedia']?.[0]?.source_url || 
                    post._embedded?.['wp:featuredmedia']?.[0]?.media_details?.sizes?.full?.source_url ||
                    'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800',
@@ -244,7 +245,6 @@ const BlogData = () => {
                     <div className="w-16 h-1.5 bg-[#DC2626]"></div>
                     <h2 className="text-3xl md:text-4xl font-bold text-[#0B1931]">Recent Post</h2>
                   </div>
-                  {/* WordPress slug use ho raha hai ✅ */}
                   <Link href={`/blog/${filteredBlogs[0].slug}`} className="block">
                     <article className="group relative bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200 hover:shadow-2xl hover:border-[#DC2626] transition-all duration-500 hover:-translate-y-3">
                       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#DC2626] to-[#171530] group-hover:h-2 transition-all duration-300"></div>
@@ -317,7 +317,6 @@ const BlogData = () => {
                   <>
                     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
                       {currentBlogs.map((blog) => (
-                        // WordPress slug use ho raha hai ✅
                         <Link 
                           key={blog.id} 
                           href={`/blog/${blog.slug}`}
@@ -432,7 +431,6 @@ const BlogData = () => {
                 </div>
                 <div className="space-y-4">
                   {popularPosts.map((post, idx) => (
-                    // WordPress slug use ho raha hai ✅
                     <Link key={post.id} href={`/blog/${post.slug}`} className="group flex items-start gap-3 pb-4 border-b last:border-0">
                       <div className="flex-shrink-0 w-8 h-8 bg-gray-100 flex items-center justify-center text-sm font-medium group-hover:bg-[#DC2626] group-hover:text-white transition-colors">
                         {idx + 1}
