@@ -4,6 +4,7 @@ import Link from 'next/link';
 const sections = [
   {
     tabTitle: "Systems & Structures",
+    tabLetter: "S",
     contentTitle: "Systems Approach and Foresight",
     image: "images/home/six-pillars/1.png",
     position: { top: '10%', left: '50%', transform: 'translateX(-50%)' },
@@ -28,6 +29,7 @@ const sections = [
   },
   {
     tabTitle: "Agility",
+    tabLetter: "A",
     contentTitle: "Agility and Strategic Planning",
     image: "images/home/six-pillars/2.png",
     position: { top: '25%', left: '30%', transform: 'translateX(-50%)' },
@@ -53,6 +55,7 @@ const sections = [
   },
   {
     tabTitle: "New Innovation",
+    tabLetter: "N",
     contentTitle: "New Solutions and Innovation Management",
     image: "images/home/six-pillars/3.png",
     position: { top: '40%', right: '15%' },
@@ -77,6 +80,7 @@ const sections = [
   },
   {
     tabTitle: "Process Excellence",
+    tabLetter: "P",
     contentTitle: "Process Excellence",
     image: "images/home/six-pillars/4.png",
     position: { top: '55%', right: '35%' },
@@ -106,6 +110,7 @@ const sections = [
   },
   {
     tabTitle: "Ecosystem Innovation",
+    tabLetter: "E",
     contentTitle: "Innovation within the Business Ecosystem",
     image: "images/home/six-pillars/5.png",
     position: { top: '70%', left: '8%' },
@@ -131,6 +136,7 @@ const sections = [
   },
   {
     tabTitle: "Collaboration & Co-Creation",
+    tabLetter: "C",
     contentTitle: "Collaborative Efforts for Shared Value",
     image: "images/home/six-pillars/6.png",
     position: { top: '85%', left: '50%', transform: 'translateX(-50%)' },
@@ -157,6 +163,7 @@ export default function InteractivePieWheel() {
   const [isAnimating, setIsAnimating] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [hoveredTabIndex, setHoveredTabIndex] = useState(null);
   
   const primaryColor = "#101631";
   const secondaryColor = "#CD091B";
@@ -266,6 +273,60 @@ export default function InteractivePieWheel() {
         .scrollable-content:hover {
           overflow-y: scroll;
         }
+
+        .sanpec-tab {
+          transition: all 0.3s ease;
+          cursor: pointer;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .sanpec-tab::before {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          width: 0;
+          height: 3px;
+          background: #CD091B;
+          transform: translateX(-50%);
+          transition: width 0.3s ease;
+        }
+
+        .sanpec-tab.active::before {
+          width: 100%;
+        }
+
+        .sanpec-tab:hover::before {
+          width: 100%;
+        }
+
+        .tab-letter {
+          transition: all 0.3s ease;
+        }
+
+        .sanpec-tab:hover .tab-letter {
+          transform: scale(1.15);
+        }
+
+        .sanpec-tab.active .tab-letter {
+          transform: scale(1.1);
+        }
+
+        @keyframes tabSlide {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .tab-animate {
+          animation: tabSlide 0.4s ease-out;
+        }
       `}</style>
 
       {!isMobile && (
@@ -350,7 +411,61 @@ export default function InteractivePieWheel() {
         </div>
 
         <div className="w-full lg:w-1/2 px-4 lg:px-0 lg:pr-[70px] lg:-ml-1 mt-0 lg:mt-0">
-          <div className="content-card bg-white rounded-xl lg:rounded-2xl shadow-lg lg:shadow-xl border border-gray-200 h-auto lg:h-[600px] hover:shadow-2xl transition-shadow duration-500 overflow-hidden">
+          {/* SANPEC TABS */}
+          <div className="mb-3 lg:mb-4">
+            <div className="flex justify-center items-center gap-1 sm:gap-2 md:gap-3 lg:gap-6">
+              {sections.map((section, index) => (
+                <button
+                  key={index}
+                  onClick={() => selectSlice(index)}
+                  onMouseEnter={() => setHoveredTabIndex(index)}
+                  onMouseLeave={() => setHoveredTabIndex(null)}
+                  className={`sanpec-tab flex flex-col items-center justify-center p-1.5 sm:p-2 md:p-3 lg:p-4 pb-3 sm:pb-3 md:pb-4 lg:pb-5 rounded-lg transition-all duration-300 ${
+                    currentActiveIndex === index ? 'active' : ''
+                  }`}
+                  style={{
+                    backgroundColor: currentActiveIndex === index 
+                      ? secondaryColor 
+                      : hoveredTabIndex === index 
+                      ? '#f8f9fa' 
+                      : 'white',
+                    color: currentActiveIndex === index ? 'white' : primaryColor,
+                    border: `2px solid ${
+                      currentActiveIndex === index 
+                        ? secondaryColor 
+                        : hoveredTabIndex === index 
+                        ? secondaryColor 
+                        : '#e5e7eb'
+                    }`,
+                    boxShadow: currentActiveIndex === index 
+                      ? '0 8px 20px rgba(205, 9, 27, 0.3)' 
+                      : hoveredTabIndex === index
+                      ? '0 4px 12px rgba(205, 9, 27, 0.2)'
+                      : '0 2px 4px rgba(0,0,0,0.05)',
+                    flex: '1',
+                    minWidth: '0',
+                    height: '100px'
+                  }}
+                >
+                  <span 
+                    className="tab-letter text-2xl sm:text-3xl md:text-4xl font-black mb-1"
+                    style={{
+                      color: currentActiveIndex === index ? 'white' : secondaryColor
+                    }}
+                  >
+                    {section.tabLetter}
+                  </span>
+                  <span className="text-[10px] sm:text-xs font-semibold text-center leading-tight">
+                    {section.tabTitle}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="content-card bg-white rounded-xl lg:rounded-2xl shadow-lg lg:shadow-xl h-auto lg:h-[600px] hover:shadow-2xl transition-shadow duration-500 overflow-hidden tab-animate" style={{
+            border: '1px solid #e5e7eb'
+          }}>
             <div className="flex flex-col h-full">
               {/* Mobile: Image left, Title right, Content below */}
               <div className="md:hidden w-full">
