@@ -21,40 +21,95 @@ const BlogCarousel = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        // Cache check karo (exactly like BlogData)
+        // Cache check karo
         const cachedData = localStorage.getItem('blogCarouselData');
         const cacheTimestamp = localStorage.getItem('blogCarouselDataTimestamp');
         const currentTime = new Date().getTime();
         const cacheExpiry = 5 * 60 * 1000; // 5 minutes
 
         if (cachedData && cacheTimestamp && (currentTime - parseInt(cacheTimestamp)) < cacheExpiry) {
+          console.log('✅ BlogCarousel: Using cached data');
           setBlogs(JSON.parse(cachedData));
           setLoading(false);
           return;
         }
 
-        // API se fetch karo
-        const response = await fetch(
-          'https://news.sanpec-excellence.com/wp-json/wp/v2/posts?categories=1,25,43,46&per_page=50&orderby=date&order=desc&_embed'
+        console.log('🔄 BlogCarousel: Fetching fresh data from API...');
+
+        // Step 1: Parent category 25 ke saare child categories fetch karo (exactly like BlogData)
+        const categoriesResponse = await fetch(
+          'https://news.sanpec-excellence.com/wp-json/wp/v2/categories?parent=25&per_page=100',
+          {
+            next: { revalidate: 60 },
+            cache: 'force-cache'
+          }
         );
+        const childCategories = await categoriesResponse.json();
+        
+        console.log('📂 BlogCarousel: Child Categories found:', childCategories);
+        
+        // Create comma-separated string of all category IDs (parent 25 + children) - exactly like BlogData
+        const categoryIds = [25, ...childCategories.map((cat: any) => cat.id)].join(',');
+        
+        console.log('🎯 BlogCarousel: Fetching posts from categories:', categoryIds);
+
+        // Step 2: Parent category 25 aur uske saare child categories ki posts fetch karo (exactly like BlogData)
+        const response = await fetch(
+          `https://news.sanpec-excellence.com/wp-json/wp/v2/posts?categories=${categoryIds}&per_page=100&orderby=date&order=desc&_embed`,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            next: { revalidate: 300 },
+            cache: 'force-cache'
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
         const data = await response.json();
         
-        const formattedBlogs = data.map((post) => {
+        console.log('📝 BlogCarousel: Total posts fetched:', data.length);
+
+        if (!Array.isArray(data) || data.length === 0) {
+          console.warn('⚠️ BlogCarousel: No posts found in API response');
+          setBlogs([]);
+          setLoading(false);
+          return;
+        }
+        
+        const formattedBlogs = data.map((post: any) => {
           // Title ko decode karo
           const decodedTitle = decodeHTML(post.title.rendered);
           
-          console.log(`BlogCarousel - Post: ${decodedTitle}, WordPress Slug: ${post.slug}`); // Debug
+          // Category name extract karo from _embedded (exactly like BlogData)
+          const categoryInfo = post._embedded?.['wp:term']?.[0]?.[0];
+          const categoryName = categoryInfo?.name || 'Uncategorized';
+          
+          // Excerpt (exactly like BlogData)
+          const excerpt = post.excerpt?.rendered 
+            ? post.excerpt.rendered.replace(/<[^>]*>/g, '').substring(0, 120) + '...'
+            : '';
+          
+          console.log(`✅ BlogCarousel Post: ${decodedTitle} | Category: ${categoryName} | Slug: ${post.slug}`);
           
           return {
             id: post.id,
             title: decodedTitle,
-            slug: post.slug, // ✅ WordPress ka actual slug use karo
-            excerpt: post.excerpt.rendered.replace(/<[^>]*>/g, '').substring(0, 120) + '...',
+            slug: post.slug,
+            category: categoryName,
+            excerpt: excerpt,
             image: post._embedded?.['wp:featuredmedia']?.[0]?.source_url || 
-                   'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e',
+                   post._embedded?.['wp:featuredmedia']?.[0]?.media_details?.sizes?.full?.source_url ||
+                   'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800',
             link: post.link
           };
         });
+        
+        console.log('💾 BlogCarousel: Saving to cache...');
+        console.log('✅ BlogCarousel: Formatted blogs count:', formattedBlogs.length);
         
         // Cache mein save karo
         localStorage.setItem('blogCarouselData', JSON.stringify(formattedBlogs));
@@ -62,9 +117,13 @@ const BlogCarousel = () => {
         
         setBlogs(formattedBlogs);
         setLoading(false);
+        
+        console.log('✅ BlogCarousel: Data loaded successfully!');
+        
       } catch (error) {
-        console.error('Error fetching blogs:', error);
+        console.error('❌ BlogCarousel Error fetching blogs:', error);
         setLoading(false);
+        setBlogs([]);
       }
     };
 
@@ -122,7 +181,7 @@ const BlogCarousel = () => {
                   </div>
 
                   <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight">
-                    Insights
+                    News and Insights
                   </h2>
 
                   <div className="flex items-center gap-2">
@@ -169,12 +228,23 @@ const BlogCarousel = () => {
                   <div key={i} className="bg-white rounded-2xl shadow-xl overflow-hidden animate-pulse">
                     <div className="h-56 bg-gray-300"></div>
                     <div className="p-5 space-y-3">
+                      <div className="h-4 bg-gray-200 rounded w-1/3"></div>
                       <div className="h-6 bg-gray-300 rounded w-3/4"></div>
                       <div className="h-4 bg-gray-200 rounded w-full"></div>
                       <div className="h-4 bg-gray-200 rounded w-2/3"></div>
                     </div>
                   </div>
                 ))}
+              </div>
+            ) : blogs.length === 0 ? (
+              <div className="flex items-center justify-center h-96 text-gray-500 text-lg">
+                <div className="text-center">
+                  <svg className="w-16 h-16 mx-auto mb-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  <p className="font-semibold">No posts found</p>
+                  <p className="text-sm text-gray-400 mt-2">Check console for details</p>
+                </div>
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
@@ -204,6 +274,14 @@ const BlogCarousel = () => {
 
                     {/* Content */}
                     <div className="p-5 space-y-3">
+                      {/* ✅ Category Badge - Title ke upar */}
+                      <div className="inline-flex items-center gap-1.5 bg-gradient-to-r from-[#CD091B] to-[#171530] text-white px-3 py-1 rounded-full text-xs font-semibold tracking-wide shadow-md">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="white">
+                          <path d="M7 7h10v2H7zm0 4h10v2H7zm0 4h7v2H7z"/>
+                        </svg>
+                        {blog.category}
+                      </div>
+
                       <h3 className="text-lg md:text-xl font-bold text-[#171530] leading-tight line-clamp-2 group-hover:text-[#CD091B] transition-colors duration-300 group-hover:translate-x-2">
                         {blog.title}
                       </h3>
@@ -234,7 +312,7 @@ const BlogCarousel = () => {
             )}
 
             {/* Pagination Dots */}
-            {!loading && (
+            {!loading && blogs.length > 0 && (
               <div className="flex justify-center gap-2 mt-8">
                 {Array.from({ length: Math.ceil(blogs.length / 2) }).map((_, idx) => (
                   <button

@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { Home, ChevronRight, Menu, X } from 'lucide-react';
+import { Home, ChevronRight, Menu, X, ChevronDown, ChevronUp } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 
 interface Post {
@@ -10,6 +10,13 @@ interface Post {
     rendered: string;
   };
   link: string;
+}
+
+interface Category {
+  id: number;
+  name: string;
+  slug: string;
+  parent: number;
 }
 
 const staticMenuData = [
@@ -28,30 +35,70 @@ export default function ElectricPowerLayout({
   const pathname = usePathname();
   const router = useRouter();
   const [transmissionPosts, setTransmissionPosts] = useState<Post[]>([]);
+  const [categoryName, setCategoryName] = useState<string>('Transmission'); // Default fallback
   const [loading, setLoading] = useState(true);
   const [isTransmissionOpen, setIsTransmissionOpen] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // Fetch category 42 details and its posts with caching
   useEffect(() => {
-    const fetchTransmissionPosts = async () => {
+    const fetchCategoryAndPosts = async () => {
       try {
-        const response = await fetch(
-          'https://news.sanpec-excellence.com/wp-json/wp/v2/posts?categories=42&_embed&per_page=100',
-            {
-            next: { revalidate: 300 }, // ✅ 5 minutes cache
-            cache: 'force-cache' // ✅ Force cache
+        // Check cache first
+        const cachedCategory = localStorage.getItem('projectsCategory42');
+        const cachedPosts = localStorage.getItem('projectsPosts42');
+        const cacheTimestamp = localStorage.getItem('projectsCache42Timestamp');
+        const currentTime = new Date().getTime();
+       const cacheExpiry = 1 * 60 * 1000; // 1 minute
+
+        if (cachedCategory && cachedPosts && cacheTimestamp && 
+            (currentTime - parseInt(cacheTimestamp)) < cacheExpiry) {
+          console.log('✅ Projects: Using cached data');
+          setCategoryName(JSON.parse(cachedCategory));
+          setTransmissionPosts(JSON.parse(cachedPosts));
+          setLoading(false);
+          return;
+        }
+
+        console.log('🔄 Projects: Fetching fresh data from API...');
+
+        // Fetch category 42 details to get the name
+        const categoryResponse = await fetch(
+          'https://news.sanpec-excellence.com/wp-json/wp/v2/categories/42',
+          {
+            next: { revalidate: 60 }, 
+            cache: 'force-cache'
           }
         );
-        const data = await response.json();
-        setTransmissionPosts(data);
+        const categoryData = await categoryResponse.json();
+        console.log('📂 Projects: Category fetched:', categoryData.name);
+        
+        // Fetch posts from category 42
+        const postsResponse = await fetch(
+          'https://news.sanpec-excellence.com/wp-json/wp/v2/posts?categories=42&_embed&per_page=100&orderby=date&order=desc',
+          {
+            next: { revalidate: 60 }, // 5 minutes cache
+            cache: 'force-cache'
+          }
+        );
+        const postsData = await postsResponse.json();
+        console.log('📝 Projects: Posts fetched:', postsData.length);
+
+        // Save to cache
+        localStorage.setItem('projectsCategory42', JSON.stringify(categoryData.name));
+        localStorage.setItem('projectsPosts42', JSON.stringify(postsData));
+        localStorage.setItem('projectsCache42Timestamp', currentTime.toString());
+
+        setCategoryName(categoryData.name);
+        setTransmissionPosts(postsData);
       } catch (error) {
-        console.error('Error fetching transmission posts:', error);
-      } finally {
+        console.error('❌ Projects: Error fetching data:', error);
+      } finally { 
         setLoading(false);
       }
     };
 
-    fetchTransmissionPosts();
+    fetchCategoryAndPosts();
   }, []);
 
   const stripHtml = (html: string) => {
@@ -63,7 +110,25 @@ export default function ElectricPowerLayout({
     return html.replace(/<[^>]*>/g, '');
   };
 
-  const isTransmissionActive = pathname.includes('/electric-power/transmission');
+  // HTML entities decode karne ka function (for &amp, &quot, etc.)
+  const decodeHTML = (html: string): string => {
+    if (typeof document !== 'undefined') {
+      const txt = document.createElement('textarea');
+      txt.innerHTML = html;
+      return txt.value;
+    }
+    // Fallback for server-side
+    return html
+      .replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&quot;/g, '"')
+      .replace(/&#039;/g, "'")
+      .replace(/&nbsp;/g, ' ');
+  };
+
+  const isTransmissionActive = pathname.includes('/electric-power/transmission') || 
+                               pathname.includes('/Projects/transmission');
   const isRecentActive = pathname.includes('/electric-power/recent');
   
   const activePostSlug = pathname.split('/').pop();
@@ -74,7 +139,17 @@ export default function ElectricPowerLayout({
       return 'Recent';
     }
     if (activePost) {
-      return stripHtml(activePost.title.rendered);
+      return decodeHTML(stripHtml(activePost.title.rendered));
+    }
+    return 'Project';
+  };
+
+  const getFullBreadcrumbTitle = () => {
+    if (isRecentActive) {
+      return 'Recent';
+    }
+    if (activePost) {
+      return decodeHTML(stripHtml(activePost.title.rendered));
     }
     return 'Project';
   };
@@ -109,29 +184,36 @@ export default function ElectricPowerLayout({
               T&D PROJECTS
             </h1>
             <div className="flex items-center gap-2">
-              <div className="h-[3px] w-12 sm:w-16 bg-[#cd091b] rounded-full"></div>
-              <div className="h-[2px] w-6 sm:w-8 bg-[#cd091b]/60 rounded-full"></div>
-              <div className="h-[2px] w-3 sm:w-4 bg-[#cd091b]/40 rounded-full"></div>
+              <div className="h-[3px] w-12 sm:w-16 bg-[#DC2626] rounded-full"></div>
+              <div className="h-[2px] w-6 sm:w-8 bg-[#DC2626]/60 rounded-full"></div>
+              <div className="h-[2px] w-3 sm:w-4 bg-[#DC2626]/40 rounded-full"></div>
             </div>
           </div>
           
-          <nav className="flex items-center flex-wrap gap-1.5 sm:gap-2 text-xs sm:text-sm">
-            <a 
-              href="/" 
-              className="group flex items-center gap-1 sm:gap-1.5 text-white/70 hover:text-white transition-colors duration-300"
-            >
-              <Home className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              <span className="font-medium">Home</span>
-            </a>
-            <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/50" />
+          <nav className="flex items-start gap-1.5 sm:gap-2 text-xs sm:text-sm">
+            <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
+              <a 
+                href="/" 
+                className="group flex items-center gap-1 sm:gap-1.5 text-white/70 hover:text-white transition-colors duration-300"
+              >
+                <Home className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <span className="font-medium">Home</span>
+              </a>
+              <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/50" />
+            </div>
             <span className="text-white/70 font-medium">Project</span>
             <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/50" />
-            <span className="text-[#cd091b] font-semibold line-clamp-1">{getBreadcrumbTitle()}</span>
+            <span 
+              className="text-[#DC2626] font-semibold break-words leading-relaxed max-w-[280px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px]"
+              title={getFullBreadcrumbTitle()}
+            >
+              {getBreadcrumbTitle()}
+            </span>
           </nav>
         </div>
 
         <div className="absolute bottom-0 left-0 w-full h-[2px]">
-          <div className="h-full w-full bg-gradient-to-r from-transparent via-[#cd091b]/80 to-transparent"></div>
+          <div className="h-full w-full bg-gradient-to-r from-transparent via-[#DC2626]/80 to-transparent"></div>
         </div>
       </div>
 
@@ -179,14 +261,17 @@ export default function ElectricPowerLayout({
             {/* Transmission Section */}
             <div>
               <div className="mb-2">
-                <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider px-2">Transmission</h4>
+                <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider px-2">
+                  {loading ? 'Loading...' : categoryName}
+                </h4>
               </div>
               <div className="space-y-1">
                 {loading ? (
-                  <div className="px-4 py-3 text-sm text-gray-500">Loading...</div>
+                  <div className="px-4 py-3 text-sm text-gray-500">Loading posts...</div>
                 ) : (
                   transmissionPosts.map((post) => {
                     const isActive = pathname.includes(post.slug);
+                    const cleanTitle = decodeHTML(stripHtml(post.title.rendered));
                     return (
                       <button
                         key={post.id}
@@ -200,7 +285,7 @@ export default function ElectricPowerLayout({
                           }
                         `}
                       >
-                        {stripHtml(post.title.rendered)}
+                        {cleanTitle}
                       </button>
                     );
                   })
@@ -258,8 +343,9 @@ export default function ElectricPowerLayout({
 
                 {/* Transmission Menu Item */}
                 <div 
+                  onClick={() => setIsTransmissionOpen(!isTransmissionOpen)}
                   className={`
-                    relative ml-11 group px-4 py-3.5
+                    relative ml-11 group px-4 py-3.5 cursor-pointer
                     transition-all duration-300 ease-out rounded-lg border-2
                     ${isTransmissionActive
                       ? 'border-gray-300 text-gray-900 shadow-xl' 
@@ -269,41 +355,52 @@ export default function ElectricPowerLayout({
                   style={isTransmissionActive ? {backgroundColor: '#F3F3F3'} : {}}
                 >
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-sm font-semibold flex-1">Transmission</span>
-                    {isTransmissionActive && (
-                      <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-gray-800 rounded-full animate-pulse"></div>
-                        <div className="w-2 h-2 bg-gray-600 rounded-full animate-ping absolute"></div>
-                      </div>
-                    )}
+                    <span className="text-sm font-semibold flex-1 capitalize">
+                      {loading ? 'Loading...' : categoryName}
+                    </span>
+                    <div className="flex items-center gap-2">
+                      {isTransmissionActive && (
+                        <>
+                          <div className="w-2 h-2 bg-gray-800 rounded-full animate-pulse"></div>
+                          <div className="w-2 h-2 bg-gray-600 rounded-full animate-ping absolute"></div>
+                        </>
+                      )}
+                      {isTransmissionOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                    </div>
                   </div>
 
                   {/* Dropdown List */}
-                  <div className="space-y-1 max-h-96 overflow-y-auto custom-scrollbar">
-                    {loading ? (
-                      <div className="px-2 py-2 text-xs text-gray-500">Loading Project...</div>
-                    ) : (
-                      transmissionPosts.map((post) => {
-                        const isActivePost = pathname.includes(post.slug);
-                        return (
-                          <div
-                            key={post.id}
-                            onClick={() => router.push(`/Projects/transmission/${post.slug}`)}
-                            className={`
-                              px-3 py-2 rounded-md cursor-pointer text-xs
-                              transition-all duration-200
-                              ${isActivePost
-                                ? 'bg-[#cd091b]/10 text-[#cd091b] font-semibold border-l-2 border-[#cd091b]'
-                                : 'text-gray-600 hover:bg-gray-100 border-l-2 border-transparent'
-                              }
-                            `}
-                          >
-                            {stripHtml(post.title.rendered)}
-                          </div>
-                        );
-                      })
-                    )}
-                  </div>
+                  {isTransmissionOpen && (
+                    <div className="space-y-1 max-h-96 overflow-y-auto custom-scrollbar">
+                      {loading ? (
+                        <div className="px-2 py-2 text-xs text-gray-500">Loading Projects...</div>
+                      ) : (
+                        transmissionPosts.map((post) => {
+                          const isActivePost = pathname.includes(post.slug);
+                          const cleanTitle = decodeHTML(stripHtml(post.title.rendered));
+                          return (
+                            <div
+                              key={post.id}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                router.push(`/Projects/transmission/${post.slug}`);
+                              }}
+                              className={`
+                                px-4 py-2.5 rounded-md cursor-pointer text-sm
+                                transition-all duration-200
+                                ${isActivePost
+                                  ? 'bg-[#cd091b]/10 text-[#cd091b] font-semibold border-l-2 border-[#cd091b]'
+                                  : 'text-gray-600 hover:bg-gray-100 border-l-2 border-transparent'
+                                }
+                              `}
+                            >
+                              {cleanTitle}
+                            </div>
+                          );
+                        })
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -359,10 +456,10 @@ export default function ElectricPowerLayout({
           </aside>
 
           {/* Content Area */}
-          <main className="flex-1 px-4 pt-4 pb-4 sm:px-6 sm:pt-6 sm:pb-6 lg:pl-8 lg:pt-8 lg:pb-8 bg-white min-h-screen">
+          <main className="flex-1 pl-4 pt-4 pb-4 sm:pl-6 sm:pt-6 sm:pb-6 lg:pl-8 lg:pt-8 lg:pb-8 bg-white min-h-screen">
             <div className="bg-white rounded-2xl shadow-sm border overflow-hidden">
               <div className="h-0.5 bg-gray-300" />
-              <div className="p-0 sm:p-0 lg:p-0">
+              <div className="pl-4 pt-4 pb-4 sm:pl-6 sm:pt-0 sm:pb-6 lg:pl-8 lg:pt-0 lg:pb-8">
                 {children}
               </div>
               <div className="h-2 bg-gray-100" />

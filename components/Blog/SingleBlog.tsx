@@ -59,7 +59,7 @@ const SingleBlog = ({ slug }: { slug: string }) => {
             const res = await fetch(
               `https://news.sanpec-excellence.com/wp-json/wp/v2/posts/${found.id}?_embed`,
               {
-                next: { revalidate: 300 }, // ✅ 5 minutes cache
+                next: { revalidate: 60 }, // ✅ 5 minutes cache
                 cache: 'force-cache' // ✅ Force cache
               }
             );

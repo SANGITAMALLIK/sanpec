@@ -30,7 +30,7 @@ const tabsData = [
       "Prototype and Proof of Fit Testing",
       "Technical Specifications Review"
     ],
-    link: "/electric-power/transmisson/design-and-engineering"
+    link: "/electric-power/transmission-and-distribution/design-and-engineering"
   },
   {
     id: 2,
@@ -46,7 +46,7 @@ const tabsData = [
       "Failure/Root Cause Analysis",
       "Field Inspection for aging transmission structures"
     ],
-    link: "/electric-power/manufacturing/failure-analysis"
+    link: "/electric-power/manufacturing-and-operations/failure-analysis"
   },
   {
     id: 3,
@@ -65,7 +65,7 @@ const tabsData = [
       "Help in tracking bundling/packaging list and BOL for tower components for each structure and payment process"
      
     ],
-    link: "/electric-power/strategic/material-sourcing"
+    link: "/electric-power/strategic-project-management/material-sourcing"
   },
   {
     id: 4,
@@ -81,7 +81,7 @@ const tabsData = [
       "Provide support during construction process for missing pieces or mis-fab pieces or new helicopter splice, damage members and any technical issues",
       "Review QA/QC process at sites during construction"
     ],
-    link: "/electric-power/constructability/logistic-construction"
+    link: "/electric-power/constructability-review/logistic-construction"
   },
   {
     id: 5,
@@ -106,7 +106,7 @@ const tabsData = [
 "Challenges in executing large and complex transmission projects: Platts transmission planningand development forum",
 "Design and analysis of transmission line towers"
     ],
-    link: "/research-and-innovation"
+    link: "/research"
   },
   {
     id: 6,

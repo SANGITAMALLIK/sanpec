@@ -55,7 +55,7 @@ export default function TransmissionPostPage() {
         const response = await fetch(
           `https://news.sanpec-excellence.com/wp-json/wp/v2/posts?slug=${slug}&_embed`,
             {
-            next: { revalidate: 300 }, // ✅ 5 minutes cache
+            next: { revalidate: 60 }, // ✅ 1 minutes cache
             cache: 'force-cache' // ✅ Force cache
           }
         );

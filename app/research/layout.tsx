@@ -22,7 +22,7 @@ interface Category {
 const staticMenuData = [
   {
     id: 'education',
-    title: 'Education and Training',
+    title: 'EDUCATION AND TRAINING',
     url: '/research',
     categoryId: 51
   },
@@ -48,10 +48,10 @@ export default function ElectricPowerLayout({
       try {
         const response = await fetch(
           'https://news.sanpec-excellence.com/wp-json/wp/v2/categories?parent=50&per_page=100',
-          // {
-          //   next: { revalidate: 300 }, // ✅ 5 minutes cache
-          //   cache: 'force-cache' // ✅ Force cache
-          // }
+          {
+            next: { revalidate: 60 }, // ✅ 1 minutes cache
+            cache: 'force-cache' // ✅ Force cache
+          }
         );
         const data = await response.json();
         
@@ -86,7 +86,7 @@ export default function ElectricPowerLayout({
       const response = await fetch(
         `https://news.sanpec-excellence.com/wp-json/wp/v2/posts?categories=${categoryId}&per_page=100&_embed`,
         {
-          next: { revalidate: 300 }, // ✅ 5 minutes cache
+          next: { revalidate: 60 }, // ✅ 5 minutes cache
           cache: 'force-cache' // ✅ Force cache
         }
       );
@@ -116,6 +116,30 @@ export default function ElectricPowerLayout({
     return html.replace(/<[^>]*>/g, '');
   };
 
+  // ✅ HTML entities decode karne ka function (for &amp;, &quot;, etc.)
+  const decodeHTML = (html: string): string => {
+    if (typeof document !== 'undefined') {
+      const txt = document.createElement('textarea');
+      txt.innerHTML = html;
+      return txt.value;
+    }
+    // Fallback for server-side rendering
+    return html
+      .replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&quot;/g, '"')
+      .replace(/&#039;/g, "'")
+      .replace(/&nbsp;/g, ' ')
+      .replace(/&apos;/g, "'")
+      .replace(/&cent;/g, '¢')
+      .replace(/&pound;/g, '£')
+      .replace(/&yen;/g, '¥')
+      .replace(/&euro;/g, '€')
+      .replace(/&copy;/g, '©')
+      .replace(/&reg;/g, '®');
+  };
+
   // Find active post if on single page
   const activePostSlug = pathname.split('/').pop();
   let activePost: Post | undefined;
@@ -135,14 +159,14 @@ export default function ElectricPowerLayout({
 
   const getBreadcrumbTitle = () => {
     if (activePost) {
-      return stripHtml(activePost.title.rendered);
+      return decodeHTML(stripHtml(activePost.title.rendered));
     }
     return 'Education and Training';
   };
 
   const getFullBreadcrumbTitle = () => {
     if (activePost) {
-      return stripHtml(activePost.title.rendered);
+      return decodeHTML(stripHtml(activePost.title.rendered));
     }
     return 'Education and Training';
   };
@@ -266,18 +290,21 @@ export default function ElectricPowerLayout({
             {categories.map((category) => (
               <div key={category.id} className="pt-4 border-t border-gray-200">
                 <div className="mb-2">
-                  <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider px-2">{category.name}</h4>
+                  <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider px-2">
+                    {decodeHTML(category.name)}
+                  </h4>
                 </div>
                 <div className="space-y-1">
                   {categoryPosts[category.id]?.map((post) => {
                     const isActive = pathname.includes(post.slug);
+                    const cleanTitle = decodeHTML(stripHtml(post.title.rendered));
                     return (
                       <button
                         key={post.id}
                         onClick={() => handleNavigation(`/research/${post.slug}`)}
                         className={`w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${isActive ? 'bg-[#cd091b] text-white shadow-md' : 'text-gray-700 hover:bg-gray-100'}`}
                       >
-                        {stripHtml(post.title.rendered)}
+                        {cleanTitle}
                       </button>
                     );
                   })}
@@ -334,6 +361,7 @@ export default function ElectricPowerLayout({
               {categories.map((category) => {
                 const isCategoryActive = activeCategoryId === category.id;
                 const posts = categoryPosts[category.id] || [];
+                const cleanCategoryName = decodeHTML(category.name);
                 
                 return (
                   <div key={category.id} className="mb-6 relative">
@@ -345,7 +373,7 @@ export default function ElectricPowerLayout({
                       className={`relative ml-11 group flex items-center justify-between px-4 py-3.5 cursor-pointer transition-all duration-300 ease-out rounded-lg border-2 ${isCategoryActive ? 'border-gray-300 text-gray-900 shadow-xl' : 'bg-white border-gray-300 text-gray-700 hover:border-gray-400 hover:shadow-lg'}`}
                       style={isCategoryActive ? {backgroundColor: '#F3F3F3'} : {}}
                     >
-                      <span className="text-sm font-semibold flex-1">{category.name}</span>
+                      <span className="text-sm font-semibold flex-1">{cleanCategoryName}</span>
                       
                       <div className="flex items-center gap-2">
                         {isCategoryActive && (
@@ -365,13 +393,14 @@ export default function ElectricPowerLayout({
                         ) : (
                           posts.map((post) => {
                             const isActivePost = pathname.includes(post.slug);
+                            const cleanTitle = decodeHTML(stripHtml(post.title.rendered));
                             return (
                               <div
                                 key={post.id}
                                 onClick={() => router.push(`/research/${post.slug}`)}
                                 className={`px-4 py-2.5 rounded-md cursor-pointer text-sm transition-all duration-200 ${isActivePost ? 'bg-[#cd091b]/10 text-[#cd091b] font-semibold border-l-2 border-[#cd091b]' : 'text-gray-600 hover:bg-gray-100 border-l-2 border-transparent'}`}
                               >
-                                {stripHtml(post.title.rendered)}
+                                {cleanTitle}
                               </div>
                             );
                           })

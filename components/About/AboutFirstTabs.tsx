@@ -43,7 +43,10 @@ export default function SanpecTabs() {
         setLoading(true);
         const response = await fetch(
           'https://news.sanpec-excellence.com/wp-json/wp/v2/posts?categories=53&_embed&per_page=100',
-        
+         {
+            next: { revalidate: 60 }, // 5 minutes cache
+            cache: 'force-cache'
+          }
         );
 
         if (!response.ok) {
@@ -185,7 +188,7 @@ export default function SanpecTabs() {
                       style={isActive ? {backgroundColor: '#F3F3F3'} : {}}
                     >
                       <span 
-                        className="text-sm font-semibold flex-1"
+                        className="text-sm font-semibold flex-1 capitalize"
                         dangerouslySetInnerHTML={{ __html: post.title.rendered }}
                       />
                       
