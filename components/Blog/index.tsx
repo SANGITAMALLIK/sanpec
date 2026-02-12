@@ -25,24 +25,24 @@ const BlogCarousel = () => {
         const cachedData = localStorage.getItem('blogCarouselData');
         const cacheTimestamp = localStorage.getItem('blogCarouselDataTimestamp');
         const currentTime = new Date().getTime();
-        //const cacheExpiry = 5 * 60 * 1000; // 5 minutes
+        const cacheExpiry = 5 * 60 * 1000; // 5 minutes
 
-        // if (cachedData && cacheTimestamp && (currentTime - parseInt(cacheTimestamp)) < cacheExpiry) {
-        //   console.log('✅ BlogCarousel: Using cached data');
-        //   setBlogs(JSON.parse(cachedData));
-        //   setLoading(false);
-        //   return;
-        // }
+        if (cachedData && cacheTimestamp && (currentTime - parseInt(cacheTimestamp)) < cacheExpiry) {
+          console.log('✅ BlogCarousel: Using cached data');
+          setBlogs(JSON.parse(cachedData));
+          setLoading(false);
+          return;
+        }
 
         console.log('🔄 BlogCarousel: Fetching fresh data from API...');
 
         // Step 1: Parent category 25 ke saare child categories fetch karo (exactly like BlogData)
         const categoriesResponse = await fetch(
           'https://news.sanpec-excellence.com/wp-json/wp/v2/categories?parent=25&per_page=100',
-          // {
-          //   next: { revalidate: 300 },
-          //   cache: 'force-cache'
-          // }
+          {
+            next: { revalidate: 300 },
+            cache: 'force-cache'
+          }
         );
         const childCategories = await categoriesResponse.json();
         
@@ -56,13 +56,13 @@ const BlogCarousel = () => {
         // Step 2: Parent category 25 aur uske saare child categories ki posts fetch karo (exactly like BlogData)
         const response = await fetch(
           `https://news.sanpec-excellence.com/wp-json/wp/v2/posts?categories=${categoryIds}&per_page=100&orderby=date&order=desc&_embed`,
-          // {
-          //   headers: {
-          //     'Content-Type': 'application/json',
-          //   },
-          //   next: { revalidate: 300 },
-          //   cache: 'force-cache'
-          // }
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            next: { revalidate: 300 },
+            cache: 'force-cache'
+          }
         );
 
         if (!response.ok) {

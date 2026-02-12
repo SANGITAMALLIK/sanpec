@@ -17,10 +17,7 @@ export default function NewInnovationPage() {
                   />
                 </div>
                 
-                {/* Pillar Badge */}
-                <div className="absolute -top-3 -right-3 bg-[#cd091b] text-white px-4 py-2 rounded-full shadow-lg font-bold text-sm">
-                  03
-                </div>
+            
               </div>
             </div>
           </div>

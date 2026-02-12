@@ -1,14 +1,12 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { Home, ChevronRight, Menu, X, ChevronDown, ChevronUp } from 'lucide-react';
+import { Home, ChevronRight, Menu, X, ChevronDown, ChevronUp, Download } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 
 interface Post {
   id: number;
   slug: string;
-  title: {
-    rendered: string;
-  };
+  title: { rendered: string };
   link: string;
 }
 
@@ -19,72 +17,57 @@ interface Category {
   parent: number;
 }
 
-const staticMenuData = [
-  // {
-  //   id: 'recent',
-  //   title: 'Recent',
-  //   url: '/electric-power/recent'
-  // }
-];
-
-export default function ElectricPowerLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function ProjectsLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const [transmissionPosts, setTransmissionPosts] = useState<Post[]>([]);
-  const [categoryName, setCategoryName] = useState<string>('Transmission'); // Default fallback
+  const [categoryName, setCategoryName] = useState<string>('Transmission');
   const [loading, setLoading] = useState(true);
   const [isTransmissionOpen, setIsTransmissionOpen] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isPdfModalOpen, setIsPdfModalOpen] = useState(false);
+  const [pdfUrl, setPdfUrl] = useState<string | null>(null);
 
-  // Fetch category 42 details and its posts with caching
+  // Fetch PDF from category 42
   useEffect(() => {
-    const fetchCategoryAndPosts = async () => {
+    const fetchPDF = async () => {
       try {
-        // Check cache first
+        const response = await fetch('https://news.sanpec-excellence.com/wp-json/wp/v2/categories/42');
+        const data = await response.json();
+        if (data.category_pdf) setPdfUrl(data.category_pdf);
+      } catch (error) {
+        console.error('Error fetching PDF:', error);
+      }
+    };
+    fetchPDF();
+  }, []);
+
+  // Fetch category and posts with caching
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
         const cachedCategory = localStorage.getItem('projectsCategory42');
         const cachedPosts = localStorage.getItem('projectsPosts42');
         const cacheTimestamp = localStorage.getItem('projectsCache42Timestamp');
         const currentTime = new Date().getTime();
-       const cacheExpiry = 1 * 60 * 1000; // 1 minute
+        const cacheExpiry = 1 * 60 * 1000;
 
         if (cachedCategory && cachedPosts && cacheTimestamp && 
             (currentTime - parseInt(cacheTimestamp)) < cacheExpiry) {
-          console.log('✅ Projects: Using cached data');
           setCategoryName(JSON.parse(cachedCategory));
           setTransmissionPosts(JSON.parse(cachedPosts));
           setLoading(false);
           return;
         }
 
-        console.log('🔄 Projects: Fetching fresh data from API...');
+        const [categoryResponse, postsResponse] = await Promise.all([
+          fetch('https://news.sanpec-excellence.com/wp-json/wp/v2/categories/42', { next: { revalidate: 300 }, cache: 'force-cache' }),
+          fetch('https://news.sanpec-excellence.com/wp-json/wp/v2/posts?categories=42&_embed&per_page=100&orderby=date&order=desc', { next: { revalidate: 300 }, cache: 'force-cache' })
+        ]);
 
-        // Fetch category 42 details to get the name
-        const categoryResponse = await fetch(
-          'https://news.sanpec-excellence.com/wp-json/wp/v2/categories/42',
-          {
-            next: { revalidate: 300 }, 
-            cache: 'force-cache'
-          }
-        );
         const categoryData = await categoryResponse.json();
-        console.log('📂 Projects: Category fetched:', categoryData.name);
-        
-        // Fetch posts from category 42
-        const postsResponse = await fetch(
-          'https://news.sanpec-excellence.com/wp-json/wp/v2/posts?categories=42&_embed&per_page=100&orderby=date&order=desc',
-          {
-            next: { revalidate: 300 }, // 5 minutes cache
-            cache: 'force-cache'
-          }
-        );
         const postsData = await postsResponse.json();
-        console.log('📝 Projects: Posts fetched:', postsData.length);
 
-        // Save to cache
         localStorage.setItem('projectsCategory42', JSON.stringify(categoryData.name));
         localStorage.setItem('projectsPosts42', JSON.stringify(postsData));
         localStorage.setItem('projectsCache42Timestamp', currentTime.toString());
@@ -92,13 +75,12 @@ export default function ElectricPowerLayout({
         setCategoryName(categoryData.name);
         setTransmissionPosts(postsData);
       } catch (error) {
-        console.error('❌ Projects: Error fetching data:', error);
-      } finally { 
+        console.error('Error fetching data:', error);
+      } finally {
         setLoading(false);
       }
     };
-
-    fetchCategoryAndPosts();
+    fetchData();
   }, []);
 
   const stripHtml = (html: string) => {
@@ -110,72 +92,56 @@ export default function ElectricPowerLayout({
     return html.replace(/<[^>]*>/g, '');
   };
 
-  // HTML entities decode karne ka function (for &amp, &quot, etc.)
   const decodeHTML = (html: string): string => {
     if (typeof document !== 'undefined') {
       const txt = document.createElement('textarea');
       txt.innerHTML = html;
       return txt.value;
     }
-    // Fallback for server-side
-    return html
-      .replace(/&amp;/g, '&')
-      .replace(/&lt;/g, '<')
-      .replace(/&gt;/g, '>')
-      .replace(/&quot;/g, '"')
-      .replace(/&#039;/g, "'")
-      .replace(/&nbsp;/g, ' ');
+    return html.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#039;/g, "'").replace(/&nbsp;/g, ' ');
   };
 
-  const isTransmissionActive = pathname.includes('/electric-power/transmission') || 
-                               pathname.includes('/Projects/transmission');
-  const isRecentActive = pathname.includes('/electric-power/recent');
-  
   const activePostSlug = pathname.split('/').pop();
   const activePost = transmissionPosts.find(post => post.slug === activePostSlug);
+  const isTransmissionActive = pathname.includes('/electric-power/transmission') || pathname.includes('/Projects/transmission');
 
-  const getBreadcrumbTitle = () => {
-    if (isRecentActive) {
-      return 'Recent';
-    }
-    if (activePost) {
-      return decodeHTML(stripHtml(activePost.title.rendered));
-    }
-    return 'Project';
-  };
+  const getBreadcrumbTitle = () => activePost ? decodeHTML(stripHtml(activePost.title.rendered)) : 'Project';
+  const handleNavigation = (url: string) => { router.push(url); setIsMobileMenuOpen(false); };
 
-  const getFullBreadcrumbTitle = () => {
-    if (isRecentActive) {
-      return 'Recent';
-    }
-    if (activePost) {
-      return decodeHTML(stripHtml(activePost.title.rendered));
-    }
-    return 'Project';
-  };
-
-  const handleNavigation = (url: string) => {
-    router.push(url);
-    setIsMobileMenuOpen(false);
-  };
+  const MenuContent = () => (
+    <div className="p-4 space-y-2">
+      <div>
+        <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider px-2 mb-2">
+          {loading ? 'Loading...' : categoryName}
+        </h4>
+        <div className="space-y-1">
+          {loading ? (
+            <div className="px-4 py-3 text-sm text-gray-500">Loading posts...</div>
+          ) : (
+            transmissionPosts.map((post) => {
+              const isActive = pathname.includes(post.slug);
+              const cleanTitle = decodeHTML(stripHtml(post.title.rendered));
+              return (
+                <button key={post.id} onClick={() => handleNavigation(`/Projects/transmission/${post.slug}`)}
+                  className={`w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${isActive ? 'bg-[#cd091b] text-white shadow-md' : 'text-gray-700 hover:bg-gray-100'}`}>
+                  {cleanTitle}
+                </button>
+              );
+            })
+          )}
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <div className="relative overflow-hidden h-64 sm:h-72 md:h-80 lg:h-[300px]">
         <div className="absolute inset-0">
-          <img 
-            src="/images/1.png" 
-            alt="Electric Power Background"
-            className="w-full h-full object-cover"
-          />
+          <img src="/images/1.png" alt="Electric Power Background" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/50"></div>
-          <div 
-            className="absolute inset-0 opacity-[0.03]"
-            style={{
-              backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,.1) 10px, rgba(255,255,255,.1) 20px)`
-            }}
-          ></div>
+          <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,.1) 10px, rgba(255,255,255,.1) 20px)` }}></div>
         </div>
 
         <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12 h-full flex flex-col justify-end pb-6 sm:pb-8 pt-20 sm:pt-0">
@@ -192,10 +158,7 @@ export default function ElectricPowerLayout({
           
           <nav className="flex items-start gap-1.5 sm:gap-2 text-xs sm:text-sm">
             <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
-              <a 
-                href="/" 
-                className="group flex items-center gap-1 sm:gap-1.5 text-white/70 hover:text-white transition-colors duration-300"
-              >
+              <a href="/" className="group flex items-center gap-1 sm:gap-1.5 text-white/70 hover:text-white transition-colors duration-300">
                 <Home className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 <span className="font-medium">Home</span>
               </a>
@@ -203,161 +166,86 @@ export default function ElectricPowerLayout({
             </div>
             <span className="text-white/70 font-medium">Project</span>
             <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/50" />
-            <span 
-              className="text-[#DC2626] font-semibold break-words leading-relaxed max-w-[280px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px]"
-              title={getFullBreadcrumbTitle()}
-            >
+            <span className="text-[#DC2626] font-semibold break-words leading-relaxed max-w-[280px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px]" title={getBreadcrumbTitle()}>
               {getBreadcrumbTitle()}
             </span>
           </nav>
         </div>
+
+        {/* PDF Download Button */}
+        {pdfUrl && (
+          <button onClick={() => setIsPdfModalOpen(true)}
+            className="absolute bottom-6 right-6 bg-[#DC2626] hover:bg-[#B91C1C] text-white px-4 py-2.5 rounded-lg shadow-lg flex items-center gap-2 transition-all duration-300 hover:scale-105 z-20">
+            <Download className="w-4 h-4" />
+            <span className="font-semibold text-sm">Download Brochure</span>
+          </button>
+        )}
 
         <div className="absolute bottom-0 left-0 w-full h-[2px]">
           <div className="h-full w-full bg-gradient-to-r from-transparent via-[#DC2626]/80 to-transparent"></div>
         </div>
       </div>
 
-      {/* MOBILE MENU BUTTON */}
+      {/* PDF Modal */}
+      {isPdfModalOpen && pdfUrl && (
+        <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4" onClick={() => setIsPdfModalOpen(false)}>
+          <div className="bg-white rounded-xl shadow-2xl w-full max-w-5xl h-[90vh] flex flex-col" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between p-4 border-b border-gray-200">
+              <h3 className="text-lg font-bold text-gray-900">Projects Section PDF</h3>
+              <button onClick={() => setIsPdfModalOpen(false)} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="flex-1 overflow-hidden">
+              <iframe src={pdfUrl} className="w-full h-full" title="Projects PDF" />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Mobile Menu Button */}
       <div className="lg:hidden sticky top-0 z-30 bg-white border-b border-gray-200 shadow-sm">
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
           <h3 className="text-sm font-bold text-gray-900">Projects Menu</h3>
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
-          >
+          <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
             {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
 
-      {/* MOBILE SIDEBAR OVERLAY */}
-      {isMobileMenuOpen && (
-        <div 
-          className="lg:hidden fixed inset-0 bg-black/50 z-40"
-          onClick={() => setIsMobileMenuOpen(false)}
-        />
-      )}
+      {/* Mobile Sidebar Overlay */}
+      {isMobileMenuOpen && <div className="lg:hidden fixed inset-0 bg-black/50 z-40" onClick={() => setIsMobileMenuOpen(false)} />}
 
-      {/* MOBILE SIDEBAR */}
-      <div className={`
-        lg:hidden fixed top-0 left-0 h-full w-80 bg-white z-50 shadow-2xl
-        transform transition-transform duration-300 ease-in-out
-        ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
-      `}>
+      {/* Mobile Sidebar */}
+      <div className={`lg:hidden fixed top-0 left-0 h-full w-80 bg-white z-50 shadow-2xl transform transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="h-full overflow-y-auto">
-          {/* Header */}
           <div className="sticky top-0 bg-[#cd091b] text-white p-4 flex items-center justify-between">
             <h3 className="text-lg font-bold">Projects</h3>
-            <button 
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="p-1 hover:bg-white/20 rounded-lg transition-colors"
-            >
+            <button onClick={() => setIsMobileMenuOpen(false)} className="p-1 hover:bg-white/20 rounded-lg transition-colors">
               <X className="w-5 h-5" />
             </button>
           </div>
-
-          {/* Menu Items */}
-          <div className="p-4 space-y-2">
-            {/* Transmission Section */}
-            <div>
-              <div className="mb-2">
-                <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider px-2">
-                  {loading ? 'Loading...' : categoryName}
-                </h4>
-              </div>
-              <div className="space-y-1">
-                {loading ? (
-                  <div className="px-4 py-3 text-sm text-gray-500">Loading posts...</div>
-                ) : (
-                  transmissionPosts.map((post) => {
-                    const isActive = pathname.includes(post.slug);
-                    const cleanTitle = decodeHTML(stripHtml(post.title.rendered));
-                    return (
-                      <button
-                        key={post.id}
-                        onClick={() => handleNavigation(`/Projects/transmission/${post.slug}`)}
-                        className={`
-                          w-full text-left px-4 py-3 rounded-lg text-sm font-medium
-                          transition-all duration-200
-                          ${isActive
-                            ? 'bg-[#cd091b] text-white shadow-md'
-                            : 'text-gray-700 hover:bg-gray-100'
-                          }
-                        `}
-                      >
-                        {cleanTitle}
-                      </button>
-                    );
-                  })
-                )}
-              </div>
-            </div>
-
-            {/* Recent Section */}
-            {staticMenuData.length > 0 && (
-              <div className="pt-4 border-t border-gray-200">
-                <div className="mb-2">
-                  <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider px-2">Other</h4>
-                </div>
-                {staticMenuData.map((item) => {
-                  const isActive = isRecentActive;
-                  return (
-                    <button
-                      key={item.id}
-                      onClick={() => handleNavigation(item.url)}
-                      className={`
-                        w-full text-left px-4 py-3 rounded-lg text-sm font-medium
-                        transition-all duration-200
-                        ${isActive
-                          ? 'bg-[#cd091b] text-white shadow-md'
-                          : 'text-gray-700 hover:bg-gray-100'
-                        }
-                      `}
-                    >
-                      {item.title}
-                    </button>
-                  );
-                })}
-              </div>
-            )}
-          </div>
+          <MenuContent />
         </div>
       </div>
 
-      {/* Sidebar + Content */}
+      {/* Main Layout */}
       <div className="max-w-7_5xl mx-auto">
         <div className="flex flex-col lg:flex-row">
-          {/* DESKTOP SIDEBAR - Tower Design WITH DROPDOWN */}
+          {/* Desktop Sidebar */}
           <aside className="hidden lg:block w-80 bg-gradient-to-b from-gray-50 to-white lg:sticky lg:top-0 h-full lg:min-h-screen border-r border-gray-200">
             <nav className="py-8 px-6 relative">
-              {/* Central Tower Pole */}
               <div className="absolute left-8 top-0 bottom-12 w-1 bg-gradient-to-b from-gray-300 via-gray-400 to-gray-300"></div>
               
-              {/* Transmission Section with Dropdown */}
               <div className="mb-6 relative">
-                {/* Connection Point on Tower */}
                 <div className="absolute left-2 top-5 w-3 h-3 bg-white border-2 border-gray-400 rounded-full shadow-md z-20"></div>
-                
-                {/* Horizontal Beam */}
                 <div className={`absolute left-5 top-6 w-6 h-0.5 transition-all duration-300 ${isTransmissionActive ? 'bg-gray-600' : 'bg-gray-400'}`}></div>
 
-                {/* Transmission Menu Item */}
-                <div 
-                  onClick={() => setIsTransmissionOpen(!isTransmissionOpen)}
-                  className={`
-                    relative ml-11 group px-4 py-3.5 cursor-pointer
-                    transition-all duration-300 ease-out rounded-lg border-2
-                    ${isTransmissionActive
-                      ? 'border-gray-300 text-gray-900 shadow-xl' 
-                      : 'bg-white border-gray-300 text-gray-700 hover:border-gray-400 hover:shadow-lg'
-                    }
-                  `}
-                  style={isTransmissionActive ? {backgroundColor: '#F3F3F3'} : {}}
-                >
+                <div onClick={() => setIsTransmissionOpen(!isTransmissionOpen)}
+                  className={`relative ml-11 group px-4 py-3.5 cursor-pointer transition-all duration-300 ease-out rounded-lg border-2 ${isTransmissionActive ? 'border-gray-300 text-gray-900 shadow-xl' : 'bg-white border-gray-300 text-gray-700 hover:border-gray-400 hover:shadow-lg'}`}
+                  style={isTransmissionActive ? {backgroundColor: '#F3F3F3'} : {}}>
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-sm font-semibold flex-1 capitalize">
-                      {loading ? 'Loading...' : categoryName}
-                    </span>
+                    <span className="text-sm font-semibold flex-1 capitalize">{loading ? 'Loading...' : categoryName}</span>
                     <div className="flex items-center gap-2">
                       {isTransmissionActive && (
                         <>
@@ -369,7 +257,6 @@ export default function ElectricPowerLayout({
                     </div>
                   </div>
 
-                  {/* Dropdown List */}
                   {isTransmissionOpen && (
                     <div className="space-y-1 max-h-96 overflow-y-auto custom-scrollbar">
                       {loading ? (
@@ -379,21 +266,8 @@ export default function ElectricPowerLayout({
                           const isActivePost = pathname.includes(post.slug);
                           const cleanTitle = decodeHTML(stripHtml(post.title.rendered));
                           return (
-                            <div
-                              key={post.id}
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                router.push(`/Projects/transmission/${post.slug}`);
-                              }}
-                              className={`
-                                px-4 py-2.5 rounded-md cursor-pointer text-sm
-                                transition-all duration-200
-                                ${isActivePost
-                                  ? 'bg-[#cd091b]/10 text-[#cd091b] font-semibold border-l-2 border-[#cd091b]'
-                                  : 'text-gray-600 hover:bg-gray-100 border-l-2 border-transparent'
-                                }
-                              `}
-                            >
+                            <div key={post.id} onClick={(e) => { e.stopPropagation(); router.push(`/Projects/transmission/${post.slug}`); }}
+                              className={`px-4 py-2.5 rounded-md cursor-pointer text-sm transition-all duration-200 ${isActivePost ? 'bg-[#cd091b]/10 text-[#cd091b] font-semibold border-l-2 border-[#cd091b]' : 'text-gray-600 hover:bg-gray-100 border-l-2 border-transparent'}`}>
                               {cleanTitle}
                             </div>
                           );
@@ -404,52 +278,6 @@ export default function ElectricPowerLayout({
                 </div>
               </div>
 
-              {/* Recent Menu Item */}
-              {staticMenuData.map((item) => {
-                const isActive = isRecentActive;
-                
-                return (
-                  <div key={item.id} className="mb-6 relative">
-                    {/* Connection Point on Tower */}
-                    <div className="absolute left-2 top-5 w-3 h-3 bg-white border-2 border-gray-400 rounded-full shadow-md z-20"></div>
-                    
-                    {/* Horizontal Beam */}
-                    <div className={`absolute left-5 top-6 w-6 h-0.5 transition-all duration-300 ${isActive ? 'bg-gray-600' : 'bg-gray-400'}`}></div>
-
-                    {/* Menu Item */}
-                    <div 
-                      onClick={() => router.push(item.url)}
-                      className={`
-                        relative ml-11 group flex items-center justify-between px-4 py-3.5 cursor-pointer
-                        transition-all duration-300 ease-out rounded-lg border-2
-                        ${isActive
-                          ? 'border-gray-300 text-gray-900 shadow-xl' 
-                          : 'bg-white border-gray-300 text-gray-700 hover:border-gray-400 hover:shadow-lg'
-                        }
-                      `}
-                      style={isActive ? {backgroundColor: '#F3F3F3'} : {}}
-                    >
-                      <span className="text-sm font-semibold flex-1">{item.title}</span>
-                      
-                      {isActive && (
-                        <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 bg-gray-800 rounded-full animate-pulse"></div>
-                          <div className="w-2 h-2 bg-gray-600 rounded-full animate-ping absolute"></div>
-                        </div>
-                      )}
-
-                      {isActive && (
-                        <div className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center">
-                          <div className="w-8 h-px bg-gradient-to-r from-gray-400 to-gray-300"></div>
-                          <div className="w-1.5 h-1.5 rotate-45 bg-gray-400 -ml-0.5"></div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-
-              {/* Tower Base Foundation */}
               <div className="absolute left-4 bottom-0 w-9 h-12 bg-gradient-to-b from-gray-400 to-gray-500 opacity-30" 
                    style={{clipPath: 'polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%)'}}></div>
             </nav>
@@ -469,28 +297,11 @@ export default function ElectricPowerLayout({
       </div>
 
       <style jsx global>{`
-        .custom-scrollbar::-webkit-scrollbar {
-          width: 6px;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-track {
-          background: #f1f1f1;
-          border-radius: 10px;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: #888;
-          border-radius: 10px;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: #555;
-        }
-
-        .custom-scrollbar {
-          scrollbar-width: thin;
-          scrollbar-color: #888 #f1f1f1;
-        }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #888; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #555; }
+        .custom-scrollbar { scrollbar-width: thin; scrollbar-color: #888 #f1f1f1; }
       `}</style>
     </div>
   );

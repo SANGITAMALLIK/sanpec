@@ -1,11 +1,34 @@
 'use client';
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
-import { ExternalLink, Zap, Award, TrendingUp, ChevronRight, Home } from 'lucide-react';
+import { ExternalLink, Zap, Award, TrendingUp, ChevronRight, Home, Download, X } from 'lucide-react';
 
 export default function StrategicInnovation() {
   const [isPlaying, setIsPlaying] = useState(false);
+   const [pdfUrl, setPdfUrl] = useState<string | null>(null);
+    const [isPdfModalOpen, setIsPdfModalOpen] = useState(false);
+ useEffect(() => {
+    const whySANPECPDF = async () => {
+      try {
+        const response = await fetch(
+          'https://news.sanpec-excellence.com/wp-json/wp/v2/categories/46'
+        );
 
+        const data = await response.json();
+
+        console.log('WHY SANPEC Data:', data);
+
+          if (data.category_pdf) {
+          setPdfUrl(data.category_pdf);
+        }
+
+      } catch (error) {
+        console.error('Error fetching About PDF:', error);
+      }
+    };
+
+    whySANPECPDF();
+  }, []);
   // Smooth scroll to section on page load if hash is present
   useEffect(() => {
     const hash = window.location.hash;
@@ -82,6 +105,47 @@ export default function StrategicInnovation() {
                 </span>
               </nav>
             </div>
+            {/* ✅ PDF Download Button */}
+      {pdfUrl && (
+        <button
+          onClick={() => setIsPdfModalOpen(true)}
+          className="absolute bottom-6 right-6 bg-[#DC2626] hover:bg-[#B91C1C] text-white px-4 py-2.5 rounded-lg shadow-lg flex items-center gap-2 transition-all duration-300 hover:scale-105 z-20"
+        >
+          <Download className="w-4 h-4" />
+          <span className="font-semibold text-sm">Download Brochure</span>
+        </button>
+      )}
+
+      {/* ✅ PDF Modal */}
+      {isPdfModalOpen && pdfUrl && (
+        <div 
+          className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4"
+          onClick={() => setIsPdfModalOpen(false)}
+        >
+          <div 
+            className="bg-white rounded-xl shadow-2xl w-full max-w-5xl h-[90vh] flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between p-4 border-b border-gray-200">
+              <h3 className="text-lg font-bold text-gray-900">WHY SANPEC</h3>
+              <button
+                onClick={() => setIsPdfModalOpen(false)}
+                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="flex-1 overflow-hidden">
+              <iframe
+                src={pdfUrl}
+                className="w-full h-full"
+                title="WHY SANPEC PDF"
+              />
+            </div>
+          </div>
+        </div>
+      )}
       
             {/* Bottom Accent Line */}
             <div className="absolute bottom-0 left-0 w-full h-[2px]">
