@@ -44,7 +44,7 @@ export default function SanpecTabs() {
         const response = await fetch(
           'https://news.sanpec-excellence.com/wp-json/wp/v2/posts?categories=53&_embed&per_page=100',
          {
-            next: { revalidate: 60 }, // 5 minutes cache
+            next: { revalidate: 300 }, // 5 minutes cache
             cache: 'force-cache'
           }
         );

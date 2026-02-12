@@ -66,7 +66,7 @@ export default function ElectricPowerLayout({
         const categoryResponse = await fetch(
           'https://news.sanpec-excellence.com/wp-json/wp/v2/categories/42',
           {
-            next: { revalidate: 60 }, 
+            next: { revalidate: 300 }, 
             cache: 'force-cache'
           }
         );
@@ -77,7 +77,7 @@ export default function ElectricPowerLayout({
         const postsResponse = await fetch(
           'https://news.sanpec-excellence.com/wp-json/wp/v2/posts?categories=42&_embed&per_page=100&orderby=date&order=desc',
           {
-            next: { revalidate: 60 }, // 5 minutes cache
+            next: { revalidate: 300 }, // 5 minutes cache
             cache: 'force-cache'
           }
         );

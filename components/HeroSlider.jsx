@@ -45,7 +45,7 @@ const slides = [
     image: "images/slider/3.jpg",
     bgColor: "#cd091b",
     buttonText: "Explore Now",
-    buttonLink: "/research-and-innovation"
+    buttonLink: "/research"
   },
   {
     id: 5,

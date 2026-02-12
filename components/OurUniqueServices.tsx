@@ -10,7 +10,6 @@ const tabsData = [
     icon: "⚡",
     title: "ENGINEERING TYPE TESTING (HVAC/HVDC)",
     heading: "Engineering, Testing",
-    // First tab has multiple images for slideshow
     images: [
       "images/sanpec_2026/15.jpeg",
       "images/sanpec_2026/1.jpeg",
@@ -20,12 +19,12 @@ const tabsData = [
       "images/sanpec_2026/13.jpeg",
       "images/sanpec_2026/14.jpeg"
     ],
-    image: "images/home/services/15.jpeg", // fallback
+    image: "images/home/services/15.jpeg",
     points: [
       "Transmission Line Engineering and Manufacturing of Steel Structures (Sustainability Approach)",
       "Structural Analysis, Design and Detailing of Steel Poles and Lattice Tower",
       "Full Scale Structural Testing (Witnessing and Validation)",
-      "Electrical Testing: Corona/RIV and others",
+      "Electrical Testing: Corona/RIV and Others",
       "Type Testing: Conductor/OPGW/Hardware",
       "Prototype and Proof of Fit Testing",
       "Technical Specifications Review"
@@ -39,12 +38,12 @@ const tabsData = [
     heading: "Plant Audit, Inspections (QA/QC), ITP",
     image: "images/home/services/2.jpg",
     points: [
-      "Transmission Materials: Steel Pole, Lattice Towers, and Substation Support Structures, Insulator, Conductor, OPGW , Guy Wires  Shield Wires and Hardware Assembly",
+      "Transmission Materials: Steel Pole, Lattice Towers, and Substation Support Structures, Insulator, Conductor, OPGW, Guy Wires Shield Wires and Hardware Assembly",
       "Weld Inspections – NDT Technique",
-      "Fabrication Shop Audits and on-site Inspections",
+      "Fabrication Shop Audits and On-Site Inspections",
       "Material Sampling (Metallurgical and Mechanical Testing)",
       "Failure/Root Cause Analysis",
-      "Field Inspection for aging transmission structures"
+      "Field Inspection for Aging Transmission Structures"
     ],
     link: "/electric-power/manufacturing-and-operations/failure-analysis"
   },
@@ -55,15 +54,14 @@ const tabsData = [
     heading: "Material and Project Management",
     image: "images/home/services/3.png",
     points: [
-      "Develop detailed project schedule to meet the construction demands",
-      "Assist in Vendor Selections/evaluations",
-      "Assist in negotiating the best pricing and delivery schedule from vendors",
-      "Risk Mitigation planning",
-      "Keep track of all milestones and critical delivery items",
-      "Follow up logistics planning from vendors",
-      "Perform inspection of material upon arrival at port and Yards",
-      "Help in tracking bundling/packaging list and BOL for tower components for each structure and payment process"
-     
+      "Develop Detailed Project Schedule to Meet the Construction Demands",
+      "Assist in Vendor Selections/Evaluations",
+      "Assist in Negotiating the Best Pricing and Delivery Schedule from Vendors",
+      "Risk Mitigation Planning",
+      "Keep Track of All Milestones and Critical Delivery Items",
+      "Follow Up Logistics Planning from Vendors",
+      "Perform Inspection of Material Upon Arrival at Port and Yards",
+      "Help in Tracking Bundling/Packaging List and BOL for Tower Components for Each Structure and Payment Process"
     ],
     link: "/electric-power/strategic-project-management/material-sourcing"
   },
@@ -71,15 +69,15 @@ const tabsData = [
     id: 4,
     icon: "🚚",
     title: "LOGISTICS CONSTRUCTION SUPPORT",
-    heading: "Logistics and Construction support",
+    heading: "Logistics and Construction Support",
     image: "images/home/services/36.jpeg",
     points: [
-      "Follow up logistics planning from vendors",
-      "Perform inspection of material upon arrival at port and Yards",
-      "Provide support during construction process for missing pieces or mis-fab pieces or new helicopter splice, damage members and any technical issues",
-      "Review of Foundation materials and details before setting up foundation and pouring concrete",
-      "Provide support during construction process for missing pieces or mis-fab pieces or new helicopter splice, damage members and any technical issues",
-      "Review QA/QC process at sites during construction"
+      "Follow Up Logistics Planning from Vendors",
+      "Perform Inspection of Material Upon Arrival at Port and Yards",
+      "Provide Support During Construction Process for Missing Pieces or Mis-Fab Pieces or New Helicopter Splice, Damage Members and Any Technical Issues",
+      "Review of Foundation Materials and Details Before Setting Up Foundation and Pouring Concrete",
+      "Provide Support During Construction Process for Missing Pieces or Mis-Fab Pieces or New Helicopter Splice, Damage Members and Any Technical Issues",
+      "Review QA/QC Process at Sites During Construction"
     ],
     link: "/electric-power/constructability-review/logistic-construction"
   },
@@ -90,21 +88,21 @@ const tabsData = [
     heading: "Recent Publication of Technical Papers",
     image: "images/home/services/5.webp",
     points: [
-     "Innovative solutions for placement of strain gauges on lattice towers: TSDOS",
-"Consideration of socio-economic values in transmission line engineering: TSDOS",
-"The challenges for successful epc transmission projects: TSDOS",
-"Challenges in performing structural analysis of existing lattice towers: TSDOS",
-"A need for improvement in arm design: consideration for new design approach: TSDOS",
-"Silicon effect color transformation on galv. steel lattice towers: TSDOS",
-"Why source inspection is critical for transmission structures: TSDOS, EDM",
-"The right choice of steel for lattice steel towers: TSDOS, EDM",
-"Lesson learned on the choice of material for lattice steel transmission tower structures: EDM",
-"Risk mitigation planning in successful epc project: TSDOS, ASCE",
-"Sustainability approach in transmission line engineering: ASCE, International Conference on Sustainable Infrastructure (ICSI)",
-"H2s entrapment and corrosion on direct embedded galvanized steel transmission poles:ASCE/SEI",
-"Silicon effect color transformation on galvanized steel lattice towers: IEEE",
-"Challenges in executing large and complex transmission projects: Platts transmission planningand development forum",
-"Design and analysis of transmission line towers"
+      "Innovative Solutions for Placement of Strain Gauges on Lattice Towers: TSDOS",
+      "Consideration of Socio-Economic Values in Transmission Line Engineering: TSDOS",
+      "The Challenges for Successful EPC Transmission Projects: TSDOS",
+      "Challenges in Performing Structural Analysis of Existing Lattice Towers: TSDOS",
+      "A Need for Improvement in Arm Design: Consideration for New Design Approach: TSDOS",
+      "Silicon Effect Color Transformation on Galv. Steel Lattice Towers: TSDOS",
+      "Why Source Inspection is Critical for Transmission Structures: TSDOS, EDM",
+      "The Right Choice of Steel for Lattice Steel Towers: TSDOS, EDM",
+      "Lesson Learned on the Choice of Material for Lattice Steel Transmission Tower Structures: EDM",
+      "Risk Mitigation Planning in Successful EPC Project: TSDOS, ASCE",
+      "Sustainability Approach in Transmission Line Engineering: ASCE, International Conference on Sustainable Infrastructure (ICSI)",
+      "H2S Entrapment and Corrosion on Direct Embedded Galvanized Steel Transmission Poles: ASCE/SEI",
+      "Silicon Effect Color Transformation on Galvanized Steel Lattice Towers: IEEE",
+      "Challenges in Executing Large and Complex Transmission Projects: Platts Transmission Planning and Development Forum",
+      "Design and Analysis of Transmission Line Towers"
     ],
     link: "/research"
   },
@@ -115,11 +113,11 @@ const tabsData = [
     heading: "OUR COMMITMENTS",
     image: "images/home/services/30.jpeg",
     points: [
-      "Reliability and Resiliency based Design for Transmission Structures with Engineering Excellence",
-      "Innovative and Cost-Effective solutions",
+      "Reliability and Resiliency Based Design for Transmission Structures with Engineering Excellence",
+      "Innovative and Cost-Effective Solutions",
       "Quality and Professional Services",
       "Unbeatable Project Management and Technical Services",
-      "R&D work in Transmission Line Engineering",
+      "R&D Work in Transmission Line Engineering",
       "ON-Time Delivery and Seamless Project Execution",
       "Advanced Engineering Tools and Technologies",
       "Value Added Services and Customer Focused Approach"
@@ -317,7 +315,7 @@ const ModernTabs = () => {
                         <span className="flex-shrink-0 w-5 h-5 md:w-6 md:h-6 rounded-full bg-gradient-to-br from-[#CD091B] to-[#a0070f] flex items-center justify-center text-white text-[10px] md:text-xs font-bold mt-0.5">
                           ✓
                         </span>
-                        <span className="text-gray-700 text-xs md:text-sm leading-relaxed">
+                        <span className="text-gray-700 leading-relaxed text-sm md:text-base">
                           {point}
                         </span>
                       </li>

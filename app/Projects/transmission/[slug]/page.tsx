@@ -55,7 +55,7 @@ export default function TransmissionPostPage() {
         const response = await fetch(
           `https://news.sanpec-excellence.com/wp-json/wp/v2/posts?slug=${slug}&_embed`,
             {
-            next: { revalidate: 60 }, // ✅ 1 minutes cache
+            next: { revalidate: 300 }, // ✅ 1 minutes cache
             cache: 'force-cache' // ✅ Force cache
           }
         );
@@ -86,7 +86,11 @@ export default function TransmissionPostPage() {
     const fetchAllPosts = async () => {
       try {
         const response = await fetch(
-          'https://news.sanpec-excellence.com/wp-json/wp/v2/posts?categories=42&_embed&per_page=100'
+          'https://news.sanpec-excellence.com/wp-json/wp/v2/posts?categories=42&_embed&per_page=100',
+            {
+            next: { revalidate: 300 }, // ✅ 1 minutes cache
+            cache: 'force-cache' // ✅ Force cache
+          }
         );
         
         if (response.ok) {
