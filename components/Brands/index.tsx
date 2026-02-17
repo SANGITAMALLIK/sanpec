@@ -75,11 +75,11 @@ const ClientsSection = () => {
     <section className="relative bg-white py-12 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-8">
-          <span className="inline-block text-[#CD091B] text-xs font-bold tracking-[0.3em] uppercase mb-2">
+          {/* <span className="inline-block text-[#CD091B] text-xs font-bold tracking-[0.3em] uppercase mb-2">
             OUR CLIENTS
-          </span>
+          </span> */}
           <h2 className="text-4xl md:text-5xl font-bold text-[#3C3B6E] mb-3">
-            Our Experience
+            Our Trusted Partners
           </h2>
           <div className="flex items-center justify-center gap-1">
             <div className="h-1 w-16 bg-[#CD091B] rounded-full"></div>
