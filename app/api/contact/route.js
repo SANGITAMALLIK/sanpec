@@ -56,7 +56,7 @@ export async function POST(request) {
     
     const mailOptions = {
       from: `"SANPEC Contact Form" <${GMAIL_USER}>`,
-      to: 'amitdevrani9@gmail.com',
+      to: 'sangita.mallik@gmail.com',
       replyTo: email,
       subject: `🔔 ${subject}`,
       html: `
