@@ -2,11 +2,35 @@ import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
 export async function POST(request) {
+  console.log('📨 API Route Hit!'); // Debug log
+  
   try {
-    const { name, email, phone, subject, message } = await request.json();
+    const body = await request.json();
+    console.log('📋 Form Data Received:', body); // Debug log
+    
+    const { name, email, phone, subject, message } = body;
 
-    const GMAIL_USER = 'amitdevrani9@gmail.com';
-    const GMAIL_APP_PASSWORD = 'nbfk oqca spix wcdn';
+    // Validate required fields
+    if (!name || !email || !subject || !message) {
+      console.log('❌ Missing required fields');
+      return NextResponse.json({ 
+        error: 'Missing required fields' 
+      }, { status: 400 });
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      console.log('❌ Invalid email format');
+      return NextResponse.json({ 
+        error: 'Invalid email format' 
+      }, { status: 400 });
+    }
+
+    const GMAIL_USER = 'sangita.mallik@gmail.com';
+    const GMAIL_APP_PASSWORD = 'dvum ociy bykh jgou';
+
+    console.log('🔄 Creating email transporter...');
 
     const transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -16,11 +40,25 @@ export async function POST(request) {
       }
     });
 
-    await transporter.sendMail({
+    // Verify connection
+    try {
+      await transporter.verify();
+      console.log('✅ SMTP Connection verified');
+    } catch (verifyError) {
+      console.error('❌ SMTP Connection failed:', verifyError);
+      return NextResponse.json({ 
+        error: 'Email service connection failed',
+        details: verifyError.message 
+      }, { status: 500 });
+    }
+
+    console.log('📧 Sending email...');
+    
+    const mailOptions = {
       from: `"SANPEC Contact Form" <${GMAIL_USER}>`,
       to: 'amitdevrani9@gmail.com',
-      replyTo: `"<${email}>`,
-      subject: `🔔${subject}`,
+      replyTo: email,
+      subject: `🔔 ${subject}`,
       html: `
         <!DOCTYPE html>
         <html>
@@ -34,7 +72,7 @@ export async function POST(request) {
             <tr>
               <td style="padding: 30px 20px;">
                 
-                <!-- Main Container - Full Width -->
+                <!-- Main Container -->
                 <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 900px; margin: 0 auto; background-color: #ffffff;">
                   
                   <!-- Header -->
@@ -43,7 +81,6 @@ export async function POST(request) {
                       <h1 style="margin: 0; font-size: 32px; font-weight: bold; color: #101631; letter-spacing: 1px;">
                         SANPEC EXCELLENCE
                       </h1>
-                     
                     </td>
                   </tr>
 
@@ -216,12 +253,26 @@ export async function POST(request) {
         </body>
         </html>
       `
-    });
+    };
 
-    return NextResponse.json({ success: true }, { status: 200 });
+    const info = await transporter.sendMail(mailOptions);
+    
+    console.log('✅ Email sent successfully!');
+    console.log('📬 Message ID:', info.messageId);
+
+    return NextResponse.json({ 
+      success: true,
+      message: 'Email sent successfully',
+      messageId: info.messageId
+    }, { status: 200 });
     
   } catch (error) {
-    console.error('Email Error:', error);
-    return NextResponse.json({ error: 'Failed to send email' }, { status: 500 });
+    console.error('❌ Email Error:', error);
+    console.error('Error details:', error.message);
+    
+    return NextResponse.json({ 
+      error: 'Failed to send email',
+      details: error.message 
+    }, { status: 500 });
   }
 }

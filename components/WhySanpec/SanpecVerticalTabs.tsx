@@ -62,6 +62,7 @@ const VerticalTabs = () => {
         ]
       }
     },
+    /* COMMENTED OUT - Excellent Project Delivery Tab
     {
       id: 2,
       title: "Excellent Project Delivery",
@@ -108,6 +109,7 @@ const VerticalTabs = () => {
         ]
       }
     },
+    END COMMENT - Excellent Project Delivery Tab */
     {
       id: 3,
       title: "Building talent as the foundation of progress",
@@ -409,7 +411,7 @@ const VerticalTabs = () => {
                   </div>
                 )}
 
-                {/* Project Delivery */}
+                {/* COMMENTED OUT - Excellent Project Delivery Content
                 {activeTab === 1 && (
                   <div className="space-y-8">
                     {tabs[activeTab].content.projects.map((project, idx) => (
@@ -453,9 +455,10 @@ const VerticalTabs = () => {
                     ))}
                   </div>
                 )}
+                END COMMENT - Excellent Project Delivery Content */}
 
                 {/* Building Talent */}
-                {activeTab === 2 && (
+                {activeTab === 1 && (
                   <div className="space-y-6">
                     <p className="text-gray-700 text-sm md:text-base leading-relaxed text-left">
                       {tabs[activeTab].content.description}
@@ -488,7 +491,7 @@ const VerticalTabs = () => {
                 )}
 
                 {/* Collaborations and Partnerships */}
-                {activeTab === 3 && (
+                {activeTab === 2 && (
                   <div className="space-y-6">
                     <div className="mb-6">
                       <p className="text-gray-700 text-sm md:text-base leading-relaxed mb-3 text-left">

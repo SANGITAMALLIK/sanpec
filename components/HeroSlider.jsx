@@ -33,7 +33,7 @@ const slides = [
     image: "images/slider/2.png",
     bgColor: "#cd091b",
     buttonText: "Explore Now",
-    buttonLink: "/electric-power/transmisson/design-and-engineering"
+    buttonLink: "/electric-power/transmission-and-distribution/design-and-engineering"
   },
   {
     id: 4,
